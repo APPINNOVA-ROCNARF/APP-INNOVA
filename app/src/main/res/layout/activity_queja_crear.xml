@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/drawer_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:fitsSystemWindows="true"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:openDrawer="start">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadeScrollbars="false">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:id="@+id/toolbar_container"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:theme="@style/AppTheme.AppBarOverlay">-->
+
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/toolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:background="?attr/colorPrimary"-->
+<!--                app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+
+        <FrameLayout
+            android:id="@+id/fm_quejas_detalle_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_motivo"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fm_quejas_detalle_cliente"
+            android:layout_marginTop="18dp"
+            android:text="Motivo: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/tv_motivo_queja_crear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Motivo"
+            android:text="Motivo"
+            android:layout_below="@id/tv_motivo"
+            android:spinnerMode="dropdown"/>
+
+        <EditText
+            android:id="@+id/et_observacion_queja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_motivo_queja_crear"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Observación"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_observacion_queja"
+            android:text="¿Enviar al cliente?"
+            android:visibility="gone"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_opcion_queja_cliente" />
+
+        <Spinner
+            android:id="@+id/tv_opcion_queja_cliente"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="158dp"
+            android:visibility="gone"
+            android:layout_below="@id/et_observacion_queja"
+            android:spinnerMode="dropdown"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="¿Asigna queja a factura?"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_opcion_queja_factura"
+            android:layout_below="@id/tv_opcion_queja_cliente"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/tv_opcion_queja_factura"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_opcion_queja_cliente"
+            android:layout_marginStart="210dp"
+            android:layout_marginTop="8dp"
+            android:spinnerMode="dropdown" />
+
+            <Button
+                android:id="@+id/bt_elegir_factura"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_opcion_queja_factura"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimary"
+                android:visibility="gone"
+                android:text="Seleccionar factura"
+                android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_facturas_showm"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bt_elegir_factura"
+            android:layout_below="@id/tv_opcion_queja_factura"
+            android:layout_marginStart="120dp"
+            android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/bt_enviar_queja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bt_elegir_factura"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimary"
+            android:text="Enviar Queja"
+            android:textColor="@android:color/white" />
+
+
+    </RelativeLayout>
+</ScrollView>
+</androidx.drawerlayout.widget.DrawerLayout>

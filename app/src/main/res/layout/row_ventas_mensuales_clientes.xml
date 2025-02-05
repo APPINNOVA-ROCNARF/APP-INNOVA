@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_mes_row_ventas_mensuales_clientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="No Factura"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:stretchColumns="*"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes_row_ventas_mensuales_clientes">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="241dp"
+                android:layout_column="0"
+                android:text="Venta" />
+            <TextView
+                android:text="$ "
+                android:textAlignment="textEnd" />
+            <TextView
+                android:id="@+id/tv_venta_row_ventas_mensuales_clientes"
+                android:text="0"
+                android:textAlignment="textEnd" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="241dp"
+                android:layout_column="0"
+                android:text="Nota Credito" />
+            <TextView
+                android:text="$ "
+                android:textAlignment="textEnd" />
+            <TextView
+                android:id="@+id/tv_nota_credito_row_ventas_mensuales_clientes"
+                android:text="0"
+                android:textAlignment="textEnd" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="241dp"
+                android:layout_column="0"
+                android:text="Venta Neta" />
+            <TextView
+                android:text="$ "
+                android:textAlignment="textEnd" />
+            <TextView
+                android:id="@+id/tv_neta_row_ventas_mensuales_clientes"
+                android:text="0"
+                android:textAlignment="textEnd" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="241dp"
+                android:layout_column="0"
+                android:text="Cobro" />
+            <TextView
+                android:text="$ "
+                android:textAlignment="textEnd" />
+            <TextView
+                android:id="@+id/tv_cobro_row_ventas_mensuales_clientes"
+                android:text="0"
+                android:textAlignment="textEnd" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="241dp"
+                android:layout_column="0"
+                android:text="Saldo" />
+            <TextView
+                android:text="$ "
+                android:textAlignment="textEnd" />
+            <TextView
+                android:id="@+id/tv_saldo_row_ventas_mensuales_clientes"
+                android:text="0"
+                android:textAlignment="textEnd" />
+        </TableRow>
+
+    </TableLayout>
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="368dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

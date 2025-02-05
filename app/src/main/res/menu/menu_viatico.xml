@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <item-->
+<!--        android:icon="@drawable/ic_person_black_24dp"-->
+<!--        android:id="@+id/action_viatico_ver"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="Ver registro"-->
+<!--        app:showAsAction="never" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/action_viatico_editar"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="Editar"-->
+<!--        app:showAsAction="never" />-->
+    <item
+        android:id="@+id/action_viatico_eliminar"
+        android:orderInCategory="100"
+        android:title="Eliminar"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_viatico_comentario"
+        android:orderInCategory="100"
+        android:title="Ver comentario"
+        app:showAsAction="never" />
+
+</menu>

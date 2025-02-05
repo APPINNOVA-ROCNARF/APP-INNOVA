@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "105885092353",
+    "firebase_url": "https://rocnarf-eb5b4.firebaseio.com",
+    "project_id": "rocnarf-eb5b4",
+    "storage_bucket": "rocnarf-eb5b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105885092353:android:0186f73c5b2a408b",
+        "android_client_info": {
+          "package_name": "com.rocnarf.rocnarf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105885092353-a78l1eur4ccltl31d94dbqbp44laitcg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rocnarf.rocnarf",
+            "certificate_hash": "d2dd846d7b9a8e8c20bf00d80498e5e297d4e87e"
+          }
+        },
+        {
+          "client_id": "105885092353-daeqt8gasebq9b4kk92luhkn5a3bmfid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV46Ry_Vx5tKCyy46bJtURQMeryz-cwC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105885092353-daeqt8gasebq9b4kk92luhkn5a3bmfid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

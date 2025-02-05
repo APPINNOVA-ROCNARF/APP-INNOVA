@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClientesFacturasNotaDebitosActivity">
+
+    <ProgressBar
+        android:id="@+id/pr_list_activity_cliente_facturas_ND"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:background="@drawable/sin_border_gris">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/idtext_ND"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="No Vencido"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/no_vencido_ND"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0.00"
+                />
+            <TextView
+                android:id="@+id/idtext1_ND"
+                android:layout_marginLeft="10dp"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dias Plazo"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:id="@+id/valor_vencido_ND"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/ssa_ND"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Vencido"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/valor_saldo_ND"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0.00"
+                />
+            <TextView
+                android:id="@+id/asaxs_ND"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dias Vcdo"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/f_mas_dia_ND"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/total_ND"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Cartera Total"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/valor_total_ND"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0.00"
+                />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="N/C Favor"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:id="@+id/tv_cliente_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:layout_marginEnd="8dp"
+
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/list_fac_ND"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_facturas_activity_cliente_facturas_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

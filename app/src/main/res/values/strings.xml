@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Laboratorios Rocnarf</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Laboratorios Rocnarf</string>
+    <string name="nav_header_esloga">Experiencia y compromiso en </string>
+    <string name="nav_header_esloga2">medicamentos de calidad</string>
+    <string name="nav_header_subtitle"></string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_clientes_criterios">Buscar Clientes</string>
+    <string name="sector">Sector</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="title_activity_resultado_visita">Registrar Visita</string>
+    <string name="visita_efectiva">Visita efectiva</string>
+    <string name="visita_acompanada">Visita acompañada</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_resultado_clientes">Clientes y Médicos</string>
+    <string name="title_activity_panel_clientes">Planificar</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="action_guardar_geolocalizacion">Guardar Ubicacion</string>
+    <string name="title_activity_geo_localizacion">Buscar Clientes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_planificacion_crear">Planificar</string>
+    <string name="title_activity_login">App Innova</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Usuario</string>
+    <string name="prompt_password">Clave</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">Falta ingresar la clave</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">Falta ingresar el usuario</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_sync">Sincronizar</string>
+    <string name="title_activity_clientes_cupo_credito">Cupo de Credito</string>
+    <string name="title_activity_pedido">Pedido</string>
+    <string name="title_activity_Comentarios">Historial de Comentarios</string>
+    <string name="title_activity_planes">Plan Comercial</string>
+    <string name="title_activity_guias_productos">Guia de Productos</string>
+    <string name="title_activity_parrila">RX</string>
+    <string name="title_activity_categoria">Categoría</string>
+    <string name="title_activity_rutas">Rutas</string>
+    <string name="title_activity_nc_Detalle">Detalle Nota de Credito</string>
+    <string name="title_activity_obsequios">Solicitud de Premios</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="title_activity_pedido_lista">Pedidos y Cobros</string>
+    <string name="title_activity_pedido_cliente">Consultar Cliente</string>
+    <string name="title_activity_visita_impulsadora_crear">Planificar Impulsacion</string>
+    <string name="title_activity_visitas_impulsadoras_clientes">
+        Planificar Impulsacion
+    </string>
+    <string name="title_activity_visitas_impulsadoras_resultado">
+        Resultado Impulsacion
+    </string>
+    <string name="tab">\u0009</string>
+</resources>

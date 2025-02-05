@@ -1,0 +1,1558 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6c9177ca85b5a2d7644efc4abba05863",
+    "entities": [
+      {
+        "tableName": "visita_clientes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idLocal` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idVisitaCliente` INTEGER NOT NULL, `codigoAsesor` TEXT, `seccion` TEXT, `codigoCliente` TEXT, `nombreCliente` TEXT, `direccion` TEXT, `latitud` REAL, `longitud` REAL, `fechaVisitaPlanificada` INTEGER, `visitaXCajasVacias` INTEGER NOT NULL, `visitaXSiembraProducto` INTEGER NOT NULL, `visitaPromocional` INTEGER NOT NULL, `visitaXEntregaPremios` INTEGER NOT NULL, `visitaXDevolucion` INTEGER NOT NULL, `visitaXPedido` INTEGER NOT NULL, `valorPedidoF2` REAL, `valorPedidoF3` REAL, `valorPedidoF4` REAL, `valorPedidoGEN` REAL, `visitaXCobro` INTEGER NOT NULL, `valorXCobrar` REAL, `efectivaXCajasVacias` INTEGER NOT NULL, `efectivaXSiembraProducto` INTEGER NOT NULL, `efectivaPromocional` INTEGER NOT NULL, `efectivaXPedido` INTEGER NOT NULL, `efectivaXCobro` INTEGER NOT NULL, `efectivaXEntregaPremios` INTEGER NOT NULL, `efectivaXDevolucion` INTEGER NOT NULL, `visitaAcompanado` INTEGER NOT NULL, `acompanate` TEXT, `visitaDocEfec` INTEGER NOT NULL, `visitaSinGestion` INTEGER NOT NULL, `visitaPuntoContacto` INTEGER NOT NULL, `visitaReVisita` INTEGER NOT NULL, `estado` TEXT, `fechaVisita` INTEGER, `observacion` TEXT, `queja` TEXT, `fechaCreacion` INTEGER, `fechaModificacion` INTEGER, `tipoCliente` TEXT, `pendienteSync` INTEGER NOT NULL, `fechaSincronizacion` INTEGER, `clien_idCliente` TEXT, `clien_nombreCliente` TEXT, `clien_tipo` TEXT, `clien_seccion` TEXT, `clien_seccion2` TEXT, `clien_seccion3` TEXT, `clien_seccion4` TEXT, `clien_seccion5` TEXT, `clien_seccion6` TEXT, `clien_seccion7` TEXT, `clien_seccion8` TEXT, `clien_seccion9` TEXT, `clien_representante` TEXT, `clien_ciudad` TEXT, `clien_direccion` TEXT, `clien_telefono1` TEXT, `clien_telefono2` TEXT, `clien_cedula` TEXT, `clien_ruc` TEXT, `clien_email` TEXT, `clien_latitud` REAL, `clien_longitud` REAL, `clien_rangoTolerancia` INTEGER, `clien_origen` TEXT, `clien_tipoObserv` TEXT, `clien_especialidades` TEXT, `clien_idEspecialidades` TEXT, `clien_clase` TEXT, `clien_fechaDesdeAuspicio` INTEGER, `clien_fechaHastaAuspicio` INTEGER, `clien_conceptoPlan` TEXT, `clien_marca` TEXT, `clien_cumpleAnyos` INTEGER, `clien_estadoVisita` TEXT, `clien_pedido` TEXT, `clien_cobro` TEXT, `clien_estadoSeleccion` TEXT, `clien_auspiciado` INTEGER, `clien_claseMedico` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idLocal",
+            "columnName": "idLocal",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idVisitaCliente",
+            "columnName": "idVisitaCliente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codigoAsesor",
+            "columnName": "codigoAsesor",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion",
+            "columnName": "seccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "codigoCliente",
+            "columnName": "codigoCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nombreCliente",
+            "columnName": "nombreCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "direccion",
+            "columnName": "direccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitud",
+            "columnName": "latitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitud",
+            "columnName": "longitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaVisitaPlanificada",
+            "columnName": "fechaVisitaPlanificada",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "visitaXCajasVacias",
+            "columnName": "visitaXCajasVacias",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaXSiembraProducto",
+            "columnName": "visitaXSiembraProducto",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaPromocional",
+            "columnName": "visitaPromocional",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaXEntregaPremios",
+            "columnName": "visitaXEntregaPremios",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaXDevolucion",
+            "columnName": "visitaXDevolucion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaXPedido",
+            "columnName": "visitaXPedido",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valorPedidoF2",
+            "columnName": "valorPedidoF2",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorPedidoF3",
+            "columnName": "valorPedidoF3",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorPedidoF4",
+            "columnName": "valorPedidoF4",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorPedidoGEN",
+            "columnName": "valorPedidoGEN",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "visitaXCobro",
+            "columnName": "visitaXCobro",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valorXCobrar",
+            "columnName": "valorXCobrar",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "efectivaXCajasVacias",
+            "columnName": "efectivaXCajasVacias",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "efectivaXSiembraProducto",
+            "columnName": "efectivaXSiembraProducto",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "efectivaPromocional",
+            "columnName": "efectivaPromocional",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "efectivaXPedido",
+            "columnName": "efectivaXPedido",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "efectivaXCobro",
+            "columnName": "efectivaXCobro",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "efectivaXEntregaPremios",
+            "columnName": "efectivaXEntregaPremios",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "efectivaXDevolucion",
+            "columnName": "efectivaXDevolucion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaAcompanado",
+            "columnName": "visitaAcompanado",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "acompanate",
+            "columnName": "acompanate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "visitaDocEfec",
+            "columnName": "visitaDocEfec",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaSinGestion",
+            "columnName": "visitaSinGestion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaPuntoContacto",
+            "columnName": "visitaPuntoContacto",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitaReVisita",
+            "columnName": "visitaReVisita",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaVisita",
+            "columnName": "fechaVisita",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "observacion",
+            "columnName": "observacion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "queja",
+            "columnName": "queja",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaModificacion",
+            "columnName": "fechaModificacion",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoCliente",
+            "columnName": "tipoCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pendienteSync",
+            "columnName": "pendienteSync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaSincronizacion",
+            "columnName": "fechaSincronizacion",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.idCliente",
+            "columnName": "clien_idCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.nombreCliente",
+            "columnName": "clien_nombreCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.tipo",
+            "columnName": "clien_tipo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion",
+            "columnName": "clien_seccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion2",
+            "columnName": "clien_seccion2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion3",
+            "columnName": "clien_seccion3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion4",
+            "columnName": "clien_seccion4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion5",
+            "columnName": "clien_seccion5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion6",
+            "columnName": "clien_seccion6",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion7",
+            "columnName": "clien_seccion7",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion8",
+            "columnName": "clien_seccion8",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.seccion9",
+            "columnName": "clien_seccion9",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.representante",
+            "columnName": "clien_representante",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.ciudad",
+            "columnName": "clien_ciudad",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.direccion",
+            "columnName": "clien_direccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.telefono1",
+            "columnName": "clien_telefono1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.telefono2",
+            "columnName": "clien_telefono2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.cedula",
+            "columnName": "clien_cedula",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.ruc",
+            "columnName": "clien_ruc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.email",
+            "columnName": "clien_email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.latitud",
+            "columnName": "clien_latitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.longitud",
+            "columnName": "clien_longitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.rangoTolerancia",
+            "columnName": "clien_rangoTolerancia",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.origen",
+            "columnName": "clien_origen",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.tipoObserv",
+            "columnName": "clien_tipoObserv",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.especialidades",
+            "columnName": "clien_especialidades",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.idEspecialidades",
+            "columnName": "clien_idEspecialidades",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.clase",
+            "columnName": "clien_clase",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.fechaDesdeAuspicio",
+            "columnName": "clien_fechaDesdeAuspicio",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.fechaHastaAuspicio",
+            "columnName": "clien_fechaHastaAuspicio",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.conceptoPlan",
+            "columnName": "clien_conceptoPlan",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.marca",
+            "columnName": "clien_marca",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.cumpleAnyos",
+            "columnName": "clien_cumpleAnyos",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.estadoVisita",
+            "columnName": "clien_estadoVisita",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.pedido",
+            "columnName": "clien_pedido",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.cobro",
+            "columnName": "clien_cobro",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.estadoSeleccion",
+            "columnName": "clien_estadoSeleccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.auspiciado",
+            "columnName": "clien_auspiciado",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.claseMedico",
+            "columnName": "clien_claseMedico",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idLocal"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_visita_clientes_codigoAsesor",
+            "unique": false,
+            "columnNames": [
+              "codigoAsesor"
+            ],
+            "createSql": "CREATE  INDEX `index_visita_clientes_codigoAsesor` ON `${TABLE_NAME}` (`codigoAsesor`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "usuarios",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idUsuario` TEXT NOT NULL, `Clave` TEXT, `Nombre` TEXT, `Seccion` TEXT, `Rol` TEXT, `Email` TEXT, `Estado` TEXT, PRIMARY KEY(`idUsuario`))",
+        "fields": [
+          {
+            "fieldPath": "idUsuario",
+            "columnName": "idUsuario",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Clave",
+            "columnName": "Clave",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Nombre",
+            "columnName": "Nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Seccion",
+            "columnName": "Seccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Rol",
+            "columnName": "Rol",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Email",
+            "columnName": "Email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Estado",
+            "columnName": "Estado",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idUsuario"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "clientes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idCliente` TEXT NOT NULL, `nombreCliente` TEXT, `tipo` TEXT, `seccion` TEXT, `seccion2` TEXT, `seccion3` TEXT, `seccion4` TEXT, `seccion5` TEXT, `seccion6` TEXT, `seccion7` TEXT, `seccion8` TEXT, `seccion9` TEXT, `representante` TEXT, `ciudad` TEXT, `direccion` TEXT, `telefono1` TEXT, `telefono2` TEXT, `cedula` TEXT, `ruc` TEXT, `email` TEXT, `latitud` REAL, `longitud` REAL, `rangoTolerancia` INTEGER NOT NULL, `origen` TEXT, `tipoObserv` TEXT, `especialidades` TEXT, `idEspecialidades` TEXT, `clase` TEXT, `fechaDesdeAuspicio` INTEGER, `fechaHastaAuspicio` INTEGER, `conceptoPlan` TEXT, `marca` TEXT, `cumpleAnyos` INTEGER, `estadoVisita` TEXT, `pedido` TEXT, `cobro` TEXT, `estadoSeleccion` TEXT, `auspiciado` INTEGER, `claseMedico` TEXT, PRIMARY KEY(`idCliente`))",
+        "fields": [
+          {
+            "fieldPath": "idCliente",
+            "columnName": "idCliente",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombreCliente",
+            "columnName": "nombreCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion",
+            "columnName": "seccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion2",
+            "columnName": "seccion2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion3",
+            "columnName": "seccion3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion4",
+            "columnName": "seccion4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion5",
+            "columnName": "seccion5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion6",
+            "columnName": "seccion6",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion7",
+            "columnName": "seccion7",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion8",
+            "columnName": "seccion8",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seccion9",
+            "columnName": "seccion9",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "representante",
+            "columnName": "representante",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ciudad",
+            "columnName": "ciudad",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "direccion",
+            "columnName": "direccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "telefono1",
+            "columnName": "telefono1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "telefono2",
+            "columnName": "telefono2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cedula",
+            "columnName": "cedula",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ruc",
+            "columnName": "ruc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitud",
+            "columnName": "latitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitud",
+            "columnName": "longitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rangoTolerancia",
+            "columnName": "rangoTolerancia",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "origen",
+            "columnName": "origen",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoObserv",
+            "columnName": "tipoObserv",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "especialidades",
+            "columnName": "especialidades",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idEspecialidades",
+            "columnName": "idEspecialidades",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clase",
+            "columnName": "clase",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaDesdeAuspicio",
+            "columnName": "fechaDesdeAuspicio",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaHastaAuspicio",
+            "columnName": "fechaHastaAuspicio",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "conceptoPlan",
+            "columnName": "conceptoPlan",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "marca",
+            "columnName": "marca",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cumpleAnyos",
+            "columnName": "cumpleAnyos",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "estadoVisita",
+            "columnName": "estadoVisita",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pedido",
+            "columnName": "pedido",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cobro",
+            "columnName": "cobro",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "estadoSeleccion",
+            "columnName": "estadoSeleccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "auspiciado",
+            "columnName": "auspiciado",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "claseMedico",
+            "columnName": "claseMedico",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idCliente"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "sincronizacion",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idUsuario` TEXT NOT NULL, `entidad` TEXT NOT NULL, `fechaSincronizacion` INTEGER, PRIMARY KEY(`idUsuario`, `entidad`))",
+        "fields": [
+          {
+            "fieldPath": "idUsuario",
+            "columnName": "idUsuario",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entidad",
+            "columnName": "entidad",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaSincronizacion",
+            "columnName": "fechaSincronizacion",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idUsuario",
+            "entidad"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "producto",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProducto` TEXT NOT NULL, `idProducto2` TEXT, `nombre` TEXT, `tipo` TEXT, `jefe` TEXT, `precio` REAL, `unitario` REAL, `saldo` REAL, `vademecun` INTEGER NOT NULL, `idEscala` INTEGER NOT NULL, `porcentajePvp` REAL, `status` TEXT, `marca` TEXT, `pvp` REAL, PRIMARY KEY(`idProducto`))",
+        "fields": [
+          {
+            "fieldPath": "idProducto",
+            "columnName": "idProducto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idProducto2",
+            "columnName": "idProducto2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "jefe",
+            "columnName": "jefe",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precio",
+            "columnName": "precio",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "unitario",
+            "columnName": "unitario",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "saldo",
+            "columnName": "saldo",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vademecun",
+            "columnName": "vademecun",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idEscala",
+            "columnName": "idEscala",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "porcentajePvp",
+            "columnName": "porcentajePvp",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "marca",
+            "columnName": "marca",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pvp",
+            "columnName": "pvp",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idProducto"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "pedido",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idLocalPedido` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idPedido` INTEGER NOT NULL, `idCliente` TEXT, `nombreCliente` TEXT, `idAsesor` TEXT, `fechaPedido` INTEGER, `precioTotal` REAL, `conBonos` INTEGER NOT NULL, `descuento` REAL, `porcentajeDescuento` REAL, `precioFinal` REAL, `observaciones` TEXT, `reciboCobro` TEXT, `factura` TEXT, `cheques` TEXT, `fechaCheque` TEXT, `valorCheque` REAL, `efectvo` REAL, `notaCredito` TEXT, `estado` TEXT, `reciboCobro1` TEXT, `reciboCobro2` TEXT, `reciboCobro3` TEXT, `reciboCobro4` TEXT, `factura1` TEXT, `factura2` TEXT, `factura3` TEXT, `factura4` TEXT, `cheque1` TEXT, `cheque2` TEXT, `cheque3` TEXT, `cheque4` TEXT, `fechaCheque1` TEXT, `fechaCheque2` TEXT, `fechaCheque3` TEXT, `fechaCheque4` TEXT, `valorCheque1` REAL, `valorCheque2` REAL, `valorCheque3` REAL, `valorCheque4` REAL, `tipoPedido` TEXT, `tipoPrecio` TEXT, `pendienteSync` INTEGER NOT NULL, `fechaSync` INTEGER, `imagen1` BLOB, `imagen2` BLOB)",
+        "fields": [
+          {
+            "fieldPath": "idLocalPedido",
+            "columnName": "idLocalPedido",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idPedido",
+            "columnName": "idPedido",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCliente",
+            "columnName": "idCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nombreCliente",
+            "columnName": "nombreCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idAsesor",
+            "columnName": "idAsesor",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaPedido",
+            "columnName": "fechaPedido",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precioTotal",
+            "columnName": "precioTotal",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "conBonos",
+            "columnName": "conBonos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descuento",
+            "columnName": "descuento",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "porcentajeDescuento",
+            "columnName": "porcentajeDescuento",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precioFinal",
+            "columnName": "precioFinal",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reciboCobro",
+            "columnName": "reciboCobro",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "factura",
+            "columnName": "factura",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cheques",
+            "columnName": "cheques",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaCheque",
+            "columnName": "fechaCheque",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorCheque",
+            "columnName": "valorCheque",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "efectvo",
+            "columnName": "efectvo",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "notaCredito",
+            "columnName": "notaCredito",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reciboCobro1",
+            "columnName": "reciboCobro1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reciboCobro2",
+            "columnName": "reciboCobro2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reciboCobro3",
+            "columnName": "reciboCobro3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reciboCobro4",
+            "columnName": "reciboCobro4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "factura1",
+            "columnName": "factura1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "factura2",
+            "columnName": "factura2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "factura3",
+            "columnName": "factura3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "factura4",
+            "columnName": "factura4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cheque1",
+            "columnName": "cheque1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cheque2",
+            "columnName": "cheque2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cheque3",
+            "columnName": "cheque3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cheque4",
+            "columnName": "cheque4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaCheque1",
+            "columnName": "fechaCheque1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaCheque2",
+            "columnName": "fechaCheque2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaCheque3",
+            "columnName": "fechaCheque3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaCheque4",
+            "columnName": "fechaCheque4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorCheque1",
+            "columnName": "valorCheque1",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorCheque2",
+            "columnName": "valorCheque2",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorCheque3",
+            "columnName": "valorCheque3",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valorCheque4",
+            "columnName": "valorCheque4",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoPedido",
+            "columnName": "tipoPedido",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoPrecio",
+            "columnName": "tipoPrecio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pendienteSync",
+            "columnName": "pendienteSync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaSync",
+            "columnName": "fechaSync",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imagen1",
+            "columnName": "imagen1",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imagen2",
+            "columnName": "imagen2",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idLocalPedido"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "pedidoDetalle",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPedidoDetalle` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idLocalPedido` INTEGER NOT NULL, `idPedido` INTEGER NOT NULL, `idProducto` TEXT, `nombre` TEXT, `tipo` TEXT, `cantidad` INTEGER NOT NULL, `bono` INTEGER NOT NULL, `precio` REAL, `precioTotal` REAL, `pvp` REAL, `pvf` REAL)",
+        "fields": [
+          {
+            "fieldPath": "idPedidoDetalle",
+            "columnName": "idPedidoDetalle",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idLocalPedido",
+            "columnName": "idLocalPedido",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idPedido",
+            "columnName": "idPedido",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idProducto",
+            "columnName": "idProducto",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cantidad",
+            "columnName": "cantidad",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bono",
+            "columnName": "bono",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precio",
+            "columnName": "precio",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precioTotal",
+            "columnName": "precioTotal",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pvp",
+            "columnName": "pvp",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pvf",
+            "columnName": "pvf",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idPedidoDetalle"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "escala_bonificacion",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idEscalaBonificacion` INTEGER NOT NULL, `idEscala` INTEGER NOT NULL, `cantidad` INTEGER NOT NULL, `bonificacion` INTEGER NOT NULL, `porcentaje` REAL, `nombre` TEXT, PRIMARY KEY(`idEscalaBonificacion`))",
+        "fields": [
+          {
+            "fieldPath": "idEscalaBonificacion",
+            "columnName": "idEscalaBonificacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idEscala",
+            "columnName": "idEscala",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cantidad",
+            "columnName": "cantidad",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bonificacion",
+            "columnName": "bonificacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "porcentaje",
+            "columnName": "porcentaje",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idEscalaBonificacion"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_escala_bonificacion_idEscalaBonificacion",
+            "unique": false,
+            "columnNames": [
+              "idEscalaBonificacion"
+            ],
+            "createSql": "CREATE  INDEX `index_escala_bonificacion_idEscalaBonificacion` ON `${TABLE_NAME}` (`idEscalaBonificacion`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "asesores_location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`fechaRegistro` INTEGER, `idAsesor` TEXT, `latitud` REAL, `longitud` REAL, `Inicio` INTEGER, `pendienteSync` INTEGER NOT NULL, PRIMARY KEY(`fechaRegistro`))",
+        "fields": [
+          {
+            "fieldPath": "fechaRegistro",
+            "columnName": "fechaRegistro",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idAsesor",
+            "columnName": "idAsesor",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitud",
+            "columnName": "latitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitud",
+            "columnName": "longitud",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Inicio",
+            "columnName": "Inicio",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pendienteSync",
+            "columnName": "pendienteSync",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "fechaRegistro"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "panel_clientes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPanelCliente` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idCliente` TEXT, `NombreCliente` TEXT, `representante` TEXT, `ciudad` TEXT, `direccion` TEXT, `origen` TEXT, `tipoObserv` TEXT, `idUsuario` TEXT, `estadoSeleccion` TEXT, `estadoVisita` TEXT, `claseMedico` TEXT, `cumpleAnyos` INTEGER, `idEspecialidades` TEXT, `tipo` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idPanelCliente",
+            "columnName": "idPanelCliente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCliente",
+            "columnName": "idCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "NombreCliente",
+            "columnName": "NombreCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "representante",
+            "columnName": "representante",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ciudad",
+            "columnName": "ciudad",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "direccion",
+            "columnName": "direccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "origen",
+            "columnName": "origen",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoObserv",
+            "columnName": "tipoObserv",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idUsuario",
+            "columnName": "idUsuario",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "estadoSeleccion",
+            "columnName": "estadoSeleccion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "estadoVisita",
+            "columnName": "estadoVisita",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "claseMedico",
+            "columnName": "claseMedico",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cumpleAnyos",
+            "columnName": "cumpleAnyos",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idEspecialidades",
+            "columnName": "idEspecialidades",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idPanelCliente"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"6c9177ca85b5a2d7644efc4abba05863\")"
+    ]
+  }
+}

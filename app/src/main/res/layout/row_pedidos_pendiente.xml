@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_pedido_pendiente"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tv_Asesor_pen"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="TextView"
+
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tv_valor_pen"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="right"
+
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:id="@+id/iv_origen_row_pedidos_pendientes"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_store_black_24dp" />
+
+        <LinearLayout
+            android:id="@+id/right_dataClie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_nombre_cliente_pen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_codigo_cliente_pen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="3"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tv_ciudad_cliente_pen"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="TextView" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/right_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="1dp"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ib_pedido_pendiente_menu"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_more_vert_black_24dp" />
+
+            <TextView
+                android:id="@+id/tv_codigo_row_tipo_cliente_pedpen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tv_codigo_row_tipo_cliente_obs_pedpen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/divider_c"
+            android:layout_width="10dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="1dp"
+            android:background="#21d162"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/divider_b"
+            android:layout_width="10dp"
+            android:layout_height="80dp"
+            android:background="#ffff00"
+            android:layout_marginRight="1dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/divider_d"
+            android:layout_width="10dp"
+            android:layout_height="80dp"
+            android:background="#ff0000"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/ll_pedido_pendiente" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

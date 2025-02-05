@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.rocnarf.rocnarf.PedidoActivity">
+    <item
+        android:id="@+id/action_agregar_producto"
+        android:orderInCategory="90"
+        android:title="Agregar Producto"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_eliminar_pedido"
+        android:orderInCategory="100"
+        android:title= "Eliminar Pedido"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_enviar_pedido"
+        android:orderInCategory="100"
+        android:title="Enviar Pedido"
+        app:showAsAction="never" />
+</menu>

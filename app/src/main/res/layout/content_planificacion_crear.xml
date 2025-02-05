@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_fecha_content_planificacion_crear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Fecha" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:layout_editor_absoluteX="339dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_hora_content_planificacion_crear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Hora" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_agregar_content_planificacion_crear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Agregar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ly_visita_doctores_content_planificacion_crear"/>
+
+    <LinearLayout
+    android:id="@+id/ly_visita_farmacia_content_planificacion_crear"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/InputLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Razón de la Visita"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="60dp" />
+
+    <CheckBox
+        android:id="@+id/cb_cajas_vacias_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cajas Vacias"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="88dp" />
+
+    <CheckBox
+        android:id="@+id/cb_siembra_producto_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Siembra de Productos"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <CheckBox
+        android:id="@+id/cb_visita_promocional_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visita Promocional"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="160dp" />
+
+        <CheckBox
+            android:id="@+id/cb_punto_contacto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Punto de Contacto"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="124dp" />
+
+    <CheckBox
+        android:id="@+id/cb_entrega_premios_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Entrega de Premios"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="196dp" />
+
+    <CheckBox
+        android:id="@+id/cb_devolucion_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Devolucion"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="232dp" />
+
+    <CheckBox
+        android:id="@+id/cb_pedido_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pedido"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_pedido_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_pedido_content_planificacion_crear">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_valorF2_content_planificacion_crear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="F2"
+                android:inputType="numberDecimal"
+                android:textAlignment="viewEnd" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_valorF3_content_planificacion_crear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="F3"
+                android:inputType="numberDecimal"
+                android:textAlignment="viewEnd" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_valorF4_content_planificacion_crear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="F4"
+                android:inputType="numberDecimal"
+                android:textAlignment="viewEnd" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_valorGEN_content_planificacion_crear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="GEN"
+                android:inputType="numberDecimal"
+                android:textAlignment="viewEnd" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cb_cobro_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cobro"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="308dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_cobro_content_planificacion_crear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_cobro_content_planificacion_crear">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_cobro_content_planificacion_crear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Valor a Cobrar"
+            android:inputType="numberDecimal"
+            android:textAlignment="viewEnd" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_visita_doctores_content_planificacion_crear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ly_visita_farmacia_content_planificacion_crear">
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/InputLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Razón de la Visita"
+            tools:layout_editor_absoluteX="135dp"
+            tools:layout_editor_absoluteY="60dp" />
+
+        <CheckBox
+            android:id="@+id/cb_visita_promocional_doctores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visita Promocional"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="88dp" />
+
+        <CheckBox
+            android:id="@+id/cb_punto_contacto_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Punto de Contacto"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="124dp" />
+
+        <CheckBox
+            android:id="@+id/cb_re_visita"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Re-Visita"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="124dp" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

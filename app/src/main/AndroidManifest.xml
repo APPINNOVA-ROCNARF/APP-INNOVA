@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.rocnarf.rocnarf">
+
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".MedicoFichaActivity"
+            android:exported="true"
+            >
+
+        </activity>
+        <activity android:name=".CobroActivity"
+            android:exported="true"/>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.rocnarf.rocnarf.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ClientesCriteriosActivity"
+            android:label="@string/title_activity_clientes_criterios"
+            android:exported="true"
+
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ClientesCriteriosSemanalActivity"
+            android:label="@string/title_activity_clientes_criterios"
+            android:exported="true"
+
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_resultado_visita"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ResultadoClientesActivity"
+            android:label="@string/title_activity_resultado_clientes"
+            android:exported="true"
+
+            android:parentActivityName=".ClientesCriteriosActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.ClientesCriteriosActivity" />
+        </activity>
+        <activity
+            android:name=".ResultadoClientesSemanalActivity"
+            android:label="@string/title_activity_resultado_clientes"
+            android:exported="true"
+
+            android:parentActivityName=".ClientesCriteriosActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.ClientesCriteriosActivity" />
+        </activity>
+
+        <activity
+            android:name=".PanelClientesActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_panel_clientes"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity
+            android:name=".ClientesBusquedaActivity"
+            android:label="@string/title_activity_resultado_clientes"
+            android:exported="true"
+
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".PedidoCobroClienteActivity"
+            android:label="@string/title_activity_resultado_clientes"
+            android:exported="true"
+
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".GeoLocalizacionMapsActivity"
+            android:label="@string/title_activity_maps"
+            android:exported="true"
+
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".GeoLocalizacionActivity"
+            android:label="@string/title_activity_geo_localizacion"
+            android:exported="true"
+
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PlanificacionCrearActivity"
+            android:label="@string/title_activity_planificacion_crear"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoClientesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.ResultadoClientesActivity" />
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SyncActivity"
+            android:label="@string/title_activity_sync"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <activity
+            android:exported="true"
+
+            android:name=".ClientesCupoCreditoActivity"
+            android:label="@string/title_activity_clientes_cupo_credito" />
+        <activity android:name=".ClientesFacturasActivity"
+            android:exported="true"
+            />
+        <activity android:name=".FacturaDetalleActivity"
+            android:exported="true"
+            />
+        <activity android:name=".VentasMensualesClientesActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".ProductosActivity"
+            android:parentActivityName=".PedidoClienteActivity"
+            android:label="Productos"
+            android:exported="true"
+
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UsuarioActivity"
+            android:label="Usuarios Acompañado"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.ResultadoVisitaActivity" />
+        </activity>
+        <activity
+            android:name=".PlanesActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="@string/title_activity_planes" />
+        <activity
+            android:name=".PlanesCreaObsequioActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_planes" />
+        <activity
+            android:name=".ObsequiosActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+
+            android:label="@string/title_activity_obsequios" />
+        <activity
+            android:name=".PedidoActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_pedido" />
+        <activity
+            android:name=".HistorialComentariosActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="@string/title_activity_Comentarios" />
+        <activity
+            android:name=".PedidoSimpleActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_pedido" />
+        <activity
+            android:name=".ParrillaActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="@string/title_activity_parrila" />
+        <activity
+            android:name=".RecetasXActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="@string/title_activity_parrila" />
+        <activity
+            android:name=".MedicosCategoriaActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="@string/title_activity_categoria" />
+        <activity
+            android:name=".QuejaActivity"
+            android:label="Quejas"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            />
+        <activity
+            android:name=".RutasActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_rutas" />
+        <activity
+            android:name=".ViaticoActivity"
+            android:label="Viáticos"
+            android:exported="true"
+            android:parentActivityName=".ResultadoVisitaActivity"
+
+            />
+        <activity
+            android:name=".RutasCrearActivity"
+            android:label="@string/title_activity_rutas"
+            android:exported="true"
+            />
+        <activity
+            android:name=".DetalleNotaCreditoActivity"
+            android:label="@string/title_activity_nc_Detalle"
+            android:exported="true"
+            />
+        <activity
+            android:name=".RecetasXMercado"
+            android:exported="true"
+            >
+        </activity>
+        <activity
+            android:name=".ClientesFacturasNotaDebitosActivity"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:label="Pruab Nuevo" />
+
+        <activity
+            android:name=".PedidoListaActivity"
+            android:label="@string/title_activity_pedido_lista"
+            android:exported="true"
+
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".DetalleQuejaActivity"
+            android:label="Crea Queja"
+            android:exported="true"
+
+            android:parentActivityName=".QuejaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.QuejaActivity" />
+        </activity>
+
+        <activity
+            android:name=".GuiasProductosActivity"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_guias_productos" />
+        <activity
+            android:name=".ReporteVentasActivity"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:label="Reporte de Ventas" />
+        <activity
+            android:name=".MapaActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Mapa" />
+
+        <activity
+            android:name=".PreguntasFrecuentesActivity"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:label="Preguntas Frecuentes" />
+        <activity
+            android:name=".PoliticasActivity"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:label="Politicas Internas" />
+        <activity
+            android:name=".PedidosPendienteActivity"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:exported="true"
+
+            android:label="Estado de Pedidos" />
+        <activity
+            android:name=".EstadisticaActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Estadísticas" />
+        <activity
+            android:name=".CarteraClienteActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Cartera por Cobrar" />
+        <activity
+            android:name=".CumpleanyosActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Cumpleaños" />
+        <activity
+            android:exported="true"
+
+            android:name=".PedidosPendienteDetalleActivity"
+            android:label="Pedidos Pendiente Detalles" />
+        <activity
+            android:name=".PdfActivity"
+            android:exported="true"
+
+            android:label="Lectura Pdf" />
+        <activity
+            android:name=".ActivityVisorDoc"
+            android:exported="true"
+
+            android:label="Lectura Visor" />
+        <activity
+            android:name=".PdfGuiasProductosActivity"
+            android:exported="true"
+
+            android:parentActivityName=".GuiasProductosActivity"
+            android:label="Guia de Producto" />
+        <activity
+            android:name=".PdfReporteVentasActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ReporteVentasActivity"
+            android:label="Reporte de Ventas" />
+        <activity
+            android:name=".TiempoEntregaActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+
+            android:label="Tiempos Promedio de Entrega" />
+        <activity
+            android:name=".HistorialVisitasActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Historial de Visitas" />
+        <activity
+            android:name=".HistorialProductosPromocionadoActivity"
+            android:exported="true"
+
+            android:label="Historial de Productos Promocionados" />
+        <activity
+            android:name=".PedidoClienteActivity"
+            android:label="@string/title_activity_pedido_cliente"
+            android:exported="true"
+
+            android:parentActivityName=".PedidoListaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.PedidoListaActivity" />
+        </activity>
+        <activity
+            android:name=".VisitaImpulsadoraCrearActivity"
+            android:label="@string/title_activity_visita_impulsadora_crear"
+            android:exported="true"
+
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocnarf.rocnarf.MainActivity" />
+        </activity>
+        <activity android:name=".VisitasImpulsadorasActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".VisitasImpulsadorasClientesActivity"
+            android:exported="true"
+            android:label="@string/title_activity_visitas_impulsadoras_clientes" />
+
+
+        <activity
+            android:name=".RegistroViaticoActivity"
+            android:exported="true"
+            android:label="Nuevo Registro" />
+        <activity
+            android:name=".HistorialViaticoActivity"
+            android:exported="true"
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Historial" />
+
+        <activity
+            android:name=".VisitasImpulsadorasResultadoActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_visitas_impulsadoras_resultado" />
+        <activity
+            android:name=".ViaticoMenuActivity"
+            android:exported="true"
+
+            android:label="@string/title_activity_visitas_impulsadoras_resultado" />
+        <service
+            android:name=".services.LocationService"
+            android:stopWithTask="false" />
+
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_logo_rocnarf" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_color"-->
+<!--            android:resource="@color/colorAccent" />-->
+
+        <activity android:name=".RecorridoActivity"
+            android:exported="true"
+            />
+        <activity android:name=".VersionActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Versión"
+            />
+        <activity android:name=".EscalaBonificacionActivity"
+            android:exported="true"
+
+            android:parentActivityName=".ResultadoVisitaActivity"
+            android:label="Tabla de Bonificaciones"/>
+    </application>
+
+</manifest>

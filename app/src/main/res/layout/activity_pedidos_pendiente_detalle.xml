@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PedidosPendienteDetalleActivity">
+
+
+
+
+    <TextView
+        android:id="@+id/textViewPor"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="PEDIDO "
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_idFactura_row_clientes_facturas_pedPen"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:text="Vendedor"
+        android:textAlignment="textEnd"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/textViewPor"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/tv_fecha_row_clientes_facturas_pedPen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="fecha"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_idFactura_row_clientes_facturas_pedPen"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_vendedor_row_clientes_facturas_ped"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:layout_marginStart="26dp"
+        android:text="IdFactura"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/textView25"
+        app:layout_constraintTop_toBottomOf="@+id/tv_idFactura_row_clientes_facturas_pedPen" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="REP"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_idFactura_row_clientes_facturas_pedPen" />
+
+
+    <TextView
+        android:id="@+id/tv_estado_desp_pedPen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="estado"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_idFactura_row_clientes_facturas_pedPen" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="FACTURA"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+
+    <TextView
+        android:id="@+id/tv_vendedor_row_clientes_facturas_ped_numero"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:layout_marginStart="26dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+
+
+
+
+    <!--    <TextView-->
+<!--        android:id="@+id/tv_vencimiento_row_clientes_facturas_pendiente_pedidos"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="Venc:    Dias:  "-->
+<!--        app:layout_constraintBaseline_toBaselineOf="@+id/textView24"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/textView24"
+        android:text="VALOR" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/textView29"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView29"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="$ " />
+
+    <TextView
+        android:id="@+id/tv_valor_row_clientes_facturas_pedPen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toEndOf="@+id/textView30"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView29"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="0.00 " />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView29"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="DIAS PLAZO " />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="16dp"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView29"
+        app:layout_constraintStart_toEndOf="@+id/textView31"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="0 " />
+
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/textView29"
+        android:text="ABONO" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/textView33"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="$ " />
+
+    <TextView
+        android:id="@+id/tv_abono_row_clientes_facturas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toEndOf="@+id/textView35"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="0.00 " />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="DIAS FACT" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+        app:layout_constraintStart_toEndOf="@+id/textView31"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="0 " />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="NOTA CREDITO"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/textView38"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="$ " />
+
+    <TextView
+        android:id="@+id/tv_nota_credito_row_clientes_facturas"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toEndOf="@+id/textView39"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="0.00 " />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="DIAS VCDO" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
+        app:layout_constraintStart_toEndOf="@+id/textView40"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="0 " />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="SALDO"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/textView41"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView41"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="$ " />
+
+    <TextView
+        android:id="@+id/tv_saldo_row_clientes_facturas_penPed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toEndOf="@+id/textView42"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView41"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="10dp"
+        android:text="0.00 " />
+
+
+<!--    <TableLayout-->
+<!--        android:id="@+id/tableLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="5dp"-->
+<!--        android:layout_marginTop="130dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_vencimiento_row_clientes_facturas_pendiente_pedidos">-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView291"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_column="0"-->
+
+<!--                android:text="Valor" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="10dp"-->
+<!--                android:layout_column="0"-->
+<!--                android:text="$ " />-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_valor_row_clientes_facturas_pedPen1"-->
+<!--                android:layout_column="0"-->
+
+<!--                android:text="0.00"-->
+<!--                android:textAlignment="textEnd" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView32"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:text="Abono" />-->
+<!--            <TextView-->
+<!--                android:text="$ "-->
+<!--                android:textAlignment="textEnd" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_abono_row_clientes_facturas1"-->
+<!--                android:text="0.00"-->
+<!--                android:textAlignment="textEnd" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView34"-->
+<!--                android:layout_column="1"-->
+<!--                android:text="Nota Credito" />-->
+<!--            <TextView-->
+<!--                android:text="$ "-->
+<!--                android:textAlignment="textEnd" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_nota_credito_row_clientes_facturas1"-->
+<!--                android:text="0.00"-->
+<!--                android:textAlignment="textEnd" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView36"-->
+<!--                android:layout_column="1"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Saldo" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView_dolar"-->
+<!--                android:layout_width="14dp"-->
+<!--                android:text="$ "-->
+<!--                android:textAlignment="textEnd"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_saldo_row_clientes_facturas_penPed1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:text="0.00"-->
+<!--                android:textAlignment="textEnd"-->
+<!--                android:textStyle="bold" />-->
+<!--        </TableRow>-->
+<!--    </TableLayout>-->
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_saldo_row_clientes_facturas_penPed" />
+
+    <TextView
+        android:id="@+id/textViewComentarioVend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/black"
+
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="COMENTARIOS VENDEDOR: "
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+    <TextView
+        android:id="@+id/tv_Comentario_vend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/textViewComentarioVend" />
+
+    <TextView
+        android:id="@+id/textViewComentarioCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="COMENTARIOS CRÉDITO &amp; COBRANZAS: "
+        android:textColor="@android:color/black"
+
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Comentario_vend" />
+
+    <TextView
+        android:id="@+id/tv_Comentario_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/textViewComentarioCart" />
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Comentario_cart" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_activity_pedidos_pendiente_detalle_pro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

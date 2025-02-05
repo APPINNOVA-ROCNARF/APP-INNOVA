@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_1_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Factura" />
+
+            <TextView
+                android:id="@+id/tv_numero_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Factura" />
+
+            <TextView
+                android:id="@+id/tv_fecha_row_cobro_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="fecha"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_2_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_1_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Rep" />
+            <TextView
+                android:id="@+id/tv_rep_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="CJD-20" />
+
+            <TextView
+                android:id="@+id/tv_fecha_row_cobro2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Despachado"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_3_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_2_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Pedido" />
+            <TextView
+                android:id="@+id/tv_pedido_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="480722" />
+
+            <TextView
+                android:id="@+id/tv_tipo_factura"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Cancelado"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_4_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_3_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Valor" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/tv_valor_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:paddingEnd="60dp"
+                android:layout_marginTop="8dp"
+                android:textAlignment="textEnd"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Dias Plazo" />
+
+            <TextView
+                android:id="@+id/tv_dia_plazo_nd"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="0" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_5_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_4_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Abono" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/tv_abono_nd"
+                android:layout_width="0dp"
+                android:textAlignment="textEnd"
+                android:layout_height="wrap_content"
+                android:paddingEnd="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Dias Fact" />
+
+            <TextView
+                android:id="@+id/tv_dia_fact_nd"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="0" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_6_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_5_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Nota Credito" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/tv_nc_nd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:paddingEnd="60dp"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Dias Vcdo" />
+
+            <TextView
+                android:id="@+id/tv_dia_vcdo_nd"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="0" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_7_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_6_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Saldo" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/tv_saldo_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textAlignment="textEnd"
+                android:paddingEnd="60dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="368dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_7_ND" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_10_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Nota de Debito" />
+
+
+            <TextView
+                android:id="@+id/tv_fecha_row_cobro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="fecha"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/ll_30_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_2_ND">
+
+            <TextView
+                android:id="@+id/tv_estado_nd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Protesto" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_40_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_3_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Valor" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/tv_valor_nd_debito"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:paddingEnd="60dp"
+                android:layout_marginTop="8dp"
+                android:textAlignment="textEnd"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Dias Plazo" />
+
+            <TextView
+                android:id="@+id/tv_dia_plazo_nd_debito"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="0" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_50_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_40_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Cheque" />
+            <TextView
+                android:id="@+id/tv_cheque_nd"
+                android:layout_width="0dp"
+                android:textAlignment="textEnd"
+                android:layout_height="wrap_content"
+                android:paddingEnd="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Dias N/D" />
+
+            <TextView
+                android:id="@+id/tv_dia_fact_nd_debito"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="0" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_60_ND"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_50_ND">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Banco" />
+
+            <TextView
+                android:id="@+id/tv_banco_nd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:paddingEnd="60dp"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="Dias Vcdo" />
+
+            <TextView
+                android:id="@+id/tv_dia_vcdo_nd_debito"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="368dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_60_ND" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

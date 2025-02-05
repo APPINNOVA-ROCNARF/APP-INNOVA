@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/expandir_planificacion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
+
+    <!--    android:id="@+id/linearLayout"-->
+
+
+    <ImageView
+        android:id="@+id/iv_estado_fragment_planifiacion_contenido_row"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_check_circle_primary_24dp" />
+
+
+    <ImageView
+        android:id="@+id/iv_cliente_revisita"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/revisita" />
+
+    <ImageButton
+        android:id="@+id/ib_pedido_fragment_cliente_detalle_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_more_vert_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/divider3"
+        android:layout_width="10dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="0dp"
+        android:background="#21d162"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_origen_row_resultado_cliente"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="4dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/h1" />
+    <!--    android:layout_marginStart="4dp"-->
+    <!--    android:layout_marginTop="32dp"-->
+
+    <ImageView
+        android:id="@+id/iv_origen_row_resultado_cliente_z"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="4dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/h2" />
+
+    <ImageView
+        android:id="@+id/iv_origen2_row_resultado_cliente"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="4dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/d1" />
+
+    <ImageView
+        android:id="@+id/iv_origen2_row_resultado_cliente_torta"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="4dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_torta_cumplanyo_24dp" />
+
+    <TextView
+        android:id="@+id/tv_nombre_cliente_fragment_planifiacion_contenido_row"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="NombreCliente"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_tipo_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="tipoCliente"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_cliente_fragment_planifiacion_contenido_row" />
+
+    <TextView
+        android:id="@+id/tv_codigo_fragment_planifiacion_contenido_row"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:textSize="12sp"
+        android:text="CodigoCliente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_cliente_fragment_planifiacion_contenido_row" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_representante_fragment_planifiacion_contenido_row"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_marginStart="16dp"-->
+    <!--android:textSize="12sp"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/tv_nombre_cliente_fragment_planifiacion_contenido_row" />-->
+
+    <TextView
+        android:id="@+id/tv_tipo_cliente_obs"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginEnd="16dp"
+        android:text="tipoCliente"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_codigo_fragment_planifiacion_contenido_row" />
+
+
+    <TextView
+        android:id="@+id/tv_direccion_fragment_planifiacion_contenido_row"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:textSize="12sp"
+        android:text="DirCliente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_codigo_fragment_planifiacion_contenido_row" />
+    <TextView
+        android:id="@+id/tv_hora_visita_fragment_planifiacion_contenido_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="9AM -10 AM"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_direccion_fragment_planifiacion_contenido_row"/>
+
+    <TextView
+        android:id="@+id/tv_motivo_visita_fragment_planificacion_contenido_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="MotivoVisita"
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toEndOf="@+id/tv_hora_visita_fragment_planifiacion_contenido_row"
+        app:layout_constraintTop_toBottomOf="@+id/tv_direccion_fragment_planifiacion_contenido_row"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/tv_motivo_visita_fragment_planificacion_contenido_row" />
+</androidx.constraintlayout.widget.ConstraintLayout>

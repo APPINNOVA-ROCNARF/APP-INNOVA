@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:paddingTop="30dp"
+        android:background="@drawable/bgkonten"
+        android:id="@+id/modalCumple"
+        android:gravity="center"
+        android:elevation="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_width="340dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:elevation="6dp"
+            android:src="@drawable/ic_torta_cumplanyo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="CUMPLEAÑEROS DEL MES"
+            android:textSize="22dp"
+            android:textColor="#343434"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ListView
+            android:id="@+id/listCumple"
+            android:layout_marginTop="12dp"
+            android:lineSpacingExtra="4dp"
+            android:textAlignment="center"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:text="LUIS ALVAREZ TORREZ"
+            android:textSize="16dp"
+            android:textColor="#343434"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp" />
+
+        <Button
+            android:id="@+id/btnCloseCumple"
+            android:layout_marginTop="30dp"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="24dp"
+            android:text="Cerrar"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btnrocnarf"
+            />
+
+    </LinearLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutPartidos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/rv_list_fragment_planificacion_list"
+            android:name="com.rocnarf.rocnarf.PlanificacionFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".PlanificacionFragment"
+            tools:listitem="@layout/fragment_planificacion_contenido_row" />
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

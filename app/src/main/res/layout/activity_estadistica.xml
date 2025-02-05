@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/idtext_ND"
+                    android:layout_width="220dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="Clientes Activos Visitados"
+                    android:layout_marginEnd="40dp"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
+                    />
+
+                <TextView
+                    android:id="@+id/cli_act_vis_val"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/cli_act_vis_por"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="18dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
+                    />
+
+            </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Clientes Activos No Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_no_vis_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_no_vis_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Clientes Activos Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_total_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_total_poc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:text="Clientes Activos Con Factura"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_fac_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_fac_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Clientes Activos Sin Factura"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_sin_fac_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_sin_fac_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Clientes Activos Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_sin_total_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_act_sin_total_poc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:text="Clientes Inactivos"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_inac"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Clientes Z"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:text="Cupo Crédito Utilizado"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_cup_uti_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_cup_uti_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Cupo Crédito Disponible"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_cred_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_cred_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Cupo Crédito Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_cup_total_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_cup_total_poc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:text="COB"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_COB_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_COB_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="SDI"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_SDI_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_SDI_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="INT"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_INT_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_INT_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="DER"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_DER_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_DER_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="TOP"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_TOP_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_TOP_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_total_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_total_poc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+</LinearLayout>
+
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/pBarQueja"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="false"-->
+<!--            android:layout_alignParentBottom="false"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:indeterminate="true"-->
+<!--            android:indeterminateDrawable="@drawable/progress_bg" />-->
+
+

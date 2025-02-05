@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PedidosPendienteActivity">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/id_chip_group_cartera"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:singleSelection="true"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/op1_cartera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor Vcdo"
+            style="@style/Widget.MaterialComponents.Chip.Filter" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/op2_cartera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dias Vcdo"
+            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/op3_cartera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ciudad"
+            style="@style/Widget.MaterialComponents.Chip.Filter" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/op4_cartera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visitas"
+            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <ProgressBar
+        android:id="@+id/pBarCarteraCliente"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress_bg"
+        tools:ignore="MissingConstraints" />
+
+
+
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+android:id="@+id/swipeRefreshCarteraCliente"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:layout_marginTop="40dp">
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_activity_cartera_cliente"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        />
+
+
+
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MedicosCategoriaActivity">
+
+    <TableLayout
+        android:id="@+id/table_lyout_med_cat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView1_md_cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_black"
+                android:text="Categoría"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_cat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_black"
+                android:text="Total Puntos"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_total_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+
+
+        </TableRow>
+    </TableLayout>
+
+
+    <TableLayout
+        android:id="@+id/table_lyout_med_det"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table_lyout_med_cat">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView1_md_cqui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="Quintil RX"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_cqui_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView4_med_cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_rxroc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="RX Productos Rocnarf"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_rxroc_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView5_med_cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_Afinidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="Afinidad"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_Afinidad_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView5_med_catAfinidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_Compra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="Compra"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_Compra_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView5_med_catCompra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_Aseguradora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="Aseguradora"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView2_md_Aseguradora_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/textView5_med_catAseguradora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text=""
+                android:textAlignment="center" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+    <TableLayout
+        android:id="@+id/table_lyout_med_det_fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table_lyout_med_det">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="MEDICO A"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text="2.60 pts - 5.00 pts"
+                android:textAlignment="center" />
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="MEDICO B"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text="1.06 pts - 2.59 pts"
+                android:textAlignment="center" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_griss"
+                android:text="MEDICO C"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="16dp"
+                android:textColor="@android:color/background_dark"
+                android:background="@drawable/border"
+                android:text="0.00 pts - 1.05 pts"
+                android:textAlignment="center" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

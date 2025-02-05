@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2,3,4,5">
+
+    <TableRow
+        android:id="@+id/row_1_recetas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/recetas_marca"
+            android:text="MARCA"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="left"
+            android:textColor="@android:color/background_dark"
+            android:padding="10dp"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <TextView
+            android:id="@+id/recetas_sem1"
+
+            android:text="TRI"
+            android:textSize="16dp"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold"
+            android:gravity="left"
+            android:padding="10dp"
+            android:layout_column="1"
+            />
+        <TextView
+            android:id="@+id/recetas_sem2"
+
+            android:text="SEM"
+            android:textSize="16dp"
+            android:textColor="@android:color/background_dark"
+
+            android:textStyle="bold"
+            android:gravity="left"
+            android:padding="10dp"
+            android:layout_column="1"
+            />
+        <TextView
+            android:id="@+id/recetas_ytd1"
+            android:text="MAT"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/background_dark"
+
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_column="1"
+            />
+        <TextView
+            android:id="@+id/recetas_ytd2"
+            android:text="YTD"
+            android:textSize="16dp"
+            android:textColor="@android:color/background_dark"
+
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_column="1"
+            />
+    </TableRow>
+
+    <TextView
+        android:id="@+id/recetas_marca_sub"
+        android:text="TRI"
+        android:textSize="14dp"
+        android:textColor="@android:color/background_dark"
+        android:gravity="left"
+        android:layout_marginLeft="10dp"
+        />
+
+
+</TableLayout>

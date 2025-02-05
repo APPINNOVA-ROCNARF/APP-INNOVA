@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/drawer_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:fitsSystemWindows="true"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:openDrawer="start"
+tools:context=".SyncActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_mensaje_cliente_activity_sync"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16px"-->
+<!--            android:text="Esta opcion descargara la informacion de los clientes para que las consultas no se hagan al srvidor remoto"-->
+<!--            android:layout_below="@+id/toolbar_container"/>-->
+<!--        <Button-->
+<!--            android:id="@+id/bt_clientes_activity_sync"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16px"-->
+<!--            android:text="Sincronizar Clientes"-->
+<!--            android:layout_below="@id/tv_mensaje_cliente_activity_sync"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_mensaje_visita_activity_sync"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16px"-->
+<!--            android:text="Esta opcion eliminara las visitas en cache y descargara la informacion que se encuentra en el servidor "-->
+<!--            android:layout_below="@id/bt_clientes_activity_sync"/>-->
+<!--        <Button-->
+<!--            android:id="@+id/bt_visitas_activity_sync"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16px"-->
+<!--            android:text="Sincronizar Visitas"-->
+<!--            android:layout_below="@id/tv_mensaje_visita_activity_sync"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_mensaje_producto_activity_sync"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16px"-->
+<!--            android:text="Esta opcion descargara la informacion de los productos para que las consultas no se hagan al srvidor remoto"-->
+<!--            android:layout_below="@id/bt_visitas_activity_sync"/>-->
+<!--        <Button-->
+<!--            android:id="@+id/bt_producto_activity_sync"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16px"-->
+<!--            android:text="Sincronizar Producto"-->
+<!--            android:layout_below="@id/tv_mensaje_producto_activity_sync"/>-->
+
+        <Button
+            android:id="@+id/bt_sync_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar_container"
+            android:layout_marginStart="16px"
+            android:layout_marginTop="16px"
+            android:layout_marginEnd="16px"
+            android:layout_marginBottom="16px"
+            android:drawableRight="@drawable/ic_sync_rocnarf"
+            android:text="Sincronizar Datos" />
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/pBar"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="90dp"-->
+<!--            android:layout_below="@+id/bt_sync_data"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:visibility="gone"/>-->
+
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progress_bg"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

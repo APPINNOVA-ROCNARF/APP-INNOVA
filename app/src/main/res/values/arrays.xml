@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sector" >
+        <item>201</item>
+        <item>202</item>
+        <item>203</item>
+        <item>204</item>
+        <item>205</item>
+    </string-array>
+    <string-array name="ciudad" >
+        <item>Guayaquil</item>
+        <item>Duran</item>
+        <item>Salinas</item>
+        <item>Quevedo</item>
+        <item>Babahoyo</item>
+    </string-array>
+    <string-array name="tipo" >
+        <item>TODOS</item>
+        <item>FAR</item>
+        <item>INT</item>
+        <item>PRI</item>
+        <item>DIS</item>
+        <item>INS</item>
+        <item>PUB</item>
+        <item>DER</item>
+    </string-array>
+</resources>

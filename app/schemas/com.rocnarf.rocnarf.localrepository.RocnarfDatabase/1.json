@@ -1,0 +1,138 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "65fdd594be799e9513d8d9800c25720c",
+    "entities": [
+      {
+        "tableName": "visita_clientes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_visita_cliente` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `codigo_asesor` TEXT NOT NULL, `codigo_cliente` TEXT NOT NULL, `nombre_cliente` TEXT NOT NULL, `fecha_visita` INTEGER NOT NULL, `visita_x_siembra_producto` INTEGER NOT NULL, `visita_promocional` INTEGER NOT NULL, `visita_x_pedido` INTEGER NOT NULL, `valor_pedido_f2` REAL NOT NULL, `valor_pedido_f3` REAL NOT NULL, `valor_pedido_gen` REAL NOT NULL, `visita_x_cobro` INTEGER NOT NULL, `valor_x_cobrar` REAL NOT NULL, `estado` TEXT NOT NULL, `fecha_creacion` INTEGER NOT NULL, `fecha_modificacion` INTEGER NOT NULL, `pendiente_sync` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "IdVisitaCliente",
+            "columnName": "id_visita_cliente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "CodigoAsesor",
+            "columnName": "codigo_asesor",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "CodigoCliente",
+            "columnName": "codigo_cliente",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "NombreCliente",
+            "columnName": "nombre_cliente",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "FechaVisita",
+            "columnName": "fecha_visita",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "VisitaXSiembraProducto",
+            "columnName": "visita_x_siembra_producto",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "VisitaPromocional",
+            "columnName": "visita_promocional",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "VisitaXPedido",
+            "columnName": "visita_x_pedido",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ValorPedidoF2",
+            "columnName": "valor_pedido_f2",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ValorPedidoF3",
+            "columnName": "valor_pedido_f3",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ValorPedidoGEN",
+            "columnName": "valor_pedido_gen",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "VisitaXCobro",
+            "columnName": "visita_x_cobro",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ValorXCobrar",
+            "columnName": "valor_x_cobrar",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "FechaCreacion",
+            "columnName": "fecha_creacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "FechaModificacion",
+            "columnName": "fecha_modificacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "PendienteSync",
+            "columnName": "pendiente_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_visita_cliente"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_visita_clientes_codigo_asesor",
+            "unique": false,
+            "columnNames": [
+              "codigo_asesor"
+            ],
+            "createSql": "CREATE  INDEX `index_visita_clientes_codigo_asesor` ON `${TABLE_NAME}` (`codigo_asesor`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"65fdd594be799e9513d8d9800c25720c\")"
+    ]
+  }
+}

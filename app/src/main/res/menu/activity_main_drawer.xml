@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_sync"
+            android:icon="@drawable/ic_sync_black_24dp"
+            android:title="Sincronizar" />
+
+        <item
+            android:id="@+id/nav_mapas"
+            android:icon="@drawable/ic_maps_gris"
+            android:title="Mapa" />
+
+
+        <item
+            android:id="@+id/nav_cliente"
+            android:icon="@drawable/ic_store_black_24dp"
+            android:title="Panel de Clientes y Médicos" />
+
+        <group android:checkableBehavior="single" >
+
+            <item
+                android:id="@+id/nav_pedidos"
+                android:icon="@drawable/ic_shopping_cart_black_24dp"
+                android:title="Pedidos y Cobros" />
+            <!--                <item-->
+            <!--                    android:id="@+id/nav_cobros"-->
+            <!--                    android:icon="@drawable/ic_shopping_cart_black_24dp"-->
+            <!--                    android:title="Realizar Cobros" />-->
+
+
+        </group>
+
+
+
+        <item
+            android:id="@+id/nav_catera"
+            android:icon="@drawable/ic_baseline_payments_24"
+            android:title="Cartera por Cobrar" />
+
+        <item
+            android:id="@+id/nav_pedidos_pendiente"
+            android:icon="@drawable/ic_icono_pedidos_pendiente_24"
+            android:title="Estado de Pedidos" />
+
+        <item
+            android:id="@+id/nav_estadistica"
+            android:icon="@drawable/ic_baseline_pie_chart_24"
+            android:title="Estadísticas" />
+
+
+        <item
+            android:id="@+id/nav_escala"
+            android:icon="@drawable/ic_calculadora_borde_white"
+            android:title="Tabla de Bonificaciones" />
+
+        <item
+            android:id="@+id/nav_parrilla"
+            android:icon="@drawable/ic_solicitud_premio_gris"
+            android:title="Parrilla Promocional" />
+
+        <item
+            android:id="@+id/nav_cumpleanyos"
+            android:icon="@drawable/ic_baseline_cake_24"
+            android:title="Cumpleaños" />
+
+        <item
+            android:id="@+id/nav_reporte_ventas"
+            android:icon="@drawable/ic_baseline_list_alt_24"
+            android:title="Reporte de Ventas" />
+
+        <group android:checkableBehavior="single" >
+            <item
+                android:id="@+id/nav_productos"
+                android:icon="@drawable/ic_productos_gris"
+                android:title="Stock de Productos" />
+
+
+            <!--<item-->
+            <!--android:id="@+id/nav_track"-->
+            <!--android:icon="@drawable/ic_directions_walk_black_24dp"-->
+            <!--android:title="Recorrido" />-->
+        </group>
+
+        <group android:checkableBehavior="single" >
+
+            <item
+                android:id="@+id/nav_planes"
+                android:icon="@drawable/ic_setup_gris"
+                android:title="Plan Comercial" />
+        </group>
+
+        <item
+            android:id="@+id/nav_solicitudPremio"
+            android:icon="@drawable/ic_plan_regalo_gris"
+            android:title="Solicitud de Premio" />
+
+        <item
+            android:id="@+id/nav_geolocalizacion"
+            android:icon="@drawable/ic_location_on_black_24dp"
+            android:title="GeoLocalizacion" />
+
+        <item
+            android:id="@+id/nav_rutas"
+            android:visible="false"
+            android:icon="@drawable/ic_directions_walk_black_24dp"
+            android:title="Rutas" />
+    </group>
+
+    <item
+        android:id="@+id/nav_guias_productos"
+        android:icon="@drawable/ic_task_list_gris"
+        android:title="Guía de Productos" />
+
+    <item
+        android:id="@+id/nav_tiempo_entrega"
+        android:icon="@drawable/ic_baseline_timer_24"
+        android:title="Tiempos Promedio de Entrega" />
+
+
+    <item
+        android:id="@+id/nav_quejas"
+        android:icon="@drawable/ic_baseline_insert_comment_24"
+        android:title="Quejas" />
+    <item
+        android:id="@+id/nav_politicas"
+        android:icon="@drawable/ic_check_circle_primary_24dp"
+        android:title="Politicas Internas" />
+
+    <item
+        android:id="@+id/nav_preguntas"
+        android:icon="@drawable/ic_help_gris"
+        android:title="Preguntas Frecuentes" />
+
+<!--    <item-->
+<!--        android:id="@+id/m_viatico"-->
+<!--        android:icon="@drawable/ic_monetization_on_black_24dp"-->
+<!--        android:title="Viáticos">-->
+<!--        <menu>-->
+<!--            <item-->
+<!--                android:id="@+id/nuevo_viatico"-->
+<!--                android:title="Nuevo Registro" />-->
+<!--            <item-->
+<!--                android:id="@+id/historial_viatico"-->
+<!--                android:title="Historial" />-->
+<!--        </menu>-->
+
+
+<!--    </item>-->
+
+    <item
+        android:id="@+id/nav_viatico_principal"
+        android:icon="@drawable/baseline_attach_money_24"
+        android:title="Viáticos" />
+
+
+
+    <group android:checkableBehavior="single" android:id="@+id/nav_sistema">
+        <item
+            android:id="@+id/nav_version"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Version" />
+        <item
+            android:id="@+id/nav_salir"
+            android:icon="@drawable/ic_close_black_24dp"
+            android:title="Cerrar Sesion" />
+
+
+    </group>
+
+</menu>
