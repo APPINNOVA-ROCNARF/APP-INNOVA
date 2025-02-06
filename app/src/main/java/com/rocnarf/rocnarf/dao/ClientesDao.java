@@ -16,19 +16,40 @@ import java.util.List;
 @Dao
 public interface ClientesDao {
 
-    @Query("select clientes.*, clientes.revisita, " +
-            "( select visita_clientes.estado from visita_clientes where clientes.idCliente = visita_clientes.codigoCliente and visita_clientes.codigoAsesor = :idAsesor  order by fechaVisitaPlanificada desc limit 1) as estadoVisita, " +
-            "( select pedido.tipoPedido from pedido where clientes.idCliente = pedido.idCliente and pedido.idAsesor = :idAsesor and pedido.tipoPedido = 'PEDID' order by fechaPedido desc limit 1) as pedido, " +
-            "( select pedido.tipoPedido from pedido where clientes.idCliente = pedido.idCliente and pedido.idAsesor = :idAsesor and pedido.tipoPedido = 'COBRO' order by fechaPedido desc limit 1) as cobro" +
-            " from clientes " +
-            " where  " +
-            "(clientes.seccion = :sector or clientes.seccion2 = :sector or clientes.seccion3 = :sector or clientes.seccion4 = :sector  or clientes.seccion5 = :sector or clientes.seccion6 = :sector or clientes.seccion7 = :sector or clientes.seccion8 = :sector or clientes.seccion9 = :sector) and " +
-            "(:codigoCliente is null or clientes.idCliente like :codigoCliente ) and " +
-            "(:nombre is null or clientes.nombreCliente like :nombre) and " +
-            "(:origen is null or clientes.origen = :origen) and " +
-            "(:representante is null or clientes.representante like :representante) and " +
-            "(:ciudad is null or clientes.ciudad like :ciudad)  " )
+    @Query("SELECT clientes.*, clientes.revisita, " +
+            "(CASE " +
+            "   WHEN EXISTS (SELECT 1 FROM visita_clientes " +
+            "               WHERE clientes.idCliente = visita_clientes.codigoCliente " +
+            "                 AND visita_clientes.codigoAsesor = :idAsesor " +
+            "                 AND visita_clientes.estado = 'EFECT') " +
+            "   THEN 'EFECT' " +
+            "   ELSE (SELECT visita_clientes.estado FROM visita_clientes " +
+            "         WHERE clientes.idCliente = visita_clientes.codigoCliente " +
+            "           AND visita_clientes.codigoAsesor = :idAsesor " +
+            "         ORDER BY fechaVisitaPlanificada DESC LIMIT 1) " +
+            "END) AS estadoVisita, " +
+            "(SELECT pedido.tipoPedido FROM pedido " +
+            " WHERE clientes.idCliente = pedido.idCliente " +
+            "   AND pedido.idAsesor = :idAsesor " +
+            "   AND pedido.tipoPedido = 'PEDID' " +
+            " ORDER BY fechaPedido DESC LIMIT 1) AS pedido, " +
+            "(SELECT pedido.tipoPedido FROM pedido " +
+            " WHERE clientes.idCliente = pedido.idCliente " +
+            "   AND pedido.idAsesor = :idAsesor " +
+            "   AND pedido.tipoPedido = 'COBRO' " +
+            " ORDER BY fechaPedido DESC LIMIT 1) AS cobro " +
+            "FROM clientes " +
+            "WHERE " +
+            "(clientes.seccion = :sector OR clientes.seccion2 = :sector OR clientes.seccion3 = :sector OR " +
+            " clientes.seccion4 = :sector OR clientes.seccion5 = :sector OR clientes.seccion6 = :sector OR " +
+            " clientes.seccion7 = :sector OR clientes.seccion8 = :sector OR clientes.seccion9 = :sector) " +
+            "AND (:codigoCliente IS NULL OR clientes.idCliente LIKE :codigoCliente) " +
+            "AND (:nombre IS NULL OR clientes.nombreCliente LIKE :nombre) " +
+            "AND (:origen IS NULL OR clientes.origen = :origen) " +
+            "AND (:representante IS NULL OR clientes.representante LIKE :representante) " +
+            "AND (:ciudad IS NULL OR clientes.ciudad LIKE :ciudad)")
     List<Clientes> get(String codigoCliente, String nombre, String origen, String sector, String representante, String ciudad, String idAsesor);
+
 
     @Query("select clientes.*, clientes.revisita, " +
             "( select visita_clientes.estado from visita_clientes where clientes.idCliente = visita_clientes.codigoCliente and visita_clientes.codigoAsesor = :idAsesor  order by fechaVisitaPlanificada desc limit 1) as estadoVisita, " +
