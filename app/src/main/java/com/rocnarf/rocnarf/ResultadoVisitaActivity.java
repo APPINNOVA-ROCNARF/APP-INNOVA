@@ -159,7 +159,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
             public void onClick(View view) {
                 try {
                     if (locCliente == null) {
-                        Toast.makeText(context, "No se ha podido establecer la ubicacion de3l cliente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "No se ha podido establecer la ubicacion del cliente", Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -178,17 +178,6 @@ public class ResultadoVisitaActivity extends AppCompatActivity
                     }
                     checkIfValidAndRead();
 
-//                    if (listaPro.size() != 0) {
-//
-//                        Log.d("myTag", "regresoo.... guarda" );
-//                        resultadoVisitaViewModel.addPromocionado(listaPro);
-//
-//                    }
-//
-//                    if (true){
-//                        Toast.makeText(context, "Esto es prueba", Toast.LENGTH_LONG).show();
-//                        return;
-//                    }
                     visitaPlanificada.setLatitud(latitudActual);
                     visitaPlanificada.setLongitud(longitudActual);
                     visitaPlanificada.setFechaVisita(new Date());

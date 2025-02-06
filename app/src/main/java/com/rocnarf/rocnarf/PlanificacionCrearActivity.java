@@ -1,10 +1,12 @@
 package com.rocnarf.rocnarf;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -217,7 +219,8 @@ public class PlanificacionCrearActivity extends AppCompatActivity
 //        mValorGEN.setText("0");
         if (estadoVisita != null && !estadoVisita.equals("NOEFE") && !estadoVisita.equals("PLANI")) {
             mReVisita.setVisibility(View.VISIBLE);
-            //mReVisita.setChecked(true);
+            mReVisita.setChecked(true); // Siempre marcado si es Re-Visita
+            mReVisita.setEnabled(false);
             if(mReVisita.isChecked()){
 
             }
@@ -313,39 +316,91 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             public void onClick(View view) {
                 try {
                     if (Validar()) {
-                        CrearVisita();
-                        Toast.makeText(context, "La visita se ha agregado con extito", Toast.LENGTH_LONG).show();
-                        if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_PANEL)) {
-                            PanelClientesRepository panelClientesRepository = new PanelClientesRepository(context);
-                            panelClientesRepository.deletePanelCliente(codigoCliente);
-                            //DelPanelClientePlanificado();
-                            Intent i = new Intent(context, PanelClientesActivity.class);
-                            i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                            i.putExtra(Common.ARG_SECCIOM, seccion);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
-                        }else if(origenPlanificacionVisita.equals(Common.VISITA_DESDE_MAPA)){
-                            Intent i = new Intent(context, MapaActivity.class);
-                            i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                            i.putExtra(Common.ARG_SECCIOM, seccion);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
-                        } else {
-                            Intent i = new Intent(context, MainActivity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
+                        if (mReVisita.isChecked()) {
+                            int diasFaltantes = diasFaltantesParaRevisita();
+                            if (diasFaltantes > 0) {
+                                // Mostrar un AlertDialog informativo con los días faltantes
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Advertencia")
+                                        .setMessage("Puedes registrar la visita, pero no será contabilizada para los puntos. " +
+                                                "Deben pasar " + diasAjuste + " días entre visitas para que sea contabilizada. " +
+                                                "Faltan " + diasFaltantes + " días.")
+                                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                CrearVisita(); // Registrar la visita
+                                                Toast.makeText(context, "La visita se ha agregado con éxito, pero no será contabilizada para los puntos.", Toast.LENGTH_LONG).show();
+                                                finalizarActividad();
+                                            }
+                                        })
+                                        .setNegativeButton("Cancelar", null) // No hacer nada si el usuario cancela
+                                        .show();
+                                return; // Salir del método para evitar registrar la visita dos veces
+                            }
                         }
-
-                        finish();
+                        // Si no es una revisita o ya han pasado los días requeridos, registrar la visita normalmente
+                        CrearVisita();
+                        Toast.makeText(context, "La visita se ha agregado con éxito.", Toast.LENGTH_LONG).show();
+                        finalizarActividad();
                     }
                 } catch (Exception ex) {
-                    Toast.makeText(context, "A ocurrido un error al intentar agregar la visita " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Ha ocurrido un error al intentar agregar la visita: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
             }
         });
     }
 
+    private void finalizarActividad() {
+        if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_PANEL)) {
+            PanelClientesRepository panelClientesRepository = new PanelClientesRepository(context);
+            panelClientesRepository.deletePanelCliente(codigoCliente);
+            Intent i = new Intent(context, PanelClientesActivity.class);
+            i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+            i.putExtra(Common.ARG_SECCIOM, seccion);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        } else if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_MAPA)) {
+            Intent i = new Intent(context, MapaActivity.class);
+            i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+            i.putExtra(Common.ARG_SECCIOM, seccion);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        } else {
+            Intent i = new Intent(context, MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        }
+        finish();
+    }
+
+    private int diasFaltantesParaRevisita() {
+        if (mReVisita.isChecked()) {
+            Calendar cal = Calendar.getInstance();
+            Calendar calToday = Calendar.getInstance();
+            cal.setTime(visitasClientesPlanificarViewModel.getByIdCliente(codigoCliente).getFechaVisita());
+            cal.add(Calendar.DAY_OF_YEAR, diasAjuste);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date dateBefore = null;
+            Date dateAfter = null;
+            try {
+                dateBefore = sdf.parse(sdf.format(cal.getTime()));
+                dateAfter = sdf.parse(sdf.format(calToday.getTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            long timeDiff = Math.abs(dateAfter.getTime() - dateBefore.getTime());
+            long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
+
+            if (calToday.compareTo(cal) > 0) {
+                return 0; // Ya han pasado los días requeridos
+            } else {
+                return (int) daysDiff; // Días que faltan
+            }
+        }
+        return 0; // Si no es una revisita, no hay restricción
+    }
 
     private void setDateField() {
         mCalendar = Calendar.getInstance();
