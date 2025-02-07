@@ -20,6 +20,7 @@ import java.util.Date;
 public class VisitaClientes extends VisitaClientesList {
 
     public final static String PLANIFICADO = "PLANI";
+    public final static String PEFECTIVA = "PEFECT";
     public final static String EFECTIVA = "EFECT";
     public final static String VISITADO = "NOEFE";
 

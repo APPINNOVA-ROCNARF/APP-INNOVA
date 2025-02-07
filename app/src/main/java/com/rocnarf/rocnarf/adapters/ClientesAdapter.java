@@ -355,21 +355,15 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             mRepresentanteView.setVisibility(View.GONE);
 
             if (TextUtils.isEmpty(cliente.getEstadoVisita())) {
-                mEstadoVisita.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_add_circle_red_24dp));
-//                mEstadoVisita.setVisibility(View.VISIBLE);
-                mEstadoVisita.setVisibility(View.GONE);
-                mEstadoFilas.setBackgroundColor(Color.parseColor("#FF0000"));
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#FF0000")); // Rojo
             } else if (cliente.getEstadoVisita().equals("EFECT")) {
-                mEstadoVisita.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check_circle_primary_24dp));
-                //mEstadoVisita.setVisibility(View.VISIBLE);
-                mEstadoVisita.setVisibility(View.GONE);
-                mEstadoFilas.setBackgroundColor(Color.parseColor("#21d162"));
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#21d162")); // Verde
+            } else if (cliente.getEstadoVisita().equals("PEFECT")) {
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#FFA500")); // Naranja
             } else {
-      //          mEstadoVisita.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_timer_black_24dp));
-         //       mEstadoVisita.setVisibility(View.VISIBLE);
-                //mEstadoFilas.setVisibility(View.GONE); ///00FFFFFF
-                mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff00"));
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff00")); // Amarillo
             }
+
 
 
 

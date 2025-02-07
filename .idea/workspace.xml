@@ -464,8 +464,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6c4e8bf-1cc8-4c9d-a7e5-46cc94718b99" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PanelClientesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PanelClientesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ResultadoVisitaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ResultadoVisitaActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PanelClienteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PanelClienteAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/ClientesDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/ClientesDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/VisitaClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/VisitaClientes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

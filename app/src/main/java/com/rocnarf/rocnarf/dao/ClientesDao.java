@@ -23,6 +23,11 @@ public interface ClientesDao {
             "                 AND visita_clientes.codigoAsesor = :idAsesor " +
             "                 AND visita_clientes.estado = 'EFECT') " +
             "   THEN 'EFECT' " +
+            "   WHEN EXISTS (SELECT 1 FROM visita_clientes " +
+            "               WHERE clientes.idCliente = visita_clientes.codigoCliente " +
+            "                 AND visita_clientes.codigoAsesor = :idAsesor " +
+            "                 AND visita_clientes.estado = 'PEFECT') " +
+            "   THEN 'PEFECT' " +
             "   ELSE (SELECT visita_clientes.estado FROM visita_clientes " +
             "         WHERE clientes.idCliente = visita_clientes.codigoCliente " +
             "           AND visita_clientes.codigoAsesor = :idAsesor " +
@@ -49,6 +54,7 @@ public interface ClientesDao {
             "AND (:representante IS NULL OR clientes.representante LIKE :representante) " +
             "AND (:ciudad IS NULL OR clientes.ciudad LIKE :ciudad)")
     List<Clientes> get(String codigoCliente, String nombre, String origen, String sector, String representante, String ciudad, String idAsesor);
+
 
 
     @Query("select clientes.*, clientes.revisita, " +

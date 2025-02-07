@@ -150,8 +150,10 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
                 mEstadoFilas.setBackgroundColor(Color.parseColor("#FF0000"));
             } else if (panelClientes.getEstadoVisita().equals("EFECT")) {
                 mEstadoFilas.setBackgroundColor(Color.parseColor("#21d162"));
+            } else if (panelClientes.getEstadoVisita().equals("PEFECT")) {
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#FFA500")); // Naranja
             } else {
-                mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff00"));
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff00")); // Amarillo
             }
 
 

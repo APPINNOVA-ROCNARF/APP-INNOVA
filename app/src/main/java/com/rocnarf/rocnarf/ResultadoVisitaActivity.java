@@ -22,10 +22,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,17 +43,27 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.api.ApiClient;
+import com.rocnarf.rocnarf.api.PlanesService;
 import com.rocnarf.rocnarf.api.VisitaClientesService;
 import com.rocnarf.rocnarf.models.Clientes;
+import com.rocnarf.rocnarf.models.Parametros;
+import com.rocnarf.rocnarf.models.ParametrosResponse;
 import com.rocnarf.rocnarf.models.Promocionado;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.viewmodel.ResultadoVisitaViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -71,9 +83,10 @@ public class ResultadoVisitaActivity extends AppCompatActivity
     private CheckBox mAcompanado;
     public static final String ACOMPANADO ="";
     private String codigoCliente, idUsuario, seccion, nombreCliente;
-    private  int idLocal;
+    private  int idLocal, diasAjuste;
     private Context context;
     private String origenCliente;
+    private Integer revisita;
     private List<Promocionado> listaPro = new ArrayList<>();;
 
     private Promocionado promocionadoAdd;
@@ -182,7 +195,21 @@ public class ResultadoVisitaActivity extends AppCompatActivity
                     visitaPlanificada.setLongitud(longitudActual);
                     visitaPlanificada.setFechaVisita(new Date());
                     visitaPlanificada.setFechaModificacion(new Date());
-                    visitaPlanificada.setEstado(mEfectiva.isChecked() ? VisitaClientes.EFECTIVA : VisitaClientes.VISITADO);
+
+                    if (Objects.equals(revisita, 1)) { // Cliente que requiere revisita
+                        if (!mReVisita.isChecked()) {
+                            // Primera visita, se marca como EFECTIVA directamente
+                            visitaPlanificada.setEstado(VisitaClientes.PEFECTIVA);
+                        } else {
+                            // Segunda visita (re-visita), simplemente marcar como efectiva si el checkbox está marcado
+                            visitaPlanificada.setEstado(VisitaClientes.EFECTIVA);
+                        }
+                    } else {
+                        // Lógica normal para clientes sin re-visita
+                        visitaPlanificada.setEstado(mEfectiva.isChecked() ? VisitaClientes.EFECTIVA : VisitaClientes.VISITADO);
+                    }
+
+
                     visitaPlanificada.setObservacion(mObservacion.getText().toString());
                     visitaPlanificada.setQueja(mQueja.getText().toString());
                     visitaPlanificada.setPendienteSync(false);
@@ -337,11 +364,31 @@ public class ResultadoVisitaActivity extends AppCompatActivity
 
                                 });
                     }
-                }catch ( Exception ex){
-                    Toast.makeText(getApplicationContext(),"Ha ocurrido un error :" + ex.getMessage(), Toast.LENGTH_LONG ).show();
+                } catch (Exception ex) {
+                    Log.e("MiAppError", "Ha ocurrido un error: " + ex.getMessage(), ex);
+                    Toast.makeText(getApplicationContext(), "Ha ocurrido un error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+        mEfectiva.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Verifica si el cliente requiere revisita (y revisita no es null)
+                if (revisita != null && revisita == 1 && isChecked) {
+                    int diasFaltantes = 5;
+
+                    if (diasFaltantes > 0) {
+                        // Si aún no han pasado los días, mostrar mensaje y desmarcar checkbox
+                        Toast.makeText(context, "Aún faltan " + diasFaltantes + " días para que la revisita sea efectiva.", Toast.LENGTH_LONG).show();
+                        mEfectiva.setChecked(false);
+                    }
                 }
             }
         });
+
+
 
         mPedido.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -464,6 +511,8 @@ public class ResultadoVisitaActivity extends AppCompatActivity
                     mEfectiva.setChecked(visitaClientes.getEstado().equals(VisitaClientes.EFECTIVA));
                     mObservacion.setText(visitaClientes.getObservacion());
                     mQueja.setText(visitaClientes.getQueja());
+
+
                     if (visitaClientes.isVisitaReVisita()) {
                         mReVisita.setVisibility(View.VISIBLE);
                         mReVisita.setChecked(visitaClientes.isVisitaReVisita());
@@ -488,6 +537,8 @@ public class ResultadoVisitaActivity extends AppCompatActivity
                     }
                 }
             }
+
+
         });
         resultadoVisitaViewModel.getByid(idLocal);
 
@@ -505,6 +556,65 @@ public class ResultadoVisitaActivity extends AppCompatActivity
 
 
 
+    }
+
+
+
+    public void CargarDias() {
+        final ArrayList<String> listaNombre = new ArrayList<>();
+        PlanesService service = ApiClient.getClient().create(PlanesService.class);
+        retrofit2.Call<ParametrosResponse> call  = service.GetJefes("VARIABLE");
+        call.enqueue(new Callback<ParametrosResponse>() {
+            @Override
+            public void onResponse(Call<ParametrosResponse> call, Response<ParametrosResponse> response) {
+                if (response.isSuccessful()) {
+                    ParametrosResponse parametrosResponse = response.body();
+                    List<Parametros> parametros = parametrosResponse.items;
+                    diasAjuste = Integer.parseInt(parametros.get(0).getValor());
+
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ParametrosResponse> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private int diasFaltantesParaRevisita() {
+        if (mReVisita.isChecked()) {
+            Calendar cal = Calendar.getInstance();
+            Calendar calToday = Calendar.getInstance();
+
+            // Obtener la fecha de la primera visita desde ViewModel
+            cal.setTime(new Date());
+            cal.add(Calendar.DAY_OF_YEAR, diasAjuste); // Sumar días de ajuste
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date dateBefore = null, dateAfter = null;
+
+            try {
+                dateBefore = sdf.parse(sdf.format(cal.getTime()));
+                dateAfter = sdf.parse(sdf.format(calToday.getTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            long timeDiff = Math.abs(dateAfter.getTime() - dateBefore.getTime());
+            long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
+
+            if (calToday.compareTo(cal) >= 0) {
+                return 0; // Ya han pasado los días requeridos
+            } else {
+                return (int) daysDiff; // Días restantes para que la revisita sea efectiva
+            }
+        }
+        return 0;
     }
 
     private void removeView(View view){
@@ -602,6 +712,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
         latitud = cliente.getLatitud();
         longitud = cliente.getLongitud();
         origenCliente = cliente.getOrigen();
+        revisita = cliente.getRevisita();
 
         if (cliente.getLatitud() != null) {
             if (cliente.getLatitud() != 0) {

@@ -235,7 +235,9 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             contenidoHolder.mEstasoView.setVisibility(View.GONE);
             if ( planificacionItem.getEstado().equals(VisitaClientes.PLANIFICADO)){
                 contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#ffff00") );
-            }else {
+            }else if (planificacionItem.getEstado().equals(VisitaClientes.PEFECTIVA)) {
+                contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#FFA500") );
+            }else{
                 contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#21d162") );
             }
 

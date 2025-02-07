@@ -141,12 +141,12 @@ public class PanelClientesActivity extends AppCompatActivity {
         lstPaneles.setAdapter(new PanelClienteAdapter (this, panelClientesClickListener, panelClientesLongClickListener, list_consulta_panel));
     }
 
-    public void onBackPressed(){
+    /*public void onBackPressed(){
         Intent i = new Intent(this, MainActivity.class);
         i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
         i.putExtra(Common.ARG_SECCIOM, sector);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
     }
-
+*/
 }
