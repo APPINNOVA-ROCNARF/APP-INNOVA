@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
@@ -166,6 +165,8 @@ public class ResultadoVisitaActivity extends AppCompatActivity
         mPedido.setVisibility(View.GONE);
 
         mPuntoContacto = (CheckBox) findViewById(R.id.cb_cobro_dialog_punto_contacto);
+
+        CargarDias();
 
         mRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -377,7 +378,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Verifica si el cliente requiere revisita (y revisita no es null)
                 if (revisita != null && revisita == 1 && isChecked) {
-                    int diasFaltantes = 5;
+                    int diasFaltantes = diasFaltantesParaRevisita();
 
                     if (diasFaltantes > 0) {
                         // Si aún no han pasado los días, mostrar mensaje y desmarcar checkbox
@@ -592,7 +593,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
             Calendar calToday = Calendar.getInstance();
 
             // Obtener la fecha de la primera visita desde ViewModel
-            cal.setTime(new Date());
+            cal.setTime(resultadoVisitaViewModel.fetchUltimaFechaVisitaValida(visitaPlanificada.getCodigoCliente(),visitaPlanificada.getCodigoAsesor()));
             cal.add(Calendar.DAY_OF_YEAR, diasAjuste); // Sumar días de ajuste
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

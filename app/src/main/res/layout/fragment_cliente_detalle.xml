@@ -37,6 +37,16 @@
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_revisita_cliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/revisita"
+            app:layout_constraintStart_toEndOf="@+id/tv_codigo_fragment_detalle_cliente"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageButton
             android:id="@+id/ib_pedido_fragment_cliente_detalle_detalle"
             android:layout_width="wrap_content"

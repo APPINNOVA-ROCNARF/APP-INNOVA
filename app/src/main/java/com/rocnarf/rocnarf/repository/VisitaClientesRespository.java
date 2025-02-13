@@ -3,7 +3,9 @@ package com.rocnarf.rocnarf.repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import android.content.Context;
+import android.util.Log;
 
+import com.google.gson.Gson;
 import com.rocnarf.rocnarf.api.ApiClient;
 import com.rocnarf.rocnarf.api.VisitaClientesService;
 import com.rocnarf.rocnarf.dao.RocnarfDatabase;
@@ -12,6 +14,7 @@ import com.rocnarf.rocnarf.models.Promocionado;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.models.VisitaClientesResponse;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +26,7 @@ import javax.inject.Singleton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Completable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -54,6 +58,10 @@ public class VisitaClientesRespository {
 
     public VisitaClientes getById(int idLocal){
         return this.visitaClientesDao.getById(idLocal);
+    }
+
+    public Date getUltimaFechaVisitaPEFCT(String idCliente, String idAsesor) {
+        return this.visitaClientesDao.getUltimaFechaVisitaPEFECT(idCliente, idAsesor);
     }
 
     public VisitaClientes getByIdCliente(String idCliente){
@@ -142,6 +150,12 @@ public class VisitaClientesRespository {
 
                             @Override
                             public void onError(Throwable e) {
+
+                                e.printStackTrace();
+
+                                // También puedes usar Log.e si estás en Android
+                                Log.e("VisitaClientes", "Error en la sincronización", e);
+
                                 executor.execute(new Runnable() {
                                     @Override
                                     public void run() {
@@ -171,11 +185,12 @@ public class VisitaClientesRespository {
 
 
 
-    public Completable update(final VisitaClientes visitaClientes){
+    public Completable update(final VisitaClientes visitaClientes) {
         return Completable.create(new Completable.CompletableOnSubscribe() {
             @Override
             public void call(final Completable.CompletableSubscriber completableSubscriber) {
                 visitaClientesService = ApiClient.getClient().create(VisitaClientesService.class);
+
                 visitaClientesService.Put(visitaClientes.getIdVisitaCliente(), visitaClientes)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -187,8 +202,12 @@ public class VisitaClientesRespository {
 
                             @Override
                             public void onError(Throwable e) {
+
+                                // Marcar como pendiente de sincronización y actualizar en la base de datos
                                 visitaClientes.setPendienteSync(true);
                                 visitaClientesDao.update(visitaClientes);
+
+                                // Notificar el error al suscriptor
                                 completableSubscriber.onError(e);
                             }
 

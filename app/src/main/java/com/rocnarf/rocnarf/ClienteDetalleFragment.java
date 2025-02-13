@@ -55,7 +55,7 @@ public class ClienteDetalleFragment extends Fragment {
     Clientes clientesResponse;
 
     private TextView mCodigoView, mNombreClienteView, mRepresentanteView, mDireccionView, mTelefonoView, mTelefono2View, mEmailView;
-    private ImageView mDireccionImage;
+    private ImageView mDireccionImage, mRevisitaView;
     private ProgressBar mProgress;
     private ConstraintLayout mLayout;
     private PopupMenu popup;
@@ -100,6 +100,7 @@ public class ClienteDetalleFragment extends Fragment {
         mEmailView = (TextView) view.findViewById(R.id.tv_email_fragment_detalle_cliente);
         mProgress = (ProgressBar) view.findViewById(R.id.pr_list_fragment_detalle_cliente);
         ImageButton mMenuPedidosView = (ImageButton)view.findViewById(R.id.ib_pedido_fragment_cliente_detalle_detalle);
+        mRevisitaView = (ImageView)view.findViewById(R.id.iv_revisita_cliente);
         mLayout = (ConstraintLayout) view.findViewById(R.id.ly_contentido_fragment_detalle_cliente);
         mPerfil = (ImageView) view.findViewById(R.id.imageView4);
 //        mPerfilCumple = (ImageView) view.findViewById(R.id.imageView5);
@@ -335,6 +336,12 @@ public class ClienteDetalleFragment extends Fragment {
                                 spannableTelefono2.setSpan(clickableSpan, 0, clientes.getTelefono2().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                 mTelefono2View.setText(spannableTelefono2, TextView.BufferType.SPANNABLE );
                                 mTelefono2View.setMovementMethod(LinkMovementMethod.getInstance());
+                            }
+
+                            if (clientes.getRevisita() != null && clientes.getRevisita() == 1) {
+                                mRevisitaView.setVisibility(View.VISIBLE);
+                            } else {
+                                mRevisitaView.setVisibility(View.GONE);
                             }
 
 

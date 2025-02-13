@@ -137,7 +137,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
             VisitaClientes planificacionItem = (VisitaClientes)mValues.get(position);
 
-            Log.d("VisitaClientes", "----- Datos de VisitaClientes -----");
+            /*Log.d("VisitaClientes", "----- Datos de VisitaClientes -----");
             for (Field field : planificacionItem.getClass().getDeclaredFields()) {
                 field.setAccessible(true);
                 try {
@@ -146,6 +146,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                     Log.e("VisitaClientes", "Error al acceder al campo: " + field.getName(), e);
                 }
             }
+             */
             ContenidoViewHolder contenidoHolder = (ContenidoViewHolder)holder;
             contenidoHolder.mItem = planificacionItem;
 
@@ -162,24 +163,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             clientesRepository = new ClientesRepository(context, planificacionItem.getCodigoAsesor());
             LiveData<Clientes> clientesCumple = clientesRepository.getClientesIdLocal(planificacionItem.getCodigoCliente());
 
-            clientesCumple.observe((LifecycleOwner) context, new Observer<Clientes>() {
-                @Override
-                public void onChanged(Clientes cliente) {
-                    if (cliente != null) {
-                        Log.d("Clientes", "----- Datos de Clientes -----");
-                        for (Field field : cliente.getClass().getDeclaredFields()) {
-                            field.setAccessible(true);
-                            try {
-                                Log.d("Clientes", field.getName() + " = " + field.get(cliente));
-                            } catch (IllegalAccessException e) {
-                                Log.e("Clientes", "Error al acceder al campo: " + field.getName(), e);
-                            }
-                        }
-                    } else {
-                        Log.d("Clientes", "Cliente no encontrado.");
-                    }
-                }
-            });
 
             // Validar y mostrar icono de revisita
             if (clientesCumple.getValue() != null) {
@@ -209,16 +192,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
             contenidoHolder.mNombreView.setText(planificacionItem.getNombreCliente());
             contenidoHolder.mCodView.setText(planificacionItem.getCodigoCliente());
-
-            Log.d("PlanificacionAdapter", "Cliente Código: " + planificacionItem.getCodigoCliente());
-            CodigoAsesor = planificacionItem.getCodigoAsesor();
-            Seccion = planificacionItem.getSeccion();
-            contenidoHolder.mTipoClienteObs.setText("tipo cliente");
-            if (planificacionItem.getTipoCliente() == null){
-                contenidoHolder.mtipoCliente.setText("");
-            }else {
-                contenidoHolder.mtipoCliente.setText(planificacionItem.getTipoCliente());
-            }
 
 
             SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
@@ -256,7 +229,9 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             String codigoCliente = contenidoHolder.mCodView.getText().toString();
             boolean iniciaConZ = codigoCliente.startsWith("Z");
 
-        // Lógica para manejar la visibilidad de los íconos
+            actualizarVisibilidadIconos(contenidoHolder,cumpleAnyo,auspicioDoc,iniciaConZ,codigoCliente,context);
+
+        /* Lógica para manejar la visibilidad de los íconos
             if (cumpleAnyo) {
                 // Si es el cumpleaños del cliente
                 contenidoHolder.mOrigen.setVisibility(View.GONE);
@@ -288,6 +263,8 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                 contenidoHolder.mOrigen3.setVisibility(View.GONE);
                 contenidoHolder.mOrigenZ.setVisibility(View.GONE);
             }
+*/
+
 
             contenidoHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -309,6 +286,29 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
         }
         return null;
+    }
+
+    private void actualizarVisibilidadIconos(ContenidoViewHolder contenidoHolder, boolean cumpleAnyo, boolean auspicioDoc, boolean iniciaConZ, String codigoCliente, Context context) {
+        // Ocultar todos los íconos por defecto
+        contenidoHolder.mOrigen.setVisibility(View.GONE);
+        contenidoHolder.mOrigen2.setVisibility(View.GONE);
+        contenidoHolder.mOrigen3.setVisibility(View.GONE);
+        contenidoHolder.mOrigenZ.setVisibility(View.GONE);
+
+        if (cumpleAnyo) {
+            // Si es el cumpleaños del cliente, solo se muestra mOrigen3
+            contenidoHolder.mOrigen3.setVisibility(View.VISIBLE);
+        } else if (iniciaConZ) {
+            // Si el código del cliente comienza con 'Z', solo se muestra mOrigenZ
+            contenidoHolder.mOrigenZ.setVisibility(View.VISIBLE);
+        } else {
+            // Lógica basada en la longitud del código del cliente
+            if (codigoCliente != null && codigoCliente.length() > 6) {
+                contenidoHolder.mOrigen2.setVisibility(View.VISIBLE);
+            } else {
+                contenidoHolder.mOrigen.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override

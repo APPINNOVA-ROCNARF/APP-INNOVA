@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.repository.VisitaClientesRespository;
 
+import java.util.Date;
+
 import rx.Completable;
 import rx.Subscription;
 
@@ -33,6 +35,10 @@ public class PlanificacionCrearViewModel extends AndroidViewModel {
 
     public void getVisitaAnterior(int idLocal) {
         visitaAnterior.setValue(this.visitaClientesRespository.getById(idLocal));
+    }
+
+    public Date fetchUltimaFechaVisitaValida(String idCliente, String idAsesor) {
+        return visitaClientesRespository.getUltimaFechaVisitaPEFCT(idCliente, idAsesor);
     }
 
     public VisitaClientes getByIdCliente(String idCliente){

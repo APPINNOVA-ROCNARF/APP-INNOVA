@@ -33,6 +33,9 @@ public interface VisitaClientesDao {
     @Query("select * from visita_clientes where pendienteSync = 1 and codigoAsesor = :idAsesor")
     List<VisitaClientes> getPendientesSincronizar(String idAsesor);
 
+    @Query("SELECT MAX(fechaVisita) FROM visita_clientes WHERE codigoCliente = :idCliente AND CodigoAsesor = :idAsesor AND (Estado = 'PEFECT' OR Estado = 'EFECT')")
+    Date getUltimaFechaVisitaPEFECT(String idCliente, String idAsesor);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void add(VisitaClientes visitaClientes);
 

@@ -461,67 +461,39 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
 
     @Override
     public Filter getFilter() {
-        //mValues = Values;
-
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String query = charSequence.toString();
-                //Log.d("log","--->"  + query);
-
-                String[] splited = query.split("\\s+");
-
-
+                String query = charSequence.toString().trim().toLowerCase();
                 List<Clientes> filtered = new ArrayList<>();
 
                 if (query.isEmpty()) {
-                    filtered = mValues;
+                    filtered = mValues; // Si la consulta está vacía, mostrar todos los clientes.
                 } else {
-              //      for (String part : splited){
-                        //   Log.d("log","--->"  + part);
-                        for (Clientes Busqueda : mValues) {
-//                            String[] nombre = Busqueda.getNombreCliente().toLowerCase().split("\\s+");
-//                            Log.d("log", "nombre a --->" + nombre.length);
-//
-//                            //     Log.d("log","nombre--->"  + nombre.toString());
-//                            for (int i = 0; i < nombre.length; i++){
-//                                if( nombre[i].toLowerCase().contains(query.toLowerCase()));
-//                                {
-//
-//                                    Log.d("log", "Busqueda a --->" + Busqueda);
-//                                    filtered.add(Busqueda);
-//                                }
-//                            }
+                    for (Clientes Busqueda : mValues) {
+                        // Verificar si el campo revisita es 1 o null
+                        Integer revisitaValue = Busqueda.getRevisita();
+                        boolean esRevisita = (revisitaValue != null && revisitaValue == 1);
 
-                            if (
-
-
-                                    Busqueda.getNombreCliente().toLowerCase().contains(query.toLowerCase())
-                                    || Busqueda.getIdCliente().toLowerCase().contains(query.toLowerCase())
-                                    || (Busqueda.getRepresentante() != null && Busqueda.getRepresentante().toLowerCase().contains(query.toLowerCase()))
-                                    || (Busqueda.getCiudad() != null && Busqueda.getCiudad().toLowerCase().contains(query.toLowerCase()))
-                                    || (Busqueda.getEspecialidades() != null && Busqueda.getEspecialidades().toLowerCase().contains(query.toLowerCase()))
-                                    || (Busqueda.getIdEspecialidades() != null && Busqueda.getIdEspecialidades().toLowerCase().contains(query.toLowerCase()))
-                                    || (Busqueda.getTipoObserv() != null && Busqueda.getTipoObserv().toLowerCase().contains(query.toLowerCase()))
-                                    || (Busqueda.getClaseMedico() != null && Busqueda.getClaseMedico().toLowerCase().contains(query.toLowerCase()))
-                                    || (Busqueda.getDireccion() != null && Busqueda.getDireccion().toLowerCase().contains(query.toLowerCase())))
-                            {
+                        // FILTRO ESPECIAL: Si el usuario busca "x2" o "X2", solo mostrar clientes con revisita = 1
+                        if (query.equals("x2")) {
+                            if (esRevisita) {
                                 filtered.add(Busqueda);
                             }
-            //            }
-
-//                    for (String part : splited){
-//                        Log.d("log", "part a --->" + part);
-//                        Log.d("log", " filtered.size() a --->" +  filtered.size());
-//                        for (int i = 0; i < filtered.size(); i++) {
-//
-//                            if (splited.length > 1 && filtered.get(i).getNombreCliente().contains(part.toLowerCase())) {
-//                                filtered.add(filtered.get(i));
-//                            }
-//                        }
-//                    };
-
-                        //}
+                        }
+                        // FILTRO GENERAL: Buscar coincidencias en varios campos
+                        else if (Busqueda.getNombreCliente().toLowerCase().contains(query)
+                                || Busqueda.getIdCliente().toLowerCase().contains(query)
+                                || (Busqueda.getRepresentante() != null && Busqueda.getRepresentante().toLowerCase().contains(query))
+                                || (Busqueda.getCiudad() != null && Busqueda.getCiudad().toLowerCase().contains(query))
+                                || (Busqueda.getEspecialidades() != null && Busqueda.getEspecialidades().toLowerCase().contains(query))
+                                || (Busqueda.getIdEspecialidades() != null && Busqueda.getIdEspecialidades().toLowerCase().contains(query))
+                                || (Busqueda.getTipoObserv() != null && Busqueda.getTipoObserv().toLowerCase().contains(query))
+                                || (Busqueda.getClaseMedico() != null && Busqueda.getClaseMedico().toLowerCase().contains(query))
+                                || (Busqueda.getDireccion() != null && Busqueda.getDireccion().toLowerCase().contains(query))
+                        ) {
+                            filtered.add(Busqueda);
+                        }
                     }
                 }
 
@@ -538,6 +510,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             }
         };
     }
+
 
     public void showPopup(View v, int menures) {
         PopupMenu.OnMenuItemClickListener listener = new PopupMenu.OnMenuItemClickListener() {

@@ -2,7 +2,6 @@ package com.rocnarf.rocnarf.viewmodel;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 import android.util.Log;
@@ -11,6 +10,7 @@ import com.rocnarf.rocnarf.models.Promocionado;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.repository.VisitaClientesRespository;
 
+import java.util.Date;
 import java.util.List;
 
 import rx.Completable;
@@ -19,6 +19,7 @@ import rx.Subscription;
 public class ResultadoVisitaViewModel extends AndroidViewModel {
 
     public MutableLiveData<VisitaClientes> visitaClientes ;
+    public Date UltimaFechaPEFECT ;
     private VisitaClientesRespository visitaClientesRespository;
 
     public ResultadoVisitaViewModel(@NonNull Application application) {
@@ -30,6 +31,11 @@ public class ResultadoVisitaViewModel extends AndroidViewModel {
     public void getByid(int idLocal){
         visitaClientes.setValue(this.visitaClientesRespository.getById(idLocal));
     }
+
+    public Date fetchUltimaFechaVisitaValida(String idCliente, String idAsesor) {
+        return visitaClientesRespository.getUltimaFechaVisitaPEFCT(idCliente, idAsesor);
+    }
+
 
     public void update (final  VisitaClientes visitaClientesActualizar){
 

@@ -317,34 +317,42 @@ public class PlanificacionCrearActivity extends AppCompatActivity
                 try {
                     if (Validar()) {
                         if (mReVisita.isChecked()) {
-                            int diasFaltantes = diasFaltantesParaRevisita();
-                            if (diasFaltantes > 0) {
-                                // Mostrar un AlertDialog informativo con los días faltantes
+                            Date fechaUltimaVisita = visitasClientesPlanificarViewModel.fetchUltimaFechaVisitaValida(codigoCliente,idUsuario);
+                            Calendar calUltimaVisita = Calendar.getInstance();
+                            calUltimaVisita.setTime(fechaUltimaVisita);
+                            calUltimaVisita.add(Calendar.DAY_OF_YEAR, diasAjuste);
+                            Date fechaMinimaEfectiva = calUltimaVisita.getTime();
+
+                            if (mCalendar.getTime().before(fechaMinimaEfectiva)) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                                String fechaMinimaStr = sdf.format(fechaMinimaEfectiva);
                                 new AlertDialog.Builder(context)
                                         .setTitle("Advertencia")
-                                        .setMessage("Puedes registrar la visita, pero no será contabilizada para los puntos. " +
-                                                "Deben pasar " + diasAjuste + " días entre visitas para que sea contabilizada. " +
-                                                "Faltan " + diasFaltantes + " días.")
-                                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        .setMessage("La fecha ingresada no cumple con el tiempo mínimo requerido desde la última visita para ser considerada efectiva. La próxima visita efectiva puede realizarse a partir del: " + fechaMinimaStr + "\n¿Desea continuar con la creación de la visita de todas formas?")
+                                        .setPositiveButton("Sí, crear visita", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                CrearVisita(); // Registrar la visita
-                                                Toast.makeText(context, "La visita se ha agregado con éxito, pero no será contabilizada para los puntos.", Toast.LENGTH_LONG).show();
+                                                CrearVisita();
+                                                Toast.makeText(context, "Visita creada, pero no será contabilizada como efectiva.", Toast.LENGTH_LONG).show();
                                                 finalizarActividad();
                                             }
                                         })
-                                        .setNegativeButton("Cancelar", null) // No hacer nada si el usuario cancela
+                                        .setNegativeButton("No, cancelar", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Toast.makeText(context, "Creación de la visita cancelada.", Toast.LENGTH_LONG).show();
+                                            }
+                                        })
                                         .show();
-                                return; // Salir del método para evitar registrar la visita dos veces
+                                return;
                             }
                         }
-                        // Si no es una revisita o ya han pasado los días requeridos, registrar la visita normalmente
                         CrearVisita();
                         Toast.makeText(context, "La visita se ha agregado con éxito.", Toast.LENGTH_LONG).show();
                         finalizarActividad();
                     }
                 } catch (Exception ex) {
-                    Toast.makeText(context, "Ha ocurrido un error al intentar agregar la visita: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al intentar agregar la visita: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -428,7 +436,6 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             }
         });
     }
-
 
     private void setTimeField() {
         mCalendar = Calendar.getInstance();

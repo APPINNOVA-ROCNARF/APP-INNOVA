@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
         getLocationPermission();
         Log.d("neoti","antes"  );
 
-        registrarDispositivo();
+        //registrarDispositivo();
         Log.d("neoti","despues"  );
 
         toolbar.setSubtitle(seccion + " - " + nombreUsuario);
