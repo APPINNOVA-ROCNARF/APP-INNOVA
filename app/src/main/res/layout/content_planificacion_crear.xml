@@ -287,14 +287,28 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="124dp" />
 
-        <CheckBox
-            android:id="@+id/cb_re_visita"
+        <LinearLayout
+            android:id="@+id/ly_revisita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Re-Visita"
+            android:orientation="horizontal"
             android:visibility="gone"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="124dp" />
+            tools:layout_editor_absoluteY="124dp">
+
+            <CheckBox
+                android:id="@+id/cb_re_visita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Re-Visita" />
+
+            <TextView
+                android:id="@+id/tv_re_visita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
 
 
     </LinearLayout>

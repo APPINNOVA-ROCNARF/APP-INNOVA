@@ -162,6 +162,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_resultado_visita.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sync.xml">
         <config>
           <theme>@style/AppTheme.NoActionBar</theme>
@@ -238,6 +243,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_pedido_cantidad.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_resultado_visita.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -481,18 +491,16 @@
     <list default="true" id="c6c4e8bf-1cc8-4c9d-a7e5-46cc94718b99" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ClienteDetalleFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ClienteDetalleFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PanelClientesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PanelClientesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MedicoFichaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MedicoFichaActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionCrearActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionCrearActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ResultadoVisitaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ResultadoVisitaActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/VisitaClientesDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/VisitaClientesDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/VisitaClientesRespository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/VisitaClientesRespository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/PlanificacionCrearViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/PlanificacionCrearViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/ResultadoVisitaViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/ResultadoVisitaViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cliente_detalle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cliente_detalle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/ClientesDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/ClientesDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ClientesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ClientesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_medico_ficha.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_medico_ficha.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_planificacion_crear.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_planificacion_crear.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -752,28 +760,17 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MedicoFichaActivity.java</url>
-          <line>209</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.rocnarf.rocnarf">
           <value>
-            <CheckInfo lastCheckTimestamp="1739374512647" />
+            <CheckInfo lastCheckTimestamp="1739555144750" />
           </value>
         </entry>
         <entry key="com.rocnarf.rocnarf.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1739374512655" />
+            <CheckInfo lastCheckTimestamp="1739555144747" />
           </value>
         </entry>
       </map>

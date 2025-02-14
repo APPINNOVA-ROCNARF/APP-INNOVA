@@ -15,6 +15,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.text.Layout;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -26,6 +28,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -63,7 +66,8 @@ public class PlanificacionCrearActivity extends AppCompatActivity
     private DatePickerDialog mDatePickerDialog;
     private TimePickerDialog mTimePickerDialog;
     private CheckBox mPedido, mCobro, mVisitaPromocional, mSiembraProducto, mCajasVacias, mEntregaPremios, mDevolucion, mPuntoContacto, mVisitaPromocionalDoctores, mReVisita;
-    private LinearLayout mPedidoLayout, opcionesVisitaFarmcaia, opcionesVisitaDoctores;
+    private TextView mTextRevista;
+    private LinearLayout mPedidoLayout, opcionesVisitaFarmcaia, opcionesVisitaDoctores, opcionesRevista;
     private TextInputLayout mCobroLayout;
     private Button mAgregarVisita;
     private Date mfechaPrimeraVista;
@@ -193,7 +197,6 @@ public class PlanificacionCrearActivity extends AppCompatActivity
         ft.commit();
 
         mFecha = (TextInputEditText) findViewById(R.id.et_fecha_content_planificacion_crear);
-        setDateField();
         mHora = (TextInputEditText) findViewById(R.id.et_hora_content_planificacion_crear);
         setTimeField();
 
@@ -204,7 +207,9 @@ public class PlanificacionCrearActivity extends AppCompatActivity
         mPuntoContacto = (CheckBox) findViewById(R.id.cb_punto_contacto);
         mEntregaPremios = (CheckBox) findViewById(R.id.cb_entrega_premios_content_planificacion_crear);
         mDevolucion = (CheckBox) findViewById(R.id.cb_devolucion_content_planificacion_crear);
+        opcionesRevista = (LinearLayout) findViewById(R.id.ly_revisita);
         mReVisita = (CheckBox) findViewById(R.id.cb_re_visita);
+        mTextRevista = (TextView) findViewById(R.id.tv_re_visita);
         opcionesVisitaFarmcaia = (LinearLayout) findViewById(R.id.ly_visita_farmacia_content_planificacion_crear);
         opcionesVisitaDoctores = (LinearLayout) findViewById(R.id.ly_visita_doctores_content_planificacion_crear);
         // Se presenta los controles para ingresar el valor de pedidos (por categoria) si se seleccion que la razon de la visita es pedido
@@ -218,7 +223,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
 //        mValorF4.setText("0");
 //        mValorGEN.setText("0");
         if (estadoVisita != null && !estadoVisita.equals("NOEFE") && !estadoVisita.equals("PLANI")) {
-            mReVisita.setVisibility(View.VISIBLE);
+            opcionesRevista.setVisibility(View.VISIBLE);
             mReVisita.setChecked(true); // Siempre marcado si es Re-Visita
             mReVisita.setEnabled(false);
             if(mReVisita.isChecked()){
@@ -226,12 +231,10 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             }
            // mReVisita.setClickable(false);
         } else {
-
-            mReVisita.setVisibility(View.GONE);
-
+            opcionesRevista.setVisibility(View.GONE);
         }
 
-
+        setDateField();
 
         mPedido = (CheckBox) findViewById(R.id.cb_pedido_content_planificacion_crear);
         mPedido.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -249,49 +252,6 @@ public class PlanificacionCrearActivity extends AppCompatActivity
 
             }
         });
-
-
-        mReVisita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (mReVisita.isChecked()) {
-
-                    Calendar cal = Calendar.getInstance();
-                    Calendar calToday = Calendar.getInstance();
-                    cal.setTime(visitasClientesPlanificarViewModel.getByIdCliente(codigoCliente).getFechaVisita());
-                    cal.add(Calendar.DAY_OF_YEAR, diasAjuste);
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                    System.out.println("String date:"+sdf.format(cal.getTime()));
-
-                    Date dateBefore = null;
-                    try {
-                        dateBefore = sdf.parse(sdf.format(cal.getTime()));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    Date dateAfter = null;
-                    try {
-                        dateAfter = sdf.parse(sdf.format(calToday.getTime()));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    long timeDiff = Math.abs(dateAfter.getTime() - dateBefore.getTime());
-                    long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
-                    //System.out.println("The number of days between dates: " + daysDiff);
-
-
-                    if (calToday.compareTo(cal) > 0) {
-
-                    }else {
-                        Toast.makeText(context, "Para registrar una Re-Visita deben pasar mas de "+ daysDiff + " días desde la primera visita ", Toast.LENGTH_LONG).show();
-                        mReVisita.setChecked(false);
-                    }
-
-                } else {
-                // your code to  no checked checkbox
-            }
-        }});
 
         // Se presenta el control para ingresar el valor a cobrar si se seleccion que la razon de la visita es cobrar
         mCobroLayout = (TextInputLayout) findViewById(R.id.ti_cobro_content_planificacion_crear);
@@ -316,8 +276,8 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             public void onClick(View view) {
                 try {
                     if (Validar()) {
-                        if (mReVisita.isChecked()) {
-                            Date fechaUltimaVisita = visitasClientesPlanificarViewModel.fetchUltimaFechaVisitaValida(codigoCliente,idUsuario);
+                        Date fechaUltimaVisita = visitasClientesPlanificarViewModel.fetchUltimaFechaVisitaValida(codigoCliente,idUsuario);
+                        if (fechaUltimaVisita != null) {
                             Calendar calUltimaVisita = Calendar.getInstance();
                             calUltimaVisita.setTime(fechaUltimaVisita);
                             calUltimaVisita.add(Calendar.DAY_OF_YEAR, diasAjuste);
@@ -352,6 +312,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
                         finalizarActividad();
                     }
                 } catch (Exception ex) {
+                    Log.d("Error al crear vista: ", ex.toString());
                     Toast.makeText(context, "Error al intentar agregar la visita: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
@@ -365,17 +326,14 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             Intent i = new Intent(context, PanelClientesActivity.class);
             i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
             i.putExtra(Common.ARG_SECCIOM, seccion);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         } else if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_MAPA)) {
             Intent i = new Intent(context, MapaActivity.class);
             i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
             i.putExtra(Common.ARG_SECCIOM, seccion);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         } else {
             Intent i = new Intent(context, MainActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
         finish();
@@ -412,6 +370,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
 
     private void setDateField() {
         mCalendar = Calendar.getInstance();
+
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -421,21 +380,50 @@ public class PlanificacionCrearActivity extends AppCompatActivity
                 mCalendar.set(Calendar.YEAR, year);
                 mCalendar.set(Calendar.MONTH, month);
                 mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                // Formatear la fecha seleccionada
                 SimpleDateFormat sdf = new SimpleDateFormat(Common.DATE_FORMAT, Locale.US);
-                mFecha.setText(sdf.format(mCalendar.getTime()));
+                String fechaSeleccionada = sdf.format(mCalendar.getTime());
+                mFecha.setText(fechaSeleccionada);
+
+                // Restablecer mensaje de advertencia antes de validar nuevamente
+                mTextRevista.setText(""); // Se limpia el mensaje de advertencia
+
+                // Validar tiempo mínimo para revisita
+                Date fechaUltimaVisita = visitasClientesPlanificarViewModel.fetchUltimaFechaVisitaValida(codigoCliente, idUsuario);
+                    if (fechaUltimaVisita != null) {
+                        Calendar calUltimaVisita = Calendar.getInstance();
+                        calUltimaVisita.setTime(fechaUltimaVisita);
+                        calUltimaVisita.add(Calendar.DAY_OF_YEAR, diasAjuste);
+                        Date fechaMinimaEfectiva = calUltimaVisita.getTime();
+
+                        // Si la fecha ingresada es antes de la fecha mínima efectiva, mostrar advertencia
+                        if (mCalendar.getTime().before(fechaMinimaEfectiva)) {
+                            mReVisita.setChecked(false); // Desmarcar el checkbox si la fecha es inválida
+                            mTextRevista.setText("Esta visita no va a ser tomada como efectiva");
+                        } else {
+                            mReVisita.setChecked(true); // Permitir marcarlo si la fecha es válida
+                        }
+                    }
+
             }
         };
-
-
-        mDatePickerDialog = new DatePickerDialog(this, date, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
 
         mFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Se actualizan los valores del DatePicker para reflejar cualquier cambio previo en la fecha
+                mDatePickerDialog = new DatePickerDialog(
+                        v.getContext(), date,
+                        mCalendar.get(Calendar.YEAR),
+                        mCalendar.get(Calendar.MONTH),
+                        mCalendar.get(Calendar.DAY_OF_MONTH)
+                );
                 mDatePickerDialog.show();
             }
         });
     }
+
 
     private void setTimeField() {
         mCalendar = Calendar.getInstance();

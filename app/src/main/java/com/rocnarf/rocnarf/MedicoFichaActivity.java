@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.Nullable;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.api.ApiClient;
 import com.rocnarf.rocnarf.api.PlanesService;
@@ -46,7 +47,7 @@ import rx.Subscription;
 public class MedicoFichaActivity extends AppCompatActivity {
     TextInputEditText mmarca,mconceptoPlan,mfechaDesde,mfechaHasta, mEspecialidad, mEmail, mCedula, mHobbies, mLabora, mSeguros, mAcademicas, mDireccion1, mDireccion2, mCelular, mTelefono, mSecretaria, mRocnarf, mfechaNacimiento;
     Button mGuardar;
-    Switch simpleSwitch;
+    SwitchMaterial simpleSwitch;
     LinearLayout mContenido;
     Spinner mEspecialidadSpi;
     MedicoFichaViewModel medicoFichaViewModel;
@@ -91,6 +92,8 @@ public class MedicoFichaActivity extends AppCompatActivity {
                         adaptador.setDropDownViewResource(android.R.layout.simple_list_item_1);
 //                    mEspecialidadSpi.setAdapter(adaptador);
                     }
+
+
                 }
             }
 
@@ -105,13 +108,13 @@ public class MedicoFichaActivity extends AppCompatActivity {
 
         mmarca = (TextInputEditText) findViewById(R.id.Marca_doc);
         mconceptoPlan = (TextInputEditText) findViewById(R.id.concepto_plan);
-        simpleSwitch = (Switch) findViewById(R.id.simpleSwitchAuspiciado);
+        simpleSwitch = (SwitchMaterial) findViewById(R.id.simpleSwitchAuspiciado);
         especidalidadesMedicos = (TextView) findViewById(R.id.EspcialidadesMedicos);
         mEspecialidad = (TextInputEditText) findViewById(R.id.et_especialidad_activity_medico_ficha);
         mEmail = (TextInputEditText) findViewById(R.id.et_mail_activity_medico_ficha);
         mCedula = (TextInputEditText) findViewById(R.id.et_cedula_activity_medico_ficha);
         mHobbies = (TextInputEditText) findViewById(R.id.et_hobbies_activity_medico_ficha);
-        mLabora = (TextInputEditText) findViewById(R.id.et_labora_activity_medico_ficha);
+        mLabora = (TextInputEditText) findViewById(R.id.et_academicas_activity_medico_ficha);
         mSeguros = (TextInputEditText) findViewById(R.id.et_seguros_activity_medico_ficha);
         mAcademicas = (TextInputEditText) findViewById(R.id.et_academicas_activity_medico_ficha);
         mDireccion1 = (TextInputEditText) findViewById(R.id.et_direccion1_activity_medico_ficha);
@@ -120,7 +123,7 @@ public class MedicoFichaActivity extends AppCompatActivity {
         mTelefono  = (TextInputEditText) findViewById(R.id.et_telefono_activity_medico_ficha);
         mSecretaria = (TextInputEditText) findViewById(R.id.et_secretaria_activity_medico_ficha);
         mRocnarf = (TextInputEditText) findViewById(R.id.et_rocnarf_activity_medico_ficha);;
-        mContenido = (LinearLayout)findViewById(R.id.ll_contenido_activity_medico_ficha);
+        //mContenido = (LinearLayout)findViewById(R.id.ll_contenido_activity_medico_ficha);
         mfechaNacimiento = (TextInputEditText) findViewById(R.id.et_fecha_nacimiento);;
         mfechaDesde = (TextInputEditText) findViewById(R.id.fecha_desde_aus);;
         mfechaHasta = (TextInputEditText) findViewById(R.id.fecha_hasta_aus);;
@@ -228,9 +231,9 @@ public class MedicoFichaActivity extends AppCompatActivity {
                 Completable.CompletableSubscriber resultado = new Completable.CompletableSubscriber() {
                     @Override
                     public void onCompleted() {
-                        Toast.makeText(getApplication(), "Ficha Actulizada con exito", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplication(), "Ficha Actualizada con exito", Toast.LENGTH_LONG).show();
                         final Snackbar snackbar = Snackbar
-                                .make(mContenido, "Ficha Actulizada con exito", Snackbar.LENGTH_LONG);
+                                .make(mContenido, "Ficha Actualizada con exito", Snackbar.LENGTH_LONG);
                         snackbar.setAction("OK", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

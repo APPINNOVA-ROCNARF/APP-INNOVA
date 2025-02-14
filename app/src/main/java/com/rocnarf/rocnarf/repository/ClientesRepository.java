@@ -217,6 +217,10 @@ public class ClientesRepository {
         return cliente;
     }
 
+    public String getEstadoVisita(String idCliente, String idAsesor){
+        return this.clientesDao.getEstadoVisita(idCliente, idAsesor);
+    }
+
 
     public LiveData<List<Factura>> getFacturas(final String idCliente, final String seccion){
 

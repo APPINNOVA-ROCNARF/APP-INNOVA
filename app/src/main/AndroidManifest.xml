@@ -30,6 +30,7 @@
 
         <activity android:name=".MedicoFichaActivity"
             android:exported="true"
+            android:label="Ficha de Médico"
             >
 
         </activity>

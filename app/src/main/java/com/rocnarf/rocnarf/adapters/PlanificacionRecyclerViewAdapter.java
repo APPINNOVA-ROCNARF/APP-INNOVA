@@ -163,7 +163,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             clientesRepository = new ClientesRepository(context, planificacionItem.getCodigoAsesor());
             LiveData<Clientes> clientesCumple = clientesRepository.getClientesIdLocal(planificacionItem.getCodigoCliente());
 
-
             // Validar y mostrar icono de revisita
             if (clientesCumple.getValue() != null) {
                 Integer revisita = clientesCumple.getValue().getRevisita();
@@ -197,6 +196,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
             String time = localDateFormat.format(planificacionItem.getFechaVisitaPlanificada());
             String Ciudad ="";
+            String EstadoVisita = "";
 
             contenidoHolder.mHoraPlanificada.setText(time);
             if(clientesCumple.getValue() != null) {
@@ -206,9 +206,12 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
             contenidoHolder.mDireccionView.setText(Ciudad + " - " + planificacionItem.getDireccion() );
             contenidoHolder.mEstasoView.setVisibility(View.GONE);
-            if ( planificacionItem.getEstado().equals(VisitaClientes.PLANIFICADO)){
+
+            EstadoVisita = clientesRepository.getEstadoVisita(planificacionItem.getCodigoCliente(),planificacionItem.getCodigoAsesor());
+
+            if ( EstadoVisita.equals(VisitaClientes.PLANIFICADO)){
                 contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#ffff00") );
-            }else if (planificacionItem.getEstado().equals(VisitaClientes.PEFECTIVA)) {
+            }else if (EstadoVisita.equals(VisitaClientes.PEFECTIVA)) {
                 contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#FFA500") );
             }else{
                 contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#21d162") );

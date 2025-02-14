@@ -86,7 +86,8 @@ public class ResultadoVisitaActivity extends AppCompatActivity
     private Context context;
     private String origenCliente;
     private Integer revisita;
-    private List<Promocionado> listaPro = new ArrayList<>();;
+    private List<Promocionado> listaPro = new ArrayList<>();
+    private Date ultimafechavalida;
 
     private Promocionado promocionadoAdd;
 
@@ -377,7 +378,9 @@ public class ResultadoVisitaActivity extends AppCompatActivity
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Verifica si el cliente requiere revisita (y revisita no es null)
-                if (revisita != null && revisita == 1 && isChecked) {
+                ultimafechavalida = resultadoVisitaViewModel.fetchUltimaFechaVisitaValida(visitaPlanificada.getCodigoCliente(),visitaPlanificada.getCodigoAsesor());
+
+                if (revisita != null && revisita == 1 && ultimafechavalida != null) {
                     int diasFaltantes = diasFaltantesParaRevisita();
 
                     if (diasFaltantes > 0) {
@@ -588,12 +591,13 @@ public class ResultadoVisitaActivity extends AppCompatActivity
     }
 
     private int diasFaltantesParaRevisita() {
-        if (mReVisita.isChecked()) {
+        ultimafechavalida = resultadoVisitaViewModel.fetchUltimaFechaVisitaValida(visitaPlanificada.getCodigoCliente(),visitaPlanificada.getCodigoAsesor());
+        if (ultimafechavalida != null) {
             Calendar cal = Calendar.getInstance();
             Calendar calToday = Calendar.getInstance();
 
             // Obtener la fecha de la primera visita desde ViewModel
-            cal.setTime(resultadoVisitaViewModel.fetchUltimaFechaVisitaValida(visitaPlanificada.getCodigoCliente(),visitaPlanificada.getCodigoAsesor()));
+            cal.setTime(ultimafechavalida);
             cal.add(Calendar.DAY_OF_YEAR, diasAjuste); // Sumar días de ajuste
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
