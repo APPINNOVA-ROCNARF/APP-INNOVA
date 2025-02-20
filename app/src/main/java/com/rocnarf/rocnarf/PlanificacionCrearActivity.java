@@ -339,35 +339,6 @@ public class PlanificacionCrearActivity extends AppCompatActivity
         finish();
     }
 
-    private int diasFaltantesParaRevisita() {
-        if (mReVisita.isChecked()) {
-            Calendar cal = Calendar.getInstance();
-            Calendar calToday = Calendar.getInstance();
-            cal.setTime(visitasClientesPlanificarViewModel.getByIdCliente(codigoCliente).getFechaVisita());
-            cal.add(Calendar.DAY_OF_YEAR, diasAjuste);
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            Date dateBefore = null;
-            Date dateAfter = null;
-            try {
-                dateBefore = sdf.parse(sdf.format(cal.getTime()));
-                dateAfter = sdf.parse(sdf.format(calToday.getTime()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            long timeDiff = Math.abs(dateAfter.getTime() - dateBefore.getTime());
-            long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
-
-            if (calToday.compareTo(cal) > 0) {
-                return 0; // Ya han pasado los días requeridos
-            } else {
-                return (int) daysDiff; // Días que faltan
-            }
-        }
-        return 0; // Si no es una revisita, no hay restricción
-    }
-
     private void setDateField() {
         mCalendar = Calendar.getInstance();
 

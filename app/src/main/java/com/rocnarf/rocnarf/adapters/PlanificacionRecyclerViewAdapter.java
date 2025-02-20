@@ -207,15 +207,19 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             contenidoHolder.mDireccionView.setText(Ciudad + " - " + planificacionItem.getDireccion() );
             contenidoHolder.mEstasoView.setVisibility(View.GONE);
 
-            EstadoVisita = clientesRepository.getEstadoVisita(planificacionItem.getCodigoCliente(),planificacionItem.getCodigoAsesor());
+            EstadoVisita = clientesRepository.getEstadoVisita(planificacionItem.getCodigoCliente(), planificacionItem.getCodigoAsesor());
 
-            if ( EstadoVisita.equals(VisitaClientes.PLANIFICADO)){
-                contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#ffff00") );
-            }else if (EstadoVisita.equals(VisitaClientes.PEFECTIVA)) {
-                contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#FFA500") );
-            }else{
-                contenidoHolder.mEstadoFilas.setBackgroundColor( Color.parseColor("#21d162") );
+            // Validar si EstadoVisita es null o vacío
+            if (EstadoVisita == null || EstadoVisita.trim().isEmpty()) {
+                contenidoHolder.mEstadoFilas.setBackgroundColor(Color.parseColor("#808080")); // Color gris para valores nulos o vacíos
+            } else if (EstadoVisita.equals(VisitaClientes.PLANIFICADO)) {
+                contenidoHolder.mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff00")); // Amarillo
+            } else if (EstadoVisita.equals(VisitaClientes.PEFECTIVA)) {
+                contenidoHolder.mEstadoFilas.setBackgroundColor(Color.parseColor("#FFA500")); // Naranja
+            } else {
+                contenidoHolder.mEstadoFilas.setBackgroundColor(Color.parseColor("#21d162")); // Verde
             }
+
 
             String motivoVisita = "";
             motivoVisita += planificacionItem.isVisitaXPedido() ? "Pedido " : "";

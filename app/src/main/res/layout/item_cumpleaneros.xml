@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <!-- Fecha (día y mes) a la izquierda -->
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#343434"
+        android:textStyle="bold"
+        android:gravity="start"/>
+
+    <!-- Nombre del médico a la derecha -->
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textColor="#343434"
+        android:gravity="start"
+        android:paddingStart="10dp"/>
+</LinearLayout>

@@ -10,11 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.CountDownTimer;
-import android.os.Looper;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,20 +20,31 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
-
+import android.widget.SimpleAdapter;
 
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.adapters.PlanificacionRecyclerViewAdapter;
+import com.rocnarf.rocnarf.api.ApiClient;
+import com.rocnarf.rocnarf.api.PlanesService;
 import com.rocnarf.rocnarf.models.Clientes;
 import com.rocnarf.rocnarf.models.Enviroment;
+import com.rocnarf.rocnarf.models.MedicosCumpleanyos;
+import com.rocnarf.rocnarf.models.MedicosCumpleanyosResponse;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.models.VisitaClientesList;
 import com.rocnarf.rocnarf.repository.ClientesRepository;
 import com.rocnarf.rocnarf.viewmodel.PlanificacionViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -172,25 +179,66 @@ public class PlanificacionFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(VisitaClientes item);
     }
-
-    public void CargaModalCumple(){
+    public void CargaModalCumple() {
         myKonten.setVisibility(View.VISIBLE);
-        clientesRepository = new ClientesRepository(context, idAsesor);
-        List<Clientes> clientesCumple = clientesRepository.getClientesCumples(seccion);
-        Log.d("xxxx","xxxxxx"+ clientesCumple.size());
 
-        final ArrayList<String> listaNombre = new ArrayList<>();
+        // Llamar al servicio API
+        PlanesService service = ApiClient.getClient().create(PlanesService.class);
+        Call<MedicosCumpleanyosResponse> call = service.GetCumpleanyos(seccion);
 
-        for (int i = 0; i < clientesCumple.size(); i++) {
-            listaNombre.add(clientesCumple.get(i).getNombreCliente());
-        }
-        final ArrayAdapter adaptador = new ArrayAdapter(context, android.R.layout.simple_list_item_1,listaNombre);
+        call.enqueue(new Callback<MedicosCumpleanyosResponse>() {
+            @Override
+            public void onResponse(Call<MedicosCumpleanyosResponse> call, Response<MedicosCumpleanyosResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    MedicosCumpleanyosResponse medicosCumpleanyosResponse = response.body();
 
-        listaCumple.setAdapter(adaptador);
+                    if (!medicosCumpleanyosResponse.items.isEmpty()) {
+                        List<Map<String, String>> listaCumpleData = new ArrayList<>();
 
-        myKonten.startAnimation(fromsmall);
-        singleToneClass.setModalCumple("S");
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd MMM", Locale.getDefault());
+
+                        for (MedicosCumpleanyos medico : medicosCumpleanyosResponse.items) {
+                            Map<String, String> item = new HashMap<>();
+
+                            // Convertir la fecha de nacimiento de tipo Date a formato "dd MMM"
+                            String fechaFormateada = formatoFecha.format(medico.getFechaNacimiento());
+
+                            item.put("fecha", fechaFormateada);
+                            item.put("nombre", medico.getNombre());
+                            listaCumpleData.add(item);
+                        }
+
+                        // Configurar el adaptador con un layout personalizado
+                        SimpleAdapter adapter = new SimpleAdapter(
+                                context,
+                                listaCumpleData,
+                                R.layout.item_cumpleaneros, // Archivo XML personalizado
+                                new String[]{"fecha", "nombre"},
+                                new int[]{R.id.txtFecha, R.id.txtNombre}
+                        );
+
+                        listaCumple.setAdapter(adapter);
+
+                        // Animación y actualización de estado
+                        myKonten.startAnimation(fromsmall);
+                        singleToneClass.setModalCumple("S");
+                    } else {
+                        Log.d("CargaModalCumple", "No hay médicos con cumpleaños en esta sección.");
+                    }
+                } else {
+                    Log.e("CargaModalCumple", "Respuesta fallida: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MedicosCumpleanyosResponse> call, Throwable t) {
+                Log.e("CargaModalCumple", "Error en la solicitud: " + t.getMessage());
+            }
+        });
     }
+
+
+
 
     public void cargarVisitas() {
 

@@ -32,6 +32,7 @@ public class ApiClient {
                 .create();
 
         retrofit = new Retrofit.Builder()
+                //.baseUrl("http://200.105.252.218/Rocnarf/")
                 .baseUrl("http://10.0.2.2:5000/")
                 //.baseUrl("http://192.168.0.125/")
                 //.baseUrl("http://192.168.0.8/")
