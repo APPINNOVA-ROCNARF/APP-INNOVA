@@ -1,7 +1,6 @@
 package com.rocnarf.rocnarf.models;
 
 import androidx.room.ColumnInfo;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,191 +14,88 @@ public class Viatico implements Serializable {
     private String ruc;
     private String razonSocial;
     private String numeroFactura;
-    private double subTotal= 0;;
-    private double subTotalIva= 0;;
-    private double total= 0;;
+    private double subTotal = 0;
+    private double subTotalIva = 0;
+    private double total = 0;
     private String placa;
     private String rutaImagen;
     private int estadoViatico;
-    private int estatus;
+    private int estatus;  // Se mantiene como int si puede tener más de 2 valores (Ej: 0 = Pendiente, 1 = Aprobado, 2 = Rechazado)
     private String comentario;
     private String usuarioComenta;
     private Date fechaFactura;
-
-    private int estadoCiclo;
-    @ColumnInfo(name = "imagen",typeAffinity = ColumnInfo.BLOB)
-    private  byte[] imagen;
-    public String getNombreCiclo() {
-        return nombreCiclo;
-    }
-
-    public void setNombreCiclo(String nombreCiclo) {
-        this.nombreCiclo = nombreCiclo;
-    }
-
-    public String getNombreCatalogo() {
-        return nombreCatalogo;
-    }
-
-    public void setNombreCatalogo(String nombreCatalogo) {
-        this.nombreCatalogo = nombreCatalogo;
-    }
+    private int estadoCiclo; // Se mantiene en caso de ser relevante para la lógica del negocio
 
     private String nombreCiclo;
     private String nombreCatalogo;
 
-    public int getIdViatico() {
-        return idViatico;
-    }
+    @ColumnInfo(name = "imagen", typeAffinity = ColumnInfo.BLOB)
+    private byte[] imagen;
 
-    public void setIdViatico(int idViatico) {
-        this.idViatico = idViatico;
-    }
+    // Getters y Setters
+    public int getIdViatico() { return idViatico; }
+    public void setIdViatico(int idViatico) { this.idViatico = idViatico; }
 
-    public int getIdCiclo() {
-        return idCiclo;
-    }
+    public int getIdCiclo() { return idCiclo; }
+    public void setIdCiclo(int idCiclo) { this.idCiclo = idCiclo; }
 
-    public void setIdCiclo(int idCiclo) {
-        this.idCiclo = idCiclo;
-    }
+    public int getIdCatalogo() { return idCatalogo; }
+    public void setIdCatalogo(int idCatalogo) { this.idCatalogo = idCatalogo; }
 
-    public int getIdCatalogo() {
-        return idCatalogo;
-    }
+    public String getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }
 
-    public void setIdCatalogo(int idCatalogo) {
-        this.idCatalogo = idCatalogo;
-    }
+    public Date getFecha() { return fecha; }
+    public void setFecha(Date fecha) { this.fecha = fecha; }
 
-    public String getIdUsuario() {
-        return idUsuario;
-    }
+    public String getRuc() { return ruc; }
+    public void setRuc(String ruc) { this.ruc = ruc; }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    public String getRazonSocial() { return razonSocial; }
+    public void setRazonSocial(String razonSocial) { this.razonSocial = razonSocial; }
 
-    public Date getFecha() {
-        return fecha;
-    }
+    public String getNumeroFactura() { return numeroFactura; }
+    public void setNumeroFactura(String numeroFactura) { this.numeroFactura = numeroFactura; }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
+    public double getSubTotal() { return subTotal; }
+    public void setSubTotal(double subTotal) { this.subTotal = subTotal; }
 
-    public String getRuc() {
-        return ruc;
-    }
+    public double getSubTotalIva() { return subTotalIva; }
+    public void setSubTotalIva(double subTotalIva) { this.subTotalIva = subTotalIva; }
 
-    public void setRuc(String ruc) {
-        this.ruc = ruc;
-    }
+    public double getTotal() { return total; }
+    public void setTotal(double total) { this.total = total; }
 
-    public String getRazonSocial() {
-        return razonSocial;
-    }
+    public String getPlaca() { return placa; }
+    public void setPlaca(String placa) { this.placa = placa; }
 
-    public void setRazonSocial(String razonSocial) {
-        this.razonSocial = razonSocial;
-    }
+    public String getRutaImagen() { return rutaImagen; }
+    public void setRutaImagen(String rutaImagen) { this.rutaImagen = rutaImagen; }
 
-    public String getNumeroFactura() {
-        return numeroFactura;
-    }
+    public int getEstadoViatico() { return estadoViatico; }
+    public void setEstadoViatico(int estadoViatico) { this.estadoViatico = estadoViatico; }
 
-    public void setNumeroFactura(String numeroFactura) {
-        this.numeroFactura = numeroFactura;
-    }
+    public int getEstatus() { return estatus; }
+    public void setEstatus(int estatus) { this.estatus = estatus; }
 
-    public double getSubTotal() {
-        return subTotal;
-    }
+    public String getComentario() { return comentario; }
+    public void setComentario(String comentario) { this.comentario = comentario; }
 
-    public void setSubTotal(double subTotal) {
-        this.subTotal = subTotal;
-    }
+    public String getUsuarioComenta() { return usuarioComenta; }
+    public void setUsuarioComenta(String usuarioComenta) { this.usuarioComenta = usuarioComenta; }
 
-    public double getSubTotalIva() {
-        return subTotalIva;
-    }
+    public Date getFechaFactura() { return fechaFactura; }
+    public void setFechaFactura(Date fechaFactura) { this.fechaFactura = fechaFactura; }
 
-    public void setSubTotalIva(double subTotalIva) {
-        this.subTotalIva = subTotalIva;
-    }
+    public int getEstadoCiclo() { return estadoCiclo; }
+    public void setEstadoCiclo(int estadoCiclo) { this.estadoCiclo = estadoCiclo; }
 
-    public double getTotal() {
-        return total;
-    }
+    public String getNombreCiclo() { return nombreCiclo; }
+    public void setNombreCiclo(String nombreCiclo) { this.nombreCiclo = nombreCiclo; }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
+    public String getNombreCatalogo() { return nombreCatalogo; }
+    public void setNombreCatalogo(String nombreCatalogo) { this.nombreCatalogo = nombreCatalogo; }
 
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    public String getRutaImagen() {
-        return rutaImagen;
-    }
-
-    public void setRutaImagen(String rutaImagen) {
-        this.rutaImagen = rutaImagen;
-    }
-
-    public int getEstadoViatico() {
-        return estadoViatico;
-    }
-
-    public int getEstadoCiclo(){
-        return estadoCiclo;
-    }
-
-    public void setEstadoViatico(int estadoViatico) {
-        this.estadoViatico = estadoViatico;
-    }
-
-    public int isEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(int estatus) {
-        this.estatus = estatus;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    public String getUsuarioComenta() {
-        return usuarioComenta;
-    }
-
-    public void setUsuarioComenta(String usuarioComenta) {
-        this.usuarioComenta = usuarioComenta;
-    }
-
-    public byte[] getImagen() {
-        return imagen;
-    }
-    //
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
-    public Date getFechaFactura() {
-        return fechaFactura;
-    }
-
-    public void setFechaFactura(Date fechaFactura) {
-        this.fechaFactura = fechaFactura;
-    }
+    public byte[] getImagen() { return imagen; }
+    public void setImagen(byte[] imagen) { this.imagen = imagen; }
 }

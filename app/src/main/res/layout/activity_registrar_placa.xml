@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro de Placa"
+            android:textSize="26sp"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Campo de entrada de placa -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_placa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/black"
+            android:hint="Placa del vehículo"
+            app:endIconTint="@color/light_green"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPlaca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapCharacters"
+                android:maxLength="7"
+                android:textColor="@color/black"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón de registro -->
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Registrar Placa"
+            android:textSize="16sp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/lighter_gray"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Sección de placas registradas -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placas Registradas"
+            android:textSize="22sp"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Lista de placas registradas -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlacas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_maximo_placas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usted ya tiene el máximo de placas registradas"
+            android:textSize="15sp"
+            android:textColor="@color/colorRed"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+</ScrollView>

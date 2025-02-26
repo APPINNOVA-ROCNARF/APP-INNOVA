@@ -36,7 +36,6 @@ import com.rocnarf.rocnarf.models.QuejasConsulta;
 import com.rocnarf.rocnarf.models.ReporteVentasResponse;
 import com.rocnarf.rocnarf.models.Usuario;
 import com.rocnarf.rocnarf.models.Viatico;
-import com.rocnarf.rocnarf.models.ViaticoAdd;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 
 import java.util.List;
@@ -51,6 +50,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
+import rx.Single;
 
 public interface PlanesService {
 
@@ -220,8 +220,8 @@ public interface PlanesService {
     );
 
     @POST("api/viatico/addVia")
-    Observable<ViaticoAdd> AddViatico(
-            @Body ViaticoAdd viatico
+    Call<Viatico> AddViatico(
+            @Body Viatico viatico
     );
 
     @GET("api/viatico/getHistorialViatico")
@@ -240,9 +240,9 @@ public interface PlanesService {
     );
 
     @PUT("api/viatico/{id}")
-    Observable<ViaticoAdd> updateViatico(
+    Call<Viatico> updateViatico(
             @Path("id") int id,
-            @Body ViaticoAdd viatico
+            @Body Viatico viatico
     );
 
 }

@@ -40,18 +40,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.api.ApiClient;
 import com.rocnarf.rocnarf.api.ClienteService;
-import com.rocnarf.rocnarf.api.RutasService;
 import com.rocnarf.rocnarf.dao.RocnarfDatabase;
 import com.rocnarf.rocnarf.dao.UsuariosDao;
 import com.rocnarf.rocnarf.models.Constantes;
 import com.rocnarf.rocnarf.models.FcmTokenDivice;
-import com.rocnarf.rocnarf.models.Rutas;
 import com.rocnarf.rocnarf.models.Usuario;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.services.LocationService;
@@ -59,8 +56,6 @@ import com.rocnarf.rocnarf.viewmodel.PlanificacionViewModel;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import rx.Completable;
 import rx.Subscriber;
@@ -367,6 +362,7 @@ public class MainActivity extends AppCompatActivity
             LinearLayout nuevoRegistro = dialog.findViewById(R.id.layoutVideo);
             //LinearLayout shortsLayout = dialog.findViewById(R.id.layoutShorts);
             LinearLayout historial = dialog.findViewById(R.id.layoutLive);
+            LinearLayout registroPlaca = dialog.findViewById(R.id.layoutPlaca);
             ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
 
             nuevoRegistro.setOnClickListener(new View.OnClickListener() {
@@ -388,6 +384,20 @@ public class MainActivity extends AppCompatActivity
 
                     dialog.dismiss();
                     Intent i = new Intent(context, HistorialViaticoActivity.class);
+                    i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
+                    i.putExtra(Common.ARG_SECCIOM, seccion);
+                    i.putExtra(Common.ARG_ROL, rolUsuario);
+                    startActivity(i);
+
+                }
+            });
+
+            registroPlaca.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    dialog.dismiss();
+                    Intent i = new Intent(context, RegistroPlacaActivity.class);
                     i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
                     i.putExtra(Common.ARG_SECCIOM, seccion);
                     i.putExtra(Common.ARG_ROL, rolUsuario);

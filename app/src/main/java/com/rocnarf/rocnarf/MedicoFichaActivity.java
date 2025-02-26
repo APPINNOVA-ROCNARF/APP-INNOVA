@@ -252,55 +252,61 @@ public class MedicoFichaActivity extends AppCompatActivity {
 
     private void actualizarUIConFicha(FichaMedico fichaMedico) {
         ficha = fichaMedico;
-        mEmail.setText(fichaMedico.getEmail());
-        mCedula.setText(fichaMedico.getCedula());
-        mHobbies.setText(fichaMedico.getHobbies());
-        mLabora.setText(fichaMedico.getLaboraEn());
-        mSeguros.setText(fichaMedico.getSegurosPrivados());
-        mAcademicas.setText(fichaMedico.getActividadesAcademicas());
-        mDireccion1.setText(fichaMedico.getDireccion());
-        mDireccion2.setText(fichaMedico.getDireccion2());
-        mCelular.setText(fichaMedico.getCelular());
-        mTelefono.setText(fichaMedico.getTelefono1());
-        mSecretaria.setText(fichaMedico.getNombreSecretaria());
-        mRocnarf.setText(fichaMedico.getActividadRocnarf());
-        mmarca.setText(fichaMedico.getMarca() != null ? fichaMedico.getMarca() : "");
-        mconceptoPlan.setText(fichaMedico.getConceptoPlan() != null ? fichaMedico.getConceptoPlan() : "");
 
+        if (fichaMedico != null) {
+            mEmail.setText(fichaMedico.getEmail() != null ? fichaMedico.getEmail() : "");
+            mCedula.setText(fichaMedico.getCedula() != null ? fichaMedico.getCedula() : "");
+            mHobbies.setText(fichaMedico.getHobbies() != null ? fichaMedico.getHobbies() : "");
+            mLabora.setText(fichaMedico.getLaboraEn() != null ? fichaMedico.getLaboraEn() : "");
+            mSeguros.setText(fichaMedico.getSegurosPrivados() != null ? fichaMedico.getSegurosPrivados() : "");
+            mAcademicas.setText(fichaMedico.getActividadesAcademicas() != null ? fichaMedico.getActividadesAcademicas() : "");
+            mDireccion1.setText(fichaMedico.getDireccion() != null ? fichaMedico.getDireccion() : "");
+            mDireccion2.setText(fichaMedico.getDireccion2() != null ? fichaMedico.getDireccion2() : "");
+            mCelular.setText(fichaMedico.getCelular() != null ? fichaMedico.getCelular() : "");
+            mTelefono.setText(fichaMedico.getTelefono1() != null ? fichaMedico.getTelefono1() : "");
+            mSecretaria.setText(fichaMedico.getNombreSecretaria() != null ? fichaMedico.getNombreSecretaria() : "");
+            mRocnarf.setText(fichaMedico.getActividadRocnarf() != null ? fichaMedico.getActividadRocnarf() : "");
+            mmarca.setText(fichaMedico.getMarca() != null ? fichaMedico.getMarca() : "");
+            mconceptoPlan.setText(fichaMedico.getConceptoPlan() != null ? fichaMedico.getConceptoPlan() : "");
 
+            if(fichaMedico.getAuspiciado() == null || fichaMedico.getAuspiciado() == false){
+                simpleSwitch.setChecked(false);
+            }else{
 
-        if(fichaMedico.getAuspiciado() == null || fichaMedico.getAuspiciado() == false){
-            simpleSwitch.setChecked(false);
-        }else{
+                if(fichaMedico.getFechaDesdeAuspicio() != null && fichaMedico.getFechaHastaAuspicio() != null){
+                    Date fechaHoy = new Date();
+                    if(fechaHoy.after(fichaMedico.getFechaDesdeAuspicio()) && fechaHoy.before(fichaMedico.getFechaHastaAuspicio()) ){
+                        simpleSwitch.setChecked(true);
 
-            if(fichaMedico.getFechaDesdeAuspicio() != null && fichaMedico.getFechaHastaAuspicio() != null){
-                Date fechaHoy = new Date();
-                if(fechaHoy.after(fichaMedico.getFechaDesdeAuspicio()) && fechaHoy.before(fichaMedico.getFechaHastaAuspicio()) ){
-                    simpleSwitch.setChecked(true);
-
-                }else{
-                    simpleSwitch.setChecked(false);
+                    }else{
+                        simpleSwitch.setChecked(false);
+                    }
                 }
+
             }
 
+            SimpleDateFormat sdf = new SimpleDateFormat(Common.DATE_FORMAT, new Locale("es", "ES"));
+            if (fichaMedico.getFechaNacimiento() == null)
+            {
+
+            }else {
+                mfechaNacimiento.setText(sdf.format(fichaMedico.getFechaNacimiento()));
+            }
+
+            if (fichaMedico.getFechaDesdeAuspicio() != null) mfechaDesde.setText(sdf.format(fichaMedico.getFechaDesdeAuspicio()));
+            if (fichaMedico.getFechaHastaAuspicio() != null) mfechaHasta.setText(sdf.format(fichaMedico.getFechaHastaAuspicio()));
+
+            datosCargados= true;
+        } else {
+            Log.e("MedicoFichaActivity", "fichaMedico es null, no se puede actualizar la UI");
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat(Common.DATE_FORMAT, new Locale("es", "ES"));
-        if (fichaMedico.getFechaNacimiento() == null)
-        {
-
-        }else {
-            mfechaNacimiento.setText(sdf.format(fichaMedico.getFechaNacimiento()));
-        }
-
-        if (fichaMedico.getFechaDesdeAuspicio() != null) mfechaDesde.setText(sdf.format(fichaMedico.getFechaDesdeAuspicio()));
-        if (fichaMedico.getFechaHastaAuspicio() != null) mfechaHasta.setText(sdf.format(fichaMedico.getFechaHastaAuspicio()));
-
-        datosCargados= true;
 
     }
 
-
+    private void setTextOrEmpty(TextView textView, String value) {
+        textView.setText(value != null ? value : "");
+    }
     private void agregarTextWatcher(TextInputEditText editText) {
         if (editText != null) {
             editText.addTextChangedListener(new TextWatcher() {
