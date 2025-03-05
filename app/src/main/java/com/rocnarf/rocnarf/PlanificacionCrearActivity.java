@@ -326,6 +326,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             Intent i = new Intent(context, PanelClientesActivity.class);
             i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
             i.putExtra(Common.ARG_SECCIOM, seccion);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         } else if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_MAPA)) {
             Intent i = new Intent(context, MapaActivity.class);

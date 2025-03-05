@@ -147,11 +147,6 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_registrar_placa.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_registro_viatico.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -232,6 +227,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_resultado_clientes.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_resultado_clientes_semanal.xml">
         <config>
           <theme>@style/AppTheme.NoActionBar</theme>
@@ -298,16 +298,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_planificacion_list.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_cumpleaneros.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_vehiculo.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -509,34 +499,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6c4e8bf-1cc8-4c9d-a7e5-46cc94718b99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/appInsightsSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/RegistroPlacaActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/VehiculoAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/VehiculoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ViaticoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/helpers/DateHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/helpers/ImageDownloader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Vehiculo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/VehiculoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ViaticoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/validators/RucValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/VehiculoViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/ViaticoViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registrar_placa.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_vehiculo.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MedicoFichaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MedicoFichaActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/RegistroViaticoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/RegistroViaticoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionCrearActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionCrearActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/PlanesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/PlanesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Viatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Viatico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_viatico.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_viatico.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bottomsheetlayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bottomsheetlayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_planificacion_crear.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_planificacion_crear.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -555,6 +522,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/build.gradle">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -597,6 +567,11 @@
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="4d3f6206b3e70921cef93e0d733e48d83e685300" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -771,6 +746,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
+        <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
+        <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
       </list>
     </recent_temporary>
   </component>
@@ -804,12 +781,12 @@
       <map>
         <entry key="com.rocnarf.rocnarf">
           <value>
-            <CheckInfo lastCheckTimestamp="1740496748499" />
+            <CheckInfo lastCheckTimestamp="1741183169049" />
           </value>
         </entry>
         <entry key="com.rocnarf.rocnarf.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1740496748517" />
+            <CheckInfo lastCheckTimestamp="1741183169045" />
           </value>
         </entry>
       </map>
