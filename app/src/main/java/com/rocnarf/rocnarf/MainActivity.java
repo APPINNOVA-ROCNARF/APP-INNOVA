@@ -353,7 +353,6 @@ public class MainActivity extends AppCompatActivity
 //            i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
 //            i.putExtra(Common.ARG_SECCIOM, seccion);
 //            i.putExtra(Common.ARG_ROL, rolUsuario);
-            startActivity(i);
         }else if (id == R.id.nav_viatico_principal) {
             context = this;
             final Dialog dialog = new Dialog(this);

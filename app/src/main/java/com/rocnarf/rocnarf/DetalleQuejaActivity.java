@@ -96,7 +96,7 @@ public class DetalleQuejaActivity  extends AppCompatActivity
         context = this;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Log.d("cliente","xcccc" + idCliente);
-        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(idCliente, idUsuario);
+        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(idCliente, idUsuario, seccion);
         btnEnviarQueja = (Button) findViewById(R.id.bt_enviar_queja);
         mOpcionCliente = (Spinner) findViewById(R.id.tv_opcion_queja_cliente);
         mObservacion = (TextView) findViewById(R.id.et_observacion_queja);

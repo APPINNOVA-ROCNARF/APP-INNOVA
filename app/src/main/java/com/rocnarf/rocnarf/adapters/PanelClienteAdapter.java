@@ -40,15 +40,17 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
     private LayoutInflater layoutInflater;
     OnPanelClientesClickListener clickListener;
     OnPanelClientesLongClickListener longClickListener;
+    private String Seccion;
 
 
     public PanelClienteAdapter(Context context, OnPanelClientesClickListener clickListener,
                                OnPanelClientesLongClickListener longClickListener,
-                               List<PanelClientes> listconsulta_formulario_objeto) {
+                               List<PanelClientes> listconsulta_formulario_objeto, String seccion) {
         this.listconsulta_panel_objeto = listconsulta_formulario_objeto;
         this.context = context;
         this.clickListener = clickListener;
         this.longClickListener = longClickListener;
+        this.Seccion = seccion;
     }
 
 
@@ -174,8 +176,11 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
             imgFarmaZ.setVisibility(View.GONE);
             imgCumple.setVisibility(View.GONE);
 
+            String claseMostrar = null;
+
+
             // Validar y mostrar icono de revisita
-            if (panelClientes.getRevisita() != null && panelClientes.getRevisita() == 1) {
+            if (panelClientes.getRevisita() != null && panelClientes.getRevisita() == 1 && panelClientes.getClaseMedico().equals("Médico A")) {
                 imgRevisita.setVisibility(View.VISIBLE);
             } else {
                 imgRevisita.setVisibility(View.GONE);

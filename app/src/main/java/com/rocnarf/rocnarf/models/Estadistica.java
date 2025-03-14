@@ -15,6 +15,44 @@ public class Estadistica {
     private Integer cliDer = 0;
     private Integer cliTop = 0;
 
+    private Integer medVis = 0;
+    private Integer medSinVis = 0;
+    private Integer medTotal = 0;
+    private Integer medMeg = 0;
+    private Integer medPed = 0;
+    private Integer medOto = 0;
+    private Integer medTra = 0;
+    private Integer medCar = 0;
+
+
+    private Integer medEnd = 0;
+    private Integer medGas = 0;
+    private Integer medGio = 0;
+
+    public Integer getMedUro() {
+        return medUro;
+    }
+
+    public void setMedUro(Integer medUro) {
+        this.medUro = medUro;
+    }
+
+    private Integer medUro = 0;
+    private Integer medCip = 0;
+    private Integer medNea = 0;
+    private Integer medCir = 0;
+    private Integer medDer = 0;
+
+    private Integer medA = 0;
+    private Integer medB = 0;
+    private Integer medC = 0;
+    private Integer medPC = 0;
+    private Integer medVisA = 0;
+    private Integer medVisB = 0;
+    private Integer medVisC = 0;
+    private Integer medVisPC = 0;
+
+
     public Integer getClienteActVis() {
         return clienteActVis;
     }
@@ -117,5 +155,188 @@ public class Estadistica {
 
     public void setCliTop(Integer cliTop) {
         this.cliTop = cliTop;
+    }
+    public Integer getMedVis() {
+        return medVis;
+    }
+
+    public void setMedVis(Integer medVis) {
+        this.medVis = medVis;
+    }
+
+    public Integer getMedSinVis() {
+        return medSinVis;
+    }
+
+    public void setMedSinVis(Integer medSinVis) {
+        this.medSinVis = medSinVis;
+    }
+
+    public Integer getMedTotal() {
+        return medTotal;
+    }
+
+    public void setMedTotal(Integer medTotal) {
+        this.medTotal = medTotal;
+    }
+
+    public Integer getMedMeg() {
+        return medMeg;
+    }
+
+    public void setMedMeg(Integer medMeg) {
+        this.medMeg = medMeg;
+    }
+
+    public Integer getMedPed() {
+        return medPed;
+    }
+
+    public void setMedPed(Integer medPed) {
+        this.medPed = medPed;
+    }
+
+    public Integer getMedOto() {
+        return medOto;
+    }
+
+    public void setMedOto(Integer medOto) {
+        this.medOto = medOto;
+    }
+
+    public Integer getMedTra() {
+        return medTra;
+    }
+
+    public void setMedTra(Integer medTra) {
+        this.medTra = medTra;
+    }
+
+    public Integer getMedCar() {
+        return medCar;
+    }
+
+    public void setMedCar(Integer medCar) {
+        this.medCar = medCar;
+    }
+
+    public Integer getMedA() {
+        return medA;
+    }
+
+    public void setMedA(Integer medA) {
+        this.medA = medA;
+    }
+
+    public Integer getMedB() {
+        return medB;
+    }
+
+    public void setMedB(Integer medB) {
+        this.medB = medB;
+    }
+
+    public Integer getMedC() {
+        return medC;
+    }
+
+    public void setMedC(Integer medC) {
+        this.medC = medC;
+    }
+
+    public Integer getMedPC() {
+        return medPC;
+    }
+
+    public void setMedPC(Integer medPC) {
+        this.medPC = medPC;
+    }
+
+    public Integer getMedVisA() {
+        return medVisA;
+    }
+
+    public void setMedVisA(Integer medVisA) {
+        this.medVisA = medVisA;
+    }
+
+    public Integer getMedVisB() {
+        return medVisB;
+    }
+
+    public void setMedVisB(Integer medVisB) {
+        this.medVisB = medVisB;
+    }
+
+    public Integer getMedVisC() {
+        return medVisC;
+    }
+
+    public void setMedVisC(Integer medVisC) {
+        this.medVisC = medVisC;
+    }
+
+    public Integer getMedVisPC() {
+        return medVisPC;
+    }
+
+    public void setMedVisPC(Integer medVisPC) {
+        this.medVisPC = medVisPC;
+    }
+
+    public Integer getMedEnd() {
+        return medEnd;
+    }
+
+    public void setMedEnd(Integer medEnd) {
+        this.medEnd = medEnd;
+    }
+
+    public Integer getMedGas() {
+        return medGas;
+    }
+
+    public void setMedGas(Integer medGas) {
+        this.medGas = medGas;
+    }
+
+    public Integer getMedGio() {
+        return medGio;
+    }
+
+    public void setMedGio(Integer medGio) {
+        this.medGio = medGio;
+    }
+
+    public Integer getMedCip() {
+        return medCip;
+    }
+
+    public void setMedCip(Integer medCip) {
+        this.medCip = medCip;
+    }
+
+    public Integer getMedNea() {
+        return medNea;
+    }
+
+    public void setMedNea(Integer medNea) {
+        this.medNea = medNea;
+    }
+
+    public Integer getMedCir() {
+        return medCir;
+    }
+
+    public void setMedCir(Integer medCir) {
+        this.medCir = medCir;
+    }
+
+    public Integer getMedDer() {
+        return medDer;
+    }
+
+    public void setMedDer(Integer medDer) {
+        this.medDer = medDer;
     }
 }

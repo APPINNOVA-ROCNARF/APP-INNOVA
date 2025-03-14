@@ -142,7 +142,7 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
                 i--;//decrease the counter by one
             }
         }
-        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario);
+        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario, seccion);
         lstPaneles = (RecyclerView) findViewById(R.id.list);
         lstPaneles.setLayoutManager(new LinearLayoutManager(this));
         lstPaneles.setAdapter(clientesAdapter);
@@ -161,13 +161,13 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
         });

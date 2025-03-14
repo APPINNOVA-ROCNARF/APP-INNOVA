@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,8 +116,15 @@ public class PlanificacionFragment extends Fragment {
 
         // Set the adapter
         final Context context = view.getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_list_fragment_planificacion_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView = view.findViewById(R.id.rv_list_fragment_planificacion_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context)); // Asegúrate de tener un LayoutManager
+        if (planificacionRecyclerViewAdapter == null) {
+            planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
+        }
+
+        recyclerView.setAdapter(planificacionRecyclerViewAdapter);
+
+        cargarVisitas();
 
         myKonten = (LinearLayout) view.findViewById(R.id.modalCumple);
         btnClose = (Button) view.findViewById(R.id.btnCloseCumple);
@@ -138,13 +148,19 @@ public class PlanificacionFragment extends Fragment {
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                planificacionViewModel.getVisitasPlanificadasList(idAsesor);
-                mSwipeLayout.setRefreshing(false);
-
+                Log.d("SwipeRefresh", "Usuario ha iniciado el refresh");
+                cargarVisitas();
             }
         });
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargarVisitas(); // Se ejecuta cada vez que el fragmento se vuelve visible
+    }
+
 
 
     @Override
@@ -157,7 +173,9 @@ public class PlanificacionFragment extends Fragment {
                     + " must implement OnListFragmentInteractionListener");
         }
         this.context = context;
-        planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
+        if (planificacionRecyclerViewAdapter == null) {
+            planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
+        }
     }
 
     @Override
@@ -241,32 +259,48 @@ public class PlanificacionFragment extends Fragment {
 
 
     public void cargarVisitas() {
-
         planificacionViewModel = ViewModelProviders.of(getActivity()).get(PlanificacionViewModel.class);
+
         planificacionViewModel.visitasLiveData.observe(this, new Observer<List<VisitaClientesList>>() {
             @Override
             public void onChanged(@Nullable List<VisitaClientesList> visitaClientesLists) {
-                planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
-                planificacionRecyclerViewAdapter.setItems(visitaClientesLists);
+                if (visitaClientesLists != null && !visitaClientesLists.isEmpty()) {
+                    Log.d("cargarVisitas", "Datos recibidos, tamaño de la lista: " + visitaClientesLists.size());
 
-                totalReg = visitaClientesLists.size();
-                recyclerView.setAdapter(planificacionRecyclerViewAdapter);
+                    // 🔥 Asegurar que el adapter está configurado antes de asignar los datos
+                    if (planificacionRecyclerViewAdapter == null) {
+                        planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(getContext(), mListener);
+                        recyclerView.setAdapter(planificacionRecyclerViewAdapter);
+                    }
 
+                    // 🔄 Actualizar el adapter con los nuevos datos
+                    planificacionRecyclerViewAdapter.setItems(visitaClientesLists);
 
-                if(totalReg > 0 && showModal != "S") {
-                    CargaModalCumple();
+                    totalReg = visitaClientesLists.size();
+
+                    // 🚀 Forzar redibujado para evitar problemas de scroll
+                    recyclerView.post(() -> recyclerView.invalidate());
+
+                    // Mostrar modal de cumpleaños si aplica
+                    if (totalReg > 0 && !"S".equals(showModal)) {
+                        CargaModalCumple();
+                    }
+                } else {
+                    Log.d("cargarVisitas", "La lista de visitas está vacía o es nula.");
+                }
+
+                // ✅ Asegurar que el SwipeRefresh se detiene después de actualizar
+                if (mSwipeLayout.isRefreshing()) {
+                    mSwipeLayout.post(() -> mSwipeLayout.setRefreshing(false));
+                    Log.d("SwipeRefresh", "Refresh detenido");
                 }
             }
         });
-        planificacionViewModel.getVisitasPlanificadasList(idAsesor);
 
-//        .observe(this, new Observer<List<VisitaClientesList>>() {
-//            @Override
-//            public void onChanged(@Nullable List<VisitaClientesList> listaVisitaClientes) {
-//                planificacionRecyclerViewAdapter.setItems(listaVisitaClientes);
-//                //mSwipeLayout.setRefreshing(false);
-//            }
-//        });
+        // ✅ Llamar la función para obtener datos sin necesidad de un SwipeRefreshLayout
+        planificacionViewModel.getVisitasPlanificadasList(idAsesor);
     }
+
+
 
 }

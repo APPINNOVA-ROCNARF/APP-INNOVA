@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.util.Log;
 import java.lang.reflect.Field;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.api.ApiClient;
 import com.rocnarf.rocnarf.api.ClienteService;
@@ -90,6 +93,13 @@ public class ClientesRepository {
                         if (response.isSuccessful()) {
                             ClientesResponse clientesResponse = response.body();
                             List<Clientes> clientes = clientesResponse.items;
+
+                            // Convertir la respuesta en JSON para mejor visualización
+                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                            String jsonResponse = gson.toJson(clientesResponse);
+                            Log.d("API Response", jsonResponse);
+
+
                             clientesDao.addClientes(clientes);
                             Log.d("clientesDao jefe", "x" + clientes.size());
 

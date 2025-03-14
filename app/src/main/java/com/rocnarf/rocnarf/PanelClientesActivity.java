@@ -138,7 +138,7 @@ public class PanelClientesActivity extends AppCompatActivity {
         List<PanelClientes> list_consulta_panel = panelClientesRepository.getPanelClientes(idUsuario);
         final RecyclerView lstPaneles = (RecyclerView) findViewById(R.id.list);
         lstPaneles.setLayoutManager(new LinearLayoutManager(this));
-        lstPaneles.setAdapter(new PanelClienteAdapter (this, panelClientesClickListener, panelClientesLongClickListener, list_consulta_panel));
+        lstPaneles.setAdapter(new PanelClienteAdapter (this, panelClientesClickListener, panelClientesLongClickListener, list_consulta_panel, sector));
     }
 
     @Override

@@ -73,7 +73,7 @@ public class GeoLocalizacionActivity extends AppCompatActivity {
         clientesRepository = new ClientesRepository(this, idUsuario);
 
         List<Clientes> clientes = clientesRepository.getClientesSinGeo(seccion, idUsuario, null);
-        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario);
+        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario, seccion);
         lstPaneles = (RecyclerView) findViewById(R.id.list);
         lstPaneles.setLayoutManager(new LinearLayoutManager(this));
         lstPaneles.setAdapter(clientesAdapter);
@@ -92,13 +92,13 @@ public class GeoLocalizacionActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
         });

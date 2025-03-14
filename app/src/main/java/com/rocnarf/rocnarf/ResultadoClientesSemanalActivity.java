@@ -12,8 +12,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +37,8 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
     private Context mContext;
     private String idUsuario, codigoCliente, nombre, tipo , seccion, representante, ciudad, opcionSeleccionada, rol;
     private int destino, tipoConsulta;
+    private Button btnFilterClientType;
+    private Button btnFilterVisitStatus;
 
 
     private Button btPanelCliente;
@@ -66,7 +70,43 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
                 panelClientes.setOrigen(cliente.getOrigen());
                 panelClientes.setEstadoSeleccion(cliente.getEstadoSeleccion());
                 panelClientes.setEstadoVisita(cliente.getEstadoVisita());
-                panelClientes.setClaseMedico(cliente.getClaseMedico());
+
+                if (cliente.getTipoObserv().equals("MEDICO") ) {
+                    if ("MEDICO".equals(cliente.getOrigen())) {
+                        // Obtener la sección del cliente
+                        String claseMostrar = null;
+
+                        if (seccion != null && !seccion.isEmpty()) {
+                            // Determinar la clase según el primer carácter de la sección
+                            char primerCaracter = seccion.charAt(0);
+
+                            if (Character.isDigit(primerCaracter)) {
+                                int numero = Character.getNumericValue(primerCaracter);
+                                if (numero >= 1 && numero <= 6) {
+                                    claseMostrar = cliente.getClase(); // F1 y F2
+                                } else if (numero >= 7 && numero <= 9) {
+                                    claseMostrar = cliente.getClase3(); // F3
+                                }
+                            } else if (primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C') {
+                                claseMostrar = cliente.getClase4(); // F4
+                            }
+                        }
+
+                        // Asignar el valor a mTipoCliente, asegurando que no sea null o vacío
+                        if (claseMostrar != null && !claseMostrar.isEmpty()) {
+                            panelClientes.setClaseMedico("Médico " + claseMostrar);
+                        } else {
+                            panelClientes.setClaseMedico("Médico PC");
+                        }
+                    }
+                }else {
+                    if (cliente.getClaseMedico() != null && !cliente.getClaseMedico().isEmpty()) {
+                        panelClientes.setClaseMedico(cliente.getClaseMedico());
+                    } else {
+                        panelClientes.setClaseMedico("");
+                    }
+                }
+
                 panelClientes.setIdEspecialidades(cliente.getIdEspecialidades());
                 panelClientes.setTipo(cliente.getTipo());
                 panelClientes.setCumpleAnyos(cliente.getCumpleAnyos());
@@ -131,51 +171,85 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
             }
         });
 
-//        final ArrayList<String> listaNombre = new ArrayList<>();
-//        listaNombre.add("Ninguno");
-//        final ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaNombre);
-//        PlanesService service = ApiClient.getClient().create(PlanesService.class);
-//        retrofit2.Call<ParametrosResponse> call  = service.GetJefes("ESPECIALIDADES");
-//        call.enqueue(new Callback<ParametrosResponse>() {
-//            @Override
-//            public void onResponse(retrofit2.Call<ParametrosResponse> call, Response<ParametrosResponse> response) {
-//                if (response.isSuccessful()) {
-//                    ParametrosResponse parametrosResponse = response.body();
-//                    List<Parametros> parametros = parametrosResponse.items;
-//                    for(int indice = 0;indice<parametros.size();indice++){
-//
-//
-//                        listaNombre.add(parametros.get(indice).getDescripcion());
-//                    }
-//
-//                    mEspecialidadSpi.setAdapter(adaptador);
-//
-//
-//                }
-//            }
-//
-//
-//            @Override
-//            public void onFailure(Call<ParametrosResponse> call, Throwable t) {
-//
-//                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-
-//        mEspecialidadSpi.setOnItemSelectedListener(
-//         new AdapterView.OnItemSelectedListener() {
-//                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-//
-//                    Object item = parent.getItemAtPosition(pos);
-//                    System.out.println(item.toString());     //prints the text in spinner item.
-//
-//                }
-//                public void onNothingSelected(AdapterView<?> parent) {
-//                }
-//            });
+        setupFilterButtons();
 
     }
+
+    private void setupFilterButtons() {
+        btnFilterClientType = findViewById(R.id.btn_filter_client_type);
+        btnFilterVisitStatus = findViewById(R.id.btn_filter_visit_status);
+
+        btnFilterClientType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showClientTypeFilterMenu(view);
+            }
+        });
+
+        btnFilterVisitStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showVisitStatusFilterMenu(view);
+            }
+        });
+    }
+
+    private void showClientTypeFilterMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.menu_client_type_filter, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                String tipoCliente = "";
+
+                if (id == R.id.filter_all_clients) {
+                    tipoCliente = "Todos";
+                } else if (id == R.id.filter_clientes) {
+                    tipoCliente = "Clientes";
+                } else if (id == R.id.filter_medicos) {
+                    tipoCliente = "Médicos";
+                } else if (id == R.id.filter_clientes_z) {
+                    tipoCliente = "Clientes Z";
+                }
+
+                btnFilterClientType.setText(tipoCliente);
+                clientesAdapter.setFiltroTipoCliente(tipoCliente);
+                return true;
+            }
+        });
+
+        popup.show();
+    }
+
+    private void showVisitStatusFilterMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.menu_visit_status_filter, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                String estadoVisita = "";
+
+                if (id == R.id.filter_all_visits) {
+                    estadoVisita = "Todos";
+                } else if (id == R.id.filter_visited) {
+                    estadoVisita = "Visitados";  // EFECT o PEFECT
+                } else if (id == R.id.filter_not_visited) {
+                    estadoVisita = "No Visitados";  // PLANI o NOEFE
+                }
+
+                btnFilterVisitStatus.setText(estadoVisita);
+                clientesAdapter.setFiltroEstadoVisita(estadoVisita); // Aplicar filtro
+                return true;
+            }
+        });
+
+        popup.show();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -186,7 +260,7 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
         clientesRepository = new ClientesRepository(this, idUsuario);
 
         List<Clientes> clientes = clientesRepository.getClientes(seccion, idUsuario, null, rol);
-        clientesAdapter =  new ClientesAdapter(this, listener, clientes,idUsuario);
+        clientesAdapter =  new ClientesAdapter(this, listener, clientes,idUsuario, seccion);
         lstPaneles = (RecyclerView) findViewById(R.id.list);
         lstPaneles.setLayoutManager(new LinearLayoutManager(this));
         lstPaneles.setAdapter(clientesAdapter);
@@ -244,13 +318,13 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
         });

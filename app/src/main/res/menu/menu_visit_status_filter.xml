@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_all_visits"
+        android:title="Todos" />
+    <item
+        android:id="@+id/filter_visited"
+        android:title="Visitados" />
+    <item
+        android:id="@+id/filter_not_visited"
+        android:title="No Visitados" />
+</menu>

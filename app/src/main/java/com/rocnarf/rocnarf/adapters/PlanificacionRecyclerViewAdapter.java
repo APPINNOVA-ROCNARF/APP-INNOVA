@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -69,12 +70,17 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     public PlanificacionRecyclerViewAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.context = context;
         mListener = listener;
+        this.mValues = new ArrayList<>();
     }
 
 
 
     public void setItems(List<VisitaClientesList> items) {
-        this.mValues = items;
+        if (mValues == null) {
+            mValues = new ArrayList<>();
+        }
+        this.mValues.clear(); // Limpiar la lista actual
+        this.mValues.addAll(items); // Agregar los nuevos elementos
 
         // Obtener la fecha actual
         Date fechaActual = new Date();
@@ -93,7 +99,8 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
         }
 
-        notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
+        notifyDataSetChanged();
+
     }
 
     @Override
@@ -163,10 +170,50 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             clientesRepository = new ClientesRepository(context, planificacionItem.getCodigoAsesor());
             LiveData<Clientes> clientesCumple = clientesRepository.getClientesIdLocal(planificacionItem.getCodigoCliente());
 
+            Clientes clientesAPI = clientesCumple.getValue();
+
+            String claseMostrar = null;
+
+
+            if (clientesAPI != null &&clientesAPI.getTipoObserv().equals("MEDICO") ) {
+                if ("MEDICO".equals(clientesAPI.getOrigen())) {
+                    // Obtener la sección del cliente
+
+                    if (planificacionItem.getSeccion() != null && !planificacionItem.getSeccion().isEmpty()) {
+                        // Determinar la clase según el primer carácter de la sección
+                        char primerCaracter = planificacionItem.getSeccion().charAt(0);
+
+                        if (Character.isDigit(primerCaracter)) {
+                            int numero = Character.getNumericValue(primerCaracter);
+                            if (numero >= 1 && numero <= 6) {
+                                claseMostrar = clientesAPI.getClase(); // F1 y F2
+                            } else if (numero >= 7 && numero <= 9) {
+                                claseMostrar = clientesAPI.getClase3(); // F3
+                            }
+                        } else if (primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C') {
+                            claseMostrar = clientesAPI.getClase4(); // F4
+                        }
+                    }
+
+                    // Asignar el valor a mTipoCliente, asegurando que no sea null o vacío
+                    if (claseMostrar != null && !claseMostrar.isEmpty()) {
+                        contenidoHolder.mtipoCliente.setText("Médico " + claseMostrar);
+                    } else {
+                        contenidoHolder.mtipoCliente.setText("Médico PC");
+                    }
+                }
+            }else {
+                if (clientesAPI != null && clientesAPI.getClaseMedico() != null && !clientesAPI.getClaseMedico().isEmpty()) {
+                    contenidoHolder.mtipoCliente.setText(clientesAPI.getClaseMedico());
+                } else {
+                    contenidoHolder.mtipoCliente.setText("Clase no disponible");
+                }
+            }
+
             // Validar y mostrar icono de revisita
-            if (clientesCumple.getValue() != null) {
-                Integer revisita = clientesCumple.getValue().getRevisita();
-                if (revisita != null && revisita == 1) {
+            if (clientesAPI != null) {
+                Integer revisita = clientesAPI.getRevisita();
+                if (revisita != null && revisita == 1 && (claseMostrar != null && claseMostrar.equals("A"))) {
                     contenidoHolder.mRevisitaView.setVisibility(View.VISIBLE);
                 } else {
                     contenidoHolder.mRevisitaView.setVisibility(View.GONE);
@@ -175,9 +222,9 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                 contenidoHolder.mRevisitaView.setVisibility(View.GONE);
             }
 
-            if(clientesCumple.getValue() != null) {
-                if (clientesCumple.getValue().getCumpleAnyos() != null) {
-                    if (clientesCumple.getValue().getCumpleAnyos()) {
+            if(clientesAPI != null) {
+                if (clientesAPI.getCumpleAnyos() != null) {
+                    if (clientesAPI.getCumpleAnyos()) {
                         cumpleAnyo = true;
                     }
                 } else cumpleAnyo = false;
