@@ -65,7 +65,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
     private Button mCobros;
     private Pedido pedidoExistemte;
     private PedidoDetalle pedidoDetalleLoop;
-    private TextView mPedido, mFecha, mTotal, mDescuento, mFinal, mObservaciones;
+    private TextView mPedido, mFecha, mTotal, mDescuento, mFinal, mObservaciones, tvObservaciones;
     private TextView mTotalF3, mDescuentoF3, mFinalF3;
     private TextView mTotalF2, mDescuentoF2, mFinalF2;
     private TextView mTotalF4, mDescuentoF4, mFinalF4;
@@ -140,13 +140,22 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         });
         //pedidoViewModel = ViewModelProviders.of(this).get(PedidoViewModel.class);
 
+        if(idUsuario.equals("SBC")){
+            tvObservaciones.setText("Orden de Compra");
+        }
+
         mObservaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(PedidoSimpleActivity.this);
                 LayoutInflater inflater = PedidoSimpleActivity.this.getLayoutInflater();
 
-                builder.setTitle("Observaciones");
+                if (idUsuario.equals("SBC")) {
+                    builder.setTitle("Orden de Compra");
+                } else {
+                    builder.setTitle("Observaciones");
+                }
+
                 // Set up the input
                 final EditText input = new EditText(PedidoSimpleActivity.this);
 
@@ -154,12 +163,14 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
 
                 input.setText(mObservaciones.getText().toString());
                 builder.setView(input);
+
                 builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String observaciones = input.getText().toString();
                         mObservaciones.setText(observaciones);
                         pedidoExistemte.setObservaciones(observaciones);
                         pedidoViewModel.updatePedido(pedidoExistemte);
+
                     }
                 });
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -170,6 +181,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
                 builder.create().show();
             }
         });
+
 
         mAgregarDescuento = (FloatingActionButton) findViewById(R.id.ib_descuento_fragment_pedido);
         mAgregarDescuento.setOnClickListener(new View.OnClickListener() {
@@ -712,6 +724,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
 
         mLayout = (LinearLayout) findViewById(R.id.ll_layout_activity_pedido_simple);
         mObservaciones = (TextView) findViewById(R.id.tv_observaciones_pedido_simple_activity);
+        tvObservaciones = (TextView) findViewById(R.id.tv_observaciones);
         mPedido = (TextView) findViewById(R.id.tv_id_fragment_pedido);
         mTotal = (TextView) findViewById(R.id.tv_total_fragment_pedido);
         mFinal = (TextView) findViewById(R.id.tv_final_fragment_pedido);

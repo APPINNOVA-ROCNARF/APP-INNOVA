@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.rocnarf.rocnarf"
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 33
         versionCode 12
         namespace 'com.rocnarf.rocnarf'
@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.github.DImuthuUpe:AndroidPdfViewer:3.1.0-beta.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'androidx.annotation:annotation:1.0.0'
@@ -130,7 +130,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-bom:32.2.3'
     implementation 'com.google.android.material:material:1.6.0'
 
-
+}
+configurations.all {
+    resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+    resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10'
+    resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10'
 }
 
 apply plugin: 'com.google.gms.google-services'

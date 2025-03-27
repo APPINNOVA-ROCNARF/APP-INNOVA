@@ -1,5 +1,6 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.room:room-common:2.0.0" external-system-id="GRADLE">
+  <library name="Gradle: androidx.room:room-common:2.0.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="androidx.room" artifactId="room-common" version="2.0.0" />
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-common/2.0.0/ecbcb11279cd5568fa7d86a0a7dc13ba0d8f37c9/room-common-2.0.0.jar!/" />
     </CLASSES>

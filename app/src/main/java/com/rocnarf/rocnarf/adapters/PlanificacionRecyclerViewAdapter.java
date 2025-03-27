@@ -466,7 +466,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                     String valiZ= mCodView.getText().toString().toUpperCase().substring(0, 1);
                     if (valiZ.equals("Z")) {
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                             popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
                             popupMenu.getMenu().findItem(R.id.action_categoria).setVisible(false);
@@ -482,8 +481,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                             popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         if (mCodView.length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                        if (mCodView.length() > 6)
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         if (mCodView.length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
@@ -508,12 +505,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                                 iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, mCodView.getText());
                                 iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
                                 context.startActivity(iFacturaDetalle);
-                                return true;
-                            } else if (itemId == R.id.action_cupos_credito) {
-                                Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                                i.putExtra(Common.ARG_IDCLIENTE, mCodView.getText());
-                                i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                context.startActivity(i);
                                 return true;
                             } else if (itemId == R.id.action_totales_mes) {
                                 Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);

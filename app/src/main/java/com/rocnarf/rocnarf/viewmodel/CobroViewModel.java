@@ -40,6 +40,11 @@ public class CobroViewModel extends AndroidViewModel {
         return listaFacturaDetalle;
     }
 
+    public LiveData<List<Cobro>> getChequeFechaXCliente(final String idCliente){
+        listaFacturaDetalle = clientesRepository.getChequeFechaXCliente(idCliente);
+        return listaFacturaDetalle;
+    }
+
     public LiveData<List<NotaCredito>> getNcXCliente(final String idFactura,final String idCliente){
         listaNotaCredito = clientesRepository.getNcXCliente(idFactura, idCliente);
         return listaNotaCredito;

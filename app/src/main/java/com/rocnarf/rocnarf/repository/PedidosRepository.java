@@ -1,6 +1,7 @@
 package com.rocnarf.rocnarf.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.rocnarf.rocnarf.api.ApiClient;
 import com.rocnarf.rocnarf.api.PedidoService;
@@ -108,6 +109,7 @@ public class PedidosRepository {
             @Override
             public void call(final Completable.CompletableSubscriber completableSubscriber) {
                 final Pedido pedido = pedidosDao.getPedidoByIdLocal(idLocalPedido);
+                Log.d("DEBUG_PEDIDO", String.valueOf(pedido));
                 List<PedidoDetalle> detalles = pedidosDao.getDetallesPedido(pedido.getIdLocalPedido());
                 for (PedidoDetalle detalle: detalles) {
                     detalle.setIdPedidoDetalle(0);

@@ -29,6 +29,10 @@ public class FacturaDetalleActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_factura_detalle);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         Intent i = getIntent();
         idUsuario = i.getStringExtra(Common.ARG_IDUSUARIO);
         idCliente = i.getStringExtra(Common.ARG_IDCLIENTE);
@@ -82,8 +86,10 @@ public class FacturaDetalleActivity extends AppCompatActivity
                 return FacturaDetalleFragment.newInstance(idUsuario, idCliente, idFactura);
             } else if (position == 1) {
                 return CobroFragment.newInstance(idUsuario, idCliente, idFactura);
-            } else {
+            } else if (position == 2){
                 return NotaCreditoFragment.newInstance(idUsuario, idCliente, idFactura);
+            } else {
+                return ChequeFechaFragment.newInstance(idUsuario,idCliente,idFactura);
             }
 
         }
@@ -91,7 +97,7 @@ public class FacturaDetalleActivity extends AppCompatActivity
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
@@ -100,9 +106,20 @@ public class FacturaDetalleActivity extends AppCompatActivity
                 return "Productos";
             } else if (position == 1) {
                 return "Cobros";
-            } else
+            } else if (position == 2) {
                 return "N/C";
+            } else {
+                return "Cheques a Fecha";
+            }
         }
+
+
     }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
 }

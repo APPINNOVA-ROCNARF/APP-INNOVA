@@ -192,9 +192,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="2dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/colorRocnarf"
                     android:text="Planificar "
-                    android:textColor="@android:color/white" />
+                    android:textColor="#FFF" />
             </LinearLayout>
         </LinearLayout>
 
@@ -214,9 +214,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorRocnarf"
                 android:text="Tipo de Cliente"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFF" />
 
             <!-- Visit Status Filter Button -->
             <Button
@@ -225,9 +225,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorRocnarf"
                 android:text="Estado de Visita"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFF" />
         </LinearLayout>
 
         <LinearLayout

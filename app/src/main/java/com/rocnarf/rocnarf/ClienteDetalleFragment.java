@@ -123,7 +123,6 @@ public class ClienteDetalleFragment extends Fragment {
                     popupMenu.getMenu().findItem(R.id.action_recetas).setVisible(false);
                     popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                      popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                     popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                      popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                 }else {
                     if (esFarmacia)  popupMenu.getMenu().findItem(R.id.action_ficha_medico).setVisible(false);
@@ -132,7 +131,6 @@ public class ClienteDetalleFragment extends Fragment {
 
                     if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                     if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                    if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                     if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                 }
 
@@ -155,12 +153,6 @@ public class ClienteDetalleFragment extends Fragment {
                             iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, idCliente);
                             iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
                             context.startActivity(iFacturaDetalle);
-                            return true;
-                        } else if (itemId == R.id.action_cupos_credito) {
-                            Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                            i.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                            i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                            context.startActivity(i);
                             return true;
                         } else if (itemId == R.id.action_totales_mes) {
                             Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
@@ -459,12 +451,6 @@ public class ClienteDetalleFragment extends Fragment {
                     iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
                     startActivity(iFacturaDetalle);
                     return true;
-                } else if (itemId == R.id.action_cupos_credito) {
-                    Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                    i.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    startActivity(i);
-                    return true;
                 } else if (itemId == R.id.action_totales_mes) {
                     Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
                     iTotalesXMes.putExtra(Common.ARG_IDCLIENTE, idCliente);
@@ -519,7 +505,6 @@ public class ClienteDetalleFragment extends Fragment {
         if (!esFarmacia) {
             popup.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
             popup.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-            popup.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
             popup.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
         }
 

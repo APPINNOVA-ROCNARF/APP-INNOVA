@@ -231,6 +231,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/ll_5_ND">
 
             <TextView
@@ -301,7 +302,7 @@
                 android:layout_marginStart="5dp"
                 android:textAlignment="textEnd"
                 android:paddingEnd="60dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:text="0" />
 
@@ -310,12 +311,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textAppearance="?android:attr/textAppearanceListItem"
-                android:text="" />
+                android:text="Fecha Pago" />
 
             <TextView
+                android:id="@+id/fecha_pago"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:textAlignment="textEnd"
                 android:text="" />

@@ -21,12 +21,12 @@ import com.rocnarf.rocnarf.models.Cobro;
 import com.rocnarf.rocnarf.models.Factura;
 import com.rocnarf.rocnarf.models.FacturaDetalle;
 import com.rocnarf.rocnarf.models.FacturasNotaDebitos;
+import com.rocnarf.rocnarf.models.FacturasNotaDebitosEstadistica;
 import com.rocnarf.rocnarf.models.FichaMedico;
 import com.rocnarf.rocnarf.models.NotaCredito;
 import com.rocnarf.rocnarf.models.Sincronizacion;
 import com.rocnarf.rocnarf.models.VentaMensualXCliente;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,8 +49,10 @@ public class ClientesRepository {
     private MutableLiveData<List<Clientes>> listaClientes = new MutableLiveData<>();
     private MutableLiveData<List<Factura>> listaFacturas = new MutableLiveData<>();
     private MutableLiveData<List<FacturasNotaDebitos>> listaFacturasNotaDebitos = new MutableLiveData<>();
+    private MutableLiveData<FacturasNotaDebitosEstadistica> FacturasNotaDebitosEstadistica = new MutableLiveData<>();
     private MutableLiveData<List<FacturaDetalle>> listaDetallesFactura =  new MutableLiveData<>();
     private MutableLiveData<List<Cobro>> listaCobros = new MutableLiveData<>();
+    private MutableLiveData<List<Cobro>> listaChequeFecha = new MutableLiveData<>();
     private MutableLiveData<ClientesCupoCredito> cupoCreditoLiveData = new MutableLiveData<>();
     private MutableLiveData<List<VentaMensualXCliente>> ventaMensualXClienteMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<FichaMedico> fichaMedicoMutableLiveData = new MutableLiveData<>();
@@ -80,8 +82,7 @@ public class ClientesRepository {
                 ///Call<ClientesResponse> call = service.GetClientes(1, 9000, 0, null, null, null, seccion, null, null, rolUsuario, null);
                 Call<ClientesResponse> call;
 
-                if (rolUsuario.equals("GR") || rolUsuario.equals("IM")) {
-                    Log.d("Clientes jefe", rolUsuario);
+                if (rolUsuario.equals("GR") || rolUsuario.equals("IM") || rolUsuario.equals("KAM")) {
                     call = service.GetClientes(1, 9000, 2, null, null, null, null, null, null, rolUsuario, idUsuario);
                 }else{
                     call = service.GetClientes(1, 9000, 0, null, null, null, seccion, null, null, rolUsuario, null);
@@ -139,7 +140,7 @@ public class ClientesRepository {
 
         List<Clientes> lista = new ArrayList<>();
 
-        if(rol !=null && (rol.equals("GR") || rol.equals("IM") ))
+        if(rol !=null && (rol.equals("GR") || rol.equals("IM") || rol.equals("KAM") ))
         {
             lista = this.clientesDao.getByJefes(null, null, origen,  null, null, idAsesor);
 
@@ -276,6 +277,28 @@ public class ClientesRepository {
         return  listaFacturasNotaDebitos;
     }
 
+    public LiveData<FacturasNotaDebitosEstadistica> getFacturasNotaDebitosEstadistica(final String idCliente, final String seccion){
+
+        ClienteService service = ApiClient.getClient().create(ClienteService.class);
+        Call<FacturasNotaDebitosEstadistica> call = service.getFacturasNotaDebitosEstadistica(idCliente, seccion);
+        call.enqueue(new Callback<FacturasNotaDebitosEstadistica>() {
+            @Override
+            public void onResponse(Call<FacturasNotaDebitosEstadistica> call, Response<FacturasNotaDebitosEstadistica> response) {
+                if (response.isSuccessful()){
+                    FacturasNotaDebitosEstadistica.setValue(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<FacturasNotaDebitosEstadistica> call, Throwable t) {
+
+            }
+        });
+
+        return  FacturasNotaDebitosEstadistica;
+    }
+
     public LiveData<List<FacturaDetalle>> getFacturaDetalles(final String idFactura){
 
         ClienteService service = ApiClient.getClient().create(ClienteService.class);
@@ -346,7 +369,7 @@ public class ClientesRepository {
     public LiveData<List<Cobro>> getCobrosXCliente(final String idCliente){
 
         ClienteService service = ApiClient.getClient().create(ClienteService.class);
-        Call<List<Cobro>> call = service.GetCobrosXCliente(idCliente);
+        Call<List<Cobro>> call = service.GetCobrosXCliente(idCliente,1);
         call.enqueue(new Callback<List<Cobro>>() {
             @Override
             public void onResponse(Call<List<Cobro>> call, Response<List<Cobro>> response) {
@@ -362,6 +385,27 @@ public class ClientesRepository {
         });
 
         return  listaCobros;
+    }
+
+    public LiveData<List<Cobro>> getChequeFechaXCliente(final String idCliente){
+
+        ClienteService service = ApiClient.getClient().create(ClienteService.class);
+        Call<List<Cobro>> call = service.GetCobrosXCliente(idCliente,2);
+        call.enqueue(new Callback<List<Cobro>>() {
+            @Override
+            public void onResponse(Call<List<Cobro>> call, Response<List<Cobro>> response) {
+                if (response.isSuccessful()){
+                    listaChequeFecha.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Cobro>> call, Throwable t) {
+
+            }
+        });
+
+        return  listaChequeFecha;
     }
 
     public LiveData<List<NotaCredito>> getNcXCliente(final String idFactura, final String idCliente){

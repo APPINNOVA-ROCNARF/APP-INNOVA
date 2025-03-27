@@ -523,7 +523,7 @@ d                <Spinner
                 android:layout_marginTop="8dp" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tv_observaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"

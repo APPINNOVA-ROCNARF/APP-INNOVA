@@ -89,6 +89,7 @@ public class FacturasNotaDebitos {
     @Expose
     private String tipoDoc;
 
+
     public BigDecimal getCobrosAbonos() {
         return cobrosAbonos;
     }

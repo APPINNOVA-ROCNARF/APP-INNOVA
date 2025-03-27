@@ -1,5 +1,6 @@
 package com.rocnarf.rocnarf.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -39,6 +40,8 @@ public class Pedido {
     private Double precioFinal;
 
     private String observaciones;
+
+    private String ordenCompra;
 
     private String reciboCobro;
 
@@ -196,6 +199,13 @@ public class Pedido {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+    public String getOrdenCompra() {
+        return ordenCompra;
+    }
+
+    public void setOrdenCompra(String ordenCompra) {
+        this.ordenCompra = ordenCompra;
     }
 
     public String getReciboCobro() {
@@ -477,4 +487,28 @@ public class Pedido {
     public void setTipoPrecio(String tipoPrecio) {
         this.tipoPrecio = tipoPrecio;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "idLocalPedido=" + idLocalPedido +
+                ", idPedido=" + idPedido +
+                ", idCliente='" + idCliente + '\'' +
+                ", nombreCliente='" + nombreCliente + '\'' +
+                ", idAsesor='" + idAsesor + '\'' +
+                ", fechaPedido=" + fechaPedido +
+                ", precioTotal=" + precioTotal +
+                ", descuento=" + descuento +
+                ", porcentajeDescuento=" + porcentajeDescuento +
+                ", precioFinal=" + precioFinal +
+                ", observaciones='" + observaciones + '\'' +
+                ", tipoPedido='" + tipoPedido + '\'' +
+                ", tipoPrecio='" + tipoPrecio + '\'' +
+                ", pendienteSync=" + pendienteSync +
+                ", pedidoDetalleResource count=" + (pedidoDetalleResource != null ? pedidoDetalleResource.size() : 0) +
+                '}';
+    }
+
 }
+

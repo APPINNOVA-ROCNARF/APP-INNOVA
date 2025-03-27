@@ -227,14 +227,12 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
                     } else {
                         popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                        popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
 
                     String valiZ= panelClientes.getIdCliente().toUpperCase().substring(0, 1);
                     if (valiZ.equals("Z")) {
                         popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
-                        popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_categoria).setVisible(false);
@@ -251,8 +249,6 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
                         if (panelClientes.getIdCliente().length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
                         if (panelClientes.getIdCliente().length() > 6)
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
-                        if (panelClientes.getIdCliente().length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
 
@@ -268,8 +264,6 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
                                 intent = new Intent(context, ClientesFacturasNotaDebitosActivity.class);
                             } else if (itemId == R.id.action_detalle_productos) {
                                 intent = new Intent(context, FacturaDetalleActivity.class);
-                            } else if (itemId == R.id.action_cupos_credito) {
-                                intent = new Intent(context, ClientesCupoCreditoActivity.class);
                             } else if (itemId == R.id.action_totales_mes) {
                                 intent = new Intent(context, VentasMensualesClientesActivity.class);
                             } else if (itemId == R.id.action_historial_comentarios) {

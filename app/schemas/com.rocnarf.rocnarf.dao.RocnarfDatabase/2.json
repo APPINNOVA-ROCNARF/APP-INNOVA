@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "9337f168437215c21d3745642cdeb620",
+    "identityHash": "e8c9bed5aeaa88d7fc70ceb686a67ee5",
     "entities": [
       {
         "tableName": "visita_clientes",
@@ -998,7 +998,7 @@
       },
       {
         "tableName": "pedido",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idLocalPedido` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idPedido` INTEGER NOT NULL, `idCliente` TEXT, `nombreCliente` TEXT, `idAsesor` TEXT, `fechaPedido` INTEGER, `precioTotal` REAL, `conBonos` INTEGER NOT NULL, `descuento` REAL, `porcentajeDescuento` REAL, `precioFinal` REAL, `observaciones` TEXT, `reciboCobro` TEXT, `factura` TEXT, `cheques` TEXT, `fechaCheque` TEXT, `valorCheque` REAL, `efectvo` REAL, `notaCredito` TEXT, `estado` TEXT, `reciboCobro1` TEXT, `reciboCobro2` TEXT, `reciboCobro3` TEXT, `reciboCobro4` TEXT, `factura1` TEXT, `factura2` TEXT, `factura3` TEXT, `factura4` TEXT, `cheque1` TEXT, `cheque2` TEXT, `cheque3` TEXT, `cheque4` TEXT, `fechaCheque1` TEXT, `fechaCheque2` TEXT, `fechaCheque3` TEXT, `fechaCheque4` TEXT, `valorCheque1` REAL, `valorCheque2` REAL, `valorCheque3` REAL, `valorCheque4` REAL, `tipoPedido` TEXT, `tipoPrecio` TEXT, `pendienteSync` INTEGER NOT NULL, `fechaSync` INTEGER, `imagen1` BLOB, `imagen2` BLOB)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idLocalPedido` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idPedido` INTEGER NOT NULL, `idCliente` TEXT, `nombreCliente` TEXT, `idAsesor` TEXT, `fechaPedido` INTEGER, `precioTotal` REAL, `conBonos` INTEGER NOT NULL, `descuento` REAL, `porcentajeDescuento` REAL, `precioFinal` REAL, `observaciones` TEXT, `ordenCompra` TEXT, `reciboCobro` TEXT, `factura` TEXT, `cheques` TEXT, `fechaCheque` TEXT, `valorCheque` REAL, `efectvo` REAL, `notaCredito` TEXT, `estado` TEXT, `reciboCobro1` TEXT, `reciboCobro2` TEXT, `reciboCobro3` TEXT, `reciboCobro4` TEXT, `factura1` TEXT, `factura2` TEXT, `factura3` TEXT, `factura4` TEXT, `cheque1` TEXT, `cheque2` TEXT, `cheque3` TEXT, `cheque4` TEXT, `fechaCheque1` TEXT, `fechaCheque2` TEXT, `fechaCheque3` TEXT, `fechaCheque4` TEXT, `valorCheque1` REAL, `valorCheque2` REAL, `valorCheque3` REAL, `valorCheque4` REAL, `tipoPedido` TEXT, `tipoPrecio` TEXT, `pendienteSync` INTEGER NOT NULL, `fechaSync` INTEGER, `imagen1` BLOB, `imagen2` BLOB)",
         "fields": [
           {
             "fieldPath": "idLocalPedido",
@@ -1069,6 +1069,12 @@
           {
             "fieldPath": "observaciones",
             "columnName": "observaciones",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ordenCompra",
+            "columnName": "ordenCompra",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -1594,7 +1600,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9337f168437215c21d3745642cdeb620\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e8c9bed5aeaa88d7fc70ceb686a67ee5\")"
     ]
   }
 }
