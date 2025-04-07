@@ -346,7 +346,29 @@ public class ClientesRepository {
     public LiveData<List<Cobro>> geGetCobrosXFactura(final String idFactura){
 
         ClienteService service = ApiClient.getClient().create(ClienteService.class);
-        Call<List<Cobro>> call = service.GetCobrosXFactura(idFactura);
+        Call<List<Cobro>> call = service.GetCobrosXFactura(idFactura,1);
+        call.enqueue(new Callback<List<Cobro>>() {
+            @Override
+            public void onResponse(Call<List<Cobro>> call, Response<List<Cobro>> response) {
+                if (response.isSuccessful()){
+                    listaCobros.setValue(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Cobro>> call, Throwable t) {
+
+            }
+        });
+
+        return  listaCobros;
+    }
+
+    public LiveData<List<Cobro>> GetChequeFechaXFactura(final String idFactura){
+
+        ClienteService service = ApiClient.getClient().create(ClienteService.class);
+        Call<List<Cobro>> call = service.GetCobrosXFactura(idFactura,2);
         call.enqueue(new Callback<List<Cobro>>() {
             @Override
             public void onResponse(Call<List<Cobro>> call, Response<List<Cobro>> response) {

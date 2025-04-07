@@ -18,13 +18,14 @@ import com.rocnarf.rocnarf.models.EscalaBonificacion;
 import com.rocnarf.rocnarf.models.PanelClientes;
 import com.rocnarf.rocnarf.models.Pedido;
 import com.rocnarf.rocnarf.models.PedidoDetalle;
+import com.rocnarf.rocnarf.models.PrecioEspecialCliente;
 import com.rocnarf.rocnarf.models.Producto;
 import com.rocnarf.rocnarf.models.Sincronizacion;
 import com.rocnarf.rocnarf.models.Usuario;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 
 @Database(entities = {VisitaClientes.class, Usuario.class, Clientes.class, Sincronizacion.class, Producto.class,
-        Pedido.class, PedidoDetalle.class, EscalaBonificacion.class, AsesorLocation.class , PanelClientes.class}, version =2 )
+        Pedido.class, PedidoDetalle.class, EscalaBonificacion.class, AsesorLocation.class , PanelClientes.class, PrecioEspecialCliente.class}, version =3 )
 @TypeConverters({TimestampConverter.class})
 public abstract class RocnarfDatabase extends RoomDatabase{
     private static RocnarfDatabase INSTANCE;
@@ -34,6 +35,25 @@ public abstract class RocnarfDatabase extends RoomDatabase{
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE clientes ADD COLUMN revisita INTEGER DEFAULT 0");
+        }
+    };
+
+    public static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `precio_especial_cliente` (" +
+                            "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                            "`codigoCliente` TEXT, " +
+                            "`codigoProducto` TEXT, " +
+                            "`fechaDesde` TEXT, " +
+                            "`fechaHasta` TEXT, " +
+                            "`precioPVF` REAL, " +
+                            "`precioPVP` REAL, " +
+                            "`precioDesc` REAL, " +
+                            "`cantidad` INTEGER, " +
+                            "`tipo` TEXT)"
+            );
         }
     };
 
@@ -51,7 +71,7 @@ public abstract class RocnarfDatabase extends RoomDatabase{
                                     Log.d("RocnarfDatabase", "populating with data...");
                                 }
                             })
-                            .addMigrations(MIGRATION_1_2)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                             .build();
                 }
             }
@@ -70,4 +90,5 @@ public abstract class RocnarfDatabase extends RoomDatabase{
     public abstract EscalaBonificacionDao EscalaBonificacionDao();
     public abstract AsesorLocationDao AsesorLocationDao();
     public abstract PanelClientesDao PanelClientesDao();
+    public abstract PrecioEspecialClienteDao PrecioEspecialClienteDao();
 }

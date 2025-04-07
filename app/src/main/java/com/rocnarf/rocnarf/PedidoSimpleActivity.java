@@ -91,7 +91,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
     public String estadoCliente;
     private double PrecioTotalAcu = 0, PrecioFinalAcu = 0, DescuentoAcu = 0;
     private ClientesCupoCreditoViewModel clientesCupoCreditoViewModel;
-
+private Boolean usarPrecioEspecial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +104,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         idCliente = intent.getStringExtra(Common.ARG_IDCLIENTE);
         idLocalPedido = intent.getIntExtra(Common.ARG_IDPEDIDO, 0);
         nombreCliente = intent.getStringExtra(Common.ARG_NOMBRE_CLIENTE);
+        usarPrecioEspecial = getIntent().getBooleanExtra(Common.ARG_USAR_PRECIO_ESPECIAL, false);
         Log.d("local", "local" + idLocalPedido);
         final ActionBar actionBar = getSupportActionBar();
         if (nombreCliente != null) {
@@ -251,6 +252,8 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
                 } else if (selectedItem.equals("P.V.P")) {
                     fragment.setTipo("P.V.P");
                     CalcularTotalesXLineaPvp();
+                } else if (selectedItem.equals("ESP")){
+                    fragment.setTipo("ESP");
                 }
 
             } // to close the onItemSelected
@@ -717,6 +720,72 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         pedidoViewModel.updatePedido(pedidoExistemte);
     }
 
+    public void CalcularTotalesXLineaESP() {
+        double totalF3 = 0, descuentoF3 = 0, finalF3 = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("F3")) {
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                totalF3 += detalle.getPrecioTotal();
+            }
+        }
+        descuentoF3 = totalF3 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF3 = totalF3 - descuentoF3;
+        mTotalF3.setText(String.format("%.2f", totalF3));
+        mDescuentoF3.setText(String.format("%.2f", descuentoF3));
+        mFinalF3.setText(String.format("%.2f", finalF3));
+
+        double totalF2 = 0, descuentoF2 = 0, finalF2 = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("F2")) {
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                totalF2 += detalle.getPrecioTotal();
+            }
+        }
+        descuentoF2 = totalF2 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF2 = totalF2 - descuentoF2;
+        mTotalF2.setText(String.format("%.2f", totalF2));
+        mDescuentoF2.setText(String.format("%.2f", descuentoF2));
+        mFinalF2.setText(String.format("%.2f", finalF2));
+
+        double totalF4 = 0, descuentoF4 = 0, finalF4 = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("F4")) {
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                totalF4 += detalle.getPrecioTotal();
+            }
+        }
+        descuentoF4 = totalF4 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF4 = totalF4 - descuentoF4;
+        mTotalF4.setText(String.format("%.2f", totalF4));
+        mDescuentoF4.setText(String.format("%.2f", descuentoF4));
+        mFinalF4.setText(String.format("%.2f", finalF4));
+
+        double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("GE")) {
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                totalGEN += detalle.getPrecioTotal();
+            }
+        }
+        descuentoGEN = totalGEN * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalGEN = totalGEN - descuentoGEN;
+        mTotalGEN.setText(String.format("%.2f", totalGEN));
+//        mTotalGEN.setText(String.format("%.2f", totalGEN));
+        mDescuentoGEN.setText(String.format("%.2f", descuentoGEN));
+        mFinalGEN.setText(String.format("%.2f", finalGEN));
+
+        pedidoExistemte.setPrecioTotal(totalGEN + totalF4 + totalF2 + totalF3);
+        pedidoExistemte.setDescuento(descuentoGEN + descuentoF4 + descuentoF2 + descuentoF3);
+        pedidoExistemte.setPrecioFinal(finalGEN + finalF4 + finalF2 + finalF3);
+
+        mTotal.setText(String.format("%.2f", pedidoExistemte.getPrecioTotal()));
+        mDescuento.setText(String.format("%.2f", pedidoExistemte.getDescuento()));
+        mFinal.setText(String.format("%.2f", pedidoExistemte.getPrecioFinal()));
+
+        pedidoExistemte.setTipoPrecio("P.V.F");
+        pedidoViewModel.updatePedido(pedidoExistemte);
+    }
+
 
     public void CargarControles() {
         progressBar = (ProgressBar) findViewById(R.id.pr_list_activity_productos);
@@ -756,6 +825,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         final ArrayList<String> listaNombre = new ArrayList<>();
         listaNombre.add("P.V.F");
         listaNombre.add("P.V.P");
+        listaNombre.add("ESP");
         final ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaNombre);
 
         //   adaptador.setDropDownViewResource(android.R.layout.simple_list_item_1);

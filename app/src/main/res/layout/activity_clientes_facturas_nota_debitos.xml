@@ -143,6 +143,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 />
             <TextView
+                android:id="@+id/dolar_vencido"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceListItem"
@@ -303,6 +304,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 />
             <TextView
+                android:id="@+id/dolar_cupo"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceListItem"

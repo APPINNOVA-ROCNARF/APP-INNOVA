@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 2,
-    "identityHash": "ed657f62a44f47301a3a52182af92e2c",
+    "version": 3,
+    "identityHash": "2c9924bf7ed707024c883901d817a206",
     "entities": [
       {
         "tableName": "visita_clientes",
@@ -906,7 +906,7 @@
       },
       {
         "tableName": "producto",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProducto` TEXT NOT NULL, `idProducto2` TEXT, `nombre` TEXT, `tipo` TEXT, `jefe` TEXT, `precio` REAL, `unitario` REAL, `saldo` REAL, `vademecun` INTEGER NOT NULL, `idEscala` INTEGER NOT NULL, `porcentajePvp` REAL, `status` TEXT, `marca` TEXT, `pvp` REAL, PRIMARY KEY(`idProducto`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProducto` TEXT NOT NULL, `idProducto2` TEXT, `nombre` TEXT, `tipo` TEXT, `jefe` TEXT, `precio` REAL, `unitario` REAL, `saldo` REAL, `vademecun` INTEGER NOT NULL, `idEscala` INTEGER NOT NULL, `porcentajePvp` REAL, `status` TEXT, `marca` TEXT, `pvp` REAL, `precioEspecial` REAL, PRIMARY KEY(`idProducto`))",
         "fields": [
           {
             "fieldPath": "idProducto",
@@ -989,6 +989,12 @@
           {
             "fieldPath": "pvp",
             "columnName": "pvp",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precioEspecial",
+            "columnName": "precioEspecial",
             "affinity": "REAL",
             "notNull": false
           }
@@ -1602,11 +1608,85 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "precio_especial_cliente",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `codigoCliente` TEXT, `codigoProducto` TEXT, `fechaDesde` TEXT, `fechaHasta` TEXT, `precioPVF` REAL, `precioPVP` REAL, `precioDesc` REAL, `cantidad` INTEGER, `tipo` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codigoCliente",
+            "columnName": "codigoCliente",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "codigoProducto",
+            "columnName": "codigoProducto",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaDesde",
+            "columnName": "fechaDesde",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaHasta",
+            "columnName": "fechaHasta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precioPVF",
+            "columnName": "precioPVF",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precioPVP",
+            "columnName": "precioPVP",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precioDesc",
+            "columnName": "precioDesc",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cantidad",
+            "columnName": "cantidad",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ed657f62a44f47301a3a52182af92e2c\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"2c9924bf7ed707024c883901d817a206\")"
     ]
   }
 }

@@ -7,6 +7,10 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Entity(tableName = "usuarios")
 public class Usuario {
 
@@ -39,6 +43,10 @@ public class Usuario {
     @SerializedName("estado")
     @Expose
     private  String Estado;
+
+    @SerializedName("secciones")
+    @Expose
+    private String Secciones;
 
     public String getIdUsuario() {
         return idUsuario;
@@ -95,4 +103,7 @@ public class Usuario {
     public void setEstado(String estado) {
         Estado = estado;
     }
+    public String getSecciones() { return Secciones;}
+    public void setSecciones(String secciones) { Secciones = secciones;}
+
 }

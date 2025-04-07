@@ -71,6 +71,11 @@ public class LoginActivity extends Activity {
             i.putExtra(Common.ARG_SECCIOM, usuario.getSeccion());
             i.putExtra(Common.ARG_NOMBREUSUARIO, usuario.getNombre());
             i.putExtra(Common.ARG_ROL, usuario.getRol());
+            String secciones = usuario.getSecciones();
+            if (secciones != null && !secciones.isEmpty()) {
+                i.putExtra(Common.ARG_SECCIONES, secciones);
+            }
+
             startActivity(i);
             finish();
 

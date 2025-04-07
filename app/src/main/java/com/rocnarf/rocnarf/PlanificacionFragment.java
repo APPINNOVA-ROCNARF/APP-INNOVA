@@ -155,11 +155,6 @@ public class PlanificacionFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        cargarVisitas(); // Se ejecuta cada vez que el fragmento se vuelve visible
-    }
 
 
 

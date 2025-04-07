@@ -29,13 +29,15 @@ import com.rocnarf.rocnarf.models.PanelClientes;
 import com.rocnarf.rocnarf.repository.ClientesRepository;
 import com.rocnarf.rocnarf.repository.PanelClientesRepository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class ResultadoClientesSemanalActivity extends AppCompatActivity {
 
     private Context mContext;
-    private String idUsuario, codigoCliente, nombre, tipo , seccion, representante, ciudad, opcionSeleccionada, rol;
+    private String idUsuario, codigoCliente, nombre, tipo , seccion,secciones, representante, ciudad, opcionSeleccionada, rol;
     private int destino, tipoConsulta;
     private Button btnFilterClientType;
     private Button btnFilterVisitStatus;
@@ -55,6 +57,8 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
 
     private ClientesRepository clientesRepository;
     private ClientesAdapter clientesAdapter;
+    private List<String> seccionesUsuario;
+
     private ClientesAdapter.OnClienteClickListener listener = new ClientesAdapter.OnClienteClickListener() {
         @Override
         public void onClienteClick(Clientes cliente) {
@@ -71,41 +75,74 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
                 panelClientes.setEstadoSeleccion(cliente.getEstadoSeleccion());
                 panelClientes.setEstadoVisita(cliente.getEstadoVisita());
 
-                if (cliente.getTipoObserv().equals("MEDICO") ) {
-                    if ("MEDICO".equals(cliente.getOrigen())) {
-                        // Obtener la sección del cliente
-                        String claseMostrar = null;
+                // Validación si es "MEDICO"
+                String claseMostrar = null;
 
-                        if (seccion != null && !seccion.isEmpty()) {
-                            // Determinar la clase según el primer carácter de la sección
+// Lista de roles especiales
+                List<String> rolesMultiples = Arrays.asList("GRC", "GVP", "GRA", "JVC", "GRS", "JVS");
+
+                if ("MEDICO".equals(cliente.getOrigen()) && "MEDICO".equals(cliente.getTipoObserv())) {
+
+                    if (seccion != null && !seccion.isEmpty()) {
+
+                        boolean esRolRegional = rolesMultiples.contains(seccion.toUpperCase());
+
+                        if (esRolRegional && seccionesUsuario != null && !seccionesUsuario.isEmpty()) {
+                            for (String seccion : seccionesUsuario) {
+                                if (seccion != null && !seccion.isEmpty()) {
+                                    char primerCaracter = seccion.charAt(0);
+
+                                    if (Character.isDigit(primerCaracter)) {
+                                        int numero = Character.getNumericValue(primerCaracter);
+                                        if (numero >= 1 && numero <= 6 && cliente.getClase() != null && !cliente.getClase().isEmpty()) {
+                                            claseMostrar = cliente.getClase();
+                                            break;
+                                        } else if (numero >= 7 && numero <= 9 && cliente.getClase3() != null && !cliente.getClase3().isEmpty()) {
+                                            claseMostrar = cliente.getClase3();
+                                            break;
+                                        }
+                                    } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                            && cliente.getClase4() != null && !cliente.getClase4().isEmpty()) {
+                                        claseMostrar = cliente.getClase4();
+                                        break;
+                                    }
+                                }
+                            }
+
+                        } else {
+                            // 🧪 Evaluar una sola sección
                             char primerCaracter = seccion.charAt(0);
 
                             if (Character.isDigit(primerCaracter)) {
                                 int numero = Character.getNumericValue(primerCaracter);
-                                if (numero >= 1 && numero <= 6) {
-                                    claseMostrar = cliente.getClase(); // F1 y F2
-                                } else if (numero >= 7 && numero <= 9) {
-                                    claseMostrar = cliente.getClase3(); // F3
+                                if (numero >= 1 && numero <= 6 && cliente.getClase() != null && !cliente.getClase().isEmpty()) {
+                                    claseMostrar = cliente.getClase();
+                                } else if (numero >= 7 && numero <= 9 && cliente.getClase3() != null && !cliente.getClase3().isEmpty()) {
+                                    claseMostrar = cliente.getClase3();
                                 }
-                            } else if (primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C') {
-                                claseMostrar = cliente.getClase4(); // F4
+                            } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                    && cliente.getClase4() != null && !cliente.getClase4().isEmpty()) {
+                                claseMostrar = cliente.getClase4();
                             }
                         }
-
-                        // Asignar el valor a mTipoCliente, asegurando que no sea null o vacío
-                        if (claseMostrar != null && !claseMostrar.isEmpty()) {
-                            panelClientes.setClaseMedico("Médico " + claseMostrar);
-                        } else {
-                            panelClientes.setClaseMedico("Médico PC");
-                        }
                     }
-                }else {
+
+                    if (claseMostrar != null && !claseMostrar.isEmpty()) {
+                        panelClientes.setClaseMedico("Médico " + claseMostrar);
+                    } else {
+                        panelClientes.setClaseMedico("Médico PC");
+                    }
+
+                } else {
                     if (cliente.getClaseMedico() != null && !cliente.getClaseMedico().isEmpty()) {
                         panelClientes.setClaseMedico(cliente.getClaseMedico());
                     } else {
                         panelClientes.setClaseMedico("");
                     }
                 }
+
+
+
 
                 panelClientes.setIdEspecialidades(cliente.getIdEspecialidades());
                 panelClientes.setTipo(cliente.getTipo());
@@ -142,6 +179,12 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         idUsuario= intent.getStringExtra("idUsuario");
         seccion = intent.getStringExtra(Common.ARG_SECCIOM);
+        secciones = intent.getStringExtra(Common.ARG_SECCIONES);
+        if (secciones != null && !secciones.isEmpty()) {
+            this.seccionesUsuario = Arrays.asList(secciones.split("\\s*,\\s*"));
+        } else {
+            this.seccionesUsuario = new ArrayList<>();
+        }
         rol = intent.getStringExtra(Common.ARG_ROL);
         panelClientesRepository = new PanelClientesRepository(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -260,7 +303,7 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
         clientesRepository = new ClientesRepository(this, idUsuario);
 
         List<Clientes> clientes = clientesRepository.getClientes(seccion, idUsuario, null, rol);
-        clientesAdapter =  new ClientesAdapter(this, listener, clientes,idUsuario, seccion);
+        clientesAdapter =  new ClientesAdapter(this, listener, clientes,idUsuario, seccion, secciones);
         lstPaneles = (RecyclerView) findViewById(R.id.list);
         lstPaneles.setLayoutManager(new LinearLayoutManager(this));
         lstPaneles.setAdapter(clientesAdapter);

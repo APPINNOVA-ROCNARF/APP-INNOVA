@@ -44,8 +44,8 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ArrayList<String> facturasSeleccionadas = new ArrayList<String>();
     private Button btCobrar;
-    private TextView pendientesPago, totalSeleccionadosTextView, valorSaldoAcu,
-            valorVencAcu, FacMasDias, valorNoVencido,totalNBFac,SaldoFavorCliente, cupoCredito, promDiasFact, chequeFecha,cupoDisponible;
+    private TextView pendientesPago, totalSeleccionadosTextView, valorSaldoAcu, dolarVencido,
+            valorVencAcu, FacMasDias, valorNoVencido,totalNBFac,SaldoFavorCliente, cupoCredito, promDiasFact, chequeFecha,cupoDisponible, dolarCupo;
     private int totalSeleccionados = 0;
     private LinearLayout cobroLayout;
     private int FacturaMasDia = 0;
@@ -76,6 +76,7 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
 
 
         valorSaldoAcu = (TextView) findViewById(R.id.valor_saldo_ND);
+        dolarVencido = (TextView) findViewById(R.id.dolar_vencido);
         valorVencAcu = (TextView) findViewById(R.id.valor_vencido_ND);
         FacMasDias = (TextView) findViewById(R.id.f_mas_dia_ND);
         totalNBFac = (TextView) findViewById(R.id.valor_total_ND);
@@ -85,6 +86,7 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
         promDiasFact = (TextView) findViewById(R.id.prom_dias_factura_valor);
         chequeFecha = (TextView) findViewById(R.id.cheque_fecha_valor);
         cupoDisponible = (TextView) findViewById(R.id.cupo_disponible_valor);
+        dolarCupo = (TextView) findViewById(R.id.dolar_cupo);
 
         final ClientesFacturasNotaDebitosReciclerViewAdapter.FacturaSeleccionadaListener facturaSeleccionadaListener = new ClientesFacturasNotaDebitosReciclerViewAdapter.FacturaSeleccionadaListener() {
             @Override
@@ -115,11 +117,18 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
                 DecimalFormat df = new DecimalFormat("#,##0.00");
                 cupoCredito.setText(df.format(facturasNotaDebitosEstadistica.getCupoTotal()));
                 valorNoVencido.setText(df.format(facturasNotaDebitosEstadistica.getValorNoVencido()));
-                valorVencAcu.setText(df.format(facturasNotaDebitosEstadistica.getValorVencido()));
                 promDiasFact.setText(String.valueOf(facturasNotaDebitosEstadistica.getPromedioDias()));
                 chequeFecha.setText(df.format(facturasNotaDebitosEstadistica.getTotalChequesFecha()));
                 totalNBFac.setText(df.format(facturasNotaDebitosEstadistica.getCarteraTotal()));
-                cupoDisponible.setText(df.format(facturasNotaDebitosEstadistica.getCupoDisponible()));
+
+                BigDecimal CupoValor = facturasNotaDebitosEstadistica.getCupoDisponible();
+
+                cupoDisponible.setText(df.format(CupoValor));
+
+                if(CupoValor.compareTo(BigDecimal.ZERO) < 0){
+                    dolarCupo.setTextColor(Color.RED);
+                    cupoDisponible.setTextColor(Color.RED);
+                }
 
             }
         });
@@ -141,6 +150,8 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
                 Log.d("valor v","nota debito----->");
 
                 for (int i = 0; i < facturas.size(); i++) {
+
+                    facturas.get(i).getVencimiento();
 
                     valorSaldo = facturas.get(i).getValor().subtract(facturas.get(i).getAbonos());
                     valorSaldo = valorSaldo.subtract(facturas.get(i).getNotaCredito());
@@ -241,6 +252,7 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
                 SaldoFavorCliente.setText("$ " + formatAFavor);
                 if(CarteraVencida.compareTo(BigDecimal.ZERO )> 0){
                     valorSaldoAcu.setTextColor(Color.RED);
+                    dolarVencido.setTextColor(Color.RED);
                     valorSaldoAcu.setText(formatCartera);
                 }else{
                     valorSaldoAcu.setTextColor(Color.BLACK);
@@ -287,7 +299,7 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
 //
 //                }
 
-                //valorVencAcu.setText(String.valueOf(plazoDiasMax));
+                valorVencAcu.setText(String.valueOf(plazoDiasMax));
 
 
                 String formatt = formatter.format(valorNovencidoAcu.add(CarteraVencida));

@@ -116,7 +116,7 @@ public class ClientesFacturasNotaDebitosReciclerViewAdapter extends RecyclerView
 
         }
         holder.mNumeroFac.setText(factura.getIdFactura().toString());
-        SimpleDateFormat sdf = new SimpleDateFormat(Common.DATE_FORMAT);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy", new Locale("es", "ES"));
 
         if (factura.getFecha() != null) {
             holder.mEstadoFactura.setText("Despachado");
@@ -258,7 +258,7 @@ public class ClientesFacturasNotaDebitosReciclerViewAdapter extends RecyclerView
         }
 
         if (factura.getFechaCobro() != null) {
-            SimpleDateFormat sdf2 = new SimpleDateFormat("dd MMM yyyy", new Locale("es", "ES"));
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yy", new Locale("es", "ES"));
             String fechaFormateada = sdf2.format(factura.getFechaCobro());
             holder.mFechaPago.setText(fechaFormateada);
 

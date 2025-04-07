@@ -100,7 +100,8 @@ public interface ClienteService {
 
     @GET("api/clientes/facturas/{idFactura}/cobros?")
     Call<List<Cobro>> GetCobrosXFactura(
-            @Path("idFactura") String idFactura
+            @Path("idFactura") String idFactura,
+            @Query("tipoConsulta") int tipoConsulta
     );
 
     @GET("api/clientes/{idCliente}/cobros?")

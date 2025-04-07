@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,11 +44,14 @@ import com.rocnarf.rocnarf.R;
 import com.rocnarf.rocnarf.RecetasXActivity;
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.VentasMensualesClientesActivity;
+import com.rocnarf.rocnarf.dao.UsuariosDao;
 import com.rocnarf.rocnarf.models.Clientes;
+import com.rocnarf.rocnarf.models.Usuario;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.models.VisitaClientesFecha;
 import com.rocnarf.rocnarf.models.VisitaClientesList;
 import com.rocnarf.rocnarf.repository.ClientesRepository;
+import com.rocnarf.rocnarf.repository.UsuarioRepository;
 import com.rocnarf.rocnarf.viewmodel.ClienteDetalleViewModel;
 
 import java.text.SimpleDateFormat;
@@ -66,7 +70,10 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     public  boolean cumpleAnyo = false;
     private boolean expadir;
     private ClientesRepository clientesRepository;
+    private UsuarioRepository usuarioRepository;
     SwipeRefreshLayout swipeRefreshLayout;
+    private List<String> seccionesUsuario;
+
     public PlanificacionRecyclerViewAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.context = context;
         mListener = listener;
@@ -170,43 +177,85 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             clientesRepository = new ClientesRepository(context, planificacionItem.getCodigoAsesor());
             LiveData<Clientes> clientesCumple = clientesRepository.getClientesIdLocal(planificacionItem.getCodigoCliente());
 
+            usuarioRepository = new UsuarioRepository(context);
+            Usuario usuario = usuarioRepository.getUsuario();
+            String secciones = usuario.getSecciones();
+
+            if (secciones != null && !secciones.isEmpty()) {
+                this.seccionesUsuario = Arrays.asList(secciones.split("\\s*,\\s*"));
+            } else {
+                this.seccionesUsuario = new ArrayList<>();
+            }
+
             Clientes clientesAPI = clientesCumple.getValue();
 
             String claseMostrar = null;
 
+            List<String> rolesMultiples = Arrays.asList("GRC", "GVP", "GRA", "JVC", "GRS", "JVS");
 
-            if (clientesAPI != null &&clientesAPI.getTipoObserv().equals("MEDICO") ) {
-                if ("MEDICO".equals(clientesAPI.getOrigen())) {
-                    // Obtener la sección del cliente
+
+                if (clientesAPI != null &&clientesAPI.getTipoObserv().equals("MEDICO") ) {
+                    if ("MEDICO".equals(clientesAPI.getOrigen())) {
+
 
                     if (planificacionItem.getSeccion() != null && !planificacionItem.getSeccion().isEmpty()) {
-                        // Determinar la clase según el primer carácter de la sección
-                        char primerCaracter = planificacionItem.getSeccion().charAt(0);
+                        boolean esRolRegional = rolesMultiples.contains(planificacionItem.getSeccion().toUpperCase());
+                        if (esRolRegional && seccionesUsuario != null && !seccionesUsuario.isEmpty()) {
+                            for (String seccion : seccionesUsuario) {
+                                if (seccion != null && !seccion.isEmpty()) {
+                                    char primerCaracter = seccion.charAt(0);
 
-                        if (Character.isDigit(primerCaracter)) {
-                            int numero = Character.getNumericValue(primerCaracter);
-                            if (numero >= 1 && numero <= 6) {
-                                claseMostrar = clientesAPI.getClase(); // F1 y F2
-                            } else if (numero >= 7 && numero <= 9) {
-                                claseMostrar = clientesAPI.getClase3(); // F3
+                                    if (Character.isDigit(primerCaracter)) {
+                                        int numero = Character.getNumericValue(primerCaracter);
+                                        if (numero >= 1 && numero <= 6 && clientesAPI.getClase() != null && !clientesAPI.getClase().isEmpty()) {
+                                            claseMostrar = clientesAPI.getClase();
+                                            break;
+                                        } else if (numero >= 7 && numero <= 9 && clientesAPI.getClase3() != null && !clientesAPI.getClase3().isEmpty()) {
+                                            claseMostrar = clientesAPI.getClase3();
+                                            break;
+                                        }
+                                    } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                            && clientesAPI.getClase4() != null && !clientesAPI.getClase4().isEmpty()) {
+                                        claseMostrar = clientesAPI.getClase4();
+                                        break;
+                                    }
+                                }
                             }
-                        } else if (primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C') {
-                            claseMostrar = clientesAPI.getClase4(); // F4
+
+                        } else {
+                            // 🧪 Evaluar una sola sección
+                            if (Seccion != null && !Seccion.isEmpty()) {
+                                char primerCaracter = Seccion.charAt(0);
+
+                                if (Character.isDigit(primerCaracter)) {
+                                    int numero = Character.getNumericValue(primerCaracter);
+                                    if (numero >= 1 && numero <= 6 && clientesAPI.getClase() != null && !clientesAPI.getClase().isEmpty()) {
+                                        claseMostrar = clientesAPI.getClase();
+                                    } else if (numero >= 7 && numero <= 9 && clientesAPI.getClase3() != null && !clientesAPI.getClase3().isEmpty()) {
+                                        claseMostrar = clientesAPI.getClase3();
+                                    }
+                                } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                        && clientesAPI.getClase4() != null && !clientesAPI.getClase4().isEmpty()) {
+                                    claseMostrar = clientesAPI.getClase4();
+                                }
+                            } else {
+                                Log.w("ClaseMostrar", "La sección es nula o vacía. No se puede determinar clase.");
+                            }
                         }
                     }
 
-                    // Asignar el valor a mTipoCliente, asegurando que no sea null o vacío
                     if (claseMostrar != null && !claseMostrar.isEmpty()) {
                         contenidoHolder.mtipoCliente.setText("Médico " + claseMostrar);
                     } else {
-                        contenidoHolder.mtipoCliente.setText("Médico PC");
+                        contenidoHolder.mtipoCliente.setText(("Médico PC"));
                     }
-                }
-            }else {
-                if (clientesAPI != null && clientesAPI.getClaseMedico() != null && !clientesAPI.getClaseMedico().isEmpty()) {
-                    contenidoHolder.mtipoCliente.setText(clientesAPI.getClaseMedico());
+
                 } else {
-                    contenidoHolder.mtipoCliente.setText("Clase no disponible");
+                    if (clientesAPI.getClaseMedico() != null && !clientesAPI.getClaseMedico().isEmpty()) {
+                        contenidoHolder.mtipoCliente.setText((clientesAPI.getClaseMedico()));
+                    } else {
+                        contenidoHolder.mtipoCliente.setText("");
+                    }
                 }
             }
 

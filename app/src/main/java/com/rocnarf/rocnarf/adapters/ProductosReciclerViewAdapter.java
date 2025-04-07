@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,13 +39,15 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
     private PedidoViewModel pedidoViewModel;
     private List<PedidoDetalle> pedidoDetalles;
 
-    public ProductosReciclerViewAdapter(List<Producto> mValues, List<EscalaBonificacion> mEscalas, String idCliente, AddProductoListener listener, List<PedidoDetalle> pedidoDetalles){
+    private Boolean usarPrecioEspecial;
+    public ProductosReciclerViewAdapter(List<Producto> mValues, List<EscalaBonificacion> mEscalas, String idCliente, AddProductoListener listener, List<PedidoDetalle> pedidoDetalles, Boolean usarPrecioEspecial){
         this.listener = listener;
         this.mEscalas = mEscalas;
         this.mValues = mValues;
         this.mValuesFiltrados = mValues;
         this.idCliente = idCliente;
         this.pedidoDetalles = pedidoDetalles;
+        this.usarPrecioEspecial = usarPrecioEspecial;
     }
 
     @NonNull
@@ -64,35 +68,51 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
         holder.mCodigo.setText(mValuesFiltrados.get(position).getIdProducto() + " - " + mValuesFiltrados.get(position).getIdProducto2());
         holder.mTipo.setText("" + mValuesFiltrados.get(position).getTipo());
         double xpvp = mValuesFiltrados.get(position).getPorcentajePvp() == null ? 0 :mValuesFiltrados.get(position).getPorcentajePvp();
-//        Log.d("--->"," " + mValuesFiltrados.get(position).getPorcentajePvp());
-//        double  xpvp = 0;
-//        if(xtipo.equals("GE"))
-//        {
-//            xpvp = (mValuesFiltrados.get(position).getPrecio() * 0.25) ;
-//        }
-//        else if (xtipo.equals("F2") || xtipo.equals("F3"))
-//        {
-//            xpvp = (mValuesFiltrados.get(position).getPrecio() * 0.20) ;
-//        }
-        ///Log.d("pro","pro--->" + mValuesFiltrados.get(position).getPvp());
 
-        holder.mPrecio.setText("P.V.F.: $ " + String.format("%.2f", mValuesFiltrados.get(position).getPrecio())+ "       P.V.P. : $ "+  String.format("%.2f", (mValuesFiltrados.get(position).getPvp() )));
+        double precio = mValuesFiltrados.get(position).getPrecio();
+        double pvp = mValuesFiltrados.get(position).getPvp();
+        Double precioEspecial = mValuesFiltrados.get(position).getPrecioEspecial();
+
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        builder.append("P.V.F.: $ ").append(String.format("%.2f", precio));
+        builder.append("  P.V.P.: $ ").append(String.format("%.2f", pvp));
+
+        if (precioEspecial != null) {
+            String pveText = "  P.V.E.: $ " + String.format("%.2f", precioEspecial);
+            int start = builder.length();
+            builder.append(pveText);
+            int end = builder.length();
+
+            builder.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        holder.mPrecio.setText(builder);
+
         holder.mSaldo.setText("Saldo: " +  formatoNumero.format(mValuesFiltrados.get(position).getSaldo()).toString());
 
         String escalas = "";
         //Log.d("pro","pro" + mEscalas);
         if (mEscalas != null) {
-        for (EscalaBonificacion bonificacion: mEscalas){
-            if (bonificacion.getIdEscala() == mValuesFiltrados.get(position).getIdEscala()) {
-                if (escalas.isEmpty()) {
-                    escalas = "" + String.valueOf(bonificacion.getCantidad()) + " + " + String.valueOf(bonificacion.getBonificacion());
-                }else {
-                    escalas += " | " + String.valueOf(bonificacion.getCantidad()) + " + " + String.valueOf(bonificacion.getBonificacion());
+            for (EscalaBonificacion bonificacion : mEscalas) {
+                if (bonificacion.getIdEscala() == mValuesFiltrados.get(position).getIdEscala()) {
+                    if (escalas.isEmpty()) {
+                        escalas = "" + String.valueOf(bonificacion.getCantidad()) + " + " + String.valueOf(bonificacion.getBonificacion());
+                    } else {
+                        escalas += " | " + String.valueOf(bonificacion.getCantidad()) + " + " + String.valueOf(bonificacion.getBonificacion());
+                    }
                 }
             }
         }
+
+
+        if (usarPrecioEspecial != null && usarPrecioEspecial) {
+            holder.mEscalaBonificacion.setVisibility(View.GONE);
+            holder.mEscalaBonificacion.setText("");
+        } else {
+            holder.mEscalaBonificacion.setVisibility(View.VISIBLE);
+            holder.mEscalaBonificacion.setText(escalas);
         }
-        holder.mEscalaBonificacion.setText(escalas);
+
         if (escalas.isEmpty()) holder.mEscalaBonificacion.setVisibility(View.GONE); else holder.mEscalaBonificacion.setVisibility(View.VISIBLE);
         holder.mProducto.setText(mValuesFiltrados.get(position).getNombre());
         final String codigProducto = mValuesFiltrados.get(position).getIdProducto();

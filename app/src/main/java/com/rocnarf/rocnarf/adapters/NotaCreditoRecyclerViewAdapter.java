@@ -61,10 +61,10 @@ public class NotaCreditoRecyclerViewAdapter extends RecyclerView.Adapter<NotaCre
         holder.mConcepto.setText("" + mValues.get(position).getConcepto());
         SimpleDateFormat sdf = new SimpleDateFormat(Common.DATE_FORMAT);
         holder.mFecha.setText(sdf.format(mValues.get(position).getFecha()));
-        holder.mNumeroNc.setText("Numero: " + mValues.get(position).getNumero());
+        holder.mNumeroNc.setText("Número N/C: " + mValues.get(position).getNumero());
         holder.mRecibo.setText(" ");
         Number total = mValues.get(position).getValor().setScale(2, BigDecimal.ROUND_HALF_EVEN);
-        holder.mMonto.setText(total.toString());
+        holder.mMonto.setText("$ "+total.toString());
 
             holder.mBanco.setVisibility(View.GONE);
             holder.mBanco.setText(mValues.get(position).getNumNota());
