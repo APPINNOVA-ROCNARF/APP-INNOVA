@@ -51,6 +51,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class PedidoSimpleActivity extends AppCompatActivity implements PedidoProductoFragment.OnListFragmentInteractionListener {
@@ -254,6 +255,7 @@ private Boolean usarPrecioEspecial;
                     CalcularTotalesXLineaPvp();
                 } else if (selectedItem.equals("ESP")){
                     fragment.setTipo("ESP");
+                    CalcularTotalesXLineaESP();
                 }
 
             } // to close the onItemSelected
@@ -319,19 +321,16 @@ private Boolean usarPrecioEspecial;
 
                        // mTipoPrecio.setSelection(1);
 
-                        final ArrayList<String> listaNombre1 = new ArrayList<>();
-                        listaNombre1.add("P.V.F");
-                        listaNombre1.add("P.V.P");
-
                         if (pedido.getTipoPrecio() != null) {
-                            for (int indice = 0; indice < listaNombre1.size(); indice++) {
-                                if (listaNombre1.get(indice).equals(pedido.getTipoPrecio())) {
+                            for (int indice = 0; indice < mTipoPrecio.getAdapter().getCount(); indice++) {
+                                if (mTipoPrecio.getAdapter().getItem(indice).toString().equals(pedido.getTipoPrecio())) {
                                     mTipoPrecio.setSelection(indice);
                                 }
                             }
-                        }else{
+                        } else {
                             pedido.setTipoPrecio("P.V.F");
                         }
+
 
 //                        if (pedido.isConBonos()){
 //                            mAgregarDescuento.setVisibility(View.GONE);
@@ -630,8 +629,11 @@ private Boolean usarPrecioEspecial;
         double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("GE")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
-
+                if (detalle.getPvp() != null) {
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
+                } else {
+                    detalle.setPrecioTotal(0.0);
+                }
                 totalGEN += detalle.getPrecioTotal();
             }
         }
@@ -697,7 +699,11 @@ private Boolean usarPrecioEspecial;
         double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("GE")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                if (detalle.getPvp() != null) {
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                } else {
+                    detalle.setPrecioTotal(0.0);
+                }
                 totalGEN += detalle.getPrecioTotal();
             }
         }
@@ -724,7 +730,7 @@ private Boolean usarPrecioEspecial;
         double totalF3 = 0, descuentoF3 = 0, finalF3 = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("F3")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
                 totalF3 += detalle.getPrecioTotal();
             }
         }
@@ -737,7 +743,7 @@ private Boolean usarPrecioEspecial;
         double totalF2 = 0, descuentoF2 = 0, finalF2 = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("F2")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
                 totalF2 += detalle.getPrecioTotal();
             }
         }
@@ -750,7 +756,7 @@ private Boolean usarPrecioEspecial;
         double totalF4 = 0, descuentoF4 = 0, finalF4 = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("F4")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
                 totalF4 += detalle.getPrecioTotal();
             }
         }
@@ -763,7 +769,11 @@ private Boolean usarPrecioEspecial;
         double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("GE")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                if (detalle.getPvp() != null) {
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
+                } else {
+                    detalle.setPrecioTotal(0.0);
+                }
                 totalGEN += detalle.getPrecioTotal();
             }
         }
@@ -782,7 +792,7 @@ private Boolean usarPrecioEspecial;
         mDescuento.setText(String.format("%.2f", pedidoExistemte.getDescuento()));
         mFinal.setText(String.format("%.2f", pedidoExistemte.getPrecioFinal()));
 
-        pedidoExistemte.setTipoPrecio("P.V.F");
+        pedidoExistemte.setTipoPrecio("ESP");
         pedidoViewModel.updatePedido(pedidoExistemte);
     }
 
@@ -823,14 +833,23 @@ private Boolean usarPrecioEspecial;
 
 
         final ArrayList<String> listaNombre = new ArrayList<>();
-        listaNombre.add("P.V.F");
-        listaNombre.add("P.V.P");
-        listaNombre.add("ESP");
+
+        String tipoPrecio = pedidoExistemte != null ? pedidoExistemte.getTipoPrecio() : null;
+
+        if (usarPrecioEspecial || "ESP".equals(tipoPrecio)) {
+            listaNombre.add("ESP");
+        } else {
+            listaNombre.add("P.V.F");
+            listaNombre.add("P.V.P");
+        }
+
         final ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaNombre);
 
         //   adaptador.setDropDownViewResource(android.R.layout.simple_list_item_1);
         mTipoPrecio.setAdapter(adaptador);
-
+        if (listaNombre.size() == 1) {
+            mTipoPrecio.setEnabled(false);
+        }
         PrecioTotalAcu = 0;
         PrecioFinalAcu = 0;
         DescuentoAcu = 0;

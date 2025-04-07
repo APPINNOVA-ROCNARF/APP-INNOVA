@@ -527,11 +527,6 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_client_type_filter.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_map_geolocalizacion.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -547,17 +542,7 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_search.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_viatico.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_visit_status_filter.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -589,47 +574,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6c4e8bf-1cc8-4c9d-a7e5-46cc94718b99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/schemas/com.rocnarf.rocnarf.dao.RocnarfDatabase/3.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/PrecioEspecialClienteDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/PrecioEspecialCliente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/UsuarioRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_search.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/com.rocnarf.rocnarf.dao.RocnarfDatabase/2.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/com.rocnarf.rocnarf.dao.RocnarfDatabase/2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ChequeFechaFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ChequeFechaFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ClientesFacturasNotaDebitosActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ClientesFacturasNotaDebitosActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/CobroFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/CobroFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/GeoLocalizacionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/GeoLocalizacionActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PedidoCobroClienteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PedidoCobroClienteActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/com.rocnarf.rocnarf.dao.RocnarfDatabase/3.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/com.rocnarf.rocnarf.dao.RocnarfDatabase/3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PedidoProductoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PedidoProductoFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PedidoSimpleActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PedidoSimpleActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ProductosActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ProductosActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ResultadoClientesSemanalActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ResultadoClientesSemanalActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/Utils/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/Utils/Common.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesFacturasNotaDebitosReciclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesFacturasNotaDebitosReciclerViewAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/CobroRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/CobroRecyclerViewAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/NotaCreditoRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/NotaCreditoRecyclerViewAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ProductosReciclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ProductosReciclerViewAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ClienteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ProductoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ProductoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/RocnarfDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/dao/RocnarfDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Cobro.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Cobro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/PedidoDetalle.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/PedidoDetalle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ClientesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ClientesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ProductosRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ProductosRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/CobroViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/CobroViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/ProductosViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/ProductosViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_clientes_facturas_nota_debitos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_clientes_facturas_nota_debitos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/row_clientes_facturas_nota_debitos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_clientes_facturas_nota_debitos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/row_cobro_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_cobro_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/row_nc_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_nc_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PedidoProductoRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PedidoProductoRecyclerViewAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pedido_simple.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pedido_simple.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -705,7 +656,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Dev" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -882,6 +833,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
         <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
         <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
         <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />

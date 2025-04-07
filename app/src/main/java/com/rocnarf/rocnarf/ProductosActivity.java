@@ -170,7 +170,11 @@ public class ProductosActivity extends AppCompatActivity {
                     pedidoDetalle.setPvp(producto.getPvp());
                     pedidoDetalle.setPvf(producto.getPrecio());
                     pedidoDetalle.setEsp(producto.getPrecioEspecial());
-                    pedidoDetalle.setPrecioTotal(cantidad * producto.getPrecio());
+                    if(usarPrecioEspecial) {
+                        pedidoDetalle.setPrecioTotal(cantidad * producto.getPrecioEspecial());
+                    }else{
+                        pedidoDetalle.setPrecioTotal(cantidad * producto.getPrecio());
+                    }
                     productosViewModel.addDetallePedido(pedidoDetalle);
 
 

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "2c9924bf7ed707024c883901d817a206",
+    "identityHash": "0942583293f771c5bb73ba62eae2c773",
     "entities": [
       {
         "tableName": "visita_clientes",
@@ -1306,7 +1306,7 @@
       },
       {
         "tableName": "pedidoDetalle",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPedidoDetalle` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idLocalPedido` INTEGER NOT NULL, `idPedido` INTEGER NOT NULL, `idProducto` TEXT, `nombre` TEXT, `tipo` TEXT, `cantidad` INTEGER NOT NULL, `bono` INTEGER NOT NULL, `precio` REAL, `precioTotal` REAL, `pvp` REAL, `pvf` REAL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPedidoDetalle` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idLocalPedido` INTEGER NOT NULL, `idPedido` INTEGER NOT NULL, `idProducto` TEXT, `nombre` TEXT, `tipo` TEXT, `cantidad` INTEGER NOT NULL, `bono` INTEGER NOT NULL, `precio` REAL, `precioTotal` REAL, `pvp` REAL, `pvf` REAL, `esp` REAL)",
         "fields": [
           {
             "fieldPath": "idPedidoDetalle",
@@ -1377,6 +1377,12 @@
           {
             "fieldPath": "pvf",
             "columnName": "pvf",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "esp",
+            "columnName": "esp",
             "affinity": "REAL",
             "notNull": false
           }
@@ -1686,7 +1692,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"2c9924bf7ed707024c883901d817a206\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0942583293f771c5bb73ba62eae2c773\")"
     ]
   }
 }

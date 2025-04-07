@@ -86,7 +86,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
-d                <Spinner
+                <Spinner
                     android:id="@+id/tipo_precio"
                     android:layout_width="120dp"
                     android:layout_height="25dp"
