@@ -416,6 +416,9 @@ private Boolean usarPrecioEspecial;
                 i.putExtra(Common.ARG_IDCLIENTE, pedidoViewModel.pedido.getValue().getIdCliente());
                 i.putExtra(Common.ARG_NOMBRE_CLIENTE, pedidoViewModel.pedido.getValue().getNombreCliente());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                if (Objects.equals(pedidoExistemte.getTipoPrecio(), "ESP")){
+                    i.putExtra(Common.ARG_USAR_PRECIO_ESPECIAL, usarPrecioEspecial);
+                }
                 startActivity(i);
 
             }
