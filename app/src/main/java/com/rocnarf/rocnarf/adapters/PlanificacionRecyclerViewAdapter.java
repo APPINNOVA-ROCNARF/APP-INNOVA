@@ -132,8 +132,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             FechaViewHolder fechaHolder = (FechaViewHolder) holder;
             VisitaClientesFecha planificacionFecha = (VisitaClientesFecha) mValues.get(position);
 
-            // Crear un SimpleDateFormat con el idioma español
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("es", "ES"));
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Common.DATE_FORMAT, new Locale("es", "ES"));
             fechaHolder.mFechaView.setText(dateFormat.format(planificacionFecha.getFecha()));
 
             fechaHolder.mFlecha.setRotation(planificacionFecha.isExpanded() ? 180 : 0);
@@ -179,6 +178,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
             usuarioRepository = new UsuarioRepository(context);
             Usuario usuario = usuarioRepository.getUsuario();
+            Seccion = usuario.getSeccion();
             String secciones = usuario.getSecciones();
 
             if (secciones != null && !secciones.isEmpty()) {
@@ -224,6 +224,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
                         } else {
                             // 🧪 Evaluar una sola sección
+                            Log.d("dsfsdfsdfsdfsdfdsf", Seccion);
                             if (Seccion != null && !Seccion.isEmpty()) {
                                 char primerCaracter = Seccion.charAt(0);
 

@@ -82,7 +82,7 @@ public class ClientesRepository {
                 ///Call<ClientesResponse> call = service.GetClientes(1, 9000, 0, null, null, null, seccion, null, null, rolUsuario, null);
                 Call<ClientesResponse> call;
 
-                if (rolUsuario.equals("GR") || rolUsuario.equals("IM") || rolUsuario.equals("KAM")) {
+                if (rolUsuario.equals("GR") || rolUsuario.equals("IM") || idUsuario.equals("SBC")) {
                     call = service.GetClientes(1, 9000, 2, null, null, null, null, null, null, rolUsuario, idUsuario);
                 }else{
                     call = service.GetClientes(1, 9000, 0, null, null, null, seccion, null, null, rolUsuario, null);
