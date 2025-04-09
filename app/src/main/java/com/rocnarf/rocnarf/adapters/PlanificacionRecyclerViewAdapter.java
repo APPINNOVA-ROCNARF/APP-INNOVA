@@ -91,7 +91,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
         // Obtener la fecha actual
         Date fechaActual = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("es", "ES"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yy", new Locale("es", "ES"));
         String fechaActualStr = dateFormat.format(fechaActual);
 
         // Buscar la fecha actual en la lista y marcarla como expandida
@@ -224,7 +224,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
                         } else {
                             // 🧪 Evaluar una sola sección
-                            Log.d("dsfsdfsdfsdfsdfdsf", Seccion);
                             if (Seccion != null && !Seccion.isEmpty()) {
                                 char primerCaracter = Seccion.charAt(0);
 

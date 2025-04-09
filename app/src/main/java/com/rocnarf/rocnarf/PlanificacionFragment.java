@@ -104,16 +104,12 @@ public class PlanificacionFragment extends Fragment {
         showModal = singleToneClass.getModalCumple();
 
 
-        cargarVisitas();
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_planificacion_list, container, false);
-
         // Set the adapter
         final Context context = view.getContext();
         recyclerView = view.findViewById(R.id.rv_list_fragment_planificacion_list);
@@ -123,8 +119,6 @@ public class PlanificacionFragment extends Fragment {
         }
 
         recyclerView.setAdapter(planificacionRecyclerViewAdapter);
-
-        cargarVisitas();
 
         myKonten = (LinearLayout) view.findViewById(R.id.modalCumple);
         btnClose = (Button) view.findViewById(R.id.btnCloseCumple);
@@ -152,6 +146,10 @@ public class PlanificacionFragment extends Fragment {
                 cargarVisitas();
             }
         });
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            cargarVisitas();
+        }, 300);
         return view;
     }
 
@@ -256,43 +254,36 @@ public class PlanificacionFragment extends Fragment {
     public void cargarVisitas() {
         planificacionViewModel = ViewModelProviders.of(getActivity()).get(PlanificacionViewModel.class);
 
-        planificacionViewModel.visitasLiveData.observe(this, new Observer<List<VisitaClientesList>>() {
-            @Override
-            public void onChanged(@Nullable List<VisitaClientesList> visitaClientesLists) {
-                if (visitaClientesLists != null && !visitaClientesLists.isEmpty()) {
-                    Log.d("cargarVisitas", "Datos recibidos, tamaño de la lista: " + visitaClientesLists.size());
+        if (!planificacionViewModel.visitasLiveData.hasObservers()) {
+            planificacionViewModel.visitasLiveData.observe(getViewLifecycleOwner(), new Observer<List<VisitaClientesList>>() {
+                @Override
+                public void onChanged(@Nullable List<VisitaClientesList> visitaClientesLists) {
+                    if (visitaClientesLists != null && !visitaClientesLists.isEmpty()) {
+                        Log.d("cargarVisitas", "Datos recibidos, tamaño de la lista: " + visitaClientesLists.size());
 
-                    // 🔥 Asegurar que el adapter está configurado antes de asignar los datos
-                    if (planificacionRecyclerViewAdapter == null) {
-                        planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(getContext(), mListener);
-                        recyclerView.setAdapter(planificacionRecyclerViewAdapter);
+                        if (planificacionRecyclerViewAdapter == null) {
+                            planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(getContext(), mListener);
+                            recyclerView.setAdapter(planificacionRecyclerViewAdapter);
+                        }
+
+                        planificacionRecyclerViewAdapter.setItems(visitaClientesLists);
+                        totalReg = visitaClientesLists.size();
+
+                        if (totalReg > 0 && !"S".equals(showModal)) {
+                            CargaModalCumple();
+                        }
+                    } else {
+                        Log.d("cargarVisitas", "La lista de visitas está vacía o es nula.");
                     }
 
-                    // 🔄 Actualizar el adapter con los nuevos datos
-                    planificacionRecyclerViewAdapter.setItems(visitaClientesLists);
-
-                    totalReg = visitaClientesLists.size();
-
-                    // 🚀 Forzar redibujado para evitar problemas de scroll
-                    recyclerView.post(() -> recyclerView.invalidate());
-
-                    // Mostrar modal de cumpleaños si aplica
-                    if (totalReg > 0 && !"S".equals(showModal)) {
-                        CargaModalCumple();
+                    if (mSwipeLayout.isRefreshing()) {
+                        mSwipeLayout.post(() -> mSwipeLayout.setRefreshing(false));
+                        Log.d("SwipeRefresh", "Refresh detenido");
                     }
-                } else {
-                    Log.d("cargarVisitas", "La lista de visitas está vacía o es nula.");
                 }
+            });
+        }
 
-                // ✅ Asegurar que el SwipeRefresh se detiene después de actualizar
-                if (mSwipeLayout.isRefreshing()) {
-                    mSwipeLayout.post(() -> mSwipeLayout.setRefreshing(false));
-                    Log.d("SwipeRefresh", "Refresh detenido");
-                }
-            }
-        });
-
-        // ✅ Llamar la función para obtener datos sin necesidad de un SwipeRefreshLayout
         planificacionViewModel.getVisitasPlanificadasList(idAsesor);
     }
 
