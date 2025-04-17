@@ -334,7 +334,6 @@ public class RegistroViaticoActivity extends AppCompatActivity {
         viatico.setFecha(new Date());
         mCalendar.set(anioCalendar, mesCalendar, diaCalendar, horaTimePicker, minutosTimePicker);
         viatico.setFechaFactura(mCalendar.getTime());
-        Log.d("Fecha hp:", mCalendar.getTime().toString());
         viatico.setIdCiclo(idciclo);
         viatico.setComentario("Registro en revisión");
         viatico.setRazonSocial(etRazonSocialViatico.getText().toString());

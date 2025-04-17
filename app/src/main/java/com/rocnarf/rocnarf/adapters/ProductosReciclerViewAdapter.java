@@ -78,7 +78,11 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
         builder.append("  P.V.P.: $ ").append(String.format("%.2f", pvp));
 
         if (precioEspecial != null) {
+<<<<<<< Updated upstream
             String pveText = "  P.V.E.: $ " + String.format("%.2f", precioEspecial);
+=======
+            String pveText = "  ESP.: $ " + String.format("%.2f", precioEspecial);
+>>>>>>> Stashed changes
             int start = builder.length();
             builder.append(pveText);
             int end = builder.length();

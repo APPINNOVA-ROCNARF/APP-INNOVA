@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rocnarf.rocnarf.Utils.Common;
@@ -95,21 +96,22 @@ public class PedidoListaActivity extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        LinearLayout btnPedido = findViewById(R.id.btn_pedido);
+        btnPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LlamarClientes(3); //Pedidos
+                LlamarClientes(3); // Pedidos
             }
         });
 
-        FloatingActionButton fabCobro = (FloatingActionButton) findViewById(R.id.fab_cobro);
-        fabCobro.setOnClickListener(new View.OnClickListener() {
+        LinearLayout btnCobro = findViewById(R.id.btn_cobro);
+        btnCobro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LlamarClientes(5); // cobros
+                LlamarClientes(5); // Cobros
             }
         });
+
 
 //        FloatingActionButton fabProforma = (FloatingActionButton) findViewById(R.id.fab_proforma);
 //        fabProforma.setOnClickListener(new View.OnClickListener() {

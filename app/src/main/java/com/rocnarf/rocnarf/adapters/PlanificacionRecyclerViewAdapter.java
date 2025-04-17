@@ -188,6 +188,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
 
             Clientes clientesAPI = clientesCumple.getValue();
+<<<<<<< Updated upstream
 
             String claseMostrar = null;
 
@@ -204,19 +205,62 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                             for (String seccion : seccionesUsuario) {
                                 if (seccion != null && !seccion.isEmpty()) {
                                     char primerCaracter = seccion.charAt(0);
+=======
+            String claseMostrar = null;
+            List<String> rolesMultiples = Arrays.asList("GRC", "GVP", "GRA", "JVC", "GRS", "JVS");
+
+            if (clientesAPI != null) {
+                if ("MEDICO".equals(clientesAPI.getTipoObserv())) {
+                    if ("MEDICO".equals(clientesAPI.getOrigen())) {
+
+                        if (planificacionItem.getSeccion() != null && !planificacionItem.getSeccion().isEmpty()) {
+                            boolean esRolRegional = rolesMultiples.contains(planificacionItem.getSeccion().toUpperCase());
+                            if (esRolRegional && seccionesUsuario != null && !seccionesUsuario.isEmpty()) {
+                                for (String seccion : seccionesUsuario) {
+                                    if (seccion != null && !seccion.isEmpty()) {
+                                        char primerCaracter = seccion.charAt(0);
+
+                                        if (Character.isDigit(primerCaracter)) {
+                                            int numero = Character.getNumericValue(primerCaracter);
+                                            if (numero >= 1 && numero <= 6 && clientesAPI.getClase() != null && !clientesAPI.getClase().isEmpty()) {
+                                                claseMostrar = clientesAPI.getClase();
+                                                break;
+                                            } else if (numero >= 7 && numero <= 9 && clientesAPI.getClase3() != null && !clientesAPI.getClase3().isEmpty()) {
+                                                claseMostrar = clientesAPI.getClase3();
+                                                break;
+                                            }
+                                        } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                                && clientesAPI.getClase4() != null && !clientesAPI.getClase4().isEmpty()) {
+                                            claseMostrar = clientesAPI.getClase4();
+                                            break;
+                                        }
+                                    }
+                                }
+
+                            } else {
+                                // 🧪 Evaluar una sola sección
+                                if (Seccion != null && !Seccion.isEmpty()) {
+                                    char primerCaracter = Seccion.charAt(0);
+>>>>>>> Stashed changes
 
                                     if (Character.isDigit(primerCaracter)) {
                                         int numero = Character.getNumericValue(primerCaracter);
                                         if (numero >= 1 && numero <= 6 && clientesAPI.getClase() != null && !clientesAPI.getClase().isEmpty()) {
                                             claseMostrar = clientesAPI.getClase();
+<<<<<<< Updated upstream
                                             break;
                                         } else if (numero >= 7 && numero <= 9 && clientesAPI.getClase3() != null && !clientesAPI.getClase3().isEmpty()) {
                                             claseMostrar = clientesAPI.getClase3();
                                             break;
+=======
+                                        } else if (numero >= 7 && numero <= 9 && clientesAPI.getClase3() != null && !clientesAPI.getClase3().isEmpty()) {
+                                            claseMostrar = clientesAPI.getClase3();
+>>>>>>> Stashed changes
                                         }
                                     } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
                                             && clientesAPI.getClase4() != null && !clientesAPI.getClase4().isEmpty()) {
                                         claseMostrar = clientesAPI.getClase4();
+<<<<<<< Updated upstream
                                         break;
                                     }
                                 }
@@ -253,12 +297,38 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                 } else {
                     if (clientesAPI.getClaseMedico() != null && !clientesAPI.getClaseMedico().isEmpty()) {
                         contenidoHolder.mtipoCliente.setText((clientesAPI.getClaseMedico()));
+=======
+                                    }
+                                } else {
+                                    Log.w("ClaseMostrar", "La sección es nula o vacía. No se puede determinar clase.");
+                                }
+                            }
+                        }
+
+                        if (claseMostrar != null && !claseMostrar.isEmpty()) {
+                            contenidoHolder.mtipoCliente.setText("Médico " + claseMostrar);
+                        } else {
+                            contenidoHolder.mtipoCliente.setText("Médico PC");
+                        }
+
+                    } else {
+                        // Si el tipo es "MEDICO" pero el origen no es "MEDICO", no seteamos nada aquí
+                    }
+                } else {
+                    // Solo si no es "MEDICO"
+                    if (clientesAPI.getClaseMedico() != null && !clientesAPI.getClaseMedico().isEmpty()) {
+                        contenidoHolder.mtipoCliente.setText(clientesAPI.getClaseMedico());
+>>>>>>> Stashed changes
                     } else {
                         contenidoHolder.mtipoCliente.setText("");
                     }
                 }
             }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             // Validar y mostrar icono de revisita
             if (clientesAPI != null) {
                 Integer revisita = clientesAPI.getRevisita();
