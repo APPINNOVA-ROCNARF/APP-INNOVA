@@ -32,7 +32,7 @@ public class VisitaImpulsadoraCrearActivity extends AppCompatActivity
     Context context;
     private TextInputEditText mFecha, mHoraInicio, mHoraFin, mValorF2, mValorF3, mValorGEN;
     private Spinner mAsesor;
-    private String idUsuario, codigoCliente, sccion ;
+    private String idUsuario, codigoCliente, seccion ;
     private Calendar mCalendar;
     private DatePickerDialog mDatePickerDialog;
     private TimePickerDialog mTimePickerDialog, TimePickerDialogHoraFin;
@@ -53,6 +53,7 @@ public class VisitaImpulsadoraCrearActivity extends AppCompatActivity
         Intent intent = getIntent();
         codigoCliente = intent.getStringExtra(Common.ARG_IDCLIENTE);
         idUsuario = intent.getStringExtra(Common.ARG_IDUSUARIO);
+        seccion = intent.getStringExtra(Common.ARG_SECCIOM);
         //idLocal= intent.getIntExtra("idLocal", 0);
         configurarControles();
     }
@@ -60,7 +61,7 @@ public class VisitaImpulsadoraCrearActivity extends AppCompatActivity
     private void configurarControles() {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(codigoCliente, idUsuario);
+        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(codigoCliente, idUsuario, seccion);
         ft.replace(R.id.fm_cliente_activity_planificacion_crear, detalleCliente);
         ft.commit();
 

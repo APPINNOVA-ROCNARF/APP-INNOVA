@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ClientesFacturasNotaDebitosReciclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<FacturasNotaDebitos> mValues;
@@ -115,7 +116,7 @@ public class ClientesFacturasNotaDebitosReciclerViewAdapter extends RecyclerView
 
         }
         holder.mNumeroFac.setText(factura.getIdFactura().toString());
-        SimpleDateFormat sdf = new SimpleDateFormat(Common.DATE_FORMAT);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy", new Locale("es", "ES"));
 
         if (factura.getFecha() != null) {
             holder.mEstadoFactura.setText("Despachado");
@@ -256,6 +257,20 @@ public class ClientesFacturasNotaDebitosReciclerViewAdapter extends RecyclerView
             }
         }
 
+        if (factura.getFechaCobro() != null) {
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yy", new Locale("es", "ES"));
+            String fechaFormateada = sdf2.format(factura.getFechaCobro());
+            holder.mFechaPago.setText(fechaFormateada);
+
+            // Comparar con la fecha actual
+            Date hoy = new Date();
+            if (factura.getFechaCobro().after(hoy)) {
+                holder.mFechaPago.setTextColor(Color.RED);
+            } else {
+                holder.mFechaPago.setTextColor(Color.BLACK); // o el color normal por defecto
+            }
+        }
+
     }
 
     @Override
@@ -271,7 +286,7 @@ public class ClientesFacturasNotaDebitosReciclerViewAdapter extends RecyclerView
         public final TextView mAbono;
         public final TextView mNotaCredito;
         public final TextView mSaldo;
-        public final TextView mNumeroFac, mPedidoFac,mValorND,mCheque,mBanco,mEstadoFactura,mPlazoFac,mDiasFac,mDiasVenFac,mEstadoND,mDiasVenND,mDiasFacND,mEstado;
+        public final TextView mNumeroFac, mPedidoFac,mValorND,mCheque,mBanco,mEstadoFactura,mPlazoFac,mDiasFac,mDiasVenFac,mEstadoND,mDiasVenND,mDiasFacND,mEstado,mFechaPago;
         public final LinearLayout mLineaNotaDebito,mLineaFactura;
 
 
@@ -300,7 +315,7 @@ public class ClientesFacturasNotaDebitosReciclerViewAdapter extends RecyclerView
             mLineaNotaDebito = (LinearLayout)itemView.findViewById(R.id.linearLayout4);
             mLineaFactura = (LinearLayout)itemView.findViewById(R.id.linearLayout3);
             mEstado = (TextView)itemView.findViewById(R.id.tv_tipo_factura);
-
+            mFechaPago = (TextView)itemView.findViewById(R.id.fecha_pago);
 
 
 

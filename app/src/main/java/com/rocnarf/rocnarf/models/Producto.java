@@ -67,6 +67,9 @@ public class Producto {
     @SerializedName("pvp")
     @Expose
     private Double pvp;
+    @SerializedName("precioEspecial")
+    @Expose
+    private Double precioEspecial;
 
     public String getIdProducto() {
         return idProducto;
@@ -178,5 +181,12 @@ public class Producto {
 
     public void setPvp(Double pvp) {
         this.pvp = pvp;
+    }
+    public Double getPrecioEspecial() {
+        return precioEspecial;
+    }
+
+    public void setPrecioEspecial(Double precioEspecial) {
+        this.precioEspecial = precioEspecial;
     }
 }

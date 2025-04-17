@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -42,11 +44,14 @@ import com.rocnarf.rocnarf.R;
 import com.rocnarf.rocnarf.RecetasXActivity;
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.VentasMensualesClientesActivity;
+import com.rocnarf.rocnarf.dao.UsuariosDao;
 import com.rocnarf.rocnarf.models.Clientes;
+import com.rocnarf.rocnarf.models.Usuario;
 import com.rocnarf.rocnarf.models.VisitaClientes;
 import com.rocnarf.rocnarf.models.VisitaClientesFecha;
 import com.rocnarf.rocnarf.models.VisitaClientesList;
 import com.rocnarf.rocnarf.repository.ClientesRepository;
+import com.rocnarf.rocnarf.repository.UsuarioRepository;
 import com.rocnarf.rocnarf.viewmodel.ClienteDetalleViewModel;
 
 import java.text.SimpleDateFormat;
@@ -65,20 +70,28 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     public  boolean cumpleAnyo = false;
     private boolean expadir;
     private ClientesRepository clientesRepository;
+    private UsuarioRepository usuarioRepository;
     SwipeRefreshLayout swipeRefreshLayout;
+    private List<String> seccionesUsuario;
+
     public PlanificacionRecyclerViewAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.context = context;
         mListener = listener;
+        this.mValues = new ArrayList<>();
     }
 
 
 
     public void setItems(List<VisitaClientesList> items) {
-        this.mValues = items;
+        if (mValues == null) {
+            mValues = new ArrayList<>();
+        }
+        this.mValues.clear(); // Limpiar la lista actual
+        this.mValues.addAll(items); // Agregar los nuevos elementos
 
         // Obtener la fecha actual
         Date fechaActual = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("es", "ES"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yy", new Locale("es", "ES"));
         String fechaActualStr = dateFormat.format(fechaActual);
 
         // Buscar la fecha actual en la lista y marcarla como expandida
@@ -93,7 +106,8 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
         }
 
-        notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
+        notifyDataSetChanged();
+
     }
 
     @Override
@@ -118,8 +132,7 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             FechaViewHolder fechaHolder = (FechaViewHolder) holder;
             VisitaClientesFecha planificacionFecha = (VisitaClientesFecha) mValues.get(position);
 
-            // Crear un SimpleDateFormat con el idioma español
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("es", "ES"));
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Common.DATE_FORMAT, new Locale("es", "ES"));
             fechaHolder.mFechaView.setText(dateFormat.format(planificacionFecha.getFecha()));
 
             fechaHolder.mFlecha.setRotation(planificacionFecha.isExpanded() ? 180 : 0);
@@ -163,10 +176,93 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             clientesRepository = new ClientesRepository(context, planificacionItem.getCodigoAsesor());
             LiveData<Clientes> clientesCumple = clientesRepository.getClientesIdLocal(planificacionItem.getCodigoCliente());
 
+            usuarioRepository = new UsuarioRepository(context);
+            Usuario usuario = usuarioRepository.getUsuario();
+            Seccion = usuario.getSeccion();
+            String secciones = usuario.getSecciones();
+
+            if (secciones != null && !secciones.isEmpty()) {
+                this.seccionesUsuario = Arrays.asList(secciones.split("\\s*,\\s*"));
+            } else {
+                this.seccionesUsuario = new ArrayList<>();
+            }
+
+            Clientes clientesAPI = clientesCumple.getValue();
+
+            String claseMostrar = null;
+
+            List<String> rolesMultiples = Arrays.asList("GRC", "GVP", "GRA", "JVC", "GRS", "JVS");
+
+
+                if (clientesAPI != null &&clientesAPI.getTipoObserv().equals("MEDICO") ) {
+                    if ("MEDICO".equals(clientesAPI.getOrigen())) {
+
+
+                    if (planificacionItem.getSeccion() != null && !planificacionItem.getSeccion().isEmpty()) {
+                        boolean esRolRegional = rolesMultiples.contains(planificacionItem.getSeccion().toUpperCase());
+                        if (esRolRegional && seccionesUsuario != null && !seccionesUsuario.isEmpty()) {
+                            for (String seccion : seccionesUsuario) {
+                                if (seccion != null && !seccion.isEmpty()) {
+                                    char primerCaracter = seccion.charAt(0);
+
+                                    if (Character.isDigit(primerCaracter)) {
+                                        int numero = Character.getNumericValue(primerCaracter);
+                                        if (numero >= 1 && numero <= 6 && clientesAPI.getClase() != null && !clientesAPI.getClase().isEmpty()) {
+                                            claseMostrar = clientesAPI.getClase();
+                                            break;
+                                        } else if (numero >= 7 && numero <= 9 && clientesAPI.getClase3() != null && !clientesAPI.getClase3().isEmpty()) {
+                                            claseMostrar = clientesAPI.getClase3();
+                                            break;
+                                        }
+                                    } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                            && clientesAPI.getClase4() != null && !clientesAPI.getClase4().isEmpty()) {
+                                        claseMostrar = clientesAPI.getClase4();
+                                        break;
+                                    }
+                                }
+                            }
+
+                        } else {
+                            // 🧪 Evaluar una sola sección
+                            if (Seccion != null && !Seccion.isEmpty()) {
+                                char primerCaracter = Seccion.charAt(0);
+
+                                if (Character.isDigit(primerCaracter)) {
+                                    int numero = Character.getNumericValue(primerCaracter);
+                                    if (numero >= 1 && numero <= 6 && clientesAPI.getClase() != null && !clientesAPI.getClase().isEmpty()) {
+                                        claseMostrar = clientesAPI.getClase();
+                                    } else if (numero >= 7 && numero <= 9 && clientesAPI.getClase3() != null && !clientesAPI.getClase3().isEmpty()) {
+                                        claseMostrar = clientesAPI.getClase3();
+                                    }
+                                } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                        && clientesAPI.getClase4() != null && !clientesAPI.getClase4().isEmpty()) {
+                                    claseMostrar = clientesAPI.getClase4();
+                                }
+                            } else {
+                                Log.w("ClaseMostrar", "La sección es nula o vacía. No se puede determinar clase.");
+                            }
+                        }
+                    }
+
+                    if (claseMostrar != null && !claseMostrar.isEmpty()) {
+                        contenidoHolder.mtipoCliente.setText("Médico " + claseMostrar);
+                    } else {
+                        contenidoHolder.mtipoCliente.setText(("Médico PC"));
+                    }
+
+                } else {
+                    if (clientesAPI.getClaseMedico() != null && !clientesAPI.getClaseMedico().isEmpty()) {
+                        contenidoHolder.mtipoCliente.setText((clientesAPI.getClaseMedico()));
+                    } else {
+                        contenidoHolder.mtipoCliente.setText("");
+                    }
+                }
+            }
+
             // Validar y mostrar icono de revisita
-            if (clientesCumple.getValue() != null) {
-                Integer revisita = clientesCumple.getValue().getRevisita();
-                if (revisita != null && revisita == 1) {
+            if (clientesAPI != null) {
+                Integer revisita = clientesAPI.getRevisita();
+                if (revisita != null && revisita == 1 && (claseMostrar != null && claseMostrar.equals("A"))) {
                     contenidoHolder.mRevisitaView.setVisibility(View.VISIBLE);
                 } else {
                     contenidoHolder.mRevisitaView.setVisibility(View.GONE);
@@ -175,9 +271,9 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                 contenidoHolder.mRevisitaView.setVisibility(View.GONE);
             }
 
-            if(clientesCumple.getValue() != null) {
-                if (clientesCumple.getValue().getCumpleAnyos() != null) {
-                    if (clientesCumple.getValue().getCumpleAnyos()) {
+            if(clientesAPI != null) {
+                if (clientesAPI.getCumpleAnyos() != null) {
+                    if (clientesAPI.getCumpleAnyos()) {
                         cumpleAnyo = true;
                     }
                 } else cumpleAnyo = false;
@@ -419,7 +515,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                     String valiZ= mCodView.getText().toString().toUpperCase().substring(0, 1);
                     if (valiZ.equals("Z")) {
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                             popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
                             popupMenu.getMenu().findItem(R.id.action_categoria).setVisible(false);
@@ -435,8 +530,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                             popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         if (mCodView.length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                        if (mCodView.length() > 6)
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         if (mCodView.length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
@@ -461,12 +554,6 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                                 iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, mCodView.getText());
                                 iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
                                 context.startActivity(iFacturaDetalle);
-                                return true;
-                            } else if (itemId == R.id.action_cupos_credito) {
-                                Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                                i.putExtra(Common.ARG_IDCLIENTE, mCodView.getText());
-                                i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                context.startActivity(i);
                                 return true;
                             } else if (itemId == R.id.action_totales_mes) {
                                 Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);

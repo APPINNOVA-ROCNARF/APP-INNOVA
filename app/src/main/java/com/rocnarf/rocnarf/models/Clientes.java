@@ -129,6 +129,15 @@ public class Clientes  implements Parcelable {
     @Expose
     private String clase;
 
+    @SerializedName("clase3")
+    @Expose
+    private String clase3;
+
+    @SerializedName("clase4")
+    @Expose
+    private String clase4;
+
+
     @SerializedName("fechaDesdeAuspicio")
     @Expose
     private Date fechaDesdeAuspicio;
@@ -167,13 +176,15 @@ public class Clientes  implements Parcelable {
     private String claseMedico;
 
     public Clientes(String idCliente, String nombreCliente, String representante,
-                    String tipo, String seccion, String seccion2,String seccion3, String seccion4, String seccion5, String seccion6,String seccion7,String seccion8,
-                    String seccion9,
-                    String ciudad, String direccion, String telefono1,
-                    String telefono2, String cedula, String ruc, String email,
-                    Double longitud, Double latitud, int rangoTolerancia, String origen,String tipoObserv,String especialidades, String idEspecialidades, String clase,String claseMedico,
-                    Boolean auspiciado, Boolean cumpleAnyos, Date fechaDesdeAuspicio, Date fechaHastaAuspicio, String conceptoPlan, String marca, Integer revisita){
-        this.idCliente= idCliente;
+                    String tipo, String seccion, String seccion2, String seccion3, String seccion4, String seccion5,
+                    String seccion6, String seccion7, String seccion8, String seccion9, String ciudad, String direccion,
+                    String telefono1, String telefono2, String cedula, String ruc, String email, Double longitud,
+                    Double latitud, int rangoTolerancia, String origen, String tipoObserv, String especialidades,
+                    String idEspecialidades, String clase, String claseMedico, Boolean auspiciado, Boolean cumpleAnyos,
+                    Date fechaDesdeAuspicio, Date fechaHastaAuspicio, String conceptoPlan, String marca, Integer revisita,
+                    String clase3, String clase4) {
+
+        this.idCliente = idCliente;
         this.nombreCliente = nombreCliente;
         this.representante = representante;
         this.tipo = tipo;
@@ -193,7 +204,7 @@ public class Clientes  implements Parcelable {
         this.cedula = cedula;
         this.ruc = ruc;
         this.email = email;
-        this.longitud = longitud ;
+        this.longitud = longitud;
         this.latitud = latitud;
         this.rangoTolerancia = rangoTolerancia;
         this.origen = origen;
@@ -209,7 +220,10 @@ public class Clientes  implements Parcelable {
         this.conceptoPlan = conceptoPlan;
         this.marca = marca;
         this.revisita = revisita;
+        this.clase3 = clase3;
+        this.clase4 = clase4;
     }
+
 
 
 
@@ -451,6 +465,23 @@ public class Clientes  implements Parcelable {
     public String getClase() {
         return clase;
     }
+
+    public String getClase3() {
+        return clase3;
+    }
+
+    public void setClase3(String clase3) {
+        this.clase3 = clase3;
+    }
+
+    public String getClase4() {
+        return clase4;
+    }
+
+    public void setClase4(String clase4) {
+        this.clase4 = clase4;
+    }
+
 
     public void setClase(String clase) {
         this.clase = clase;

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +56,7 @@ public class ProductosActivity extends AppCompatActivity {
 
     private com.rocnarf.rocnarf.dao.DataBaseHelper DataBaseHelper;
     private SQLiteDatabase sQLiteDatabase;
+    private boolean usarPrecioEspecial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class ProductosActivity extends AppCompatActivity {
         seccion = i.getStringExtra(Common.ARG_SECCIOM);
         idCliente = i.getStringExtra(Common.ARG_IDCLIENTE);
         nombreCliente = i.getStringExtra(Common.ARG_NOMBRE_CLIENTE);
+        usarPrecioEspecial = getIntent().getBooleanExtra(Common.ARG_USAR_PRECIO_ESPECIAL, false);
         context = this;
 
         final ActionBar actionBar = getSupportActionBar();
@@ -166,7 +169,12 @@ public class ProductosActivity extends AppCompatActivity {
                     pedidoDetalle.setPrecio(producto.getPrecio());
                     pedidoDetalle.setPvp(producto.getPvp());
                     pedidoDetalle.setPvf(producto.getPrecio());
-                    pedidoDetalle.setPrecioTotal(cantidad * producto.getPrecio());
+                    pedidoDetalle.setEsp(producto.getPrecioEspecial());
+                    if(usarPrecioEspecial) {
+                        pedidoDetalle.setPrecioTotal(cantidad * producto.getPrecioEspecial());
+                    }else{
+                        pedidoDetalle.setPrecioTotal(cantidad * producto.getPrecio());
+                    }
                     productosViewModel.addDetallePedido(pedidoDetalle);
 
 
@@ -184,13 +192,12 @@ public class ProductosActivity extends AppCompatActivity {
 //                if (pedidoCliente == null) progressBar.setVisibility(View.GONE);
                 
                 recyclerView.setVisibility(View.VISIBLE);
-                adapter = new ProductosReciclerViewAdapter(productos, listaEscalas, idCliente, listenerAddProducto, pedidoDetalles);
+                adapter = new ProductosReciclerViewAdapter(productos, listaEscalas, idCliente, listenerAddProducto, pedidoDetalles, usarPrecioEspecial);
                 recyclerView.setAdapter(adapter);
             }
         });
 
-
-        productosViewModel.getListaProductos();
+        productosViewModel.getListaProductos(usarPrecioEspecial, idCliente);
 
 
     }
@@ -245,6 +252,7 @@ public class ProductosActivity extends AppCompatActivity {
             i.putExtra(Common.ARG_IDCLIENTE, idCliente);
             i.putExtra(Common.ARG_NOMBRE_CLIENTE, nombreCliente);
             i.putExtra(Common.ARG_IDPEDIDO, pedidoCliente.getIdLocalPedido());
+            i.putExtra(Common.ARG_USAR_PRECIO_ESPECIAL, usarPrecioEspecial);
             startActivity(i);
             return true;
         }

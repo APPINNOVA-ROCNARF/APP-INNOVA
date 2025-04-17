@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.rocnarf.rocnarf.models.Factura;
 import com.rocnarf.rocnarf.models.FacturasNotaDebitos;
+import com.rocnarf.rocnarf.models.FacturasNotaDebitosEstadistica;
 import com.rocnarf.rocnarf.repository.ClientesRepository;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ClientesFacturasViewModel extends AndroidViewModel{
 
     public LiveData<List<Factura>> listaFacturas;
     public LiveData<List<FacturasNotaDebitos>> listaFacturasND;
+    public LiveData<FacturasNotaDebitosEstadistica> FacturasEstadistica;
     private ClientesRepository clientesRepository;
     private String idUsuario;
     private Context context;
@@ -42,6 +44,12 @@ public class ClientesFacturasViewModel extends AndroidViewModel{
         clientesRepository = new ClientesRepository(context, idUsuario );
         listaFacturasND = clientesRepository.getFacturasNotaDebitos(idCliente, seccion);
         return listaFacturasND;
+    }
+
+    public LiveData<FacturasNotaDebitosEstadistica> getFacturasNotaDebitosEstadistica(String idCliente, String seccion){
+        clientesRepository = new ClientesRepository(context, idUsuario );
+        FacturasEstadistica = clientesRepository.getFacturasNotaDebitosEstadistica(idCliente, seccion);
+        return FacturasEstadistica;
     }
 
 }

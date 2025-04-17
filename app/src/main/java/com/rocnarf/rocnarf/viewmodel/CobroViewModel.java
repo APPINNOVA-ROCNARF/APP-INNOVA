@@ -35,8 +35,18 @@ public class CobroViewModel extends AndroidViewModel {
         return listaFacturaDetalle;
     }
 
+    public LiveData<List<Cobro>> getChequeFechaXFactura(final String idFactura) {
+        listaFacturaDetalle = clientesRepository.GetChequeFechaXFactura(idFactura);
+        return listaFacturaDetalle;
+    }
+
     public LiveData<List<Cobro>> getCobrosXCliente(final String idCliente){
         listaFacturaDetalle = clientesRepository.getCobrosXCliente(idCliente);
+        return listaFacturaDetalle;
+    }
+
+    public LiveData<List<Cobro>> getChequeFechaXCliente(final String idCliente){
+        listaFacturaDetalle = clientesRepository.getChequeFechaXCliente(idCliente);
         return listaFacturaDetalle;
     }
 

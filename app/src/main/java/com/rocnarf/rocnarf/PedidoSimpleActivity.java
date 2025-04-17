@@ -51,6 +51,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class PedidoSimpleActivity extends AppCompatActivity implements PedidoProductoFragment.OnListFragmentInteractionListener {
@@ -65,7 +66,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
     private Button mCobros;
     private Pedido pedidoExistemte;
     private PedidoDetalle pedidoDetalleLoop;
-    private TextView mPedido, mFecha, mTotal, mDescuento, mFinal, mObservaciones;
+    private TextView mPedido, mFecha, mTotal, mDescuento, mFinal, mObservaciones, tvObservaciones;
     private TextView mTotalF3, mDescuentoF3, mFinalF3;
     private TextView mTotalF2, mDescuentoF2, mFinalF2;
     private TextView mTotalF4, mDescuentoF4, mFinalF4;
@@ -91,7 +92,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
     public String estadoCliente;
     private double PrecioTotalAcu = 0, PrecioFinalAcu = 0, DescuentoAcu = 0;
     private ClientesCupoCreditoViewModel clientesCupoCreditoViewModel;
-
+private Boolean usarPrecioEspecial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         idCliente = intent.getStringExtra(Common.ARG_IDCLIENTE);
         idLocalPedido = intent.getIntExtra(Common.ARG_IDPEDIDO, 0);
         nombreCliente = intent.getStringExtra(Common.ARG_NOMBRE_CLIENTE);
+        usarPrecioEspecial = getIntent().getBooleanExtra(Common.ARG_USAR_PRECIO_ESPECIAL, false);
         Log.d("local", "local" + idLocalPedido);
         final ActionBar actionBar = getSupportActionBar();
         if (nombreCliente != null) {
@@ -140,13 +142,22 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         });
         //pedidoViewModel = ViewModelProviders.of(this).get(PedidoViewModel.class);
 
+        if(idUsuario.equals("SBC")){
+            tvObservaciones.setText("Orden de Compra");
+        }
+
         mObservaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(PedidoSimpleActivity.this);
                 LayoutInflater inflater = PedidoSimpleActivity.this.getLayoutInflater();
 
-                builder.setTitle("Observaciones");
+                if (idUsuario.equals("SBC")) {
+                    builder.setTitle("Orden de Compra");
+                } else {
+                    builder.setTitle("Observaciones");
+                }
+
                 // Set up the input
                 final EditText input = new EditText(PedidoSimpleActivity.this);
 
@@ -154,12 +165,14 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
 
                 input.setText(mObservaciones.getText().toString());
                 builder.setView(input);
+
                 builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String observaciones = input.getText().toString();
                         mObservaciones.setText(observaciones);
                         pedidoExistemte.setObservaciones(observaciones);
                         pedidoViewModel.updatePedido(pedidoExistemte);
+
                     }
                 });
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -170,6 +183,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
                 builder.create().show();
             }
         });
+
 
         mAgregarDescuento = (FloatingActionButton) findViewById(R.id.ib_descuento_fragment_pedido);
         mAgregarDescuento.setOnClickListener(new View.OnClickListener() {
@@ -239,6 +253,9 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
                 } else if (selectedItem.equals("P.V.P")) {
                     fragment.setTipo("P.V.P");
                     CalcularTotalesXLineaPvp();
+                } else if (selectedItem.equals("ESP")){
+                    fragment.setTipo("ESP");
+                    CalcularTotalesXLineaESP();
                 }
 
             } // to close the onItemSelected
@@ -304,19 +321,16 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
 
                        // mTipoPrecio.setSelection(1);
 
-                        final ArrayList<String> listaNombre1 = new ArrayList<>();
-                        listaNombre1.add("P.V.F");
-                        listaNombre1.add("P.V.P");
-
                         if (pedido.getTipoPrecio() != null) {
-                            for (int indice = 0; indice < listaNombre1.size(); indice++) {
-                                if (listaNombre1.get(indice).equals(pedido.getTipoPrecio())) {
+                            for (int indice = 0; indice < mTipoPrecio.getAdapter().getCount(); indice++) {
+                                if (mTipoPrecio.getAdapter().getItem(indice).toString().equals(pedido.getTipoPrecio())) {
                                     mTipoPrecio.setSelection(indice);
                                 }
                             }
-                        }else{
+                        } else {
                             pedido.setTipoPrecio("P.V.F");
                         }
+
 
 //                        if (pedido.isConBonos()){
 //                            mAgregarDescuento.setVisibility(View.GONE);
@@ -402,6 +416,9 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
                 i.putExtra(Common.ARG_IDCLIENTE, pedidoViewModel.pedido.getValue().getIdCliente());
                 i.putExtra(Common.ARG_NOMBRE_CLIENTE, pedidoViewModel.pedido.getValue().getNombreCliente());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                if (Objects.equals(pedidoExistemte.getTipoPrecio(), "ESP")){
+                    i.putExtra(Common.ARG_USAR_PRECIO_ESPECIAL, usarPrecioEspecial);
+                }
                 startActivity(i);
 
             }
@@ -615,8 +632,11 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("GE")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
-
+                if (detalle.getPvp() != null) {
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
+                } else {
+                    detalle.setPrecioTotal(0.0);
+                }
                 totalGEN += detalle.getPrecioTotal();
             }
         }
@@ -682,7 +702,11 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("GE")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                if (detalle.getPvp() != null) {
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
+                } else {
+                    detalle.setPrecioTotal(0.0);
+                }
                 totalGEN += detalle.getPrecioTotal();
             }
         }
@@ -705,6 +729,76 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
         pedidoViewModel.updatePedido(pedidoExistemte);
     }
 
+    public void CalcularTotalesXLineaESP() {
+        double totalF3 = 0, descuentoF3 = 0, finalF3 = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("F3")) {
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
+                totalF3 += detalle.getPrecioTotal();
+            }
+        }
+        descuentoF3 = totalF3 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF3 = totalF3 - descuentoF3;
+        mTotalF3.setText(String.format("%.2f", totalF3));
+        mDescuentoF3.setText(String.format("%.2f", descuentoF3));
+        mFinalF3.setText(String.format("%.2f", finalF3));
+
+        double totalF2 = 0, descuentoF2 = 0, finalF2 = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("F2")) {
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
+                totalF2 += detalle.getPrecioTotal();
+            }
+        }
+        descuentoF2 = totalF2 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF2 = totalF2 - descuentoF2;
+        mTotalF2.setText(String.format("%.2f", totalF2));
+        mDescuentoF2.setText(String.format("%.2f", descuentoF2));
+        mFinalF2.setText(String.format("%.2f", finalF2));
+
+        double totalF4 = 0, descuentoF4 = 0, finalF4 = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("F4")) {
+                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
+                totalF4 += detalle.getPrecioTotal();
+            }
+        }
+        descuentoF4 = totalF4 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF4 = totalF4 - descuentoF4;
+        mTotalF4.setText(String.format("%.2f", totalF4));
+        mDescuentoF4.setText(String.format("%.2f", descuentoF4));
+        mFinalF4.setText(String.format("%.2f", finalF4));
+
+        double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
+        for (PedidoDetalle detalle : pedidoDetalleExistente) {
+            if (detalle.getTipo().equals("GE")) {
+                if (detalle.getPvp() != null) {
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
+                } else {
+                    detalle.setPrecioTotal(0.0);
+                }
+                totalGEN += detalle.getPrecioTotal();
+            }
+        }
+        descuentoGEN = totalGEN * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalGEN = totalGEN - descuentoGEN;
+        mTotalGEN.setText(String.format("%.2f", totalGEN));
+//        mTotalGEN.setText(String.format("%.2f", totalGEN));
+        mDescuentoGEN.setText(String.format("%.2f", descuentoGEN));
+        mFinalGEN.setText(String.format("%.2f", finalGEN));
+
+        pedidoExistemte.setPrecioTotal(totalGEN + totalF4 + totalF2 + totalF3);
+        pedidoExistemte.setDescuento(descuentoGEN + descuentoF4 + descuentoF2 + descuentoF3);
+        pedidoExistemte.setPrecioFinal(finalGEN + finalF4 + finalF2 + finalF3);
+
+        mTotal.setText(String.format("%.2f", pedidoExistemte.getPrecioTotal()));
+        mDescuento.setText(String.format("%.2f", pedidoExistemte.getDescuento()));
+        mFinal.setText(String.format("%.2f", pedidoExistemte.getPrecioFinal()));
+
+        pedidoExistemte.setTipoPrecio("ESP");
+        pedidoViewModel.updatePedido(pedidoExistemte);
+    }
+
 
     public void CargarControles() {
         progressBar = (ProgressBar) findViewById(R.id.pr_list_activity_productos);
@@ -712,6 +806,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
 
         mLayout = (LinearLayout) findViewById(R.id.ll_layout_activity_pedido_simple);
         mObservaciones = (TextView) findViewById(R.id.tv_observaciones_pedido_simple_activity);
+        tvObservaciones = (TextView) findViewById(R.id.tv_observaciones);
         mPedido = (TextView) findViewById(R.id.tv_id_fragment_pedido);
         mTotal = (TextView) findViewById(R.id.tv_total_fragment_pedido);
         mFinal = (TextView) findViewById(R.id.tv_final_fragment_pedido);
@@ -741,13 +836,23 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
 
 
         final ArrayList<String> listaNombre = new ArrayList<>();
-        listaNombre.add("P.V.F");
-        listaNombre.add("P.V.P");
+
+        String tipoPrecio = pedidoExistemte != null ? pedidoExistemte.getTipoPrecio() : null;
+
+        if (usarPrecioEspecial || "ESP".equals(tipoPrecio)) {
+            listaNombre.add("ESP");
+        } else {
+            listaNombre.add("P.V.F");
+            listaNombre.add("P.V.P");
+        }
+
         final ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaNombre);
 
         //   adaptador.setDropDownViewResource(android.R.layout.simple_list_item_1);
         mTipoPrecio.setAdapter(adaptador);
-
+        if (listaNombre.size() == 1) {
+            mTipoPrecio.setEnabled(false);
+        }
         PrecioTotalAcu = 0;
         PrecioFinalAcu = 0;
         DescuentoAcu = 0;

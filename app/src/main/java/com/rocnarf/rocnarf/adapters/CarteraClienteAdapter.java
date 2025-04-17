@@ -256,7 +256,6 @@ public class CarteraClienteAdapter extends  RecyclerView.Adapter<CarteraClienteA
                     if (valiZ.equals("Z")) {
                         popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                        popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_categoria).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_recetas).setVisible(false);
@@ -272,79 +271,77 @@ public class CarteraClienteAdapter extends  RecyclerView.Adapter<CarteraClienteA
                         if (!mOrigenCliente.equals("FARMA"))
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
                         if (!mOrigenCliente.equals("FARMA"))
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
-                        if (!mOrigenCliente.equals("FARMA"))
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
                     popupMenu.show();
 
-                    /*popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
-                            switch (menuItem.getItemId()) {
+                            int id = menuItem.getItemId();
 
-                                case R.id.action_historial_pedidos:
-                                    Intent iFacturas = new Intent(context, ClientesFacturasNotaDebitosActivity.class);
-                                    iFacturas.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iFacturas.putExtra(Common.ARG_NOMBRE_CLIENTE, mNombreCliente.getText().toString());
-                                    iFacturas.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iFacturas);
-                                    return true;
-                                case R.id.action_detalle_productos:
-                                    Intent iFacturaDetalle = new Intent(context, FacturaDetalleActivity.class);
-                                    iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iFacturaDetalle);
-                                    return true;
-                                case R.id.action_cupos_credito:
-                                    Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                                    i.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(i);
-                                    return true;
-                                case R.id.action_totales_mes:
-                                    Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
-                                    iTotalesXMes.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iTotalesXMes.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iTotalesXMes);
-                                    return true;
-                                case R.id.action_ficha_medico:
-//                                    Log.d("menu", "menu ---> Ficha Medico");
-                                    Intent iFichaMedico = new Intent(context, MedicoFichaActivity.class);
-                                    iFichaMedico.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iFichaMedico.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iFichaMedico);
-                                    return true;
-                                case R.id.action_historial_comentarios:
-                                    Intent iComentarios = new Intent(context, HistorialComentariosActivity.class);
-                                    iComentarios.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iComentarios.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iComentarios);
-                                    return true;
-                                case R.id.action_historial_visitas:
-                                    Intent iVisitas = new Intent(context, HistorialVisitasActivity.class);
-                                    iVisitas.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iVisitas.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iVisitas);
-                                    return true;
-                                case R.id.action_recetas:
-                                    Intent iRecetas = new Intent(context, RecetasXActivity.class);
-                                    iRecetas.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iRecetas.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iRecetas);
-                                    return true;
-                                case R.id.action_categoria:
-                                    Intent iCategoria = new Intent(context, MedicosCategoriaActivity.class);
-                                    iCategoria.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                    iCategoria.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                    context.startActivity(iCategoria);
-                                    return true;
-                                default:
-                                    return false;
+                            if (id == R.id.action_historial_pedidos) {
+                                Intent iFacturas = new Intent(context, ClientesFacturasNotaDebitosActivity.class);
+                                iFacturas.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iFacturas.putExtra(Common.ARG_NOMBRE_CLIENTE, mNombreCliente.getText().toString());
+                                iFacturas.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iFacturas);
+                                return true;
 
+                            } else if (id == R.id.action_detalle_productos) {
+                                Intent iFacturaDetalle = new Intent(context, FacturaDetalleActivity.class);
+                                iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iFacturaDetalle);
+                                return true;
+
+                            } else if (id == R.id.action_totales_mes) {
+                                Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
+                                iTotalesXMes.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iTotalesXMes.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iTotalesXMes);
+                                return true;
+
+                            } else if (id == R.id.action_ficha_medico) {
+                                Intent iFichaMedico = new Intent(context, MedicoFichaActivity.class);
+                                iFichaMedico.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iFichaMedico.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iFichaMedico);
+                                return true;
+
+                            } else if (id == R.id.action_historial_comentarios) {
+                                Intent iComentarios = new Intent(context, HistorialComentariosActivity.class);
+                                iComentarios.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iComentarios.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iComentarios);
+                                return true;
+
+                            } else if (id == R.id.action_historial_visitas) {
+                                Intent iVisitas = new Intent(context, HistorialVisitasActivity.class);
+                                iVisitas.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iVisitas.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iVisitas);
+                                return true;
+
+                            } else if (id == R.id.action_recetas) {
+                                Intent iRecetas = new Intent(context, RecetasXActivity.class);
+                                iRecetas.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iRecetas.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iRecetas);
+                                return true;
+
+                            } else if (id == R.id.action_categoria) {
+                                Intent iCategoria = new Intent(context, MedicosCategoriaActivity.class);
+                                iCategoria.putExtra(Common.ARG_IDCLIENTE, idCliente);
+                                iCategoria.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+                                context.startActivity(iCategoria);
+                                return true;
+
+                            } else {
+                                return false;
                             }
                         }
-                    });*/
+                    });
                 }
             });
         }

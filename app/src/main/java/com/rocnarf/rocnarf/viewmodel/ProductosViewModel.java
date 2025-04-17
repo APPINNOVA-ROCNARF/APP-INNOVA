@@ -5,19 +5,25 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import android.content.Context;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.rocnarf.rocnarf.models.EscalaBonificacion;
 import com.rocnarf.rocnarf.models.Pedido;
 import com.rocnarf.rocnarf.models.PedidoDetalle;
+import com.rocnarf.rocnarf.models.PrecioEspecialCliente;
 import com.rocnarf.rocnarf.models.Producto;
 import com.rocnarf.rocnarf.repository.EscalaBonificacionRepository;
 import com.rocnarf.rocnarf.repository.PedidosRepository;
 import com.rocnarf.rocnarf.repository.ProductosRepository;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Completable;
 import rx.Subscription;
@@ -71,30 +77,61 @@ public class ProductosViewModel extends AndroidViewModel {
         }
     }
 
-    public void getListaProductos(){
+    public void getListaProductos(boolean usarPrecioEspecial, String idCliente) {
         productosRepository = new ProductosRepository(this.context, idUsuario);
-        if (this.productosRepository.isFueraSincronizacion()){
+
+        if (productosRepository.isFueraSincronizacion()) {
             productosRepository.sincronizar(idUsuario).subscribe(new Completable.CompletableSubscriber() {
                 @Override
                 public void onCompleted() {
-                    listaProductos.setValue(productosRepository.getProductos());
+                    List<Producto> productos = productosRepository.getProductos();
+
+                    if (usarPrecioEspecial) {
+                        productos = enriquecerConPreciosEspeciales(productos, idCliente);
+                    }
+
+                    listaProductos.setValue(productos);
                 }
 
                 @Override
-                public void onError(Throwable e) {
-
-                }
+                public void onError(Throwable e) {}
 
                 @Override
-                public void onSubscribe(Subscription d) {
-
-                }
+                public void onSubscribe(Subscription d) {}
             });
-        }else  {
-            listaProductos.setValue(productosRepository.getProductos());
+        } else {
+            List<Producto> productos = productosRepository.getProductos();
+
+            if (usarPrecioEspecial) {
+                productos = enriquecerConPreciosEspeciales(productos, idCliente);
+            }
+
+            listaProductos.setValue(productos);
         }
     }
 
+
+    private List<Producto> enriquecerConPreciosEspeciales(List<Producto> productos, String idCliente) {
+        List<PrecioEspecialCliente> precios = productosRepository.getPreciosEspecialesPorCliente(idCliente);
+
+        Map<String, PrecioEspecialCliente> mapa = new HashMap<>();
+
+        for (PrecioEspecialCliente pec : precios) {
+            mapa.put(pec.getCodigoProducto(), pec);
+        }
+
+        List<Producto> productosConPrecioEspecial = new ArrayList<>();
+
+        for (Producto producto : productos) {
+            if (mapa.containsKey(producto.getIdProducto())) {
+                PrecioEspecialCliente pec = mapa.get(producto.getIdProducto());
+                producto.setPrecioEspecial(pec.getPrecioDesc());
+                productosConPrecioEspecial.add(producto);
+            }
+        }
+
+        return productosConPrecioEspecial;
+    }
 
     public Completable getPedido(final String idCliente, final String nombreCliente, final String tipoPedido ){
 

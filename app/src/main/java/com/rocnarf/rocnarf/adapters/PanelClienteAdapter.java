@@ -40,15 +40,17 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
     private LayoutInflater layoutInflater;
     OnPanelClientesClickListener clickListener;
     OnPanelClientesLongClickListener longClickListener;
+    private String Seccion;
 
 
     public PanelClienteAdapter(Context context, OnPanelClientesClickListener clickListener,
                                OnPanelClientesLongClickListener longClickListener,
-                               List<PanelClientes> listconsulta_formulario_objeto) {
+                               List<PanelClientes> listconsulta_formulario_objeto, String seccion) {
         this.listconsulta_panel_objeto = listconsulta_formulario_objeto;
         this.context = context;
         this.clickListener = clickListener;
         this.longClickListener = longClickListener;
+        this.Seccion = seccion;
     }
 
 
@@ -174,8 +176,11 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
             imgFarmaZ.setVisibility(View.GONE);
             imgCumple.setVisibility(View.GONE);
 
+            String claseMostrar = null;
+
+
             // Validar y mostrar icono de revisita
-            if (panelClientes.getRevisita() != null && panelClientes.getRevisita() == 1) {
+            if (panelClientes.getRevisita() != null && panelClientes.getRevisita() == 1 && panelClientes.getClaseMedico().equals("Médico A")) {
                 imgRevisita.setVisibility(View.VISIBLE);
             } else {
                 imgRevisita.setVisibility(View.GONE);
@@ -222,14 +227,12 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
                     } else {
                         popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                        popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
 
                     String valiZ= panelClientes.getIdCliente().toUpperCase().substring(0, 1);
                     if (valiZ.equals("Z")) {
                         popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
-                        popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_categoria).setVisible(false);
@@ -246,8 +249,6 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
                         if (panelClientes.getIdCliente().length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
                         if (panelClientes.getIdCliente().length() > 6)
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
-                        if (panelClientes.getIdCliente().length() > 6)
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
 
@@ -263,8 +264,6 @@ public class PanelClienteAdapter  extends RecyclerView.Adapter<PanelClienteAdapt
                                 intent = new Intent(context, ClientesFacturasNotaDebitosActivity.class);
                             } else if (itemId == R.id.action_detalle_productos) {
                                 intent = new Intent(context, FacturaDetalleActivity.class);
-                            } else if (itemId == R.id.action_cupos_credito) {
-                                intent = new Intent(context, ClientesCupoCreditoActivity.class);
                             } else if (itemId == R.id.action_totales_mes) {
                                 intent = new Intent(context, VentasMensualesClientesActivity.class);
                             } else if (itemId == R.id.action_historial_comentarios) {

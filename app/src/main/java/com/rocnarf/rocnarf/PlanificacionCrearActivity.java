@@ -182,6 +182,15 @@ public class PlanificacionCrearActivity extends AppCompatActivity
                         mValorCobrar.setText(visitaAnterior.getValorXCobrar().toString());
                     }
 
+                    if (visitaAnterior.getEstado() != null && !visitaAnterior.getEstado().equals("NOEFE") && !visitaAnterior.getEstado().equals("PLANI")) {
+                        opcionesRevista.setVisibility(View.VISIBLE);
+                        mReVisita.setChecked(true); // Siempre marcado si es Re-Visita
+                        mReVisita.setEnabled(false);
+                        // mReVisita.setClickable(false);
+                    } else {
+                        opcionesRevista.setVisibility(View.GONE);
+                    }
+
                 }
             });
             visitasClientesPlanificarViewModel.getVisitaAnterior(idLocal);
@@ -192,7 +201,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
     private void configurarControles() {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(codigoCliente, idUsuario);
+        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(codigoCliente, idUsuario, seccion);
         ft.replace(R.id.fm_cliente_activity_planificacion_crear, detalleCliente);
         ft.commit();
 
@@ -285,10 +294,16 @@ public class PlanificacionCrearActivity extends AppCompatActivity
 
                             if (mCalendar.getTime().before(fechaMinimaEfectiva)) {
                                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                                String fechaMinimaStr = sdf.format(fechaMinimaEfectiva);
+                                Calendar calendarioMinimo = Calendar.getInstance();
+                                calendarioMinimo.setTime(fechaMinimaEfectiva);
+                                calendarioMinimo.add(Calendar.DAY_OF_MONTH, 1); // 🔹 Se suma un día
+
+                                // Formatear la nueva fecha para mostrarla en el AlertDialog
+                                String fechaMinimaStrAjustada = sdf.format(calendarioMinimo.getTime());
+
                                 new AlertDialog.Builder(context)
                                         .setTitle("Advertencia")
-                                        .setMessage("La fecha ingresada no cumple con el tiempo mínimo requerido desde la última visita para ser considerada efectiva. La próxima visita efectiva puede realizarse a partir del: " + fechaMinimaStr + "\n¿Desea continuar con la creación de la visita de todas formas?")
+                                        .setMessage("La fecha ingresada no cumple con el tiempo mínimo requerido desde la última visita para ser considerada efectiva. La próxima visita efectiva puede realizarse a partir del: " + fechaMinimaStrAjustada + "\n¿Desea continuar con la creación de la visita de todas formas?")
                                         .setPositiveButton("Sí, crear visita", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -326,6 +341,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             Intent i = new Intent(context, PanelClientesActivity.class);
             i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
             i.putExtra(Common.ARG_SECCIOM, seccion);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         } else if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_MAPA)) {
             Intent i = new Intent(context, MapaActivity.class);
@@ -365,6 +381,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
                     if (fechaUltimaVisita != null) {
                         Calendar calUltimaVisita = Calendar.getInstance();
                         calUltimaVisita.setTime(fechaUltimaVisita);
+                        calUltimaVisita.add(Calendar.DAY_OF_YEAR, 1);
                         calUltimaVisita.add(Calendar.DAY_OF_YEAR, diasAjuste);
                         Date fechaMinimaEfectiva = calUltimaVisita.getTime();
 

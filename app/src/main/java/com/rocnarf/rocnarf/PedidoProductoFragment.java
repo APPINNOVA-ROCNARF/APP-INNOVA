@@ -153,12 +153,24 @@ public class PedidoProductoFragment extends Fragment {
                         pedidoViewModel.updatePedidoDetalle(pedidoDetalle);
                         mListener.onListFragmentInteraction(pedidoDetalle);
 
-                        ((PedidoSimpleActivity)getActivity()).CalcularTotalesXLineaPvf();
-                        if(pedidoViewModel.pedido.getValue().getTipoPrecio().equals("P.V.F")){
-                            ((PedidoSimpleActivity)getActivity()).CalcularTotalesXLineaPvf();
-                        }else if(pedidoViewModel.pedido.getValue().getTipoPrecio().equals("P.V.P")){
-                            ((PedidoSimpleActivity)getActivity()).CalcularTotalesXLineaPvp();
+                        String tipoPrecio = pedidoViewModel.pedido.getValue().getTipoPrecio();
+                        if (tipoPrecio != null) {
+                            switch (tipoPrecio) {
+                                case "P.V.F":
+                                    ((PedidoSimpleActivity)getActivity()).CalcularTotalesXLineaPvf();
+                                    break;
+                                case "P.V.P":
+                                    ((PedidoSimpleActivity)getActivity()).CalcularTotalesXLineaPvp();
+                                    break;
+                                case "ESP":
+                                    ((PedidoSimpleActivity)getActivity()).CalcularTotalesXLineaESP();
+                                    break;
+                                default:
+                                    Toast.makeText(getActivity(), "Tipo de precio desconocido", Toast.LENGTH_LONG).show();
+                                    break;
+                            }
                         }
+
 
                         ///setTipo(pedidoViewModel.pedido.getValue().getTipoPrecio());
                         recyclerView.setAdapter(null);

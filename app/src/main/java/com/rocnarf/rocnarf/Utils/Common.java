@@ -6,16 +6,18 @@ import java.sql.Array;
 import java.util.List;
 
 public class Common {
-    public static final String DATE_FORMAT = "dd MMM yy";
+    public static final String DATE_FORMAT = "dd/MM/yy";
     public static final String TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String ARG_IDUSUARIO = "idUsuario";
     public static final String ARG_ROL = "rol";
     public static final String ARG_SECCIOM = "seccion";
+    public static final String ARG_SECCIONES = "secciones";
     public static final String ARG_ESTADO_VIATICO = "estadoviatico";
     public static final String ARG_ESTADO_CICLO = "estadociclo";
     public static final String ARG_NOMBREUSUARIO = "nombre";
     public static final String ARG_IDCLIENTE = "idCliente";
     public static final String ARG_NOMBRE_CLIENTE = "nombreCliente";
+    public static final String ARG_USAR_PRECIO_ESPECIAL = "precioEspecial";
     public static final String ARG_NOMBRE_CICLO = "nombreCiclo";
     public static final String ARG_HISTORIAL = "historial";
 

@@ -2,6 +2,8 @@ package com.rocnarf.rocnarf;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -97,6 +99,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
     private LocationManager milocManager;
     private LocationListener milocListener;
     private Double latitudActual, longitudActual, latitud, longitud ;
+    private String tipoObser, clase, clase3, clase4;
 
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -130,7 +133,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(codigoCliente, idUsuario);
+        ClienteDetalleFragment detalleCliente = ClienteDetalleFragment.newInstance(codigoCliente, idUsuario, seccion);
         ft.replace(R.id.fm_cliente_content_resultado_visita, detalleCliente);
         ft.commit();
 
@@ -198,9 +201,33 @@ public class ResultadoVisitaActivity extends AppCompatActivity
                     visitaPlanificada.setFechaVisita(new Date());
                     visitaPlanificada.setFechaModificacion(new Date());
 
-                    if (Objects.equals(revisita, 1)) { // Cliente que requiere revisita
+                    String claseMostrar = null;
+
+                    if (tipoObser.equals("MEDICO") ) {
+                        if ("MEDICO".equals(origenCliente)) {
+                            // Obtener la sección del cliente
+
+                            if (seccion != null && !seccion.isEmpty()) {
+                                // Determinar la clase según el primer carácter de la sección
+                                char primerCaracter = seccion.charAt(0);
+
+                                if (Character.isDigit(primerCaracter)) {
+                                    int numero = Character.getNumericValue(primerCaracter);
+                                    if (numero >= 1 && numero <= 6) {
+                                        claseMostrar = clase; // F1 y F2
+                                    } else if (numero >= 7 && numero <= 9) {
+                                        claseMostrar = clase3; // F3
+                                    }
+                                } else if (primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C') {
+                                    claseMostrar = clase4; // F4
+                                }
+                            }
+                        }
+                    }
+
+                    if (Objects.equals(revisita, 1) && (claseMostrar != null && claseMostrar.equals("A"))) { // Cliente que requiere revisita
                         if (!mReVisita.isChecked()) {
-                            // Primera visita, se marca como EFECTIVA directamente
+                            // Primera visita
                             visitaPlanificada.setEstado(VisitaClientes.PEFECTIVA);
                         } else {
                             // Segunda visita (re-visita), simplemente marcar como efectiva si el checkbox está marcado
@@ -532,7 +559,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
                         // Si esta planificado se consulta la ubicacion actual para qu epermita hacer planificacion efectiva
                         getLocationPermission();
                         getDeviceLocation();
-                    }else if (visitaClientes.getEstado().equals(VisitaClientes.EFECTIVA)){
+                    }else if (visitaClientes.getEstado().equals(VisitaClientes.EFECTIVA) || visitaClientes.getEstado().equals(VisitaClientes.PEFECTIVA)){
                         mRegistrar.setVisibility(View.GONE);
                         mEliminar.setVisibility(View.GONE);
                         mReplanificar.setVisibility(View.VISIBLE);
@@ -567,7 +594,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
     public void CargarDias() {
         final ArrayList<String> listaNombre = new ArrayList<>();
         PlanesService service = ApiClient.getClient().create(PlanesService.class);
-        retrofit2.Call<ParametrosResponse> call  = service.GetJefes("VARIABLE");
+        Call<ParametrosResponse> call  = service.GetJefes("VARIABLE");
         call.enqueue(new Callback<ParametrosResponse>() {
             @Override
             public void onResponse(Call<ParametrosResponse> call, Response<ParametrosResponse> response) {
@@ -598,6 +625,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
 
             // Obtener la fecha de la primera visita desde ViewModel
             cal.setTime(ultimafechavalida);
+            cal.add(Calendar.DAY_OF_YEAR, 1);
             cal.add(Calendar.DAY_OF_YEAR, diasAjuste); // Sumar días de ajuste
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -616,7 +644,7 @@ public class ResultadoVisitaActivity extends AppCompatActivity
             if (calToday.compareTo(cal) >= 0) {
                 return 0; // Ya han pasado los días requeridos
             } else {
-                return (int) daysDiff; // Días restantes para que la revisita sea efectiva
+                return (int) daysDiff - 1; // Días restantes para que la revisita sea efectiva
             }
         }
         return 0;
@@ -681,12 +709,12 @@ public class ResultadoVisitaActivity extends AppCompatActivity
          * onRequestPermissionsResult.
          */
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
         } else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
@@ -718,6 +746,10 @@ public class ResultadoVisitaActivity extends AppCompatActivity
         longitud = cliente.getLongitud();
         origenCliente = cliente.getOrigen();
         revisita = cliente.getRevisita();
+        tipoObser = cliente.getTipoObserv();
+        clase = cliente.getClase();
+        clase3 = cliente.getClase3();
+        clase4 = cliente.getClase4();
 
         if (cliente.getLatitud() != null) {
             if (cliente.getLatitud() != 0) {

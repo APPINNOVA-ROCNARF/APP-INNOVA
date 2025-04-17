@@ -71,6 +71,11 @@ public class LoginActivity extends Activity {
             i.putExtra(Common.ARG_SECCIOM, usuario.getSeccion());
             i.putExtra(Common.ARG_NOMBREUSUARIO, usuario.getNombre());
             i.putExtra(Common.ARG_ROL, usuario.getRol());
+            String secciones = usuario.getSecciones();
+            if (secciones != null && !secciones.isEmpty()) {
+                i.putExtra(Common.ARG_SECCIONES, secciones);
+            }
+
             startActivity(i);
             finish();
 
@@ -151,7 +156,7 @@ public class LoginActivity extends Activity {
             //Guardo localmente los usuarios
             clientesDao.deleteAll();
             ClienteService service2 = ApiClient.getClient().create(ClienteService.class);
-            retrofit2.Call<ClientesResponse> call2  = service2.GetClientes(1, 1000, 0, null,null, null, null, null, null, null, null);
+            /*retrofit2.Call<ClientesResponse> call2  = service2.GetClientes(1, 1000, 0, null,null, null, null, null, null, null, null);
             call2.enqueue(new Callback<ClientesResponse>() {
                 @Override
                 public void onResponse(Call<ClientesResponse> call, Response<ClientesResponse> response) {
@@ -169,7 +174,7 @@ public class LoginActivity extends Activity {
                     Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
-
+            */
             //Se conecta al servicio de usuario para login
             UsuarioService service = ApiClient.getClient().create(UsuarioService.class);
             retrofit2.Call<Usuario> call = service.Get(email, password);

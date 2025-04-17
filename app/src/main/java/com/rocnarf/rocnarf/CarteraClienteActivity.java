@@ -63,6 +63,8 @@ public class CarteraClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartera_cliente);
+
+
         Intent i = getIntent();
         idUsuario = i.getStringExtra(Common.ARG_IDUSUARIO);
         seccion =  i.getStringExtra(Common.ARG_SECCIOM);

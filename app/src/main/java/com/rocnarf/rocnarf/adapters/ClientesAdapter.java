@@ -41,26 +41,40 @@ import com.rocnarf.rocnarf.VentasMensualesClientesActivity;
 import com.rocnarf.rocnarf.models.Clientes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ClienteViewHolder> implements Filterable {
+public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ClienteViewHolder>  {
     Context context;
     OnClienteClickListener listener;
+    private String filtroTexto = "";
+    private String filtroTipoCliente = "";
+    private String filtroEstadoVisita = "";
+    private boolean filtroRevisita = false;
 
     private List<Clientes> mValues;
     private List<Clientes> mValuesFiltrados;
     private PopupMenu popup;
     private String idCliente, idUsuario, nombreCliente, mOrigenCliente,categoriaMed;
     public  String tipoCliente;
-    public ClientesAdapter(Context context, OnClienteClickListener listener, List<Clientes> values, String idUsuarioTrans) {
+    private String Seccion, Secciones;
+    private List<String> seccionesUsuario;
+
+    public ClientesAdapter(Context context, OnClienteClickListener listener, List<Clientes> values, String idUsuarioTrans, String seccion, String secciones) {
 
         this.context = context;
         this.listener = listener;
         this.mValues = values;
         this.mValuesFiltrados = values;
         idUsuario = idUsuarioTrans;
+        Seccion = seccion;
 
+        if (secciones != null && !secciones.isEmpty()) {
+            this.seccionesUsuario = Arrays.asList(secciones.split("\\s*,\\s*"));
+        } else {
+            this.seccionesUsuario = new ArrayList<>();
+        }
     }
 
     @NonNull
@@ -76,8 +90,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
         Clientes cliente = mValuesFiltrados.get(i);
         if (cliente != null) {
             viewHolder.bindTo(cliente, this.listener);
-        } else {
-
         }
 
     }
@@ -106,8 +118,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
         public final ImageView mEstadoVisita;
         public final ImageView mEstadoFilas;
         public Clientes mItem;
-
-
         public ClienteViewHolder(View view) {
             super(view);
             mView = view;
@@ -159,7 +169,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
                     if (valiZ.equals("Z")) {
                         popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                        popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_categoria).setVisible(false);
                         popupMenu.getMenu().findItem(R.id.action_recetas).setVisible(false);
@@ -175,8 +184,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
                             popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                         if (!mOrigenCliente.equals("FARMA"))
                             popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                        if (!mOrigenCliente.equals("FARMA"))
-                            popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                         if (!mOrigenCliente.equals("FARMA"))
                             popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                     }
@@ -202,12 +209,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
                                 iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, idCliente);
                                 iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
                                 context.startActivity(iFacturaDetalle);
-                                return true;
-                            } else if (itemId == R.id.action_cupos_credito) {
-                                Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                                i.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                                i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                                context.startActivity(i);
                                 return true;
                             } else if (itemId == R.id.action_totales_mes) {
                                 Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
@@ -292,25 +293,73 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
                     mTipoClienteObs.setText(cliente.getIdEspecialidades());
                 }
             }
-            if (cliente.getTipoObserv() == null){
 
-            }else {
-                mTipoCliente.setText(cliente.getClaseMedico());
-//                switch (cliente.getTipoObserv()) {
-//                    case "CLACT":
-//                        tipoCliente = "ACTIVO";
-//                        break;
-//                    case "CONTA":
-//                        tipoCliente = "CONTADO";
-//                        break;
-//                    case "CLPLE":
-//                        tipoCliente = "PRELEGAL";
-//                        break;
-//                    case "CLINC":
-//                        tipoCliente = "INACTIVO";
-//                        break;
-//                }
+            String claseMostrar = null;
+
+// Lista de roles especiales
+            List<String> rolesMultiples = Arrays.asList("GRC", "GVP", "GRA", "JVC", "GRS", "JVS");
+
+            if ("MEDICO".equals(cliente.getOrigen()) && "MEDICO".equals(cliente.getTipoObserv())) {
+
+                if (Seccion != null && !Seccion.isEmpty()) {
+
+                    boolean esRolRegional = rolesMultiples.contains(Seccion.toUpperCase());
+                    if (esRolRegional && seccionesUsuario != null && !seccionesUsuario.isEmpty()) {
+                        for (String seccion : seccionesUsuario) {
+                            if (seccion != null && !seccion.isEmpty()) {
+                                char primerCaracter = seccion.charAt(0);
+
+                                if (Character.isDigit(primerCaracter)) {
+                                    int numero = Character.getNumericValue(primerCaracter);
+                                    if (numero >= 1 && numero <= 6 && cliente.getClase() != null && !cliente.getClase().isEmpty()) {
+                                        claseMostrar = cliente.getClase();
+                                        break;
+                                    } else if (numero >= 7 && numero <= 9 && cliente.getClase3() != null && !cliente.getClase3().isEmpty()) {
+                                        claseMostrar = cliente.getClase3();
+                                        break;
+                                    }
+                                } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                        && cliente.getClase4() != null && !cliente.getClase4().isEmpty()) {
+                                    claseMostrar = cliente.getClase4();
+                                    break;
+                                }
+                            }
+                        }
+
+                    } else {
+                        // 🧪 Evaluar una sola sección
+                        char primerCaracter = Seccion.charAt(0);
+
+                        if (Character.isDigit(primerCaracter)) {
+                            int numero = Character.getNumericValue(primerCaracter);
+                            if (numero >= 1 && numero <= 6 && cliente.getClase() != null && !cliente.getClase().isEmpty()) {
+                                claseMostrar = cliente.getClase();
+                            } else if (numero >= 7 && numero <= 9 && cliente.getClase3() != null && !cliente.getClase3().isEmpty()) {
+                                claseMostrar = cliente.getClase3();
+                            }
+                        } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                && cliente.getClase4() != null && !cliente.getClase4().isEmpty()) {
+                            claseMostrar = cliente.getClase4();
+                        }
+                    }
+                }
+
+                if (claseMostrar != null && !claseMostrar.isEmpty()) {
+                    mTipoCliente.setText("Médico " + claseMostrar);
+                } else {
+                    mTipoCliente.setText(("Médico PC"));
+                }
+
+            } else {
+                if (cliente.getClaseMedico() != null && !cliente.getClaseMedico().isEmpty()) {
+                    mTipoCliente.setText((cliente.getClaseMedico()));
+                } else {
+                    mTipoCliente.setText("");
+                }
             }
+
+
+
 //            Log.d("menu", "tipoCliente --->tipoCliente"+ tipoCliente);
             if (cliente.getOrigen().equals("MEDICO")) {
                 mOrigen.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.d1));
@@ -324,7 +373,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             }
 
             // Validar y mostrar icono de revisita
-            if (cliente.getRevisita() != null && cliente.getRevisita() == 1) {
+            if (cliente.getRevisita() != null && cliente.getRevisita() == 1 && (claseMostrar != null && claseMostrar.equals("A"))) {
                 mRevisita.setVisibility(View.VISIBLE);
             } else {
                 mRevisita.setVisibility(View.GONE);
@@ -458,131 +507,108 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
         void onClienteClick(Clientes cliente);
     }
 
+    public void filtrarPorTexto(String texto) {
+        filtroTexto = texto.toLowerCase().trim();
 
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String query = charSequence.toString().trim().toLowerCase();
-                List<Clientes> filtered = new ArrayList<>();
+        filtroRevisita = filtroTexto.equals("x2");
 
-                if (query.isEmpty()) {
-                    filtered = mValues; // Si la consulta está vacía, mostrar todos los clientes.
-                } else {
-                    for (Clientes Busqueda : mValues) {
-                        // Verificar si el campo revisita es 1 o null
-                        Integer revisitaValue = Busqueda.getRevisita();
-                        boolean esRevisita = (revisitaValue != null && revisitaValue == 1);
+        aplicarFiltros(); // Aplicar los filtros nuevamente
+    }
+    public void setFiltroTipoCliente(String tipoCliente) {
+        this.filtroTipoCliente = tipoCliente;
+        aplicarFiltros(); // Aplicar los filtros nuevamente
+    }
 
-                        // FILTRO ESPECIAL: Si el usuario busca "x2" o "X2", solo mostrar clientes con revisita = 1
-                        if (query.equals("x2")) {
-                            if (esRevisita) {
-                                filtered.add(Busqueda);
+    public void setFiltroEstadoVisita(String estadoVisita) {
+        this.filtroEstadoVisita = estadoVisita;
+        aplicarFiltros(); // Aplicar los filtros nuevamente
+    }
+    private void aplicarFiltros() {
+        List<Clientes> filteredList = new ArrayList<>();
+
+        for (Clientes cliente : mValues) {
+
+            String claseMostrar = determinarClaseMostrar(cliente);
+
+            // Caso especial para clientes con clase A y revisita 1
+            boolean esClaseAConRevisita = "A".equals(claseMostrar) &&
+                    cliente.getRevisita() != null &&
+                    cliente.getRevisita() == 1;
+
+
+            boolean coincideTexto = filtroTexto.isEmpty() || cliente.getNombreCliente().toLowerCase().contains(filtroTexto)
+                    || cliente.getIdCliente().toLowerCase().contains(filtroTexto)
+                    || (cliente.getRepresentante() != null && cliente.getRepresentante().toLowerCase().contains(filtroTexto))
+                    || (cliente.getCiudad() != null && cliente.getCiudad().toLowerCase().contains(filtroTexto))
+                    || (cliente.getDireccion() != null && cliente.getDireccion().toLowerCase().contains(filtroTexto))
+                    || esClaseAConRevisita;
+
+            boolean coincideTipoCliente = filtroTipoCliente.isEmpty() || filtroTipoCliente.equals("Todos")
+                    || (filtroTipoCliente.equals("Clientes Z") && cliente.getIdCliente().toUpperCase().startsWith("Z"))
+                    || (filtroTipoCliente.equals("Médicos") && "MEDICO".equals(cliente.getOrigen()))
+                    || (filtroTipoCliente.equals("Clientes") && "FARMA".equals(cliente.getOrigen()) && !cliente.getIdCliente().toUpperCase().startsWith("Z"));
+
+            boolean coincideEstadoVisita = filtroEstadoVisita.isEmpty() || filtroEstadoVisita.equals("Todos")
+                    || (filtroEstadoVisita.equals("Visitados") &&
+                    (cliente.getEstadoVisita() != null &&
+                            (cliente.getEstadoVisita().equals("EFECT") || cliente.getEstadoVisita().equals("PEFECT"))))
+                    || (filtroEstadoVisita.equals("No Visitados") &&
+                    (cliente.getEstadoVisita() == null || cliente.getEstadoVisita().isEmpty() ||
+                            cliente.getEstadoVisita().equals("PLANI") || cliente.getEstadoVisita().equals("NOEFE")));
+
+
+            if (coincideTexto && coincideTipoCliente && coincideEstadoVisita) {
+                filteredList.add(cliente);
+            }
+        }
+
+        mValuesFiltrados = filteredList;
+        notifyDataSetChanged();
+    }
+
+    private String determinarClaseMostrar(Clientes cliente) {
+        String claseMostrar = null;
+
+        if (cliente == null) {
+            Log.w("ClaseMostrar", "Cliente es null");
+            return null;
+        }
+
+        String tipoObserv = cliente.getTipoObserv();
+        String origen = cliente.getOrigen();
+
+        if ("MEDICO".equals(tipoObserv) && "MEDICO".equals(origen)) {
+            if (seccionesUsuario != null && !seccionesUsuario.isEmpty()) {
+                for (String seccion : seccionesUsuario) {
+                    if (seccion != null && !seccion.isEmpty()) {
+                        char primerCaracter = seccion.charAt(0);
+
+                        if (Character.isDigit(primerCaracter)) {
+                            int numero = Character.getNumericValue(primerCaracter);
+                            if (numero >= 1 && numero <= 6 && cliente.getClase() != null) {
+                                claseMostrar = cliente.getClase(); // F1 y F2
+                                break;
+                            } else if (numero >= 7 && numero <= 9 && cliente.getClase3() != null) {
+                                claseMostrar = cliente.getClase3(); // F3
+                                break;
                             }
-                        }
-                        // FILTRO GENERAL: Buscar coincidencias en varios campos
-                        else if (Busqueda.getNombreCliente().toLowerCase().contains(query)
-                                || Busqueda.getIdCliente().toLowerCase().contains(query)
-                                || (Busqueda.getRepresentante() != null && Busqueda.getRepresentante().toLowerCase().contains(query))
-                                || (Busqueda.getCiudad() != null && Busqueda.getCiudad().toLowerCase().contains(query))
-                                || (Busqueda.getEspecialidades() != null && Busqueda.getEspecialidades().toLowerCase().contains(query))
-                                || (Busqueda.getIdEspecialidades() != null && Busqueda.getIdEspecialidades().toLowerCase().contains(query))
-                                || (Busqueda.getTipoObserv() != null && Busqueda.getTipoObserv().toLowerCase().contains(query))
-                                || (Busqueda.getClaseMedico() != null && Busqueda.getClaseMedico().toLowerCase().contains(query))
-                                || (Busqueda.getDireccion() != null && Busqueda.getDireccion().toLowerCase().contains(query))
-                        ) {
-                            filtered.add(Busqueda);
+                        } else if ((primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C')
+                                && cliente.getClase4() != null) {
+                            claseMostrar = cliente.getClase4(); // F4
+                            break;
                         }
                     }
                 }
-
-                FilterResults results = new FilterResults();
-                results.count = filtered.size();
-                results.values = filtered;
-                return results;
+            } else {
+                Log.w("ClaseMostrar", "seccionesUsuario es null o vacía");
             }
+        }
 
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults results) {
-                mValuesFiltrados = (List<Clientes>) results.values;
-                notifyDataSetChanged();
-            }
-        };
+        return claseMostrar;
     }
 
-
-    public void showPopup(View v, int menures) {
-        PopupMenu.OnMenuItemClickListener listener = new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                int itemId = menuItem.getItemId();
-
-                if (itemId == R.id.action_historial_pedidos) {
-                    Intent iFacturas = new Intent(context, ClientesFacturasActivity.class);
-                    iFacturas.putExtra(Common.ARG_IDCLIENTE, "cliente.getOrigen()");
-                    iFacturas.putExtra(Common.ARG_NOMBRE_CLIENTE, "nombreCliente");
-                    iFacturas.putExtra(Common.ARG_IDUSUARIO, "idUsuario");
-                    context.startActivity(iFacturas);
-                    return true;
-                } else if (itemId == R.id.action_detalle_productos) {
-                    Intent iFacturaDetalle = new Intent(context, FacturaDetalleActivity.class);
-                    // iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    // iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    // startActivity(iFacturaDetalle);
-                    return true;
-                } else if (itemId == R.id.action_cupos_credito) {
-                    Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                    // i.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    // i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    // startActivity(i);
-                    return true;
-                } else if (itemId == R.id.action_totales_mes) {
-                    Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
-                    // iTotalesXMes.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    // iTotalesXMes.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    // startActivity(iTotalesXMes);
-                    return true;
-                } else if (itemId == R.id.action_ficha_medico) {
-                    // Intent iFichaMedico = new Intent(context, MedicoFichaActivity.class);
-                    // iFichaMedico.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    // iFichaMedico.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    // startActivity(iFichaMedico);
-                    return true;
-                } else if (itemId == R.id.action_recetas) {
-                    Intent iRecetas = new Intent(context, RecetasXActivity.class);
-                    iRecetas.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    iRecetas.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    context.startActivity(iRecetas);
-                    return true;
-                } else if (itemId == R.id.action_categoria) {
-                    Intent iCategoria = new Intent(context, MedicosCategoriaActivity.class);
-                    iCategoria.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    iCategoria.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    context.startActivity(iCategoria);
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        };
-
-        popup = new PopupMenu(context.getApplicationContext(), v);
-        popup.setOnMenuItemClickListener(listener);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(menures, popup.getMenu());
-
-        // Configurar visibilidad de los elementos del menú
-        popup.getMenu().findItem(R.id.action_ficha_medico).setVisible(true);
-        popup.getMenu().findItem(R.id.action_recetas).setVisible(true);
-        popup.getMenu().findItem(R.id.action_categoria).setVisible(true);
-        popup.getMenu().findItem(R.id.action_historial_pedidos).setVisible(true);
-        popup.getMenu().findItem(R.id.action_detalle_productos).setVisible(true);
-        popup.getMenu().findItem(R.id.action_cupos_credito).setVisible(true);
-        popup.getMenu().findItem(R.id.action_totales_mes).setVisible(true);
-
-        popup.show();
-    }
 
 
 }
+
+

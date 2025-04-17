@@ -32,7 +32,22 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clientes_facturas.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clientes_facturas_nota_debitos.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cobro.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_crear_obsequio.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -43,6 +58,21 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_estadistica.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_factura_detalle.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_historial_comentarios.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_historial_producto_promocionado.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -63,6 +93,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_medico_ficha.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_medicos_categoria.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -132,6 +167,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_productos.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_queja.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -143,11 +183,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_recetas_x.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_registrar_placa.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -197,6 +232,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_visita_impulsadora_crear.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_visor_doc.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -228,6 +268,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_planificacion_crear.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_resultado_clientes.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -277,6 +322,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_notacredito.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pedido.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -298,16 +348,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_planificacion_list.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_cumpleaneros.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_vehiculo.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -372,6 +412,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_item_nc.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_nc_fragment.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -382,12 +427,27 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_panel_obsequio.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_panel_plan.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_pedido_lista.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_pedido_producto.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_pedidos_pendiente.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -428,6 +488,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_resultado_cliente.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_rutas.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -509,34 +574,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6c4e8bf-1cc8-4c9d-a7e5-46cc94718b99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/appInsightsSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/RegistroPlacaActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/VehiculoAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/VehiculoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ViaticoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/helpers/DateHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/helpers/ImageDownloader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Vehiculo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/VehiculoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/ViaticoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/validators/RucValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/VehiculoViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/viewmodel/ViaticoViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registrar_placa.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_vehiculo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MedicoFichaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/MedicoFichaActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/RegistroViaticoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/RegistroViaticoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/PlanesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/PlanesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Viatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Viatico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_viatico.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_viatico.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bottomsheetlayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bottomsheetlayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -555,6 +597,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/build.gradle">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -571,7 +619,14 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="rocnarf" type="f1a62948:ProjectNode" />
                 <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="rocnarf" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -583,9 +638,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
         <option value="Interface" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -597,6 +652,11 @@
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -633,12 +693,13 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.android.tools.idea.streaming.zoom.toolbar.visible&quot;: &quot;false&quot;,
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dev&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/App/rocnarf/app/src/main/res/drawable&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/App/rocnarf/app/src/main/res/drawable&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/BD ROCNARF&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Suggestions&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -771,6 +832,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
+        <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
+        <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
+        <item itemvalue="Gradle.D:/RocnarfApp/rocnarf/build.gradle" />
       </list>
     </recent_temporary>
   </component>
@@ -790,7 +854,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -804,12 +880,12 @@
       <map>
         <entry key="com.rocnarf.rocnarf">
           <value>
-            <CheckInfo lastCheckTimestamp="1740496748499" />
+            <CheckInfo lastCheckTimestamp="1744129233923" />
           </value>
         </entry>
         <entry key="com.rocnarf.rocnarf.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1740496748517" />
+            <CheckInfo lastCheckTimestamp="1744129233927" />
           </value>
         </entry>
       </map>

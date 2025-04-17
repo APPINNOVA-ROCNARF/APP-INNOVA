@@ -31,6 +31,7 @@ public class PedidoDetalle {
     private Double pvp;
 
     private Double pvf;
+    private Double esp;
 
     public int getIdLocalPedido() {
         return idLocalPedido;
@@ -126,5 +127,13 @@ public class PedidoDetalle {
 
     public void setPvp(Double pvp) {
         this.pvp = pvp;
+    }
+
+    public Double getEsp() {
+        return esp;
+    }
+
+    public void setEsp(Double esp) {
+        this.esp = esp;
     }
 }

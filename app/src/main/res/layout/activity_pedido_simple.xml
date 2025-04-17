@@ -86,7 +86,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
-d                <Spinner
+                <Spinner
                     android:id="@+id/tipo_precio"
                     android:layout_width="120dp"
                     android:layout_height="25dp"
@@ -523,7 +523,7 @@ d                <Spinner
                 android:layout_marginTop="8dp" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tv_observaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"

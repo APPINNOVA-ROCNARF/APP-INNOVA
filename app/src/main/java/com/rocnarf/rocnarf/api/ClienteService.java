@@ -8,10 +8,10 @@ import com.rocnarf.rocnarf.models.DetalleNotaCredito;
 import com.rocnarf.rocnarf.models.Factura;
 import com.rocnarf.rocnarf.models.FacturaDetalle;
 import com.rocnarf.rocnarf.models.FacturasNotaDebitos;
+import com.rocnarf.rocnarf.models.FacturasNotaDebitosEstadistica;
 import com.rocnarf.rocnarf.models.FcmTokenDivice;
 import com.rocnarf.rocnarf.models.FichaMedico;
 import com.rocnarf.rocnarf.models.NotaCredito;
-import com.rocnarf.rocnarf.models.Rutas;
 import com.rocnarf.rocnarf.models.VentaMensualXCliente;
 
 import java.util.List;
@@ -78,6 +78,13 @@ public interface ClienteService {
             @Query("seccion") String seccion
     );
 
+    @GET("api/clientes/facturasNotaDebitosestadistica?")
+    Call<FacturasNotaDebitosEstadistica> getFacturasNotaDebitosEstadistica(
+            @Query("id") String codigoCliente,
+            @Query("seccion") String seccion
+    );
+
+
     @GET("api/clientes/facturas/{idFactura}/detalles?")
     Call<List<FacturaDetalle>> GetFacturaDetalles(
             @Path("idFactura") String idFactura
@@ -93,12 +100,14 @@ public interface ClienteService {
 
     @GET("api/clientes/facturas/{idFactura}/cobros?")
     Call<List<Cobro>> GetCobrosXFactura(
-            @Path("idFactura") String idFactura
+            @Path("idFactura") String idFactura,
+            @Query("tipoConsulta") int tipoConsulta
     );
 
-    @GET("api/clientes/{idCliente}/cobros")
+    @GET("api/clientes/{idCliente}/cobros?")
     Call<List<Cobro>> GetCobrosXCliente(
-            @Path("idCliente") String idCliente
+            @Path("idCliente") String idCliente,
+            @Query("tipoConsulta") int tipoConsulta
     );
 
     //--------------------------------------------------

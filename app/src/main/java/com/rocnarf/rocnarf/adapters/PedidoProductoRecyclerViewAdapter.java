@@ -55,11 +55,15 @@ public class PedidoProductoRecyclerViewAdapter extends RecyclerView.Adapter<Pedi
             mValues.get(position).setPrecioTotal(mValues.get(position).getCantidad() *  mValues.get(position).getPrecio());
             holder.mPrecio.setText("$ " + String.format("%.2f",mValues.get(position).getPrecio()));
 
+        }else if(tipo.equalsIgnoreCase("ESP")){
+            mValues.get(position).setPrecio( mValues.get(position).getEsp());
+            mValues.get(position).setPrecioTotal(mValues.get(position).getCantidad() *  mValues.get(position).getPrecio());
+            holder.mPrecio.setText("$ " + String.format("%.2f",mValues.get(position).getPrecio()));
+
         }else{
             mValues.get(position).setPrecio( mValues.get(position).getPvp());
             mValues.get(position).setPrecioTotal(mValues.get(position).getCantidad() *  mValues.get(position).getPrecio());
             holder.mPrecio.setText("$ " + String.format("%.2f",mValues.get(position).getPrecio()));
-
         }
 
         holder.mTotal.setText(String.format("%.2f", mValues.get(position).getPrecioTotal()));

@@ -10,18 +10,14 @@
     <item
         android:id="@+id/action_historial_pedidos"
         android:orderInCategory="100"
-        android:title="Historial de Pedidos"
+        android:title="Historial de Crédito"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_detalle_productos"
         android:orderInCategory="100"
         android:title="Historial de  Productos y Cobros"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_cupos_credito"
-        android:orderInCategory="100"
-        android:title="Cupo de Credito"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_totales_mes"
         android:orderInCategory="100"

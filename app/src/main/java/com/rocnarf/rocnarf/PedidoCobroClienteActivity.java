@@ -1,5 +1,6 @@
 package com.rocnarf.rocnarf;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,7 @@ import com.rocnarf.rocnarf.repository.ClientesRepository;
 import java.util.List;
 
 public class PedidoCobroClienteActivity extends AppCompatActivity {
-    private String  seccion, rol;
+    private String  seccion, rol, secciones;
     private String idUsuario ;
     private int destino;
 
@@ -41,14 +42,23 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
         public void onClienteClick(Clientes cliente) {
             try {
                 Log.d("pedido","pedido de cobros --->"+ destino);
-                if (destino == 3) //Pedidos
+                if (destino == 3) // Pedidos
                 {
-                    Intent in = new Intent(getApplicationContext(), ProductosActivity.class);
-                    in.putExtra(Common.ARG_IDCLIENTE, cliente.getIdCliente());
-                    in.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    in.putExtra(Common.ARG_SECCIOM, seccion);
-                    in.putExtra(Common.ARG_NOMBRE_CLIENTE, cliente.getNombreCliente());
-                    startActivity(in);
+                    if ("SBC".equalsIgnoreCase(idUsuario)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PedidoCobroClienteActivity.this);
+                        builder.setTitle("¿Qué precios desea usar?")
+                                .setMessage("Seleccione si desea usar precios normales o precios especiales para este cliente.")
+                                .setPositiveButton("Precios especiales", (dialog, which) -> {
+                                    abrirProductosActivity(cliente, true);
+                                })
+                                .setNegativeButton("Precios normales", (dialog, which) -> {
+                                    abrirProductosActivity(cliente, false);
+                                })
+                                .setCancelable(true)
+                                .show();
+                    } else {
+                        abrirProductosActivity(cliente, false); // usuarios normales
+                    }
                 }
 
                 if (destino == 5)//Pedidos
@@ -119,6 +129,7 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
         destino = i.getIntExtra(Common.ARG_DESTINO_PEDIDO, 3);
         idUsuario = i.getStringExtra(Common.ARG_IDUSUARIO);
         seccion =  i.getStringExtra(Common.ARG_SECCIOM);
+        secciones = i.getStringExtra(Common.ARG_SECCIONES);
         rol=  i.getStringExtra(Common.ARG_ROL);
 
         CargarPanel();
@@ -130,6 +141,16 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
 
     }
 
+    private void abrirProductosActivity(Clientes cliente, boolean usarPrecioEspecial) {
+        Intent in = new Intent(getApplicationContext(), ProductosActivity.class);
+        in.putExtra(Common.ARG_IDCLIENTE, cliente.getIdCliente());
+        in.putExtra(Common.ARG_IDUSUARIO, idUsuario);
+        in.putExtra(Common.ARG_SECCIOM, seccion);
+        in.putExtra(Common.ARG_NOMBRE_CLIENTE, cliente.getNombreCliente());
+        in.putExtra(Common.ARG_USAR_PRECIO_ESPECIAL, usarPrecioEspecial);
+        startActivity(in);
+    }
+
 
     public void CargarPanel() {
         clientesRepository = new ClientesRepository(this, idUsuario);
@@ -137,12 +158,12 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
 
         List<Clientes> clientes = clientesRepository.getClientes(seccion, idUsuario, "FARMA", rol);
         for (int i=0; i < clientes.size(); i++) {
-            if (clientes.get(i).getTipoObserv().equals("CLI Z")) {
+            if ("CLI Z".equals(clientes.get(i).getTipoObserv())) {
                 clientes.remove(i);
                 i--;//decrease the counter by one
             }
         }
-        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario);
+        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario, seccion, secciones);
         lstPaneles = (RecyclerView) findViewById(R.id.list);
         lstPaneles.setLayoutManager(new LinearLayoutManager(this));
         lstPaneles.setAdapter(clientesAdapter);
@@ -161,13 +182,13 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
         });

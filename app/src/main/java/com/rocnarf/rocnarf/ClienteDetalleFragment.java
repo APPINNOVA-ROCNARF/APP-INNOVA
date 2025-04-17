@@ -36,7 +36,7 @@ import com.rocnarf.rocnarf.viewmodel.ClienteDetalleViewModel;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ClienteDetalleFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link ClienteDetalleFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -46,7 +46,7 @@ public class ClienteDetalleFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 
-    private String idCliente, idUsuario, nombreCliente;
+    private String idCliente, idUsuario, nombreCliente, Seccion;
     private Context context;
     private boolean esFarmacia = false;
     private OnFragmentInteractionListener mListener;
@@ -65,11 +65,12 @@ public class ClienteDetalleFragment extends Fragment {
     }
 
 
-    public static ClienteDetalleFragment newInstance(String idCliente, String idUsuario) {
+    public static ClienteDetalleFragment newInstance(String idCliente, String idUsuario, String seccion) {
         ClienteDetalleFragment fragment = new ClienteDetalleFragment();
         Bundle args = new Bundle();
         args.putString(Common.ARG_IDCLIENTE, idCliente);
         args.putString(Common.ARG_IDUSUARIO, idUsuario);
+        args.putString(Common.ARG_SECCIOM, seccion);
 
         fragment.setArguments(args);
         return fragment;
@@ -81,6 +82,7 @@ public class ClienteDetalleFragment extends Fragment {
         if (getArguments() != null) {
             idCliente = getArguments().getString(Common.ARG_IDCLIENTE);
             idUsuario = getArguments().getString(Common.ARG_IDUSUARIO);
+            Seccion = getArguments().getString(Common.ARG_SECCIOM);
         }
 
     }
@@ -121,7 +123,6 @@ public class ClienteDetalleFragment extends Fragment {
                     popupMenu.getMenu().findItem(R.id.action_recetas).setVisible(false);
                     popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                      popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                     popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                      popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                 }else {
                     if (esFarmacia)  popupMenu.getMenu().findItem(R.id.action_ficha_medico).setVisible(false);
@@ -130,7 +131,6 @@ public class ClienteDetalleFragment extends Fragment {
 
                     if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
                     if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-                    if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
                     if (!esFarmacia)  popupMenu.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
                 }
 
@@ -153,12 +153,6 @@ public class ClienteDetalleFragment extends Fragment {
                             iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, idCliente);
                             iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
                             context.startActivity(iFacturaDetalle);
-                            return true;
-                        } else if (itemId == R.id.action_cupos_credito) {
-                            Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                            i.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                            i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                            context.startActivity(i);
                             return true;
                         } else if (itemId == R.id.action_totales_mes) {
                             Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
@@ -301,7 +295,7 @@ public class ClienteDetalleFragment extends Fragment {
                                         @Override
                                         public void onClick(View view) {
                                             String geo = "google.navigation:q=" + clientes.getLatitud().toString() + "," + clientes.getLongitud();
-                                            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                            Intent intent = new Intent(Intent.ACTION_VIEW,
                                                     Uri.parse(geo));
                                             startActivity(intent);
                                         }
@@ -338,7 +332,32 @@ public class ClienteDetalleFragment extends Fragment {
                                 mTelefono2View.setMovementMethod(LinkMovementMethod.getInstance());
                             }
 
-                            if (clientes.getRevisita() != null && clientes.getRevisita() == 1) {
+                            String claseMostrar = null;
+
+                            if (clientes.getTipoObserv().equals("MEDICO") ) {
+                                if ("MEDICO".equals(clientes.getOrigen())) {
+                                    // Obtener la sección del cliente
+
+                                    if (Seccion != null && !Seccion.isEmpty()) {
+                                        // Determinar la clase según el primer carácter de la sección
+                                        char primerCaracter = Seccion.charAt(0);
+
+                                        if (Character.isDigit(primerCaracter)) {
+                                            int numero = Character.getNumericValue(primerCaracter);
+                                            if (numero >= 1 && numero <= 6) {
+                                                claseMostrar = clientes.getClase(); // F1 y F2
+                                            } else if (numero >= 7 && numero <= 9) {
+                                                claseMostrar = clientes.getClase3(); // F3
+                                            }
+                                        } else if (primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C') {
+                                            claseMostrar = clientes.getClase4(); // F4
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            if (clientes.getRevisita() != null && clientes.getRevisita() == 1 && (claseMostrar != null && claseMostrar.equals("A"))) {
                                 mRevisitaView.setVisibility(View.VISIBLE);
                             } else {
                                 mRevisitaView.setVisibility(View.GONE);
@@ -404,7 +423,7 @@ public class ClienteDetalleFragment extends Fragment {
          * onRequestPermissionsResult.
          */
         if (ContextCompat.checkSelfPermission(this.getActivity().getApplicationContext(),
-                android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             return  true;
         } else {
             ActivityCompat.requestPermissions(this.getActivity(),
@@ -431,12 +450,6 @@ public class ClienteDetalleFragment extends Fragment {
                     iFacturaDetalle.putExtra(Common.ARG_IDCLIENTE, idCliente);
                     iFacturaDetalle.putExtra(Common.ARG_IDUSUARIO, idUsuario);
                     startActivity(iFacturaDetalle);
-                    return true;
-                } else if (itemId == R.id.action_cupos_credito) {
-                    Intent i = new Intent(context, ClientesCupoCreditoActivity.class);
-                    i.putExtra(Common.ARG_IDCLIENTE, idCliente);
-                    i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
-                    startActivity(i);
                     return true;
                 } else if (itemId == R.id.action_totales_mes) {
                     Intent iTotalesXMes = new Intent(context, VentasMensualesClientesActivity.class);
@@ -492,7 +505,6 @@ public class ClienteDetalleFragment extends Fragment {
         if (!esFarmacia) {
             popup.getMenu().findItem(R.id.action_historial_pedidos).setVisible(false);
             popup.getMenu().findItem(R.id.action_detalle_productos).setVisible(false);
-            popup.getMenu().findItem(R.id.action_cupos_credito).setVisible(false);
             popup.getMenu().findItem(R.id.action_totales_mes).setVisible(false);
         }
 

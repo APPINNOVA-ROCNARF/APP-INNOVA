@@ -16,12 +16,65 @@
 
 
     <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:orientation="vertical"
         android:paddingBottom="10dp"
         android:background="@drawable/sin_border_gris">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/cupo_credito"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Cupo de Credito"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/cupo_credito_valor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0.00"
+                />
+            <TextView
+                android:id="@+id/space_1"
+                android:layout_marginLeft="10dp"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:id="@+id/space"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,6 +143,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 />
             <TextView
+                android:id="@+id/dolar_vencido"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceListItem"
@@ -117,6 +171,60 @@
 
             <TextView
                 android:id="@+id/f_mas_dia_ND"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/cheque_fecha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Cheques a fecha"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/cheque_fecha_valor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0.00"
+                />
+            <TextView
+                android:id="@+id/prom_dias_factura"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Días Fact"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/prom_dias_factura_valor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
@@ -180,20 +288,70 @@
                 />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/cupo_disponible"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Cupo Disponible"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:id="@+id/dolar_cupo"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAlignment="textEnd"
+                android:text="$" />
+            <TextView
+                android:id="@+id/cupo_disponible_valor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0.00"
+                />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:layout_marginEnd="8dp"
+
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/list_fac_ND"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="75dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
 
 

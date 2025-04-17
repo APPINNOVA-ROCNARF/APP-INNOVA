@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -731,6 +743,12 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layoutCoberturaMedica"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -738,7 +756,1219 @@
         android:layout_marginBottom="8dp"
         android:background="#FF000000"/>
 
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="Cobertura Médica"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="% De Médicos Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_visitados_porcentaje"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Pts obtenidos a la fecha"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/puntos_obtenidos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/puntos_obtenidos_porcentaje"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_visitados_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_visitados_porcentaje2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos No Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_no_visitados_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_no_visitados_porcentaje2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos__total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos__porcentaje"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos A"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_A"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_A_puntos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos B"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_B"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_B_puntos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos C"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_C"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_C_puntos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos Sin Categoría"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_PC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_PC_puntos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_total_puntos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_total_puntos2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos A Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_A_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_A_puntos_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos B Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_B_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_B_puntos_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos C Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_C_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_C_puntos_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos Sin Categoría Visitados"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_PC_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_PC_puntos_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Médicos Visitados Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/medicos_total_puntos_visitados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/medicos_total_puntos2_visitaods"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF000000"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ly_meg"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:text="MEG"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_MEG_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_MEG_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ly_ped"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="PED"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_PED_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_PED_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ly_oto"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="OTO"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_OTO_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_OTO_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ly_tra"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="TRA"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_TRA_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_TRA_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ly_car"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="CAR"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/cli_CAR_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/cli_CAR_por"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_uro"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="URO"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_URO_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_URO_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_end"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="END"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_END_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_END_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_gas"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="GAS"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_GAS_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_GAS_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_gio"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="GIO"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_GIO_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_GIO_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_cip"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="CIP"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_CIP_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_CIP_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_nea"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="NEA"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_NEA_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_NEA_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_cir"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="CIR"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_CIR_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_CIR_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ly_der"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="DER"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+            <TextView
+                android:id="@+id/cli_DERMA_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/cli_DERMA_por"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                />
+
+        </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="40dp"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/med_total_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:text="0"
+            />
+
+        <TextView
+            android:id="@+id/med_total_poc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
+</ScrollView>
+
 
 
 <!--        <ProgressBar-->

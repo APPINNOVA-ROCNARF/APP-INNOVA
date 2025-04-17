@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,20 +104,21 @@ public class PlanificacionFragment extends Fragment {
         showModal = singleToneClass.getModalCumple();
 
 
-        cargarVisitas();
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_planificacion_list, container, false);
-
         // Set the adapter
         final Context context = view.getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_list_fragment_planificacion_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView = view.findViewById(R.id.rv_list_fragment_planificacion_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context)); // Asegúrate de tener un LayoutManager
+        if (planificacionRecyclerViewAdapter == null) {
+            planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
+        }
+
+        recyclerView.setAdapter(planificacionRecyclerViewAdapter);
 
         myKonten = (LinearLayout) view.findViewById(R.id.modalCumple);
         btnClose = (Button) view.findViewById(R.id.btnCloseCumple);
@@ -138,13 +142,18 @@ public class PlanificacionFragment extends Fragment {
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                planificacionViewModel.getVisitasPlanificadasList(idAsesor);
-                mSwipeLayout.setRefreshing(false);
-
+                Log.d("SwipeRefresh", "Usuario ha iniciado el refresh");
+                cargarVisitas();
             }
         });
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            cargarVisitas();
+        }, 300);
         return view;
     }
+
+
 
 
     @Override
@@ -157,7 +166,9 @@ public class PlanificacionFragment extends Fragment {
                     + " must implement OnListFragmentInteractionListener");
         }
         this.context = context;
-        planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
+        if (planificacionRecyclerViewAdapter == null) {
+            planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
+        }
     }
 
     @Override
@@ -241,32 +252,41 @@ public class PlanificacionFragment extends Fragment {
 
 
     public void cargarVisitas() {
-
         planificacionViewModel = ViewModelProviders.of(getActivity()).get(PlanificacionViewModel.class);
-        planificacionViewModel.visitasLiveData.observe(this, new Observer<List<VisitaClientesList>>() {
-            @Override
-            public void onChanged(@Nullable List<VisitaClientesList> visitaClientesLists) {
-                planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(context, mListener);
-                planificacionRecyclerViewAdapter.setItems(visitaClientesLists);
 
-                totalReg = visitaClientesLists.size();
-                recyclerView.setAdapter(planificacionRecyclerViewAdapter);
+        if (!planificacionViewModel.visitasLiveData.hasObservers()) {
+            planificacionViewModel.visitasLiveData.observe(getViewLifecycleOwner(), new Observer<List<VisitaClientesList>>() {
+                @Override
+                public void onChanged(@Nullable List<VisitaClientesList> visitaClientesLists) {
+                    if (visitaClientesLists != null && !visitaClientesLists.isEmpty()) {
+                        Log.d("cargarVisitas", "Datos recibidos, tamaño de la lista: " + visitaClientesLists.size());
 
+                        if (planificacionRecyclerViewAdapter == null) {
+                            planificacionRecyclerViewAdapter = new PlanificacionRecyclerViewAdapter(getContext(), mListener);
+                            recyclerView.setAdapter(planificacionRecyclerViewAdapter);
+                        }
 
-                if(totalReg > 0 && showModal != "S") {
-                    CargaModalCumple();
+                        planificacionRecyclerViewAdapter.setItems(visitaClientesLists);
+                        totalReg = visitaClientesLists.size();
+
+                        if (totalReg > 0 && !"S".equals(showModal)) {
+                            CargaModalCumple();
+                        }
+                    } else {
+                        Log.d("cargarVisitas", "La lista de visitas está vacía o es nula.");
+                    }
+
+                    if (mSwipeLayout.isRefreshing()) {
+                        mSwipeLayout.post(() -> mSwipeLayout.setRefreshing(false));
+                        Log.d("SwipeRefresh", "Refresh detenido");
+                    }
                 }
-            }
-        });
-        planificacionViewModel.getVisitasPlanificadasList(idAsesor);
+            });
+        }
 
-//        .observe(this, new Observer<List<VisitaClientesList>>() {
-//            @Override
-//            public void onChanged(@Nullable List<VisitaClientesList> listaVisitaClientes) {
-//                planificacionRecyclerViewAdapter.setItems(listaVisitaClientes);
-//                //mSwipeLayout.setRefreshing(false);
-//            }
-//        });
+        planificacionViewModel.getVisitasPlanificadasList(idAsesor);
     }
+
+
 
 }

@@ -32,6 +32,11 @@ public class VentasMensualesClientesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventas_mensuales_clientes);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         Intent i = getIntent();
         idUsuario = i.getStringExtra(Common.ARG_IDUSUARIO);
         idCliente =  i.getStringExtra(Common.ARG_IDCLIENTE);
@@ -53,5 +58,11 @@ public class VentasMensualesClientesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

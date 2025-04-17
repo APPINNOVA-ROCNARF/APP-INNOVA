@@ -21,6 +21,7 @@ import com.rocnarf.rocnarf.models.Pedido;
 import com.rocnarf.rocnarf.viewmodel.PedidoListaViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PedidoListaActivity extends AppCompatActivity {
     private String idUsuario, sector, idAsesor, rolUsuario;
@@ -59,6 +60,9 @@ public class PedidoListaActivity extends AppCompatActivity {
                     i.putExtra(Common.ARG_SECCIOM, sector);
                     i.putExtra(Common.ARG_IDCLIENTE, pedido.getIdCliente());
                     i.putExtra(Common.ARG_IDPEDIDO, pedido.getIdLocalPedido());
+                    if (Objects.equals(pedido.getTipoPrecio(), "ESP")){
+                        i.putExtra(Common.ARG_USAR_PRECIO_ESPECIAL, true);
+                    }
                     startActivity(i);
                 }
                 else {

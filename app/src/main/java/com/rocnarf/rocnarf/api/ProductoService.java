@@ -1,5 +1,6 @@
 package com.rocnarf.rocnarf.api;
 
+import com.rocnarf.rocnarf.models.PrecioEspecialCliente;
 import com.rocnarf.rocnarf.models.Producto;
 import com.rocnarf.rocnarf.models.Usuario;
 
@@ -12,6 +13,10 @@ public interface ProductoService {
 
     @GET("api/productos/")
     Call<List<Producto>> GetAll(
+    );
+
+    @GET("api/productos/preciosespeciales/")
+    Call<List<PrecioEspecialCliente>> GetPrecioEspecial(
     );
 
 }

@@ -23,16 +23,18 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="numero" />
+            android:textStyle="bold"
+            android:text="Número N/C:" />
 
         <TextView
-            android:id="@+id/tv_fecha_row_cobro"
+            android:id="@+id/tv_monto_row_nc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
+            android:textStyle="bold"
             android:textAlignment="textEnd" />
     </LinearLayout>
 
@@ -66,16 +68,10 @@
             android:layout_weight="1"
             android:text="TextView" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="4dp"
-            android:text="$ "
-            android:textAlignment="textEnd" />
+
 
         <TextView
-            android:id="@+id/tv_monto_row_nc"
+            android:id="@+id/tv_fecha_row_cobro"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_marginTop="4dp"

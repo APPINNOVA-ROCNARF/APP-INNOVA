@@ -22,9 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.adapters.ClientesFacturasNotaDebitosReciclerViewAdapter;
-import com.rocnarf.rocnarf.adapters.ClientesFacturasReciclerViewAdapter;
 import com.rocnarf.rocnarf.models.Factura;
 import com.rocnarf.rocnarf.models.FacturasNotaDebitos;
+import com.rocnarf.rocnarf.models.FacturasNotaDebitosEstadistica;
 import com.rocnarf.rocnarf.viewmodel.ClientesFacturasViewModel;
 
 import java.math.BigDecimal;
@@ -44,7 +44,8 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ArrayList<String> facturasSeleccionadas = new ArrayList<String>();
     private Button btCobrar;
-    private TextView pendientesPago, totalSeleccionadosTextView, valorSaldoAcu, valorVencAcu, FacMasDias, valorNoVencido,totalNBFac,SaldoFavorCliente;
+    private TextView pendientesPago, totalSeleccionadosTextView, valorSaldoAcu, dolarVencido,
+            valorVencAcu, FacMasDias, valorNoVencido,totalNBFac,SaldoFavorCliente, cupoCredito, promDiasFact, chequeFecha,cupoDisponible, dolarCupo;
     private int totalSeleccionados = 0;
     private LinearLayout cobroLayout;
     private int FacturaMasDia = 0;
@@ -75,11 +76,17 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
 
 
         valorSaldoAcu = (TextView) findViewById(R.id.valor_saldo_ND);
+        dolarVencido = (TextView) findViewById(R.id.dolar_vencido);
         valorVencAcu = (TextView) findViewById(R.id.valor_vencido_ND);
         FacMasDias = (TextView) findViewById(R.id.f_mas_dia_ND);
         totalNBFac = (TextView) findViewById(R.id.valor_total_ND);
         SaldoFavorCliente = (TextView) findViewById(R.id.tv_cliente_nd);
         valorNoVencido = (TextView) findViewById(R.id.no_vencido_ND);
+        cupoCredito = (TextView) findViewById(R.id.cupo_credito_valor);
+        promDiasFact = (TextView) findViewById(R.id.prom_dias_factura_valor);
+        chequeFecha = (TextView) findViewById(R.id.cheque_fecha_valor);
+        cupoDisponible = (TextView) findViewById(R.id.cupo_disponible_valor);
+        dolarCupo = (TextView) findViewById(R.id.dolar_cupo);
 
         final ClientesFacturasNotaDebitosReciclerViewAdapter.FacturaSeleccionadaListener facturaSeleccionadaListener = new ClientesFacturasNotaDebitosReciclerViewAdapter.FacturaSeleccionadaListener() {
             @Override
@@ -104,6 +111,28 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
         clientesFacturasViewModel = ViewModelProviders.of(this).get(ClientesFacturasViewModel.class);
         clientesFacturasViewModel.setIdUsuario(idUsuario);
 
+        clientesFacturasViewModel.getFacturasNotaDebitosEstadistica(idCliente,"").observe(this, new Observer<FacturasNotaDebitosEstadistica>() {
+            @Override
+            public void onChanged(FacturasNotaDebitosEstadistica facturasNotaDebitosEstadistica) {
+                DecimalFormat df = new DecimalFormat("#,##0.00");
+                cupoCredito.setText(df.format(facturasNotaDebitosEstadistica.getCupoTotal()));
+                valorNoVencido.setText(df.format(facturasNotaDebitosEstadistica.getValorNoVencido()));
+                promDiasFact.setText(String.valueOf(facturasNotaDebitosEstadistica.getPromedioDias()));
+                chequeFecha.setText(df.format(facturasNotaDebitosEstadistica.getTotalChequesFecha()));
+                totalNBFac.setText(df.format(facturasNotaDebitosEstadistica.getCarteraTotal()));
+
+                BigDecimal CupoValor = facturasNotaDebitosEstadistica.getCupoDisponible();
+
+                cupoDisponible.setText(df.format(CupoValor));
+
+                if(CupoValor.compareTo(BigDecimal.ZERO) < 0){
+                    dolarCupo.setTextColor(Color.RED);
+                    cupoDisponible.setTextColor(Color.RED);
+                }
+
+            }
+        });
+
         clientesFacturasViewModel.getFacturasNotaDebitos(idCliente, "").observe(this, new Observer<List<FacturasNotaDebitos>>() {
             @Override
             public void onChanged(@Nullable List<FacturasNotaDebitos> facturas) {
@@ -121,6 +150,9 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
                 Log.d("valor v","nota debito----->");
 
                 for (int i = 0; i < facturas.size(); i++) {
+
+                    facturas.get(i).getVencimiento();
+
                     valorSaldo = facturas.get(i).getValor().subtract(facturas.get(i).getAbonos());
                     valorSaldo = valorSaldo.subtract(facturas.get(i).getNotaCredito());
                     if (valorSaldo.compareTo(new BigDecimal(0)) < 0) {
@@ -220,6 +252,7 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
                 SaldoFavorCliente.setText("$ " + formatAFavor);
                 if(CarteraVencida.compareTo(BigDecimal.ZERO )> 0){
                     valorSaldoAcu.setTextColor(Color.RED);
+                    dolarVencido.setTextColor(Color.RED);
                     valorSaldoAcu.setText(formatCartera);
                 }else{
                     valorSaldoAcu.setTextColor(Color.BLACK);
@@ -243,7 +276,7 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
 
                     String formattV = formatter.format(valorNovencidoAcu);
 
-                    valorNoVencido.setText(formattV);
+                    //valorNoVencido.setText(formattV);
                     total = total.add(valorNovencidoAcu);
                 }
 
@@ -275,7 +308,7 @@ public class ClientesFacturasNotaDebitosActivity extends AppCompatActivity {
                 }else{
                     SaldoFavorCliente.setTextColor(Color.BLACK);
                 }
-                totalNBFac.setText(formatt);
+                //totalNBFac.setText(formatt);
 
                 if (facturas != null) {
                     if (facturas.size() == 0)

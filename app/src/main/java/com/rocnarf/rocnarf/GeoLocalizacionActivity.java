@@ -46,7 +46,7 @@ public class GeoLocalizacionActivity extends AppCompatActivity {
         }
     };
 
-    private String idUsuario, seccion;
+    private String idUsuario, seccion, secciones;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +59,7 @@ public class GeoLocalizacionActivity extends AppCompatActivity {
         Intent i = getIntent();
         idUsuario = i.getStringExtra(Common.ARG_IDUSUARIO);
         seccion =  i.getStringExtra(Common.ARG_SECCIOM);
+        secciones = i.getStringExtra(Common.ARG_SECCIONES);
 
         CargarPanel();
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -73,7 +74,7 @@ public class GeoLocalizacionActivity extends AppCompatActivity {
         clientesRepository = new ClientesRepository(this, idUsuario);
 
         List<Clientes> clientes = clientesRepository.getClientesSinGeo(seccion, idUsuario, null);
-        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario);
+        clientesAdapter =  new ClientesAdapter(this, listener, clientes, idUsuario, seccion, secciones);
         lstPaneles = (RecyclerView) findViewById(R.id.list);
         lstPaneles.setLayoutManager(new LinearLayoutManager(this));
         lstPaneles.setAdapter(clientesAdapter);
@@ -92,13 +93,13 @@ public class GeoLocalizacionActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                clientesAdapter.getFilter().filter(query);
+                clientesAdapter.filtrarPorTexto(query);
                 return false;
             }
         });

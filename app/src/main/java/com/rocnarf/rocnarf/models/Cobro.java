@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Cobro {
 
@@ -56,6 +57,16 @@ public class Cobro {
     @SerializedName("numeroCheque")
     @Expose
     private String numeroCheque;
+
+    private List<Cobro> pedidosRelacionados;
+
+    public List<Cobro> getPedidosRelacionados() {
+        return pedidosRelacionados;
+    }
+
+    public void setPedidosRelacionados(List<Cobro> pedidosRelacionados) {
+        this.pedidosRelacionados = pedidosRelacionados;
+    }
 
     @NonNull
     public int getIdCobro() {

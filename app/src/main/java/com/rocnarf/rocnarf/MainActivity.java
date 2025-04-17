@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PlanificacionFragment.OnListFragmentInteractionListener {
 
     private PlanificacionViewModel planificacionViewModel;
-    private String idAsesor, seccion, nombreUsuario, rolUsuario;
+    private String idAsesor, seccion, secciones, nombreUsuario, rolUsuario;
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         seccion =  i.getStringExtra(Common.ARG_SECCIOM);
         nombreUsuario = i.getStringExtra(Common.ARG_NOMBREUSUARIO);
         rolUsuario = i.getStringExtra(Common.ARG_ROL);
+        secciones =  i.getStringExtra(Common.ARG_SECCIONES);
         // Si la actividad es le buscan lamada de una actividad que no contienen los datos de Usuario sen la ase de datos
         if (idAsesor == null){
             UsuariosDao usuariosDao = RocnarfDatabase.getDatabase(getApplicationContext()).UsuariosDao();
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity
                 seccion =  usuario.getSeccion();
                 nombreUsuario = usuario.getNombre();
                 rolUsuario = usuario.getRol();
+                secciones = usuario.getSecciones();
             }else {
                 // Si pr alguna razon no esta logoneado se los devuelve a la panalla de login
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity
                 i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
                 i.putExtra(Common.ARG_SECCIOM, seccion);
                 i.putExtra(Common.ARG_ROL, rolUsuario);
+                i.putExtra(Common.ARG_SECCIONES, secciones);
                 startActivity(i);
             }
         });
@@ -140,6 +143,7 @@ public class MainActivity extends AppCompatActivity
                 bundle.putString(Common.ARG_IDUSUARIO, idAsesor);
                 bundle.putString(Common.ARG_SECCIOM, seccion);
                 bundle.putString(Common.ARG_ROL, rolUsuario);
+                bundle.putString(Common.ARG_SECCIONES, secciones);
                 planificacion.setArguments(bundle);
                 ft.replace(R.id.fl_fragment_activity_main, planificacion);
                 ft.commit();
@@ -353,7 +357,6 @@ public class MainActivity extends AppCompatActivity
 //            i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
 //            i.putExtra(Common.ARG_SECCIOM, seccion);
 //            i.putExtra(Common.ARG_ROL, rolUsuario);
-            startActivity(i);
         }else if (id == R.id.nav_viatico_principal) {
             context = this;
             final Dialog dialog = new Dialog(this);
@@ -444,6 +447,7 @@ public class MainActivity extends AppCompatActivity
             i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
             i.putExtra(Common.ARG_SECCIOM, seccion);
             i.putExtra(Common.ARG_ROL, rolUsuario);
+            i.putExtra(Common.ARG_SECCIONES, secciones);
             startActivity(i);
 
         }else if (id == R.id.nav_salir) {
