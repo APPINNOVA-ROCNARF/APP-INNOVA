@@ -70,7 +70,7 @@ public class PedidoSimpleActivity extends AppCompatActivity implements PedidoPro
     private TextView mTotalF3, mDescuentoF3, mFinalF3;
     private TextView mTotalF2, mDescuentoF2, mFinalF2;
     private TextView mTotalF4, mDescuentoF4, mFinalF4;
-    private TextView mTotalGEN, mDescuentoGEN, mFinalGEN;
+    private TextView mTotalGEN, mDescuentoGEN, mFinalGEN, tvDescuento;
     //private ImageButton mAgregarDescuento;
     FloatingActionButton mAgregarDescuento;
     private ClienteDetalleViewModel clienteDetalleViewModel;
@@ -99,6 +99,7 @@ private Boolean usarPrecioEspecial;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_simple);
 
+
         Intent intent = getIntent();
         idUsuario = intent.getStringExtra(Common.ARG_IDUSUARIO);
         seccion = intent.getStringExtra(Common.ARG_SECCIOM);
@@ -108,6 +109,9 @@ private Boolean usarPrecioEspecial;
         usarPrecioEspecial = getIntent().getBooleanExtra(Common.ARG_USAR_PRECIO_ESPECIAL, false);
         Log.d("local", "local" + idLocalPedido);
         final ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
         if (nombreCliente != null) {
             actionBar.setTitle(nombreCliente);
             actionBar.setSubtitle(idCliente);
@@ -186,6 +190,14 @@ private Boolean usarPrecioEspecial;
 
 
         mAgregarDescuento = (FloatingActionButton) findViewById(R.id.ib_descuento_fragment_pedido);
+
+        if(usarPrecioEspecial){
+            mAgregarDescuento.setVisibility(View.GONE);
+            tvDescuento.setVisibility(View.GONE);
+        }else{
+            mAgregarDescuento.setVisibility(View.VISIBLE);
+            tvDescuento.setVisibility(View.VISIBLE);
+        }
         mAgregarDescuento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -312,7 +324,6 @@ private Boolean usarPrecioEspecial;
                     public void onChanged(@Nullable Pedido pedido) {
                         pedidoExistemte = pedido;
                         SimpleDateFormat sdf = new SimpleDateFormat(Common.DATE_FORMAT);
-                        mPedido.setText("Pedido " + String.valueOf(pedido.getIdPedido()));
                         mFecha.setText(sdf.format(pedido.getFechaPedido()));
                         mTotal.setText(String.format("%.2f", pedido.getPrecioTotal()));
                         mDescuento.setText(String.format("%.2f", pedido.getDescuento()));
@@ -364,6 +375,10 @@ private Boolean usarPrecioEspecial;
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == android.R.id.home) {
+            finish(); // Cierra la actividad y vuelve a la anterior
+            return true;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_eliminar_pedido) {
             eliminarPedido();
@@ -834,6 +849,7 @@ private Boolean usarPrecioEspecial;
 
         mTipoPrecio = (Spinner) findViewById(R.id.tipo_precio);
 
+        tvDescuento = (TextView) findViewById(R.id.tv_descuento_total);
 
         final ArrayList<String> listaNombre = new ArrayList<>();
 

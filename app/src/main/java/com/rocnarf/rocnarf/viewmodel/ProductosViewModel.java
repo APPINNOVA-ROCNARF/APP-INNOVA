@@ -126,6 +126,7 @@ public class ProductosViewModel extends AndroidViewModel {
             if (mapa.containsKey(producto.getIdProducto())) {
                 PrecioEspecialCliente pec = mapa.get(producto.getIdProducto());
                 producto.setPrecioEspecial(pec.getPrecioDesc());
+                producto.setFechaVencimiento(pec.getFechaHasta());
                 productosConPrecioEspecial.add(producto);
             }
         }

@@ -1,3 +1,4 @@
+
 package com.rocnarf.rocnarf.adapters;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -26,10 +27,11 @@ import com.rocnarf.rocnarf.viewmodel.PedidoViewModel;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<ProductosReciclerViewAdapter.ViewHolder>
-    implements Filterable {
+        implements Filterable {
     private final List<Producto> mValues;
     private List<Producto> mValuesFiltrados;
     private AddProductoListener listener;
@@ -72,17 +74,15 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
         double precio = mValuesFiltrados.get(position).getPrecio();
         double pvp = mValuesFiltrados.get(position).getPvp();
         Double precioEspecial = mValuesFiltrados.get(position).getPrecioEspecial();
+        Date FechaVencimiento = mValuesFiltrados.get(position).getFechaVencimiento();
+
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("P.V.F.: $ ").append(String.format("%.2f", precio));
         builder.append("  P.V.P.: $ ").append(String.format("%.2f", pvp));
 
         if (precioEspecial != null) {
-<<<<<<< Updated upstream
-            String pveText = "  P.V.E.: $ " + String.format("%.2f", precioEspecial);
-=======
             String pveText = "  ESP.: $ " + String.format("%.2f", precioEspecial);
->>>>>>> Stashed changes
             int start = builder.length();
             builder.append(pveText);
             int end = builder.length();
@@ -124,14 +124,34 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
             holder.mContenedor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Date fechaActual = new Date();
 
-                    holder.mAgregarLayout.setVisibility( holder.mAgregarLayout.getVisibility() == View.GONE? View.VISIBLE : View.GONE );
+                    boolean layoutVisible = holder.mAgregarLayout.getVisibility() == View.VISIBLE
+                            || holder.tvMensajePrecioNoValido.getVisibility() == View.VISIBLE;
 
-                    for (int i = 0; i < pedidoDetalles.size(); i++) {
+                    if (layoutVisible) {
+                        // Si alguno de los dos está visible, ocultarlos ambos
+                        holder.mAgregarLayout.setVisibility(View.GONE);
+                        holder.tvMensajePrecioNoValido.setVisibility(View.GONE);
+                    } else {
+                        if (FechaVencimiento != null && FechaVencimiento.before(fechaActual)) {
+                            // Producto vencido → mostrar solo mensaje
+                            holder.tvMensajePrecioNoValido.setVisibility(View.VISIBLE);
+                            holder.mAgregarLayout.setVisibility(View.GONE);
+                            holder.tvMensajePrecioNoValido.setText("Precio ESP requiere actualización en Sistema FOX\nFavor contactarse con Departamento de ventas");
 
-                        if( pedidoDetalles.get(i).getIdProducto().equals(codigProducto)){
-                            holder.mBono.setText(String.valueOf(pedidoDetalles.get(i).getBono()));
-                            holder.mCantidad.setText(String.valueOf(pedidoDetalles.get(i).getCantidad()));
+                        } else {
+                            // Producto vigente → mostrar input
+                            holder.mAgregarLayout.setVisibility(View.VISIBLE);
+                            holder.tvMensajePrecioNoValido.setVisibility(View.GONE);
+
+                            // Cargar cantidad si ya existe en pedido
+                            for (int i = 0; i < pedidoDetalles.size(); i++) {
+                                if (pedidoDetalles.get(i).getIdProducto().equals(codigProducto)) {
+                                    holder.mCantidad.setText(String.valueOf(pedidoDetalles.get(i).getCantidad()));
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -192,10 +212,10 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
         public final TextView mEscalaBonificacion;
         public final TextView mTipo;
         public final TextInputEditText mCantidad;
-        public final TextInputEditText  mBono;
         public final LinearLayout mAgregarLayout;
         public final ImageButton mAgregar;
         public Producto mItem;
+        TextView tvMensajePrecioNoValido;
 
 
         public ViewHolder(View view, final AddProductoListener listener) {
@@ -209,9 +229,9 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
             mEscalaBonificacion = (TextView) view.findViewById(R.id.tv_escala_row_productos);
             mTipo = (TextView) view.findViewById(R.id.tv_tipo_row_productos);
             mCantidad = (TextInputEditText) view.findViewById(R.id.et_cantidad_row_productos);
-            mBono = (TextInputEditText) view.findViewById(R.id.et_bono_row_productos);
             mAgregarLayout = (LinearLayout) view.findViewById(R.id.ll_agregar_row_productos);
             mAgregar = (ImageButton) view.findViewById(R.id.bt_agregar_row_productos);
+            tvMensajePrecioNoValido = (TextView) view.findViewById(R.id.tv_mensaje_no_editar);
 
             mAgregar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -221,7 +241,6 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
                     //if (!mCantidad.getText().toString().isEmpty()) { cantidad = Integer.parseInt( mCantidad.getText().toString()); mCantidad.setText(""); }
                     //if (!mBono.getText().toString().isEmpty()){ bono =Integer.parseInt( mBono.getText().toString()); mBono.setText("");}
                     if (!mCantidad.getText().toString().isEmpty()) { cantidad = Integer.parseInt( mCantidad.getText().toString());  }
-                    if (!mBono.getText().toString().isEmpty()){ bono =Integer.parseInt( mBono.getText().toString()); }
                     listener.AddProducto(mItem, cantidad, bono );
                 }
             });

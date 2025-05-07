@@ -745,7 +745,20 @@ public class ResultadoVisitaActivity extends AppCompatActivity
         latitud = cliente.getLatitud();
         longitud = cliente.getLongitud();
         origenCliente = cliente.getOrigen();
-        revisita = cliente.getRevisita();
+
+        boolean esRevisita = false;
+
+        if (cliente.getRevisita() != null && cliente.getRevisita() == 1 && seccion.equals(cliente.getSeccion2())) {
+            esRevisita = true;
+        } else if (cliente.getRevisita3() != null && cliente.getRevisita3() == 1 && seccion.equals(cliente.getSeccion3())) {
+            esRevisita = true;
+        } else if (cliente.getRevisita4() != null && cliente.getRevisita4() == 1 && seccion.equals(cliente.getSeccion4())) {
+            esRevisita = true;
+        }
+
+        if(esRevisita){
+            revisita = 1;
+        }
         tipoObser = cliente.getTipoObserv();
         clase = cliente.getClase();
         clase3 = cliente.getClase3();

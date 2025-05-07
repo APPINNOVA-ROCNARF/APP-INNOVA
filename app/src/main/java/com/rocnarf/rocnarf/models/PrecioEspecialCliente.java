@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 @Entity(tableName = "precio_especial_cliente")
 public class PrecioEspecialCliente {
 
@@ -22,11 +24,11 @@ public class PrecioEspecialCliente {
 
     @SerializedName("fechaDesde")
     @Expose
-    private String fechaDesde;
+    private Date fechaDesde;
 
     @SerializedName("fechaHasta")
     @Expose
-    private String fechaHasta;
+    private Date fechaHasta;
 
     @SerializedName("precioPVF")
     @Expose
@@ -59,12 +61,6 @@ public class PrecioEspecialCliente {
     public String getCodigoProducto() { return codigoProducto; }
     public void setCodigoProducto(String codigoProducto) { this.codigoProducto = codigoProducto; }
 
-    public String getFechaDesde() { return fechaDesde; }
-    public void setFechaDesde(String fechaDesde) { this.fechaDesde = fechaDesde; }
-
-    public String getFechaHasta() { return fechaHasta; }
-    public void setFechaHasta(String fechaHasta) { this.fechaHasta = fechaHasta; }
-
     public Double getPrecioPVF() { return precioPVF; }
     public void setPrecioPVF(Double precioPVF) { this.precioPVF = precioPVF; }
 
@@ -79,4 +75,20 @@ public class PrecioEspecialCliente {
 
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
+
+    public Date getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public void setFechaDesde(Date fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
+
+    public Date getFechaHasta() {
+        return fechaHasta;
+    }
+
+    public void setFechaHasta(Date fechaHasta) {
+        this.fechaHasta = fechaHasta;
+    }
 }

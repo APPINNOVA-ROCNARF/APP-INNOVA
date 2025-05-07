@@ -161,6 +161,13 @@ public class Clientes  implements Parcelable {
     @SerializedName("revisita")
     @Expose
     private Integer revisita;
+    @SerializedName("revisita3")
+    @Expose
+    private Integer revisita3;
+
+    @SerializedName("revisit4")
+    @Expose
+    private Integer revisita4;
 
     private String estadoVisita;
     private String pedido;
@@ -536,6 +543,22 @@ public class Clientes  implements Parcelable {
     public Integer getRevisita() {return revisita;}
     public void setRevisita(Integer revisita) {
         this.revisita  = revisita;
+    }
+
+    public Integer getRevisita3() {
+        return revisita3;
+    }
+
+    public void setRevisita3(Integer revisita3) {
+        this.revisita3 = revisita3;
+    }
+
+    public Integer getRevisita4() {
+        return revisita4;
+    }
+
+    public void setRevisita4(Integer revisita4) {
+        this.revisita4 = revisita4;
     }
 
     public void setAuspiciado(Boolean auspiciado) {

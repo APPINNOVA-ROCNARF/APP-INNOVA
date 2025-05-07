@@ -82,7 +82,7 @@ public class ClientesRepository {
                 ///Call<ClientesResponse> call = service.GetClientes(1, 9000, 0, null, null, null, seccion, null, null, rolUsuario, null);
                 Call<ClientesResponse> call;
 
-                if (rolUsuario.equals("GR") || rolUsuario.equals("IM") || idUsuario.equals("SBC")) {
+                if (rolUsuario.equals("GR") || rolUsuario.equals("IM") || idUsuario.equals("SBC") || idUsuario.equals("AMY")) {
                     call = service.GetClientes(1, 9000, 2, null, null, null, null, null, null, rolUsuario, idUsuario);
                 }else{
                     call = service.GetClientes(1, 9000, 0, null, null, null, seccion, null, null, rolUsuario, null);
@@ -140,7 +140,7 @@ public class ClientesRepository {
 
         List<Clientes> lista = new ArrayList<>();
 
-        if(rol !=null && (rol.equals("GR") || rol.equals("IM") || rol.equals("KAM") ))
+        if(rol !=null && (rol.equals("GR") || rol.equals("IM") || rol.equals("KAM") || rol.equals("VE") ))
         {
             lista = this.clientesDao.getByJefes(null, null, origen,  null, null, idAsesor);
 

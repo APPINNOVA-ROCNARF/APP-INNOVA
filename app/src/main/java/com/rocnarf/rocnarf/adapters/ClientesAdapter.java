@@ -138,16 +138,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             mOrigenMenu = (TextView) view.findViewById(R.id.tv_origen);
             mRevisita = (ImageView) view.findViewById(R.id.iv_cliente_revisita);
             ImageButton mMenuPedidosView = (ImageButton) view.findViewById(R.id.ib_pedido_fragment_cliente_detalle);
-//            mMenuPedidosView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    showPopup(view, R.menu.menu_pedidos_detalle_cliente);
-//                }
-//            });
-//            mOrigenCliente = cliente.getOrigen();
-//            idCliente = cliente.getIdCliente();
-//            nombreCliente = cliente.getNombreCliente();
-
 
             mMenuPedidosView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -161,7 +151,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
                     }
 
                     nombreCliente = nombreClienteL;
-//                    Log.d("menu", "mOrigenCliente --->" + nombreCliente);
 
                     PopupMenu popupMenu = new PopupMenu(context, v);
                     popupMenu.getMenuInflater().inflate(R.menu.menu_pedidos_detalle_cliente, popupMenu.getMenu());
@@ -373,11 +362,17 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             }
 
             // Validar y mostrar icono de revisita
-            if (cliente.getRevisita() != null && cliente.getRevisita() == 1 && (claseMostrar != null && claseMostrar.equals("A"))) {
-                mRevisita.setVisibility(View.VISIBLE);
-            } else {
-                mRevisita.setVisibility(View.GONE);
+            boolean esRevisita = false;
+
+            if (cliente.getRevisita() != null && cliente.getRevisita() == 1 && Seccion.equals(cliente.getSeccion2())) {
+                esRevisita = true;
+            } else if (cliente.getRevisita3() != null && cliente.getRevisita3() == 1 && Seccion.equals(cliente.getSeccion3())) {
+                esRevisita = true;
+            } else if (cliente.getRevisita4() != null && cliente.getRevisita4() == 1 && Seccion.equals(cliente.getSeccion4())) {
+                esRevisita = true;
             }
+
+            mRevisita.setVisibility(esRevisita ? View.VISIBLE : View.GONE);
 
             if (valiZ.equals("Z")){
                 mOrigen.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.h2));
@@ -410,7 +405,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             } else if (cliente.getEstadoVisita().equals("PEFECT")) {
                 mEstadoFilas.setBackgroundColor(Color.parseColor("#FFA500")); // Naranja
             } else {
-                mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff00")); // Amarillo
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff")); // Amarillo
             }
 
 

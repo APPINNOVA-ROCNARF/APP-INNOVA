@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "0942583293f771c5bb73ba62eae2c773",
+    "identityHash": "cb8d310eeb4f366920911a6efb7b6b8f",
     "entities": [
       {
         "tableName": "visita_clientes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idLocal` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idVisitaCliente` INTEGER NOT NULL, `codigoAsesor` TEXT, `seccion` TEXT, `codigoCliente` TEXT, `nombreCliente` TEXT, `direccion` TEXT, `latitud` REAL, `longitud` REAL, `fechaVisitaPlanificada` INTEGER, `visitaXCajasVacias` INTEGER NOT NULL, `visitaXSiembraProducto` INTEGER NOT NULL, `visitaPromocional` INTEGER NOT NULL, `visitaXEntregaPremios` INTEGER NOT NULL, `visitaXDevolucion` INTEGER NOT NULL, `visitaXPedido` INTEGER NOT NULL, `valorPedidoF2` REAL, `valorPedidoF3` REAL, `valorPedidoF4` REAL, `valorPedidoGEN` REAL, `visitaXCobro` INTEGER NOT NULL, `valorXCobrar` REAL, `efectivaXCajasVacias` INTEGER NOT NULL, `efectivaXSiembraProducto` INTEGER NOT NULL, `efectivaPromocional` INTEGER NOT NULL, `efectivaXPedido` INTEGER NOT NULL, `efectivaXCobro` INTEGER NOT NULL, `efectivaXEntregaPremios` INTEGER NOT NULL, `efectivaXDevolucion` INTEGER NOT NULL, `visitaAcompanado` INTEGER NOT NULL, `acompanate` TEXT, `visitaDocEfec` INTEGER NOT NULL, `visitaSinGestion` INTEGER NOT NULL, `visitaPuntoContacto` INTEGER NOT NULL, `visitaReVisita` INTEGER NOT NULL, `estado` TEXT, `fechaVisita` INTEGER, `observacion` TEXT, `queja` TEXT, `fechaCreacion` INTEGER, `fechaModificacion` INTEGER, `tipoCliente` TEXT, `pendienteSync` INTEGER NOT NULL, `fechaSincronizacion` INTEGER, `clien_idCliente` TEXT, `clien_nombreCliente` TEXT, `clien_tipo` TEXT, `clien_seccion` TEXT, `clien_seccion2` TEXT, `clien_seccion3` TEXT, `clien_seccion4` TEXT, `clien_seccion5` TEXT, `clien_seccion6` TEXT, `clien_seccion7` TEXT, `clien_seccion8` TEXT, `clien_seccion9` TEXT, `clien_representante` TEXT, `clien_ciudad` TEXT, `clien_direccion` TEXT, `clien_telefono1` TEXT, `clien_telefono2` TEXT, `clien_cedula` TEXT, `clien_ruc` TEXT, `clien_email` TEXT, `clien_latitud` REAL, `clien_longitud` REAL, `clien_rangoTolerancia` INTEGER, `clien_origen` TEXT, `clien_tipoObserv` TEXT, `clien_especialidades` TEXT, `clien_idEspecialidades` TEXT, `clien_clase` TEXT, `clien_clase3` TEXT, `clien_clase4` TEXT, `clien_fechaDesdeAuspicio` INTEGER, `clien_fechaHastaAuspicio` INTEGER, `clien_conceptoPlan` TEXT, `clien_marca` TEXT, `clien_cumpleAnyos` INTEGER, `clien_revisita` INTEGER, `clien_estadoVisita` TEXT, `clien_pedido` TEXT, `clien_cobro` TEXT, `clien_estadoSeleccion` TEXT, `clien_auspiciado` INTEGER, `clien_claseMedico` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idLocal` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idVisitaCliente` INTEGER NOT NULL, `codigoAsesor` TEXT, `seccion` TEXT, `codigoCliente` TEXT, `nombreCliente` TEXT, `direccion` TEXT, `latitud` REAL, `longitud` REAL, `fechaVisitaPlanificada` INTEGER, `visitaXCajasVacias` INTEGER NOT NULL, `visitaXSiembraProducto` INTEGER NOT NULL, `visitaPromocional` INTEGER NOT NULL, `visitaXEntregaPremios` INTEGER NOT NULL, `visitaXDevolucion` INTEGER NOT NULL, `visitaXPedido` INTEGER NOT NULL, `valorPedidoF2` REAL, `valorPedidoF3` REAL, `valorPedidoF4` REAL, `valorPedidoGEN` REAL, `visitaXCobro` INTEGER NOT NULL, `valorXCobrar` REAL, `efectivaXCajasVacias` INTEGER NOT NULL, `efectivaXSiembraProducto` INTEGER NOT NULL, `efectivaPromocional` INTEGER NOT NULL, `efectivaXPedido` INTEGER NOT NULL, `efectivaXCobro` INTEGER NOT NULL, `efectivaXEntregaPremios` INTEGER NOT NULL, `efectivaXDevolucion` INTEGER NOT NULL, `visitaAcompanado` INTEGER NOT NULL, `acompanate` TEXT, `visitaDocEfec` INTEGER NOT NULL, `visitaSinGestion` INTEGER NOT NULL, `visitaPuntoContacto` INTEGER NOT NULL, `visitaReVisita` INTEGER NOT NULL, `estado` TEXT, `fechaVisita` INTEGER, `observacion` TEXT, `queja` TEXT, `fechaCreacion` INTEGER, `fechaModificacion` INTEGER, `tipoCliente` TEXT, `pendienteSync` INTEGER NOT NULL, `fechaSincronizacion` INTEGER, `clien_idCliente` TEXT, `clien_nombreCliente` TEXT, `clien_tipo` TEXT, `clien_seccion` TEXT, `clien_seccion2` TEXT, `clien_seccion3` TEXT, `clien_seccion4` TEXT, `clien_seccion5` TEXT, `clien_seccion6` TEXT, `clien_seccion7` TEXT, `clien_seccion8` TEXT, `clien_seccion9` TEXT, `clien_representante` TEXT, `clien_ciudad` TEXT, `clien_direccion` TEXT, `clien_telefono1` TEXT, `clien_telefono2` TEXT, `clien_cedula` TEXT, `clien_ruc` TEXT, `clien_email` TEXT, `clien_latitud` REAL, `clien_longitud` REAL, `clien_rangoTolerancia` INTEGER, `clien_origen` TEXT, `clien_tipoObserv` TEXT, `clien_especialidades` TEXT, `clien_idEspecialidades` TEXT, `clien_clase` TEXT, `clien_clase3` TEXT, `clien_clase4` TEXT, `clien_fechaDesdeAuspicio` INTEGER, `clien_fechaHastaAuspicio` INTEGER, `clien_conceptoPlan` TEXT, `clien_marca` TEXT, `clien_cumpleAnyos` INTEGER, `clien_revisita` INTEGER, `clien_revisita3` INTEGER, `clien_revisita4` INTEGER, `clien_estadoVisita` TEXT, `clien_pedido` TEXT, `clien_cobro` TEXT, `clien_estadoSeleccion` TEXT, `clien_auspiciado` INTEGER, `clien_claseMedico` TEXT)",
         "fields": [
           {
             "fieldPath": "idLocal",
@@ -489,6 +489,18 @@
             "notNull": false
           },
           {
+            "fieldPath": "cliente.revisita3",
+            "columnName": "clien_revisita3",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.revisita4",
+            "columnName": "clien_revisita4",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
             "fieldPath": "cliente.estadoVisita",
             "columnName": "clien_estadoVisita",
             "affinity": "TEXT",
@@ -607,7 +619,7 @@
       },
       {
         "tableName": "clientes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idCliente` TEXT NOT NULL, `nombreCliente` TEXT, `tipo` TEXT, `seccion` TEXT, `seccion2` TEXT, `seccion3` TEXT, `seccion4` TEXT, `seccion5` TEXT, `seccion6` TEXT, `seccion7` TEXT, `seccion8` TEXT, `seccion9` TEXT, `representante` TEXT, `ciudad` TEXT, `direccion` TEXT, `telefono1` TEXT, `telefono2` TEXT, `cedula` TEXT, `ruc` TEXT, `email` TEXT, `latitud` REAL, `longitud` REAL, `rangoTolerancia` INTEGER NOT NULL, `origen` TEXT, `tipoObserv` TEXT, `especialidades` TEXT, `idEspecialidades` TEXT, `clase` TEXT, `clase3` TEXT, `clase4` TEXT, `fechaDesdeAuspicio` INTEGER, `fechaHastaAuspicio` INTEGER, `conceptoPlan` TEXT, `marca` TEXT, `cumpleAnyos` INTEGER, `revisita` INTEGER, `estadoVisita` TEXT, `pedido` TEXT, `cobro` TEXT, `estadoSeleccion` TEXT, `auspiciado` INTEGER, `claseMedico` TEXT, PRIMARY KEY(`idCliente`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idCliente` TEXT NOT NULL, `nombreCliente` TEXT, `tipo` TEXT, `seccion` TEXT, `seccion2` TEXT, `seccion3` TEXT, `seccion4` TEXT, `seccion5` TEXT, `seccion6` TEXT, `seccion7` TEXT, `seccion8` TEXT, `seccion9` TEXT, `representante` TEXT, `ciudad` TEXT, `direccion` TEXT, `telefono1` TEXT, `telefono2` TEXT, `cedula` TEXT, `ruc` TEXT, `email` TEXT, `latitud` REAL, `longitud` REAL, `rangoTolerancia` INTEGER NOT NULL, `origen` TEXT, `tipoObserv` TEXT, `especialidades` TEXT, `idEspecialidades` TEXT, `clase` TEXT, `clase3` TEXT, `clase4` TEXT, `fechaDesdeAuspicio` INTEGER, `fechaHastaAuspicio` INTEGER, `conceptoPlan` TEXT, `marca` TEXT, `cumpleAnyos` INTEGER, `revisita` INTEGER, `revisita3` INTEGER, `revisita4` INTEGER, `estadoVisita` TEXT, `pedido` TEXT, `cobro` TEXT, `estadoSeleccion` TEXT, `auspiciado` INTEGER, `claseMedico` TEXT, PRIMARY KEY(`idCliente`))",
         "fields": [
           {
             "fieldPath": "idCliente",
@@ -826,6 +838,18 @@
             "notNull": false
           },
           {
+            "fieldPath": "revisita3",
+            "columnName": "revisita3",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "revisita4",
+            "columnName": "revisita4",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
             "fieldPath": "estadoVisita",
             "columnName": "estadoVisita",
             "affinity": "TEXT",
@@ -906,7 +930,7 @@
       },
       {
         "tableName": "producto",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProducto` TEXT NOT NULL, `idProducto2` TEXT, `nombre` TEXT, `tipo` TEXT, `jefe` TEXT, `precio` REAL, `unitario` REAL, `saldo` REAL, `vademecun` INTEGER NOT NULL, `idEscala` INTEGER NOT NULL, `porcentajePvp` REAL, `status` TEXT, `marca` TEXT, `pvp` REAL, `precioEspecial` REAL, PRIMARY KEY(`idProducto`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProducto` TEXT NOT NULL, `idProducto2` TEXT, `nombre` TEXT, `tipo` TEXT, `jefe` TEXT, `precio` REAL, `unitario` REAL, `saldo` REAL, `vademecun` INTEGER NOT NULL, `idEscala` INTEGER NOT NULL, `porcentajePvp` REAL, `status` TEXT, `marca` TEXT, `pvp` REAL, `precioEspecial` REAL, `fechaVencimiento` INTEGER, PRIMARY KEY(`idProducto`))",
         "fields": [
           {
             "fieldPath": "idProducto",
@@ -996,6 +1020,12 @@
             "fieldPath": "precioEspecial",
             "columnName": "precioEspecial",
             "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaVencimiento",
+            "columnName": "fechaVencimiento",
+            "affinity": "INTEGER",
             "notNull": false
           }
         ],
@@ -1617,7 +1647,7 @@
       },
       {
         "tableName": "precio_especial_cliente",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `codigoCliente` TEXT, `codigoProducto` TEXT, `fechaDesde` TEXT, `fechaHasta` TEXT, `precioPVF` REAL, `precioPVP` REAL, `precioDesc` REAL, `cantidad` INTEGER, `tipo` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `codigoCliente` TEXT, `codigoProducto` TEXT, `fechaDesde` INTEGER, `fechaHasta` INTEGER, `precioPVF` REAL, `precioPVP` REAL, `precioDesc` REAL, `cantidad` INTEGER, `tipo` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -1640,13 +1670,13 @@
           {
             "fieldPath": "fechaDesde",
             "columnName": "fechaDesde",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
             "fieldPath": "fechaHasta",
             "columnName": "fechaHasta",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -1692,7 +1722,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0942583293f771c5bb73ba62eae2c773\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"cb8d310eeb4f366920911a6efb7b6b8f\")"
     ]
   }
 }

@@ -147,7 +147,18 @@ public class ResultadoClientesSemanalActivity extends AppCompatActivity {
                 panelClientes.setIdEspecialidades(cliente.getIdEspecialidades());
                 panelClientes.setTipo(cliente.getTipo());
                 panelClientes.setCumpleAnyos(cliente.getCumpleAnyos());
-                panelClientes.setRevisita(cliente.getRevisita());
+
+                int esRevisita = 0;
+
+                if (cliente.getRevisita() != null && cliente.getRevisita() == 1 && seccion.equals(cliente.getSeccion2())) {
+                    esRevisita = 1;
+                } else if (cliente.getRevisita3() != null && cliente.getRevisita3() == 1 && seccion.equals(cliente.getSeccion3())) {
+                    esRevisita = 1;
+                } else if (cliente.getRevisita4() != null && cliente.getRevisita4() == 1 && seccion.equals(cliente.getSeccion4())) {
+                    esRevisita = 1;
+                }
+
+                panelClientes.setRevisita(esRevisita);
                 Log.d("xxxx","xxxx"+ panelClientes.getCumpleAnyos());
                 if (cliente.getEstadoSeleccion() != null) {
                     panelClientesRepository.addPanelCliente(panelClientes);

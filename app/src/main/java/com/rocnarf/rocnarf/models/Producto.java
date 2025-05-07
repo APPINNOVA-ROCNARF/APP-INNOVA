@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 @Entity(tableName = "producto")
 public class Producto {
 
@@ -70,6 +72,10 @@ public class Producto {
     @SerializedName("precioEspecial")
     @Expose
     private Double precioEspecial;
+
+    @SerializedName("fechaVencimiento")
+    @Expose
+    private Date fechaVencimiento;
 
     public String getIdProducto() {
         return idProducto;
@@ -188,5 +194,13 @@ public class Producto {
 
     public void setPrecioEspecial(Double precioEspecial) {
         this.precioEspecial = precioEspecial;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 }
