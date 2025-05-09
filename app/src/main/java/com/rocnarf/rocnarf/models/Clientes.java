@@ -165,7 +165,7 @@ public class Clientes  implements Parcelable {
     @Expose
     private Integer revisita3;
 
-    @SerializedName("revisit4")
+    @SerializedName("revisita4")
     @Expose
     private Integer revisita4;
 
@@ -188,7 +188,7 @@ public class Clientes  implements Parcelable {
                     String telefono1, String telefono2, String cedula, String ruc, String email, Double longitud,
                     Double latitud, int rangoTolerancia, String origen, String tipoObserv, String especialidades,
                     String idEspecialidades, String clase, String claseMedico, Boolean auspiciado, Boolean cumpleAnyos,
-                    Date fechaDesdeAuspicio, Date fechaHastaAuspicio, String conceptoPlan, String marca, Integer revisita,
+                    Date fechaDesdeAuspicio, Date fechaHastaAuspicio, String conceptoPlan, String marca, Integer revisita, Integer revisita3, Integer revisita4,
                     String clase3, String clase4) {
 
         this.idCliente = idCliente;
@@ -227,6 +227,8 @@ public class Clientes  implements Parcelable {
         this.conceptoPlan = conceptoPlan;
         this.marca = marca;
         this.revisita = revisita;
+        this.revisita3 = revisita3;
+        this.revisita4 = revisita4;
         this.clase3 = clase3;
         this.clase4 = clase4;
     }

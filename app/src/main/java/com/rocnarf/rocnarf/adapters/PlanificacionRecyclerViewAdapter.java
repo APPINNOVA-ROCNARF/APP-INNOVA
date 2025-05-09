@@ -194,12 +194,9 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             List<String> rolesMultiples = Arrays.asList("GRC", "GVP", "GRA", "JVC", "GRS", "JVS");
 
 
-            if (clientesAPI != null &&clientesAPI.getTipoObserv().equals("MEDICO") ) {
-                if ("MEDICO".equals(clientesAPI.getOrigen())) {
-
-
-                    if (planificacionItem.getSeccion() != null && !planificacionItem.getSeccion().isEmpty()) {
-                        boolean esRolRegional = rolesMultiples.contains(planificacionItem.getSeccion().toUpperCase());
+            if (clientesAPI != null && clientesAPI.getOrigen().equals("MEDICO") ) {
+                    if (Seccion != null && !Seccion.isEmpty()) {
+                        boolean esRolRegional = rolesMultiples.contains(Seccion.toUpperCase());
                         if (esRolRegional && seccionesUsuario != null && !seccionesUsuario.isEmpty()) {
                             for (String seccion : seccionesUsuario) {
                                 if (seccion != null && !seccion.isEmpty()) {
@@ -249,27 +246,28 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                     } else {
                         contenidoHolder.mtipoCliente.setText(("Médico PC"));
                     }
-
-                } else {
+            } else if (clientesAPI != null && "FARMA".equals(clientesAPI.getOrigen())) {
                     if (clientesAPI.getClaseMedico() != null && !clientesAPI.getClaseMedico().isEmpty()) {
                         contenidoHolder.mtipoCliente.setText((clientesAPI.getClaseMedico()));
                     } else {
                         contenidoHolder.mtipoCliente.setText("");
                     }
-                }
+            }
+            // Validar y mostrar icono de revisita
+
+            boolean esRevisita = false;
+
+            if (clientesAPI.getRevisita() != null && clientesAPI.getRevisita() == 1 && Seccion.equals(clientesAPI.getSeccion2())) {
+                esRevisita = true;
+            } else if (clientesAPI.getRevisita3() != null && clientesAPI.getRevisita3() == 1 && Seccion.equals(clientesAPI.getSeccion3())) {
+                esRevisita = true;
+            } else if (clientesAPI.getRevisita4() != null && clientesAPI.getRevisita4() == 1 && Seccion.equals(clientesAPI.getSeccion4())) {
+                esRevisita = true;
             }
 
-            // Validar y mostrar icono de revisita
-            if (clientesAPI != null) {
-                Integer revisita = clientesAPI.getRevisita();
-                if (revisita != null && revisita == 1 && (claseMostrar != null && claseMostrar.equals("A"))) {
-                    contenidoHolder.mRevisitaView.setVisibility(View.VISIBLE);
-                } else {
-                    contenidoHolder.mRevisitaView.setVisibility(View.GONE);
-                }
-            } else {
-                contenidoHolder.mRevisitaView.setVisibility(View.GONE);
-            }
+            contenidoHolder.mRevisitaView.setVisibility(esRevisita ? View.VISIBLE : View.GONE);
+
+
 
             if(clientesAPI != null) {
                 if (clientesAPI.getCumpleAnyos() != null) {

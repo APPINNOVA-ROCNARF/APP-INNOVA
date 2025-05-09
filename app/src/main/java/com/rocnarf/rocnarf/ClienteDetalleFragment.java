@@ -357,11 +357,18 @@ public class ClienteDetalleFragment extends Fragment {
                             }
 
 
-                            if (clientes.getRevisita() != null && clientes.getRevisita() == 1 && (claseMostrar != null && claseMostrar.equals("A"))) {
-                                mRevisitaView.setVisibility(View.VISIBLE);
-                            } else {
-                                mRevisitaView.setVisibility(View.GONE);
+                            boolean esRevisita = false;
+
+                            if (clientes.getRevisita() != null && clientes.getRevisita() == 1 && Seccion.equals(clientes.getSeccion2())) {
+                                esRevisita = true;
+                            } else if (clientes.getRevisita3() != null && clientes.getRevisita3() == 1 && Seccion.equals(clientes.getSeccion3())) {
+                                esRevisita = true;
+                            } else if (clientes.getRevisita4() != null && clientes.getRevisita4() == 1 && Seccion.equals(clientes.getSeccion4())) {
+                                esRevisita = true;
                             }
+
+                            mRevisitaView.setVisibility(esRevisita ? View.VISIBLE : View.GONE);
+
 
 
                             mEmailView.setText(clientes.getEmail());

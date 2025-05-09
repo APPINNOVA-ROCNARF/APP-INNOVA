@@ -25,6 +25,8 @@ import java.util.List;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GuiaProductosAdapter extends  RecyclerView.Adapter<GuiaProductosAdapter.ViewHolder> {
@@ -65,23 +67,27 @@ public class GuiaProductosAdapter extends  RecyclerView.Adapter<GuiaProductosAda
             holder.mVideo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                    if (link != null && !link.trim().isEmpty()) {
+                        Uri uri = Uri.parse(link);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
-                    if (intent.resolveActivity(context.getPackageManager()) != null) {
-                        // Si está instalada, iniciar la actividad de YouTube
-                        context.startActivity(intent);
+                        if (intent.resolveActivity(context.getPackageManager()) != null) {
+                            context.startActivity(intent);
+                        } else {
+                            // Alternativa: abrir en navegador si no hay app
+                            Intent webIntent = new Intent(Intent.ACTION_VIEW, uri);
+                            if (webIntent.resolveActivity(context.getPackageManager()) != null) {
+                                context.startActivity(webIntent);
+                            } else {
+                                Toast.makeText(context, "No se encontró una aplicación para abrir el enlace", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     } else {
-                        // Si no está instalada, puedes manejar esto según tus necesidades
-                        // Por ejemplo, abrir el enlace en un navegador web o mostrar un mensaje al usuario
-                        // ...
-
-                        // En este ejemplo, abrir el enlace en un navegador web
-                        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-                        context.startActivity(webIntent);
+                        Toast.makeText(context, "El enlace del video no está disponible", Toast.LENGTH_SHORT).show();
                     }
                 }
-
             });
+
 
         } else {
             holder.mVideo.setVisibility(View.GONE);

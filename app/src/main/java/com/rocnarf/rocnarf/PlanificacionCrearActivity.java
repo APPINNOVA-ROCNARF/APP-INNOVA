@@ -327,15 +327,15 @@ public class PlanificacionCrearActivity extends AppCompatActivity
                         finalizarActividad();
                     }
                 } catch (Exception ex) {
-                    Log.d("Error al crear vista: ", ex.toString());
-                    Toast.makeText(context, "Error al intentar agregar la visita: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("Error al crear vista", Log.getStackTraceString(ex));
+                    Toast.makeText(context, "Error al intentar agregar la visita:\n" + ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
     private void finalizarActividad() {
-        if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_PANEL)) {
+        if (Common.VISITA_DESDE_PANEL.equals(origenPlanificacionVisita)) {
             PanelClientesRepository panelClientesRepository = new PanelClientesRepository(context);
             panelClientesRepository.deletePanelCliente(codigoCliente);
             Intent i = new Intent(context, PanelClientesActivity.class);
@@ -343,7 +343,7 @@ public class PlanificacionCrearActivity extends AppCompatActivity
             i.putExtra(Common.ARG_SECCIOM, seccion);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
-        } else if (origenPlanificacionVisita.equals(Common.VISITA_DESDE_MAPA)) {
+        } else if (Common.VISITA_DESDE_MAPA.equals(origenPlanificacionVisita)) {
             Intent i = new Intent(context, MapaActivity.class);
             i.putExtra(Common.ARG_IDUSUARIO, idUsuario);
             i.putExtra(Common.ARG_SECCIOM, seccion);
