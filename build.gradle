@@ -21,6 +21,10 @@ buildscript {
     }
 }
 
+ext {
+    defaultVersionName = '3.1.0'
+}
+
 
 allprojects {
     repositories {
