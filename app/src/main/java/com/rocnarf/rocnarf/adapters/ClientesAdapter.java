@@ -405,7 +405,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             } else if (cliente.getEstadoVisita().equals("PEFECT")) {
                 mEstadoFilas.setBackgroundColor(Color.parseColor("#FFA500")); // Naranja
             } else {
-                mEstadoFilas.setBackgroundColor(Color.parseColor("#ffff")); // Amarillo
+                mEstadoFilas.setBackgroundColor(Color.parseColor("#FFFF00")); // Amarillo
             }
 
 

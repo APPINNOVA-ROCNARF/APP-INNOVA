@@ -126,6 +126,15 @@ public class GuiasProductosActivity extends AppCompatActivity {
 
                                         // Configurar el ListView
                                         List<ArchivosGuiaProducto> archivos = archivosGuiaProducto;
+
+// Si hay URL de video válida, la agregamos como un archivo especial
+                                        if (guiaProductos.getUrlVideo() != null && !guiaProductos.getUrlVideo().trim().isEmpty()) {
+                                            ArchivosGuiaProducto videoArchivo = new ArchivosGuiaProducto();
+                                            videoArchivo.setNombre(guiaProductos.getMarca() + " - Video");
+                                            // Puedes usar un campo extra o una convención para marcar que es video (ej. nombre)
+                                            archivos.add(videoArchivo);
+                                        }
+
                                         String[] nombresArchivos = new String[archivos.size()];
                                         for (int i = 0; i < archivos.size(); i++) {
                                             nombresArchivos[i] = archivos.get(i).getNombre();
@@ -141,6 +150,18 @@ public class GuiasProductosActivity extends AppCompatActivity {
                                                 // Aquí puedes iniciar la descarga del archivo asociado al nombre seleccionado
                                                 ArchivosGuiaProducto selectedArchivo = archivos.get(position);
                                                 String archivoId = selectedArchivo.getNombre();
+
+                                                if ("Guía de Producto - Video".equals(archivoId)) {
+                                                    String urlVideo = guiaProductos.getUrlVideo();
+                                                    if (urlVideo == null || urlVideo.trim().isEmpty()) {
+                                                        Toast.makeText(context, "URL de vídeo no válida", Toast.LENGTH_SHORT).show();
+                                                        return;
+                                                    }
+                                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo));
+                                                    startActivity(intent);
+                                                    return;
+                                                }
+
                                                 String guiaId = selectedArchivo.getIdGuia();
                                                 String extension = archivoId.substring(archivoId.lastIndexOf(".") + 1);
                                                 Log.d("xxx","xxx"+"http://200.105.252.218/rocnarf/api/Planes/getFileGuiaProductos/"+ guiaId + "/"+ archivoId);

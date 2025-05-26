@@ -580,13 +580,18 @@
   <component name="ChangeListManager">
     <list default="true" id="c6c4e8bf-1cc8-4c9d-a7e5-46cc94718b99" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_5_2025_11_25_[Default_Changelist]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_5_2025_11_25__Default_Changelist_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ClienteDetalleFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/ClienteDetalleFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionCrearActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/PlanificacionCrearActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/GuiasProductosActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/GuiasProductosActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/ClientesAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/GuiaProductosAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/GuiaProductosAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/adapters/PlanificacionRecyclerViewAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/api/ApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Clientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/models/Clientes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/PedidosRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rocnarf/rocnarf/repository/PedidosRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_version.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_version.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/row_guia_productos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_guia_productos.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -889,12 +894,12 @@
       <map>
         <entry key="com.rocnarf.rocnarf">
           <value>
-            <CheckInfo lastCheckTimestamp="1746739092222" />
+            <CheckInfo lastCheckTimestamp="1747067265999" />
           </value>
         </entry>
         <entry key="com.rocnarf.rocnarf.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1746739092223" />
+            <CheckInfo lastCheckTimestamp="1747067266001" />
           </value>
         </entry>
       </map>

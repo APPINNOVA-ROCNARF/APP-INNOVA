@@ -3,6 +3,8 @@ package com.rocnarf.rocnarf.repository;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.rocnarf.rocnarf.api.ApiClient;
 import com.rocnarf.rocnarf.api.PedidoService;
 import com.rocnarf.rocnarf.dao.PedidosDao;
@@ -109,7 +111,9 @@ public class PedidosRepository {
             @Override
             public void call(final Completable.CompletableSubscriber completableSubscriber) {
                 final Pedido pedido = pedidosDao.getPedidoByIdLocal(idLocalPedido);
-                Log.d("DEBUG_PEDIDO", String.valueOf(pedido));
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String jsonPedido = gson.toJson(pedido);
+                Log.d("DEBUG_PEDIDO_JSON", jsonPedido);
                 List<PedidoDetalle> detalles = pedidosDao.getDetallesPedido(pedido.getIdLocalPedido());
                 for (PedidoDetalle detalle: detalles) {
                     detalle.setIdPedidoDetalle(0);

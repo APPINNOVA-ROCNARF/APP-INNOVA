@@ -60,39 +60,6 @@ public class GuiaProductosAdapter extends  RecyclerView.Adapter<GuiaProductosAda
         holder.mDescripcion.setText(mValues.get(i).getNombre());
         holder.mFuerza.setText(mValues.get(i).getFuerza());
 
-        if (mValues.get(i).getUrlVideo() != null) {
-            String link = mValues.get(i).getUrlVideo();
-            holder.mVideo.setVisibility(View.VISIBLE);
-
-            holder.mVideo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (link != null && !link.trim().isEmpty()) {
-                        Uri uri = Uri.parse(link);
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-
-                        if (intent.resolveActivity(context.getPackageManager()) != null) {
-                            context.startActivity(intent);
-                        } else {
-                            // Alternativa: abrir en navegador si no hay app
-                            Intent webIntent = new Intent(Intent.ACTION_VIEW, uri);
-                            if (webIntent.resolveActivity(context.getPackageManager()) != null) {
-                                context.startActivity(webIntent);
-                            } else {
-                                Toast.makeText(context, "No se encontró una aplicación para abrir el enlace", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    } else {
-                        Toast.makeText(context, "El enlace del video no está disponible", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-
-        } else {
-            holder.mVideo.setVisibility(View.GONE);
-        }
-
     }
 
     @Override
@@ -145,7 +112,6 @@ public class GuiaProductosAdapter extends  RecyclerView.Adapter<GuiaProductosAda
         public final TextView mNombre;
         public final TextView mDescripcion;
         public final TextView mFuerza;
-        public final ImageView mVideo;
         public GuiaProductos mItem;
 
         public ViewHolder(View view, GuiaProductosAdapter.GuiaProductosListener guiaProductosListener) {
@@ -160,7 +126,6 @@ public class GuiaProductosAdapter extends  RecyclerView.Adapter<GuiaProductosAda
             mNombre = (TextView) view.findViewById(R.id.tv_nombre_proc);
             mDescripcion = (TextView) view.findViewById(R.id.tv_codigo_prod);
             mFuerza = (TextView) view.findViewById(R.id.tv_fuerza_prod);
-            mVideo = (ImageView)  view.findViewById(R.id.im_video_guia);
         }
 
         @Override

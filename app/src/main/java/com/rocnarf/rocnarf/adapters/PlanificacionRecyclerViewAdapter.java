@@ -257,13 +257,17 @@ public class PlanificacionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
             boolean esRevisita = false;
 
-            if (clientesAPI.getRevisita() != null && clientesAPI.getRevisita() == 1 && Seccion.equals(clientesAPI.getSeccion2())) {
-                esRevisita = true;
-            } else if (clientesAPI.getRevisita3() != null && clientesAPI.getRevisita3() == 1 && Seccion.equals(clientesAPI.getSeccion3())) {
-                esRevisita = true;
-            } else if (clientesAPI.getRevisita4() != null && clientesAPI.getRevisita4() == 1 && Seccion.equals(clientesAPI.getSeccion4())) {
-                esRevisita = true;
+
+            if (clientesAPI != null) {
+                if (clientesAPI.getRevisita() != null && clientesAPI.getRevisita() == 1 && Seccion.equals(clientesAPI.getSeccion2())) {
+                    esRevisita = true;
+                } else if (clientesAPI.getRevisita3() != null && clientesAPI.getRevisita3() == 1 && Seccion.equals(clientesAPI.getSeccion3())) {
+                    esRevisita = true;
+                } else if (clientesAPI.getRevisita4() != null && clientesAPI.getRevisita4() == 1 && Seccion.equals(clientesAPI.getSeccion4())) {
+                    esRevisita = true;
+                }
             }
+
 
             contenidoHolder.mRevisitaView.setVisibility(esRevisita ? View.VISIBLE : View.GONE);
 
