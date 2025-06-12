@@ -31,14 +31,14 @@
             android:id="@+id/textViewFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha: 12/05/2025"
+            android:text="Fecha: 10/06/2025"
             android:textAlignment="center"
             android:layout_marginTop="4dp" />
         <TextView
             android:id="@+id/textViewChangelog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cambios:\n- Añadido Médicos de revisita\n- Arreglo de categorias en página principal\n- Arreglo de fallo al abrir video en guía de productos"
+            android:text="Cambios: Médicos de revisita \n Guías de producto"
             android:textAlignment="center"
             android:layout_marginTop="8dp"
             />

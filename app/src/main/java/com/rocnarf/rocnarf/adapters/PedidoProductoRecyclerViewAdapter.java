@@ -2,6 +2,7 @@ package com.rocnarf.rocnarf.adapters;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ public class PedidoProductoRecyclerViewAdapter extends RecyclerView.Adapter<Pedi
     private final List<PedidoDetalle> mValues;
     private final PedidoProductoEliminarListener mListener;
     private final PedidoProductoEditarListener mListenerEdit;
-    public String tipo = "PVF";
+    public String tipo ="PVP";
     public interface PedidoProductoEliminarListener{
         void PedidoProductoEliminar(PedidoDetalle pedidoDetalle);
     }
@@ -49,6 +50,11 @@ public class PedidoProductoRecyclerViewAdapter extends RecyclerView.Adapter<Pedi
         holder.mProductoView.setText(mValues.get(position).getNombre());
         holder.mCantidad.setText(String.valueOf(formatoNumero.format(mValues.get(position).getCantidad())));
         holder.mBono.setText(String.valueOf(mValues.get(position).getBono()));
+        if (tipo == null) {
+            Log.d("DEBUG", "El valor de tipo es null");
+        } else {
+            Log.d("DEBUG", "tipo: " + tipo);
+        }
         if(tipo.equalsIgnoreCase("P.V.F")){
 
             mValues.get(position).setPrecio( mValues.get(position).getPvf());
@@ -60,7 +66,7 @@ public class PedidoProductoRecyclerViewAdapter extends RecyclerView.Adapter<Pedi
             mValues.get(position).setPrecioTotal(mValues.get(position).getCantidad() *  mValues.get(position).getPrecio());
             holder.mPrecio.setText("$ " + String.format("%.2f",mValues.get(position).getPrecio()));
 
-        }else{
+        }else if (tipo.equalsIgnoreCase("P.V.P")){
             mValues.get(position).setPrecio( mValues.get(position).getPvp());
             mValues.get(position).setPrecioTotal(mValues.get(position).getCantidad() *  mValues.get(position).getPrecio());
             holder.mPrecio.setText("$ " + String.format("%.2f",mValues.get(position).getPrecio()));

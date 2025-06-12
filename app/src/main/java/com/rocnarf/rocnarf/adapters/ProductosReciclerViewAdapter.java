@@ -71,6 +71,8 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
         holder.mTipo.setText("" + mValuesFiltrados.get(position).getTipo());
         double xpvp = mValuesFiltrados.get(position).getPorcentajePvp() == null ? 0 :mValuesFiltrados.get(position).getPorcentajePvp();
 
+
+
         double precio = mValuesFiltrados.get(position).getPrecio();
         double pvp = mValuesFiltrados.get(position).getPvp();
         Double precioEspecial = mValuesFiltrados.get(position).getPrecioEspecial();
@@ -110,9 +112,11 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
 
 
         if (usarPrecioEspecial != null && usarPrecioEspecial) {
+            holder.mBono.setVisibility(View.GONE);
             holder.mEscalaBonificacion.setVisibility(View.GONE);
             holder.mEscalaBonificacion.setText("");
         } else {
+            holder.mBono.setVisibility(View.VISIBLE);
             holder.mEscalaBonificacion.setVisibility(View.VISIBLE);
             holder.mEscalaBonificacion.setText(escalas);
         }
@@ -212,6 +216,8 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
         public final TextView mEscalaBonificacion;
         public final TextView mTipo;
         public final TextInputEditText mCantidad;
+        public final TextInputEditText  mBono;
+
         public final LinearLayout mAgregarLayout;
         public final ImageButton mAgregar;
         public Producto mItem;
@@ -229,6 +235,7 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
             mEscalaBonificacion = (TextView) view.findViewById(R.id.tv_escala_row_productos);
             mTipo = (TextView) view.findViewById(R.id.tv_tipo_row_productos);
             mCantidad = (TextInputEditText) view.findViewById(R.id.et_cantidad_row_productos);
+            mBono = (TextInputEditText) view.findViewById(R.id.et_bono_row_productos);
             mAgregarLayout = (LinearLayout) view.findViewById(R.id.ll_agregar_row_productos);
             mAgregar = (ImageButton) view.findViewById(R.id.bt_agregar_row_productos);
             tvMensajePrecioNoValido = (TextView) view.findViewById(R.id.tv_mensaje_no_editar);
@@ -241,6 +248,7 @@ public class ProductosReciclerViewAdapter extends RecyclerView.Adapter<Productos
                     //if (!mCantidad.getText().toString().isEmpty()) { cantidad = Integer.parseInt( mCantidad.getText().toString()); mCantidad.setText(""); }
                     //if (!mBono.getText().toString().isEmpty()){ bono =Integer.parseInt( mBono.getText().toString()); mBono.setText("");}
                     if (!mCantidad.getText().toString().isEmpty()) { cantidad = Integer.parseInt( mCantidad.getText().toString());  }
+                    if (!mBono.getText().toString().isEmpty()){ bono =Integer.parseInt( mBono.getText().toString()); }
                     listener.AddProducto(mItem, cantidad, bono );
                 }
             });

@@ -146,7 +146,11 @@ private Boolean usarPrecioEspecial;
         });
         //pedidoViewModel = ViewModelProviders.of(this).get(PedidoViewModel.class);
 
-        if(idUsuario.equals("SBC")){
+        final boolean esKAM = idUsuario.equalsIgnoreCase("SBC") ||
+                idUsuario.equalsIgnoreCase("JRP") ||
+                idUsuario.equalsIgnoreCase("COG");
+
+        if(esKAM){
             tvObservaciones.setText("Orden de Compra");
         }
 
@@ -156,7 +160,7 @@ private Boolean usarPrecioEspecial;
                 AlertDialog.Builder builder = new AlertDialog.Builder(PedidoSimpleActivity.this);
                 LayoutInflater inflater = PedidoSimpleActivity.this.getLayoutInflater();
 
-                if (idUsuario.equals("SBC")) {
+                if (esKAM) {
                     builder.setTitle("Orden de Compra");
                 } else {
                     builder.setTitle("Observaciones");
@@ -259,15 +263,19 @@ private Boolean usarPrecioEspecial;
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 PedidoProductoFragment fragment = (PedidoProductoFragment) getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1);
-                if (selectedItem.equals("P.V.F")) {
-                    fragment.setTipo("P.V.F");
-                    CalcularTotalesXLineaPvf();
-                } else if (selectedItem.equals("P.V.P")) {
-                    fragment.setTipo("P.V.P");
-                    CalcularTotalesXLineaPvp();
-                } else if (selectedItem.equals("ESP")){
-                    fragment.setTipo("ESP");
-                    CalcularTotalesXLineaESP();
+                switch (selectedItem) {
+                    case "P.V.F":
+                        fragment.setTipo("P.V.F");
+                        CalcularTotalesXLineaPvf();
+                        break;
+                    case "P.V.P":
+                        fragment.setTipo("P.V.P");
+                        CalcularTotalesXLineaPvp();
+                        break;
+                    case "ESP":
+                        fragment.setTipo("ESP");
+                        CalcularTotalesXLineaESP();
+                        break;
                 }
 
             } // to close the onItemSelected
@@ -606,74 +614,82 @@ private Boolean usarPrecioEspecial;
 
     public void CalcularTotalesXLineaPvp() {
         double totalF3 = 0, descuentoF3 = 0, finalF3 = 0;
+        double totalF2 = 0, descuentoF2 = 0, finalF2 = 0;
+        double totalF4 = 0, descuentoF4 = 0, finalF4 = 0;
+        double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
+
+        // Actualizar todos los detalles del pedido con precios PVP y guardar en DB
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
-            if (detalle.getTipo().equals("F3")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
-                totalF3 += detalle.getPrecioTotal();
+            switch (detalle.getTipo()) {
+                case "F3":
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
+                    totalF3 += detalle.getPrecioTotal();
+                    break;
+                case "F2":
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
+                    totalF2 += detalle.getPrecioTotal();
+                    break;
+                case "F4":
+                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
+                    totalF4 += detalle.getPrecioTotal();
+                    break;
+                case "GE":
+                    if (detalle.getPvp() != null) {
+                        detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
+                    } else {
+                        detalle.setPrecioTotal(0.0);
+                    }
+                    totalGEN += detalle.getPrecioTotal();
+                    break;
             }
+            // Actualizar el detalle en la base de datos
+            pedidoViewModel.updatePedidoDetalle(detalle);
         }
+
+        // Calcular descuentos y totales finales
         descuentoF3 = totalF3 * (pedidoExistemte.getPorcentajeDescuento() / 100);
         finalF3 = totalF3 - descuentoF3;
+
+        descuentoF2 = totalF2 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF2 = totalF2 - descuentoF2;
+
+        descuentoF4 = totalF4 * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalF4 = totalF4 - descuentoF4;
+
+        descuentoGEN = totalGEN * (pedidoExistemte.getPorcentajeDescuento() / 100);
+        finalGEN = totalGEN - descuentoGEN;
+
+        // Actualizar UI
         mTotalF3.setText(String.format("%.2f", totalF3));
         mDescuentoF3.setText(String.format("%.2f", descuentoF3));
         mFinalF3.setText(String.format("%.2f", finalF3));
 
-        double totalF2 = 0, descuentoF2 = 0, finalF2 = 0;
-        for (PedidoDetalle detalle : pedidoDetalleExistente) {
-            if (detalle.getTipo().equals("F2")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
-                totalF2 += detalle.getPrecioTotal();
-            }
-        }
-        descuentoF2 = totalF2 * (pedidoExistemte.getPorcentajeDescuento() / 100);
-        finalF2 = totalF2 - descuentoF2;
         mTotalF2.setText(String.format("%.2f", totalF2));
         mDescuentoF2.setText(String.format("%.2f", descuentoF2));
         mFinalF2.setText(String.format("%.2f", finalF2));
 
-        double totalF4 = 0, descuentoF4 = 0, finalF4 = 0;
-        for (PedidoDetalle detalle : pedidoDetalleExistente) {
-            if (detalle.getTipo().equals("F4")) {
-                detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
-                totalF4 += detalle.getPrecioTotal();
-            }
-        }
-        descuentoF4 = totalF4 * (pedidoExistemte.getPorcentajeDescuento() / 100);
-        finalF4 = totalF4 - descuentoF4;
         mTotalF4.setText(String.format("%.2f", totalF4));
         mDescuentoF4.setText(String.format("%.2f", descuentoF4));
         mFinalF4.setText(String.format("%.2f", finalF4));
 
-        double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
-        for (PedidoDetalle detalle : pedidoDetalleExistente) {
-            if (detalle.getTipo().equals("GE")) {
-                if (detalle.getPvp() != null) {
-                    detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvp());
-                } else {
-                    detalle.setPrecioTotal(0.0);
-                }
-                totalGEN += detalle.getPrecioTotal();
-            }
-        }
-        descuentoGEN = totalGEN * (pedidoExistemte.getPorcentajeDescuento() / 100);
-        finalGEN = totalGEN - descuentoGEN;
         mTotalGEN.setText(String.format("%.2f", totalGEN));
-//        mTotalGEN.setText(String.format("%.2f", totalGEN));
         mDescuentoGEN.setText(String.format("%.2f", descuentoGEN));
         mFinalGEN.setText(String.format("%.2f", finalGEN));
 
+        // Actualizar totales del pedido
         pedidoExistemte.setPrecioTotal(totalGEN + totalF4 + totalF2 + totalF3);
         pedidoExistemte.setDescuento(descuentoGEN + descuentoF4 + descuentoF2 + descuentoF3);
         pedidoExistemte.setPrecioFinal(finalGEN + finalF4 + finalF2 + finalF3);
+        pedidoExistemte.setTipoPrecio("P.V.P");
 
+        // Actualizar UI con totales generales
         mTotal.setText(String.format("%.2f", pedidoExistemte.getPrecioTotal()));
         mDescuento.setText(String.format("%.2f", pedidoExistemte.getDescuento()));
         mFinal.setText(String.format("%.2f", pedidoExistemte.getPrecioFinal()));
 
-        pedidoExistemte.setTipoPrecio("P.V.P");
+        // Guardar cambios en la base de datos
         pedidoViewModel.updatePedido(pedidoExistemte);
     }
-
     public void CalcularTotalesXLineaPvf() {
         double totalF3 = 0, descuentoF3 = 0, finalF3 = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
@@ -717,7 +733,7 @@ private Boolean usarPrecioEspecial;
         double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("GE")) {
-                if (detalle.getPvp() != null) {
+                if (detalle.getPvf() != null) {
                     detalle.setPrecioTotal(detalle.getCantidad() * detalle.getPvf());
                 } else {
                     detalle.setPrecioTotal(0.0);
@@ -787,7 +803,7 @@ private Boolean usarPrecioEspecial;
         double totalGEN = 0, descuentoGEN = 0, finalGEN = 0;
         for (PedidoDetalle detalle : pedidoDetalleExistente) {
             if (detalle.getTipo().equals("GE")) {
-                if (detalle.getPvp() != null) {
+                if (detalle.getEsp() != null) {
                     detalle.setPrecioTotal(detalle.getCantidad() * detalle.getEsp());
                 } else {
                     detalle.setPrecioTotal(0.0);

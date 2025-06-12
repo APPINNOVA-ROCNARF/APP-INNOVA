@@ -202,12 +202,19 @@ public class VisitaClientesRespository {
 
                             @Override
                             public void onError(Throwable e) {
+                                // Log completo del error
+                                Log.e("UpdateVisitaClientes", "Error al actualizar visita", e);
 
-                                // Marcar como pendiente de sincronización y actualizar en la base de datos
+                                // Si necesitas más detalle explícito:
+                                Log.e("UpdateVisitaClientes", "Tipo de error: " + e.getClass().getName());
+                                Log.e("UpdateVisitaClientes", "Mensaje: " + e.getMessage());
+                                Log.e("UpdateVisitaClientes", "StackTrace: " + Log.getStackTraceString(e));
+
+                                // Marcar como pendiente de sincronización
                                 visitaClientes.setPendienteSync(true);
                                 visitaClientesDao.update(visitaClientes);
 
-                                // Notificar el error al suscriptor
+                                // Notificar el error
                                 completableSubscriber.onError(e);
                             }
 

@@ -15,6 +15,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
+import com.rocnarf.rocnarf.ViaticoBottomSheet;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +43,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.api.ApiClient;
 import com.rocnarf.rocnarf.api.ClienteService;
@@ -359,68 +360,7 @@ public class MainActivity extends AppCompatActivity
 //            i.putExtra(Common.ARG_ROL, rolUsuario);
         }else if (id == R.id.nav_viatico_principal) {
             context = this;
-            final Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.bottomsheetlayout);
-            LinearLayout nuevoRegistro = dialog.findViewById(R.id.layoutVideo);
-            //LinearLayout shortsLayout = dialog.findViewById(R.id.layoutShorts);
-            LinearLayout historial = dialog.findViewById(R.id.layoutLive);
-            LinearLayout registroPlaca = dialog.findViewById(R.id.layoutPlaca);
-            ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
-
-            nuevoRegistro.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    Intent i = new Intent(context, ViaticoActivity.class);
-                    i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
-                    i.putExtra(Common.ARG_SECCIOM, seccion);
-                    i.putExtra(Common.ARG_ROL, rolUsuario);
-                    startActivity(i);
-
-                }
-            });
-
-            historial.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    dialog.dismiss();
-                    Intent i = new Intent(context, HistorialViaticoActivity.class);
-                    i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
-                    i.putExtra(Common.ARG_SECCIOM, seccion);
-                    i.putExtra(Common.ARG_ROL, rolUsuario);
-                    startActivity(i);
-
-                }
-            });
-
-            registroPlaca.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    dialog.dismiss();
-                    Intent i = new Intent(context, RegistroPlacaActivity.class);
-                    i.putExtra(Common.ARG_IDUSUARIO, idAsesor);
-                    i.putExtra(Common.ARG_SECCIOM, seccion);
-                    i.putExtra(Common.ARG_ROL, rolUsuario);
-                    startActivity(i);
-
-                }
-            });
-
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                }
-            });
-
-            dialog.show();
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-            dialog.getWindow().setGravity(Gravity.BOTTOM);
+            new ViaticoBottomSheet().show(getSupportFragmentManager(), "ViaticoBottomSheet");
 
 //        } else if (id == R.id.nav_track) {
 //
@@ -590,64 +530,6 @@ public class MainActivity extends AppCompatActivity
             startService(i);
             //Toast.makeText(context, "En recorrido ", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void registrarDispositivo(){
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(ContentValues.TAG,
-                                    "Fetching FCM registration token failed xxxxxxxx",
-                                    task.getException());
-                            return;
-                        }
-
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        String tokenGuardado = getSharedPreferences(Constantes.SP_FILE,0)
-                                .getString(Constantes.SP_KEY_DEVICEID,null);
-                        Log.d("neoti","token" +token );
-                        Log.d("neoti","tokenGuardado" +tokenGuardado );
-
-                        if(token != null){
-
-                            if (tokenGuardado == null || !token.equals(tokenGuardado)){
-                                MainActivity.this.getSharedPreferences(Constantes.SP_FILE,0).edit()
-                                        .putString(Constantes.SP_KEY_DEVICEID, token).commit();
-                                final FcmTokenDivice fcmtoken = new FcmTokenDivice();
-                                fcmtoken.setToken(token);
-                                fcmtoken.setIdUsuario(idAsesor);
-                                ClienteService service = ApiClient.getClient().create(ClienteService.class);
-                                service.addToken(fcmtoken)
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(new Subscriber<FcmTokenDivice>() {
-                                            @Override
-                                            public void onCompleted() {
-                                          //      Toast.makeText(getApplicationContext(), "Token Guardada ", Toast.LENGTH_LONG).show();
-                                            }
-
-                                            @Override
-                                            public void onError(Throwable e) {
-                                        //        Toast.makeText(getApplicationContext(), "Token No Fue Generada", Toast.LENGTH_LONG).show();
-                                            }
-
-                                            @Override
-                                            public void onNext(FcmTokenDivice fcmTokenDivice) {
-
-                                            }
-
-
-                                        });
-                            }
-                        }
-
-//                        Toast.makeText(MainActivity.this, token,
-//                                Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 
 }

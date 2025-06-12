@@ -40,11 +40,15 @@ public class PedidoCobroClienteActivity extends AppCompatActivity {
     private ClientesAdapter.OnClienteClickListener listener = new ClientesAdapter.OnClienteClickListener() {
         @Override
         public void onClienteClick(Clientes cliente) {
+
+            final boolean esKAM = idUsuario.equalsIgnoreCase("SBC") ||
+                    idUsuario.equalsIgnoreCase("JRP") ||
+                    idUsuario.equalsIgnoreCase("COG");
             try {
                 Log.d("pedido","pedido de cobros --->"+ destino);
                 if (destino == 3) // Pedidos
                 {
-                    if ("SBC".equalsIgnoreCase(idUsuario)) {
+                    if (esKAM) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(PedidoCobroClienteActivity.this);
                         builder.setTitle("¿Qué precios desea usar?")
                                 .setMessage("Seleccione si desea usar precios normales o precios especiales para este cliente.")

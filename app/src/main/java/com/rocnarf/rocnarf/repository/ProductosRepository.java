@@ -52,8 +52,10 @@ public class ProductosRepository {
             Call<List<Producto>> callProductos = service.GetAll();
 
             // Bandera para controlar la finalización en caso de SBC
-            final boolean esSBC = idUsuario.equalsIgnoreCase("SBC");
-            final boolean[] preciosCargados = { !esSBC }; // true si no es SBC
+            final boolean esKAM = idUsuario.equalsIgnoreCase("SBC") ||
+                    idUsuario.equalsIgnoreCase("JRP") ||
+                    idUsuario.equalsIgnoreCase("COG");
+            final boolean[] preciosCargados = { !esKAM }; // true si no es SBC
             final boolean[] productosCargados = { false };
 
             callProductos.enqueue(new Callback<List<Producto>>() {
@@ -91,7 +93,7 @@ public class ProductosRepository {
                 }
             });
 
-            if (esSBC) {
+            if (esKAM) {
                 precioEspecialClienteDao.deleteAll();
 
                 Call<List<PrecioEspecialCliente>> callPrecios = service.GetPrecioEspecial();

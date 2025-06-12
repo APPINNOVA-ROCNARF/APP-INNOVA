@@ -201,31 +201,8 @@ public class ResultadoVisitaActivity extends AppCompatActivity
                     visitaPlanificada.setFechaVisita(new Date());
                     visitaPlanificada.setFechaModificacion(new Date());
 
-                    String claseMostrar = null;
 
-                    if (tipoObser.equals("MEDICO") ) {
-                        if ("MEDICO".equals(origenCliente)) {
-                            // Obtener la sección del cliente
-
-                            if (seccion != null && !seccion.isEmpty()) {
-                                // Determinar la clase según el primer carácter de la sección
-                                char primerCaracter = seccion.charAt(0);
-
-                                if (Character.isDigit(primerCaracter)) {
-                                    int numero = Character.getNumericValue(primerCaracter);
-                                    if (numero >= 1 && numero <= 6) {
-                                        claseMostrar = clase; // F1 y F2
-                                    } else if (numero >= 7 && numero <= 9) {
-                                        claseMostrar = clase3; // F3
-                                    }
-                                } else if (primerCaracter == 'A' || primerCaracter == 'B' || primerCaracter == 'C') {
-                                    claseMostrar = clase4; // F4
-                                }
-                            }
-                        }
-                    }
-
-                    if (Objects.equals(revisita, 1) && (claseMostrar != null && claseMostrar.equals("A"))) { // Cliente que requiere revisita
+                    if (Objects.equals(revisita, 1)) { // Cliente que requiere revisita
                         if (!mReVisita.isChecked()) {
                             // Primera visita
                             visitaPlanificada.setEstado(VisitaClientes.PEFECTIVA);

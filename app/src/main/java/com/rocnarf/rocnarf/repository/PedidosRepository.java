@@ -106,20 +106,24 @@ public class PedidosRepository {
 
 
     // envio de pedido
-    public Completable sync(final int idLocalPedido){
+    public Completable sync(final int idLocalPedido) {
         return Completable.create(new Completable.CompletableOnSubscribe() {
             @Override
             public void call(final Completable.CompletableSubscriber completableSubscriber) {
                 final Pedido pedido = pedidosDao.getPedidoByIdLocal(idLocalPedido);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
                 String jsonPedido = gson.toJson(pedido);
                 Log.d("DEBUG_PEDIDO_JSON", jsonPedido);
+
                 List<PedidoDetalle> detalles = pedidosDao.getDetallesPedido(pedido.getIdLocalPedido());
-                for (PedidoDetalle detalle: detalles) {
+                for (PedidoDetalle detalle : detalles) {
                     detalle.setIdPedidoDetalle(0);
+                    // Imprimir cada detalle como JSON
+                    String jsonDetalle = gson.toJson(detalle);
+                    Log.d("DEBUG_PEDIDO_DETALLE_JSON", jsonDetalle);
                 }
                 pedido.setPedidoDetalleResource(detalles);
-
 
                 PedidoService pedidoService = ApiClient.getClient().create(PedidoService.class);
                 pedidoService.Post(pedido)
@@ -140,12 +144,11 @@ public class PedidosRepository {
 
                             @Override
                             public void onNext(Pedido pedido) {
-
+                                // No hace nada aquí
                             }
                         });
             }
         });
-
     }
 
 

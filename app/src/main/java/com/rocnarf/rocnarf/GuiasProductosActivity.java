@@ -151,42 +151,37 @@ public class GuiasProductosActivity extends AppCompatActivity {
                                                 ArchivosGuiaProducto selectedArchivo = archivos.get(position);
                                                 String archivoId = selectedArchivo.getNombre();
 
-                                                if ("Guía de Producto - Video".equals(archivoId)) {
+                                                // Verificar si es un video (terminado en " - Video")
+                                                if (archivoId.endsWith(" - Video")) {
                                                     String urlVideo = guiaProductos.getUrlVideo();
                                                     if (urlVideo == null || urlVideo.trim().isEmpty()) {
                                                         Toast.makeText(context, "URL de vídeo no válida", Toast.LENGTH_SHORT).show();
-                                                        return;
+                                                    } else {
+                                                        // Redireccionar a YouTube o navegador
+                                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo));
+                                                        try {
+                                                            startActivity(intent);
+                                                        } catch (Exception e) {
+                                                            Toast.makeText(context, "No se pudo abrir el enlace", Toast.LENGTH_SHORT).show();
+                                                        }
                                                     }
-                                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo));
-                                                    startActivity(intent);
-                                                    return;
+                                                    return; // Importante: salir del método aquí
                                                 }
 
+                                                // Código para manejar archivos normales (PDF, PPT, etc.)
                                                 String guiaId = selectedArchivo.getIdGuia();
                                                 String extension = archivoId.substring(archivoId.lastIndexOf(".") + 1);
                                                 Log.d("xxx","xxx"+"http://200.105.252.218/rocnarf/api/Planes/getFileGuiaProductos/"+ guiaId + "/"+ archivoId);
 
                                                 if(extension.toLowerCase().equals("pdf")){
-                                                    //descargarArchivo(archivoId, guiaId);
                                                     Intent intent = new Intent(context, PdfActivity.class);
                                                     intent.putExtra("urlPdf", "http://200.105.252.218/rocnarf/api/Planes/getFileGuiaProductos/"+ guiaId + "/"+ archivoId);
                                                     startActivity(intent);
-                                                }else if (extension.toLowerCase().equals("ppt") || extension.toLowerCase().equals("pptx")) {
-
+                                                } else if (extension.toLowerCase().equals("ppt") || extension.toLowerCase().equals("pptx")) {
                                                     descargarArchivo(archivoId, guiaId);
-
-//                                                    Intent intent = new Intent(context, PdfActivity.class);
-//                                                    intent.putExtra("urlPdf", "http://200.105.252.218/rocnarf/api/Planes/getFileGuiaProductos/"+ guiaId + "/"+ archivoId);
-//                                                    startActivity(intent);
-
-
                                                 } else {
-                                                    //String nombreArchivo = nombresArchivos[position];
-                                                    // Llamar a la función para descargar el archivo
                                                     descargarArchivo(archivoId, guiaId);
                                                 }
-                                                // Cerrar el diálogo después de seleccionar un archivo
-                                                //      dismiss();
                                             }
                                         });
 

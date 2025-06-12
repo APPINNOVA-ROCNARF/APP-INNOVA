@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.rocnarf.rocnarf.Utils.Common;
 import com.rocnarf.rocnarf.adapters.ProductosReciclerViewAdapter;
+import com.rocnarf.rocnarf.dao.DataBaseHelper;
 import com.rocnarf.rocnarf.models.EscalaBonificacion;
 import com.rocnarf.rocnarf.models.Pedido;
 import com.rocnarf.rocnarf.models.PedidoDetalle;
@@ -175,6 +176,7 @@ public class ProductosActivity extends AppCompatActivity {
                     }else{
                         pedidoDetalle.setPrecioTotal(cantidad * producto.getPrecio());
                     }
+
                     productosViewModel.addDetallePedido(pedidoDetalle);
 
 

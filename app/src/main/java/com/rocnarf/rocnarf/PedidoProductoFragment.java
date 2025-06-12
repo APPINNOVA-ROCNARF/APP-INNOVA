@@ -150,8 +150,7 @@ public class PedidoProductoFragment extends Fragment {
                             pedidoDetalle.setBono(Integer.parseInt(bono.getText().toString()));
                             Toast.makeText(getActivity(), " Cantidad y Bono asignado" , Toast.LENGTH_LONG).show();
                         }
-                        pedidoViewModel.updatePedidoDetalle(pedidoDetalle);
-                        mListener.onListFragmentInteraction(pedidoDetalle);
+
 
                         String tipoPrecio = pedidoViewModel.pedido.getValue().getTipoPrecio();
                         if (tipoPrecio != null) {
@@ -170,7 +169,8 @@ public class PedidoProductoFragment extends Fragment {
                                     break;
                             }
                         }
-
+                        pedidoViewModel.updatePedidoDetalle(pedidoDetalle);
+                        mListener.onListFragmentInteraction(pedidoDetalle);
 
                         ///setTipo(pedidoViewModel.pedido.getValue().getTipoPrecio());
                         recyclerView.setAdapter(null);
